@@ -12,7 +12,6 @@ import {
 import { MEMBERS_LIST } from '../graphQL/member-queries';
 import { UBERHAUS_QUERY, UBER_MINIONS } from '../graphQL/uberhaus-queries';
 import { getGraphEndpoint, supportedChains } from './chain';
-import { omit } from './general';
 import { getApiMetadata, fetchApiVaultData, fetchMetaData } from './metadata';
 import {
   GET_ERC721,
@@ -22,7 +21,7 @@ import {
   GET_WRAP_N_ZAPS,
 } from '../graphQL/boost-queries';
 import { MINION_TYPES } from './proposalUtils';
-import { proposalResolver, daoResolver } from './resolvers';
+import { proposalResolver } from './resolvers';
 import { calcTotalUSD, fetchTokenData } from './tokenValue';
 import { UBERHAUS_DATA } from './uberhaus';
 import { validateSafeMinion } from './vaults';
@@ -426,17 +425,15 @@ const buildCrossChainQuery = (supportedChains, endpointType) => {
   return array;
 };
 
-export const hubChainQuery = async ({
+export const exampleCrossChainQuery = async ({
   query,
   supportedChains,
   endpointType,
   reactSetter,
   apiFetcher,
   variables,
-  setApiData,
 }) => {
   const metaDataMap = await apiFetcher();
-  setApiData(metaDataMap);
 
   const daoMapLookup = (address, chainName) => {
     const daoMatch = metaDataMap[address] || [];
@@ -453,123 +450,19 @@ export const hubChainQuery = async ({
 
       const withMetaData = chainData?.membersHub
         .map(dao => {
-          const withResolvedProposals = {
-            ...dao,
-            moloch: {
-              ...omit('proposals', dao.moloch),
-              proposals: dao.moloch.proposals.map(proposal =>
-                proposalResolver(proposal, {
-                  proposalType: true,
-                  description: true,
-                  title: true,
-                  activityFeed: true,
-                }),
-              ),
-            },
-          };
-
           return {
-            ...withResolvedProposals,
+            ...dao,
             meta: daoMapLookup(dao?.moloch?.id, chain.apiMatch),
           };
         })
         .filter(dao => {
-          const notHiddenAndHasMetaOrIsUnregisteredSummoner =
-            (dao.meta && !dao.meta.hide) ||
-            (!dao.meta &&
-              variables.memberAddress.toLowerCase() === dao.moloch.summoner);
-
-          const hasNoSharesLoot =
-            Number(dao.shares) > 0 || Number(dao.loot) > 0;
-
-          return notHiddenAndHasMetaOrIsUnregisteredSummoner && hasNoSharesLoot;
+          return Number(dao.shares) > 0 || Number(dao.loot) > 0;
         });
 
       reactSetter(prevState => [
         ...prevState,
         { ...chain, data: withMetaData },
       ]);
-    } catch (error) {
-      console.error(error);
-    }
-  });
-};
-
-export const exploreChainQuery = async ({
-  query,
-  supportedChains,
-  endpointType,
-  reactSetter,
-  apiFetcher,
-}) => {
-  const metaDataMap = await apiFetcher();
-  const prices = await fetchTokenData();
-
-  const daoMapLookup = (address, chainName) => {
-    const daoMatch = metaDataMap[address] || [];
-    return daoMatch.find(dao => dao.network === chainName) || null;
-  };
-  buildCrossChainQuery(supportedChains, endpointType).forEach(async chain => {
-    try {
-      const chainData = await graphFetchAll({
-        endpoint: chain.endpoint,
-        query,
-        subfield: 'moloches',
-      });
-
-      const withMetaData = chainData
-        .map(dao => {
-          const withResolvedDao = daoResolver(dao, { prices, chain });
-          return {
-            ...withResolvedDao,
-            meta: daoMapLookup(dao?.id, chain.apiMatch),
-          };
-        })
-        .filter(dao => !dao.meta || !dao.meta.hide);
-
-      reactSetter(prevState => {
-        return {
-          chains: [...prevState.chains, chain],
-          data: [...prevState.data, ...withMetaData],
-        };
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  });
-};
-
-export const balanceChainQuery = async ({ address, reactSetter }) => {
-  const metaDataMap = await getApiMetadata();
-
-  const daoMapLookup = (address, chainName) => {
-    const daoMatch = metaDataMap[address] || [];
-    return daoMatch.find(dao => dao.network === chainName) || null;
-  };
-  buildCrossChainQuery(supportedChains, 'subgraph_url').forEach(async chain => {
-    try {
-      const chainData = await graphFetchAll({
-        endpoint: chain.endpoint,
-        query: ADDRESS_BALANCES,
-        subfield: 'addressBalances',
-        variables: {
-          memberAddress: address,
-        },
-      });
-
-      const withMetaData = chainData.map(member => {
-        return {
-          ...member,
-          meta: daoMapLookup(member.moloch?.id, chain.apiMatch),
-        };
-      });
-
-      reactSetter(prevState => {
-        return {
-          chains: [...prevState.chains, chain],
-          data: [...prevState.data, ...withMetaData],
-        };
-      });
     } catch (error) {
       console.error(error);
     }

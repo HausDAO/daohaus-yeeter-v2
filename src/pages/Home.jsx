@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 
 import { CustomThemeContext } from '../contexts/CustomThemeContext';
 import Layout from '../components/layout';
-// import Main from './Main';
+import ExampleHome from '../components/exampleHome';
 
 const Home = () => {
   const { theme, resetTheme } = useContext(CustomThemeContext);
@@ -13,7 +13,11 @@ const Home = () => {
     }
   }, [theme, resetTheme]);
 
-  return <Layout>{/* <Main /> */}</Layout>;
+  return (
+    <Layout>
+      <ExampleHome />
+    </Layout>
+  );
 };
 
 export default Home;

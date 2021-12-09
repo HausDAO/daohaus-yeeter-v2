@@ -2,23 +2,18 @@ import React, { useContext, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useDao } from './DaoContext';
-import { useDaoMember } from './DaoMemberContext';
 import { useInjectedProvider } from './InjectedProviderContext';
-import { useMetaData } from './MetaDataContext';
 import { useOverlay } from './OverlayContext';
-import { useToken } from './TokenContext';
-import { useUser } from './UserContext';
+import { useTxPoll } from './TxPollContext';
 import {
   createActions,
   exposeValues,
   getArgs,
   handleFieldModifiers,
   createHydratedString,
-  // handleFormError,
   Transaction,
 } from '../utils/txHelpers';
 import { createPoll } from '../services/pollService';
-import { createForumTopic } from '../utils/discourse';
 import { customValidations } from '../utils/validation';
 import { supportedChains } from '../utils/chain';
 import { TX } from '../data/contractTX';
@@ -28,23 +23,13 @@ export const TXContext = createContext();
 
 export const TXProvider = ({ children }) => {
   const { injectedProvider, address, injectedChain } = useInjectedProvider();
-  const {
-    resolvePoll,
-    cachePoll,
-    userHubDaos,
-    apiData,
-    outstandingTXs,
-  } = useUser();
+  const { resolvePoll, cachePoll } = useTxPoll();
   const {
     hasPerformedBatchQuery,
     refetch,
     daoOverview,
-    daoMembers,
     daoProposals,
-    daoVaults,
-    refreshAllDaoVaults,
   } = useDao();
-  const { daoMetaData } = useMetaData();
   const {
     errorToast,
     successToast,
@@ -52,15 +37,6 @@ export const TXProvider = ({ children }) => {
     setModal,
     setGenericModal,
   } = useOverlay();
-  const { hasFetchedMetadata, shouldUpdateTheme } = useMetaData();
-  const { shouldFetchInit, shouldFetchContract, currentDaoTokens } = useToken();
-  const {
-    currentMemberRef,
-    memberWalletRef,
-    isMember,
-    daoMember,
-    delegate,
-  } = useDaoMember();
 
   const { daoid, daochain, minion } = useParams();
   const chainConfig = supportedChains[daochain];
@@ -71,16 +47,7 @@ export const TXProvider = ({ children }) => {
     daoid,
     daochain,
     minion,
-    daoMetaData,
-    daoMembers,
     daoProposals,
-    currentDaoTokens,
-    isMember,
-    daoMember,
-    delegate,
-    userHubDaos,
-    outstandingTXs,
-    daoVaults,
     chainConfig,
   };
 
@@ -90,41 +57,27 @@ export const TXProvider = ({ children }) => {
     resolvePoll,
     cachePoll,
     refetch,
-    refreshAllDaoVaults,
     setTxInfoModal,
     setGenericModal,
     setModal,
   };
 
-  const refreshDao = async (skipVaults = false) => {
+  const refreshDao = async () => {
     // I use useRef to stop excessive rerenders in most of the contexts
     // I need to reset them in order to prevent them from locking up
     // the rerendering flow
 
-    // DaoContext
     hasPerformedBatchQuery.current = false;
-    // TokenContext
-    shouldFetchInit.current = true;
-    shouldFetchContract.current = true;
-    // MetadataContext
-    hasFetchedMetadata.current = false;
-    shouldUpdateTheme.current = true;
-    // DaoMemberContext
-    currentMemberRef.current = false;
-    memberWalletRef.current = false;
+
     // Now, I call rerender on DaoContext, which should re-fetch all the graphQueries
     // This should get up all the up to date data from the Graph and spread across the
     // entire component tree. It should also recache the new data automatically
-    if (!skipVaults) {
-      console.log('refresh');
-      await refreshAllDaoVaults();
-      console.log('refresh done');
-    }
+
     refetch();
   };
 
   const buildTXPoll = data => {
-    const { tx, values, formData, now, lifeCycleFns, localValues } = data;
+    const { tx, values, now, lifeCycleFns, localValues } = data;
 
     return createPoll({
       action: tx.poll || tx.specialPoll || tx.name,
@@ -154,17 +107,6 @@ export const TXProvider = ({ children }) => {
           });
           lifeCycleFns?.onPollSuccess?.(txHash, data);
           resolvePoll(txHash);
-          if (tx.createDiscourse) {
-            createForumTopic({
-              chainID: daochain,
-              daoID: daoid,
-              afterTime: now,
-              proposalType: formData?.type,
-              values,
-              applicant: values?.applicant || address,
-              daoMetaData,
-            });
-          }
         },
       },
     });
@@ -176,7 +118,7 @@ export const TXProvider = ({ children }) => {
       const isError = customValidations[rule]?.({
         values,
         formData,
-        appState: { ...contextData, apiData },
+        appState: contextData,
       });
       if (isError) {
         return [...arr, isError];
@@ -268,23 +210,12 @@ export const TXProvider = ({ children }) => {
       injectedProvider,
     });
 
-  const checkState = (checklist, errorDeliveryType, checkApiData) =>
-    checkApiData
-      ? handleChecklist(
-          {
-            ...contextData,
-            ...apiData,
-            injectedProvider,
-            injectedChain,
-          },
-          checklist,
-          errorDeliveryType,
-        )
-      : handleChecklist(
-          { ...contextData, injectedProvider, injectedChain },
-          checklist,
-          errorDeliveryType,
-        );
+  const checkState = (checklist, errorDeliveryType) =>
+    handleChecklist(
+      { ...contextData, injectedProvider, injectedChain },
+      checklist,
+      errorDeliveryType,
+    );
 
   return (
     <TXContext.Provider

@@ -2,7 +2,6 @@ import React from 'react';
 import { Flex, Box } from '@chakra-ui/react';
 
 import { useCustomTheme } from '../contexts/CustomThemeContext';
-// import MobileNav from '../nav/mobileNav';
 import Navigation from '../nav/navigation';
 import { themeImagePath } from '../utils/metadata';
 
@@ -13,8 +12,6 @@ const Layout = ({ children }) => {
 
   return (
     <Flex direction='column' minH='100vh' w='100vw'>
-      {/* <MobileNav /> */}
-
       <Navigation />
 
       <Box
