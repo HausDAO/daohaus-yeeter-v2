@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Button } from '@chakra-ui/react';
 
 import useCanInteract from '../hooks/useCanInteract';
-import TextBox from './TextBox';
+import TextBox from './textBox';
 
 const ListItemButton = ({ onClick, helperText, mainText, value }) => {
   const { canInteract } = useCanInteract({});

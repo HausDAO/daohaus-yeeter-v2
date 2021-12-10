@@ -2,18 +2,16 @@ import React from 'react';
 import { BsDownload } from 'react-icons/bs';
 import { Box, Icon, useToast } from '@chakra-ui/react';
 
-import { useMetaData } from '../contexts/MetaDataContext';
-import { ToolTipWrapper } from '../staticElements/wrappers';
+import { ToolTipWrapper } from './wrappers';
 import { downloadFromBrowser, prepCsvData } from '../utils/csv';
 
 const CsvDownloadButton = ({ entityList, typename }) => {
   const toast = useToast();
-  const { daoMetaData } = useMetaData();
 
   const handleDownload = () => {
     const csvArray = prepCsvData(entityList);
     const nowSeconds = (new Date() / 1000).toFixed(0);
-    const filename = `${daoMetaData.slug}_${typename}_${nowSeconds}.csv`;
+    const filename = `${typename}_${nowSeconds}.csv`;
     downloadFromBrowser(csvArray, filename);
 
     toast({
@@ -24,10 +22,6 @@ const CsvDownloadButton = ({ entityList, typename }) => {
       isClosable: true,
     });
   };
-
-  if (!daoMetaData) {
-    return null;
-  }
 
   return (
     <Box onClick={handleDownload}>

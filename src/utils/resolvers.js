@@ -8,8 +8,6 @@ import {
   determineUnreadActivityFeed,
 } from './proposalUtils';
 
-import { getTotalBankValue } from './tokenValue';
-
 //  TODO. Can be made a lot more effecient. We are parsing JSON for each of these fields.
 //  Would be better if there was a way to parse once since JSON.parse is relatively expensive.
 export const proposalResolver = (proposal, fields = {}) => {
@@ -36,21 +34,4 @@ export const proposalResolver = (proposal, fields = {}) => {
   }
 
   return proposal;
-};
-
-export const daoResolver = (dao, context) => {
-  if (dao.version === '1') {
-    const usdPrice = context.prices[dao.depositToken.tokenAddress] || {
-      price: 0,
-    };
-    dao.guildBankValue =
-      usdPrice.price *
-      (dao.guildBankBalanceV1 / 10 ** dao.depositToken.decimals);
-  } else {
-    dao.guildBankValue = getTotalBankValue(dao.tokenBalances, context.prices);
-  }
-
-  dao.networkId = context.chain.network_id;
-
-  return dao;
 };

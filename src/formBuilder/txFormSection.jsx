@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Flex, Icon } from '@chakra-ui/react';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 import FormSection from './formSection';
 
 import { IsJsonString } from '../utils/general';

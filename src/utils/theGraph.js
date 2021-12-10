@@ -2,11 +2,9 @@ import { graphQuery } from './apollo';
 
 import { getGraphEndpoint } from './chain';
 import { proposalResolver } from './resolvers';
-import {
-  EXAMPLE_HOME_DAO,
-  EXAMPLE_DAO_PROPOSALS,
-} from '../graphQL/example-queries';
+import { EXAMPLE_DAO_PROPOSALS } from '../graphQL/example-queries';
 import { fetchMetaData } from './metadata';
+import { DAO_OVERVIEW } from '../graphQL/general';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
   try {
@@ -36,7 +34,7 @@ const completeQueries = {
 
       const graphOverview = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
-        query: EXAMPLE_HOME_DAO,
+        query: DAO_OVERVIEW,
         variables: {
           contractAddr: args.daoID,
         },

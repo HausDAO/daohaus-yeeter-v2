@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import TextBox from './TextBox';
+import TextBox from './textBox';
 
 const ToolTipLabel = ({ text }) => {
   return (

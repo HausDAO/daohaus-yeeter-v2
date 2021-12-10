@@ -1,8 +1,8 @@
-import { TokenService } from '../services/tokenService';
-import { NFTService } from '../services/nftService';
 import { TX_HASH } from '../graphQL/general';
 import { getGraphEndpoint } from '../utils/chain';
 import { graphQuery } from '../utils/apollo';
+import { LOCAL_ABI } from '../utils/abi';
+import { createContract } from '../utils/contract';
 
 export const pollTXHash = async ({ chainID, txHash }) => {
   return graphQuery({
@@ -20,33 +20,17 @@ export const pollTokenAllowances = async ({
   tokenAddress,
   userAddress,
 }) => {
-  const tokenContract = TokenService({
+  const tokenContract = createContract({
+    address: tokenAddress,
+    abi: LOCAL_ABI.ERC_20,
     chainID,
-    tokenAddress,
   });
 
-  const amountApproved = await tokenContract('allowance')({
-    accountAddr: userAddress,
-    contractAddr: daoID,
-  });
+  const amountApproved = await tokenContract.methods
+    .allowance({
+      accountAddr: userAddress,
+      contractAddr: daoID,
+    })
+    .call();
   return amountApproved;
-};
-
-export const pollTokenApproval = async ({
-  chainID,
-  contractAddress,
-  userAddress,
-  controllerAddress,
-}) => {
-  const tokenContract = NFTService({
-    chainID,
-    tokenAddress: contractAddress,
-  });
-
-  const args = [userAddress, controllerAddress];
-  const approved = await tokenContract('isApprovedForAll')({
-    args,
-    userAddress,
-  });
-  return approved;
 };

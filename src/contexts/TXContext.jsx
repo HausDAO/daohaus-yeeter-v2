@@ -13,7 +13,7 @@ import {
   createHydratedString,
   Transaction,
 } from '../utils/txHelpers';
-import { createPoll } from '../services/pollService';
+import { createPoll } from '../utils/pollService';
 import { customValidations } from '../utils/validation';
 import { supportedChains } from '../utils/chain';
 import { TX } from '../data/contractTX';

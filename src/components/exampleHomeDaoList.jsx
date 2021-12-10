@@ -7,7 +7,7 @@ import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import { exampleCrossChainQuery } from '../utils/theGraph';
 
 import { supportedChains } from '../utils/chain';
-import { getApiMetadata } from '../utils/requests';
+import { getApiMetadata } from '../utils/metadata';
 import { EXAMPLE_MEMBERSHIPS } from '../graphQL/example-queries';
 
 const numOfSupportedChains = Object.keys(supportedChains).length;

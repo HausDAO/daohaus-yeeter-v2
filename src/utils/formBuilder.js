@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid';
 import { filterObject, isObjectEmpty, pipe } from './general';
-import { logFormError } from './errorLog';
 import { collectTypeValidations, validate } from './validation';
 import { handleSearch } from './txHelpers';
 
@@ -157,25 +156,10 @@ export const inputDataFromABI = (inputs, serialTag) => {
   });
 };
 
-export const handleFormError = ({
-  contextData,
-  formData,
-  args,
-  values,
-  error,
-  errorToast,
-  loading,
-}) => {
+export const handleFormError = ({ error, errorToast, loading }) => {
   const errMsg = error?.message || '';
   console.error(error);
   loading?.(false);
-  logFormError({
-    contextData,
-    formData,
-    args,
-    values,
-    errMsg,
-  });
   errorToast?.({
     title: 'Error Submitting Proposal',
     description: errMsg,

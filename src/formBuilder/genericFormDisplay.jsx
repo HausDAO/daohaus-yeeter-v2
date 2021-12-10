@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Input, InputGroup, InputRightAddon } from '@chakra-ui/input';
 
 import FieldWrapper from './fieldWrapper';
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 import { validate, TYPE_ERR_MSGS } from '../utils/validation';
 
 const GenericFormDisplay = props => {

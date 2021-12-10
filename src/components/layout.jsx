@@ -2,17 +2,17 @@ import React from 'react';
 import { Flex, Box } from '@chakra-ui/react';
 
 import { useCustomTheme } from '../contexts/CustomThemeContext';
-import Navigation from '../nav/navigation';
+import Navigation from './navigation';
 import { themeImagePath } from '../utils/metadata';
 
 import '../global.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isDao }) => {
   const { theme } = useCustomTheme();
 
   return (
     <Flex direction='column' minH='100vh' w='100vw'>
-      <Navigation />
+      <Navigation isDao={isDao} />
 
       <Box
         position='fixed'

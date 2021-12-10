@@ -19,12 +19,8 @@ export const DaoProvider = ({ children }) => {
 
   const daoNetworkData = supportedChains[daochain];
 
-  // Example dao queries - can query multiple entities and set to any context scope
-  // const [daoOverview, setDaoOverview] = useState([]);
   const [daoOverview, setDaoOverview] = useState();
-
   const [daoProposals, setDaoProposals] = useState();
-  // const [daoProposals, setDaoProposals] = useState([]);
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
@@ -44,6 +40,8 @@ export const DaoProvider = ({ children }) => {
       return;
     }
 
+    // DaoOverview data/query required for most of frombuilder to work
+    // Example dao queries - can add other entities and set to any context scope - see dao proposals
     const bigQueryOptions = {
       args: {
         daoID: daoid.toLowerCase(),

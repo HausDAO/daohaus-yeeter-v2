@@ -2,8 +2,9 @@ import React from 'react';
 
 import AbiInput from './abiInput';
 import AddressInput from './addressInput';
-import ColorPicker from './colorPicker';
-import DateRange from './dateRange';
+import BoolSelect from './boolSelect';
+import CheckGate from './checkGate';
+import CheckSwitch from './checkSwitch';
 import GatedInput from './gatedInput';
 import GenericFormDisplay from './genericFormDisplay';
 import GenericInput from './genericInput';
@@ -13,14 +14,11 @@ import LinkInput from './linkInput';
 import MinionSelect from './minionSelect';
 import MultiInput from './multiInput';
 import PaymentInput from './paymentInput';
-import CheckSwitch from './checkSwitch';
-import CheckGate from './checkGate';
 import TargetContract from './targetContract';
 import ToggleForm from './toggleForm';
 import TributeInput from './tributeInput';
 import ListBox from './listBox';
 import { createRegisterOptions } from '../utils/formBuilder';
-import BoolSelect from './boolSelect';
 import GenericSwitch from './genericSwitch';
 
 export const InputFactory = props => {
@@ -80,12 +78,6 @@ export const InputFactory = props => {
   }
   if (type === 'genericDisplay') {
     return <GenericFormDisplay {...props} />;
-  }
-  if (type === 'dateRange') {
-    return <DateRange {...props} />;
-  }
-  if (type === 'colorPicker') {
-    return <ColorPicker {...props} />;
   }
   if (type === 'checkSwitch') {
     return <CheckSwitch {...props} />;

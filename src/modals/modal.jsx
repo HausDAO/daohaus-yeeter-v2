@@ -13,7 +13,7 @@ import { rgba } from 'polished';
 import { useOverlay } from '../contexts/OverlayContext';
 import { useCustomTheme } from '../contexts/CustomThemeContext';
 import FormFooter from '../formBuilder/formFooter';
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 
 const Modal = () => {
   const { theme } = useCustomTheme();

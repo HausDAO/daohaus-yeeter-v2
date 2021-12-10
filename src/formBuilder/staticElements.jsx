@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from '@chakra-ui/react';
 
-// import TextBox from '../components/TextBox';
+// import TextBox from '../components/textBox';
 
 export const ErrorList = ({ errors = [] }) => {
   //  determine which errors are submit errors

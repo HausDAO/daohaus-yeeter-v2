@@ -3,7 +3,7 @@ import { Box, Divider, Flex, Icon } from '@chakra-ui/react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 import FormBuilder from './formBuilder';
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 import { multiTXIndicatorStates } from './indicatorState';
 
 const FormSection = props => {

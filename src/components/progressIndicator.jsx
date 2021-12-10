@@ -7,7 +7,7 @@ import Icon from '@chakra-ui/icon';
 import { useCustomTheme } from '../contexts/CustomThemeContext';
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import ExplorerLink from './explorerLink';
-import TextBox from './TextBox';
+import TextBox from './textBox';
 
 const defaultIndicatorStates = {
   loading: {

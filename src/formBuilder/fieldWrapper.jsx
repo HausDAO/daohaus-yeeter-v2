@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { RiInformationLine } from 'react-icons/ri';
 import { Box, Flex, FormHelperText, FormLabel, Icon } from '@chakra-ui/react';
 
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 import ErrorList from './ErrorList';
-import { ToolTipWrapper } from '../staticElements/wrappers';
+import { ToolTipWrapper } from '../components/wrappers';
 import { handleCheckError } from '../utils/formBuilder';
 
 const FieldWrapper = ({

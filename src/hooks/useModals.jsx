@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { OverlayContext } from '../contexts/OverlayContext';
 import FormBuilder from '../formBuilder/formBuilder';
 import MultiForm from '../formBuilder/multiForm';
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 
 const MODAL_SIZES = Object.freeze({
   sm: '400px',

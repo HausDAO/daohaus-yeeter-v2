@@ -2,7 +2,7 @@ import React, { useContext, createContext, useEffect, useState } from 'react';
 
 import { useInjectedProvider } from './InjectedProviderContext';
 import { useOverlay } from './OverlayContext';
-import { createPoll } from '../services/pollService';
+import { createPoll } from '../utils/pollService';
 
 export const TxPollContext = createContext();
 

@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import { RiExternalLinkLine } from 'react-icons/ri';
 import { Box, HStack, Icon, Image, Link } from '@chakra-ui/react';
 
-import TextBox from './TextBox';
+import TextBox from './textBox';
 
 const hasImage = string => {
   const imageExtensions = ['.gif', '.jpg', '.png', '.svg', 'ipfs/Qm'];

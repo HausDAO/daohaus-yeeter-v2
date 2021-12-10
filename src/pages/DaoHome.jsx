@@ -6,6 +6,7 @@ import makeBlockie from 'ethereum-blockies-base64';
 import { useParams } from 'react-router';
 import { useDao } from '../contexts/DaoContext';
 import { themeImagePath } from '../utils/metadata';
+import DaohausLink from '../components/daohausLink';
 
 const DaoHome = () => {
   const { daoOverview } = useDao();
@@ -34,6 +35,8 @@ const DaoHome = () => {
             Guildbank Token Count: {daoOverview.tokenBalances.length}
           </Text>
           <Text fontSize='sm'>Minion Count: {daoOverview.minions.length}</Text>
+
+          <DaohausLink linkText='View on Daohaus' />
         </>
       )}
     </Box>

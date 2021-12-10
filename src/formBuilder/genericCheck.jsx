@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, Flex } from '@chakra-ui/react';
-import TextBox from '../components/TextBox';
+import TextBox from '../components/textBox';
 import FieldWrapper from './fieldWrapper';
 import Paragraphs from './Paragraphs';
 

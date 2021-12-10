@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Flex, ListItem as ChakraListItem } from '@chakra-ui/react';
 
-import ContentBox from './ContentBox';
-import TextBox from './TextBox';
+import ContentBox from './contentBox';
+import TextBox from './textBox';
 
 const ListItem = ({
   customFormData,

@@ -5,55 +5,20 @@ import { Contract, BigNumber } from 'ethers';
 import { chainByID } from './chain';
 import { createContract } from './contract';
 import { IsJsonString } from './general';
+import { validate } from './validation';
 
-import DAO_CONDITIONAL_HELPER from '../contracts/daoConditionalHelper.json';
 import ERC_20 from '../contracts/erc20a.json';
-import ERC_721 from '../contracts/nft.json';
-import ERC_1155 from '../contracts/erc1155.json';
-import ERC_1155_METADATA from '../contracts/erc1155MetadataUri.json';
 import GNOSIS_IPROXY from '../contracts/iProxy.json';
 import MOLOCH_V2 from '../contracts/molochV2.json';
-import NIFTY_INK from '../contracts/niftyInk.json';
-import NIFTY_MINION_FACTORY from '../contracts/minionNiftyFactory.json';
-import NIFTY_MINION from '../contracts/minionNifty.json';
 import SAFE_MINION from '../contracts/safeMinion.json';
-import SAFE_MINION_FACTORY from '../contracts/safeMinionFactory.json';
 import SAFE_MULTISEND from '../contracts/safeMultisend.json';
-import SAFE_SIGNLIB from '../contracts/safeSignMessageLib.json';
-import SUPERFLUID_MINION from '../contracts/superfluidMinion.json';
-import SUPERFLUID_MINION_FACTORY from '../contracts/superfluidMinionFactory.json';
-import UBERHAUS_MINION from '../contracts/uberHausMinion.json';
-import VANILLA_MINION from '../contracts/minion.json';
-import VANILLA_MINION_FACTORY from '../contracts/minionFactory.json';
-import WRAP_N_ZAP_FACTORY from '../contracts/wrapNZapFactory.json';
-import WRAP_N_ZAP from '../contracts/wrapNZap.json';
-import ESCROW_MINION from '../contracts/escrowMinion.json';
-import DISPERSE_APP from '../contracts/disperseApp.json';
-import { validate } from './validation';
 
 export const LOCAL_ABI = Object.freeze({
   MOLOCH_V2,
   ERC_20,
-  VANILLA_MINION,
-  NIFTY_MINION,
-  ERC_721,
-  ERC_1155,
-  ERC_1155_METADATA,
-  NIFTY_INK,
-  UBERHAUS_MINION,
-  SUPERFLUID_MINION,
-  SUPERFLUID_MINION_FACTORY,
-  SAFE_MINION_FACTORY,
   SAFE_MINION,
   SAFE_MULTISEND,
-  SAFE_SIGNLIB,
-  VANILLA_MINION_FACTORY,
-  NIFTY_MINION_FACTORY,
-  WRAP_N_ZAP_FACTORY,
-  WRAP_N_ZAP,
-  DAO_CONDITIONAL_HELPER,
-  ESCROW_MINION,
-  DISPERSE_APP,
+  GNOSIS_IPROXY,
 });
 
 const getBlockExplorerApiKey = chainID => {

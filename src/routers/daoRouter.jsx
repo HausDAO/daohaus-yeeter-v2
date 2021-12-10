@@ -9,7 +9,7 @@ const DaoRouter = () => {
   const { path } = useRouteMatch();
 
   return (
-    <Layout>
+    <Layout isDao>
       <Switch>
         <Route exact path={`${path}/`}>
           <DaoHome />

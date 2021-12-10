@@ -27,7 +27,6 @@ import { rgba } from 'polished';
 import { useOverlay } from '../contexts/OverlayContext';
 import { useCustomTheme } from '../contexts/CustomThemeContext';
 import ExplorerLink from '../components/explorerLink';
-import { getLastTx } from '../utils/txData';
 import { useTxPoll } from '../contexts/TxPollContext';
 
 const TxInfoModal = () => {
@@ -35,7 +34,7 @@ const TxInfoModal = () => {
   const { txInfoModal, setTxInfoModal } = useOverlay();
   const { theme } = useCustomTheme();
 
-  const latestTx = getLastTx(outstandingTXs);
+  const latestTx = outstandingTXs[0];
   const handleClose = () => setTxInfoModal(false);
 
   return (
