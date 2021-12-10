@@ -1,14 +1,15 @@
 import React from 'react';
+import { TxPollContextProvider } from './contexts/TxPollContext';
 
-// import TxInfoModal from './modals/TxInfoModal';
+import TxInfoModal from './modals/TxInfoModal';
 import BaseRouter from './routers/baseRouter';
 
 function App() {
   return (
-    <>
-      {/* <TxInfoModal /> */}
+    <TxPollContextProvider>
+      <TxInfoModal />
       <BaseRouter />
-    </>
+    </TxPollContextProvider>
   );
 }
 

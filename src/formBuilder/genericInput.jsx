@@ -24,7 +24,6 @@ const GenericInput = props => {
     formState,
   } = props;
   const { register } = localForm;
-  console.log(`formState`, formState);
   return (
     <FieldWrapper {...props}>
       <InputGroup>

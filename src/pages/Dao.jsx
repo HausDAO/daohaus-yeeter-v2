@@ -8,16 +8,10 @@ import Modal from '../modals/modal';
 const Dao = () => {
   const { daoid } = useParams();
 
-  const DaoScopedModals = () => (
-    <>
-      <Modal />
-    </>
-  );
-
   return (
     <DaoProvider key={daoid}>
       <DaoRouter />
-      <DaoScopedModals />
+      <Modal />
     </DaoProvider>
   );
 };

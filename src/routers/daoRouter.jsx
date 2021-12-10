@@ -1,37 +1,21 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  Redirect,
-  useRouteMatch,
-  useParams,
-} from 'react-router-dom';
-
-import { useDao } from '../contexts/DaoContext';
-// import { useDaoMember } from '../contexts/DaoMemberContext';
-// import { useMetaData } from '../contexts/MetaDataContext';
-// import { useToken } from '../contexts/TokenContext';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import Layout from '../components/layout';
+import DaoHome from '../pages/DaoHome';
+import DaoProposals from '../pages/DaoProposals';
 
 const DaoRouter = () => {
   const { path } = useRouteMatch();
-  //   const { daoProposals, daoVaults } = useDao();
 
   return (
     <Layout>
       <Switch>
         <Route exact path={`${path}/`}>
-          {/* <Overview
-            activities={daoActivities}
-            daoMember={daoMember}
-            isMember={isMember}
-            isCorrectNetwork={isCorrectNetwork}
-            daoOverview={daoOverview}
-            members={daoMembers}
-            daoMetaData={daoMetaData}
-            daoVaults={daoVaults}
-          /> */}
+          <DaoHome />
+        </Route>
+        <Route exact path={`${path}/proposals`}>
+          <DaoProposals />
         </Route>
       </Switch>
     </Layout>

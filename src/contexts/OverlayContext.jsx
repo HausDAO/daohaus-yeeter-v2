@@ -6,16 +6,7 @@ export const OverlayContext = createContext();
 export const OverlayProvider = ({ children }) => {
   const toast = useToast();
   const [modal, setModal] = useState(false);
-
-  const [daoSwitcherModal, setDaoSwitcherModal] = useState(false);
-  const [hubAccountModal, setHubAccountModal] = useState(false);
-  const [daoAccountModal, setDaoAccountModal] = useState(false);
-  const [proposalSelector, setProposalSelector] = useState(false);
   const [txInfoModal, setTxInfoModal] = useState(false);
-  const [imageUploadModal, setImageUploadModal] = useState(false);
-  const [d2dProposalTypeModal, setD2dProposalTypeModal] = useState(false);
-  const [d2dProposalModal, setD2dProposalModal] = useState(false);
-  const [nftViewModal, setNftViewModal] = useState(false);
   const [genericModal, setGenericModal] = useState({});
 
   const errorToast = content => {
@@ -61,30 +52,14 @@ export const OverlayProvider = ({ children }) => {
       value={{
         modal,
         setModal,
-        daoSwitcherModal,
-        setDaoSwitcherModal,
-        hubAccountModal,
-        setHubAccountModal,
-        daoAccountModal,
-        setDaoAccountModal,
         errorToast,
         successToast,
         warningToast,
         txInfoModal,
         setTxInfoModal,
-        imageUploadModal,
-        setImageUploadModal,
-        d2dProposalTypeModal,
-        setD2dProposalTypeModal,
-        d2dProposalModal,
-        setD2dProposalModal,
         genericModal,
         setGenericModal,
-        proposalSelector,
-        setProposalSelector,
         closeModal,
-        nftViewModal,
-        setNftViewModal,
       }}
     >
       {children}
@@ -98,55 +73,23 @@ export const useOverlay = () => {
   const {
     modal,
     setModal,
-    daoSwitcherModal,
-    setDaoSwitcherModal,
-    hubAccountModal,
-    setHubAccountModal,
-    daoAccountModal,
-    setDaoAccountModal,
     errorToast,
     successToast,
     warningToast,
     txInfoModal,
     setTxInfoModal,
-    imageUploadModal,
-    setImageUploadModal,
-    d2dProposalTypeModal,
-    setD2dProposalTypeModal,
-    d2dProposalModal,
-    setD2dProposalModal,
     genericModal,
     setGenericModal,
-    proposalSelector,
-    setProposalSelector,
-    nftViewModal,
-    setNftViewModal,
   } = useContext(OverlayContext);
   return {
     modal,
     setModal,
-    daoSwitcherModal,
-    setDaoSwitcherModal,
-    daoAccountModal,
-    setDaoAccountModal,
-    hubAccountModal,
-    setHubAccountModal,
     errorToast,
     successToast,
     warningToast,
     txInfoModal,
     setTxInfoModal,
-    imageUploadModal,
-    setImageUploadModal,
-    d2dProposalTypeModal,
-    setD2dProposalTypeModal,
-    d2dProposalModal,
-    setD2dProposalModal,
     genericModal,
     setGenericModal,
-    proposalSelector,
-    setProposalSelector,
-    nftViewModal,
-    setNftViewModal,
   };
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -26,20 +27,24 @@ import Brand from './brand';
 
 const NAV_ITEMS = [
   {
-    label: 'Nav 1',
-    href: '#',
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'Dao',
+    href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01',
   },
   {
     label: 'Nav DD',
     children: [
       {
-        label: 'Item 1',
-        subLabel: 'Yolo',
-        href: '#',
+        label: 'Proposals Example',
+        subLabel: '',
+        href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01/proposals',
       },
       {
         label: 'Item 2',
-        subLabel: 'FTW',
+        subLabel: 'Yolo',
         href: '#',
       },
     ],
@@ -117,7 +122,8 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? '#'}
+                as={RouterLink}
+                to={navItem.href || '#'}
                 fontSize='sm'
                 fontWeight={500}
                 color={linkColor}
@@ -156,7 +162,8 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
-      href={href}
+      as={RouterLink}
+      to={href}
       role='group'
       display='block'
       p={2}

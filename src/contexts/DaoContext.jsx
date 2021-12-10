@@ -8,7 +8,6 @@ import React, {
 import { useParams } from 'react-router-dom';
 
 import { TXProvider } from './TXContext';
-import { useInjectedProvider } from './InjectedProviderContext';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
@@ -17,14 +16,15 @@ export const DaoContext = createContext();
 
 export const DaoProvider = ({ children }) => {
   const { daoid, daochain } = useParams();
-  const { injectedChain } = useInjectedProvider();
 
   const daoNetworkData = supportedChains[daochain];
-  const isCorrectNetwork = daochain === injectedChain?.chainId;
 
   // Example dao queries - can query multiple entities and set to any context scope
-  const [daoOverview, setDaoOverview] = useState([]);
-  const [daoProposals, setDaoProposals] = useState([]);
+  // const [daoOverview, setDaoOverview] = useState([]);
+  const [daoOverview, setDaoOverview] = useState();
+
+  const [daoProposals, setDaoProposals] = useState();
+  // const [daoProposals, setDaoProposals] = useState([]);
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
@@ -60,14 +60,7 @@ export const DaoProvider = ({ children }) => {
 
     bigGraphQuery(bigQueryOptions);
     hasPerformedBatchQuery.current = true;
-  }, [
-    daoid,
-    daochain,
-    daoNetworkData,
-    daoOverview,
-    setDaoOverview,
-    isCorrectNetwork,
-  ]);
+  }, [daoid, daochain, daoNetworkData, daoOverview, setDaoOverview]);
 
   const refetch = () => {
     const bigQueryOptions = {
@@ -97,7 +90,6 @@ export const DaoProvider = ({ children }) => {
       value={{
         daoProposals,
         daoOverview,
-        isCorrectNetwork,
         refetch,
         refreshAllDaoVaults,
         hasPerformedBatchQuery, // Ref, not state
@@ -111,14 +103,12 @@ export const useDao = () => {
   const {
     daoProposals,
     daoOverview,
-    isCorrectNetwork,
     refetch,
     hasPerformedBatchQuery, // Ref, not state
   } = useContext(DaoContext);
   return {
     daoProposals,
     daoOverview,
-    isCorrectNetwork,
     refetch,
     hasPerformedBatchQuery,
   };

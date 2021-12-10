@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 
 import { CustomThemeContext } from '../contexts/CustomThemeContext';
 import Layout from '../components/layout';
-import ExampleHome from '../components/exampleHome';
+import ExampleHomeDaoList from '../components/exampleHomeDaoList';
 
 const Home = () => {
   const { theme, resetTheme } = useContext(CustomThemeContext);
@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <ExampleHome />
+      <ExampleHomeDaoList />
     </Layout>
   );
 };

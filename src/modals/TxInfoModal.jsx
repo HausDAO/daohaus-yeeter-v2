@@ -25,14 +25,13 @@ import {
 import { rgba } from 'polished';
 
 import { useOverlay } from '../contexts/OverlayContext';
-import { useUser } from '../contexts/UserContext';
 import { useCustomTheme } from '../contexts/CustomThemeContext';
 import ExplorerLink from '../components/explorerLink';
-import TextBox from '../components/TextBox';
 import { getLastTx } from '../utils/txData';
+import { useTxPoll } from '../contexts/TxPollContext';
 
 const TxInfoModal = () => {
-  const { outstandingTXs } = useUser();
+  const { outstandingTXs } = useTxPoll();
   const { txInfoModal, setTxInfoModal } = useOverlay();
   const { theme } = useCustomTheme();
 
@@ -158,64 +157,6 @@ const TxInfoModal = () => {
                       </ListItem>
                     ))}
                   </List>
-                ) : null}
-                {latestTx?.links ? (
-                  <Box m={2}>
-                    {latestTx?.links.length && (
-                      <TextBox size='sm'>Links</TextBox>
-                    )}
-                    <Stack spacing={3} mt={2}>
-                      {/* {latestTx?.links?.length > 0 && (
-                        latestTx?.links.map((link, idx) => (
-                          link.external ? (
-                            <Flex
-                              align='center'
-                              key={`${link?.href}-${link?.idx}`}
-                            >
-                              <Icon
-                                as={RiLinksLine}
-                                mr={2}
-                                color='primary.200'
-                              />
-                              <Box
-                                as={Link}
-                                href={link?.href}
-                                fontWeight={400}
-                                fontSize={['xs', null, null, 'sm']}
-                                mt={0}
-                              >
-                                {link?.text}
-                              </Box>
-                              <Icon
-                                as={RiExternalLinkLine}
-                                color='secondary.500'
-                                ml={2}
-                              />
-                            </Flex>
-                          ) : (
-                            <Flex
-                              align='center'
-                              key={`${link?.href}-${link?.idx}`}
-                            >
-                              <Icon
-                                as={RiLinksLine}
-                                mr={2}
-                                color='secondary.500'
-                              />
-                              <Box
-                                as={RouterLink}
-                                to={link?.href}
-                                fontFamily='mono'
-                                fontWeight={400}
-                                fontSize={('sm', null, null, 'md')}
-                              >
-                                {link?.text}
-                              </Box>
-                            </Flex>
-                          )
-                        )))} */}
-                    </Stack>
-                  </Box>
                 ) : null}
               </>
             )}

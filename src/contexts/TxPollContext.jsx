@@ -85,10 +85,10 @@ export const TxPollContextProvider = ({ children }) => {
   );
 };
 export const useTxPoll = () => {
-  const { cachePoll, apiData, resolvePoll } = useContext(TxPollContext);
+  const { cachePoll, resolvePoll, outstandingTXs } = useContext(TxPollContext);
   return {
-    apiData,
     cachePoll,
     resolvePoll,
+    outstandingTXs,
   };
 };
