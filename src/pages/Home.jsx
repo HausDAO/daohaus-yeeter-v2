@@ -1,22 +1,13 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 
-import { CustomThemeContext } from '../contexts/CustomThemeContext';
-import Layout from '../components/layout';
-import ExampleHomeDaoList from '../components/exampleHomeDaoList';
+import { ProjectsContextProvider } from '../contexts/ProjectsContext';
+import ProjectsList from '../components/projectsList';
 
 const Home = () => {
-  const { theme, resetTheme } = useContext(CustomThemeContext);
-
-  useEffect(() => {
-    if (theme.active) {
-      resetTheme();
-    }
-  }, [theme, resetTheme]);
-
   return (
-    <Layout>
-      <ExampleHomeDaoList />
-    </Layout>
+    <ProjectsContextProvider>
+      <ProjectsList />
+    </ProjectsContextProvider>
   );
 };
 

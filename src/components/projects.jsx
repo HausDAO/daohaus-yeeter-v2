@@ -12,7 +12,7 @@ import { EXAMPLE_MEMBERSHIPS } from '../graphQL/example-queries';
 
 const numOfSupportedChains = Object.keys(supportedChains).length;
 
-const ExampleHome = () => {
+const Projects = () => {
   const { address } = useInjectedProvider();
   const [userDaosExample, setUserDaosExample] = useState([]);
 
@@ -62,4 +62,4 @@ const ExampleHome = () => {
   );
 };
 
-export default ExampleHome;
+export default Projects;

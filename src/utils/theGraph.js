@@ -7,6 +7,7 @@ import { fetchMetaData } from './metadata';
 import { DAO_OVERVIEW } from '../graphQL/general';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
+  console.log('args', args);
   try {
     const { endpoint, query, variables, subfield } = args;
     const result = await graphQuery({
@@ -95,50 +96,61 @@ const buildCrossChainQuery = (supportedChains, endpointType) => {
         networkID: chain,
         network_id: supportedChains[chain].network_id,
         hubSortOrder: supportedChains[chain].hub_sort_order,
-        apiMatch: chain === '0x64' ? 'xdai' : supportedChains[chain].network,
+        // apiMatch: chain === '0x64' ? 'xdai' : supportedChains[chain].network,
+        apiMatch: supportedChains[chain].network,
       },
     ];
   }
   return array;
 };
 
-export const exampleCrossChainQuery = async ({
+export const projectsCrossChainQuery = async ({
   query,
   supportedChains,
   endpointType,
   reactSetter,
-  apiFetcher,
+  // apiFetcher,
   variables,
 }) => {
-  const metaDataMap = await apiFetcher();
+  // const metaDataMap = await apiFetcher();
 
-  const daoMapLookup = (address, chainName) => {
-    const daoMatch = metaDataMap[address] || [];
+  // const daoMapLookup = (address, chainName) => {
+  //   const daoMatch = metaDataMap[address] || [];
 
-    return daoMatch.find(dao => dao.network === chainName) || null;
-  };
+  //   return daoMatch.find(dao => dao.network === chainName) || null;
+  // };
   buildCrossChainQuery(supportedChains, endpointType).forEach(async chain => {
     try {
-      const chainData = await graphQuery({
+      const daoData = await graphFetchAll({
         endpoint: chain.endpoint,
         query,
         variables,
+        subfield: 'moloches',
       });
 
-      const withMetaData = chainData?.membersHub
-        .map(dao => {
-          return {
-            ...dao,
-            meta: daoMapLookup(dao?.moloch?.id, chain.apiMatch),
-          };
-        })
-        .filter(dao => {
-          return Number(dao.shares) > 0 || Number(dao.loot) > 0;
-        });
+      console.log('daoData', daoData);
+
+      // const shamanData = await graphQuery({
+      //   endpoint: chain.endpoint,
+      //   query,
+      //   variables,
+      // });
+
+      // const withMetaData = daoData
+      //   .map(dao => {
+      //     return {
+      //       ...dao,
+      //       meta: daoMapLookup(dao?.id, chain.apiMatch),
+      //     };
+      //   })
+      //   .filter(dao => {
+      //     return dao.version === '2.2';
+      //   });
 
       reactSetter(prevState => [
         ...prevState,
-        { ...chain, data: withMetaData },
+        // { ...chain, data: withMetaData },
+        { ...chain, data: daoData },
       ]);
     } catch (error) {
       console.error(error);
