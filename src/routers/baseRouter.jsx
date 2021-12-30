@@ -4,13 +4,20 @@ import { Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Dao from '../pages/Dao';
 import FourOhFour from '../pages/404';
+import Faq from '../pages/Faq';
+import BaseLayout from './baseLayout';
 
 const BaseRouter = () => {
   return (
     <Switch>
-      <Route exact path='/'>
-        <Home />
-      </Route>
+      <BaseLayout>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route exact path='/faq'>
+          <Faq />
+        </Route>
+      </BaseLayout>
 
       <Route
         path='/dao/:daochain/:daoid'

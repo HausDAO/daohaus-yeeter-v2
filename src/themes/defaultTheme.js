@@ -4,10 +4,10 @@ import BrandImg from '../assets/img/Daohaus__Castle--Dark.svg';
 import BgImg from '../assets/img/daohaus__hero--falling.jpg';
 
 export const defaultTheme = {
-  primary500: '#10153d',
-  primaryAlpha: rgba('#10153d', 0.9),
+  primary500: '#050A1B',
+  primaryAlpha: rgba('#050A1B', 0.9),
   secondary500: '#EB8A23',
-  secondaryAlpha: rgba('#10153d', 0.75),
+  secondaryAlpha: rgba('#050A1B', 0.75),
   bg500: '#03061B',
   bgAlpha: '#03061B',
   bgOverlayOpacity: 0.75,

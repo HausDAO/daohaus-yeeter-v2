@@ -28,28 +28,32 @@ import WrongNetworkToolTip from './wrongNetworkToolTip';
 
 const NAV_ITEMS = [
   {
-    label: 'Home',
+    label: 'Projects',
     href: '/',
   },
   {
-    label: 'Dao',
-    href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01',
+    label: 'FAQ',
+    href: '/faq',
   },
-  {
-    label: 'Nav DD',
-    children: [
-      {
-        label: 'Proposals Example',
-        subLabel: '',
-        href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01/proposals',
-      },
-      {
-        label: 'Item 2',
-        subLabel: 'Yolo',
-        href: '#',
-      },
-    ],
-  },
+  // {
+  //   label: 'Dao',
+  //   href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01',
+  // },
+  // {
+  //   label: 'Nav DD',
+  //   children: [
+  //     {
+  //       label: 'Proposals Example',
+  //       subLabel: '',
+  //       href: '/dao/0x4/0x9fc4eff9db153a17e92d9213c52c6af97409ce01/proposals',
+  //     },
+  //     {
+  //       label: 'Item 2',
+  //       subLabel: 'Yolo',
+  //       href: '#',
+  //     },
+  //   ],
+  // },
 ];
 
 const Navigation = ({ isDao }) => {
