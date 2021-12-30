@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { Flex, Icon, Link } from '@chakra-ui/react';
 import { RiExternalLinkLine } from 'react-icons/ri';
 
-const DaohausLink = ({ linkText }) => {
+const DaohausLink = ({ linkText, project }) => {
   const { daoid, daochain } = useParams();
+
   return (
     <Link
-      href={`https://app.daohaus.club/dao/${daochain}/${daoid}`}
+      href={`https://app.daohaus.club/dao/${project?.networkID ||
+        daochain}/${project?.id || daoid}`}
       isExternal
       ml={2}
     >

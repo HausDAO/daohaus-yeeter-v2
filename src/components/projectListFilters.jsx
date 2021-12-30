@@ -30,24 +30,24 @@ export const filterOptions = [
   },
 ];
 
-const ProjectListFilters = ({ projectCount }) => {
+const ProjectListFilters = ({ projectCount, handleSearchFilter }) => {
   const [sort, setSort] = useState('time');
   const [filter, setFilter] = useState('rinkeby');
 
-  const handleChange = e => {
-    console.log('e', e);
-  };
   return (
-    <Flex alignContent='space-between'>
-      <Text>{projectCount} Projects</Text>
+    <Flex alignContent='space-between' align='center' wrap='wrap'>
+      <Text mr={5}>{projectCount} Projects</Text>
       <Input
         type='search'
         className='input'
         placeholder='Search By Name'
         maxW={300}
-        onChange={e => handleChange(e)}
+        mr={5}
+        onChange={e => handleSearchFilter(e)}
       />
-      <ListSort sort={sort} setSort={setSort} options={sortOptions} />
+      <Box mr={5}>
+        <ListSort sort={sort} setSort={setSort} options={sortOptions} />
+      </Box>
       <ListFilter
         filter={filter}
         setFilter={setFilter}

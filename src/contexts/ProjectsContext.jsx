@@ -38,7 +38,7 @@ export const ProjectsContextProvider = ({ children }) => {
         }, {});
 
         const networkDaos = network.daos.map(dao => {
-          return { ...dao, yeeter: yeeterMap[dao.id] };
+          return { ...dao, yeeter: yeeterMap[dao.id], ...network };
         });
 
         return [...allProjects, ...networkDaos];

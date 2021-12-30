@@ -21,6 +21,10 @@ export const PROJECTS_DAOS_QUERY = gql`
           tokenAddress
         }
       }
+      shamans {
+        shamanAddress
+        enabled
+      }
     }
   }
 `;
@@ -46,12 +50,10 @@ export const PROJECTS_SHAMANS_QUERY = gql`
         raiseStartTime
         maxUnits
         pricePerUnit
-        platformFee
-        lootPerUnit
       }
       yeets {
         createdAt
-        fromAddress
+        contributorAddress
         amount
       }
     }

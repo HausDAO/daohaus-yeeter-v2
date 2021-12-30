@@ -338,3 +338,17 @@ export const isLastItem = (list, index) => index === list?.length - 1;
 export const isFirstItem = (list, index) => index === 0;
 
 export const generateNonce = () => `0x${randomBytes(32).toString('hex')}`;
+
+const socialLinksBaseUrls = {
+  twitter: 'https://twitter.com/',
+  discord: 'https://discord.gg/',
+  telegram: 'https://t.me/',
+  medium: 'https://medium.com/',
+  github: 'https://github.com/',
+};
+
+export const fixSocialLink = (type, unfixed) => {
+  return !unfixed.includes(socialLinksBaseUrls[type])
+    ? `${socialLinksBaseUrls[type]}${unfixed}`
+    : unfixed;
+};
