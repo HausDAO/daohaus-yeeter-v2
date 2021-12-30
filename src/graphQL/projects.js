@@ -38,6 +38,7 @@ export const PROJECTS_SHAMANS_QUERY = gql`
       shamanAddress
       molochAddress
       details
+      shamanType
       yeeterConfig {
         id
         maxTarget

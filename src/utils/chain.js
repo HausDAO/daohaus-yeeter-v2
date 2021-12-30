@@ -65,6 +65,7 @@ export const supportedChains = {
     tokenlist_api_url: 'https://api-rinkeby.etherscan.io/api',
     subgraph_url:
       'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-rinkeby',
+
     stats_graph_url:
       'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-rinkeby',
     boosts_graph_url:

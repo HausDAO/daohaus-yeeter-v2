@@ -21,8 +21,7 @@ const ProjectsList = () => {
 
   return (
     <Box p={7}>
-      {/* {address && projects.length !== numOfSupportedChains ? ( */}
-      {!address && !projectData ? (
+      {!address && !projects.length ? (
         <Spinner />
       ) : (
         <>
@@ -31,7 +30,7 @@ const ProjectsList = () => {
           </Text>
           <ProjectListFilters projectCount={projectData?.length} />
           <List spacing={3}>
-            {projectData.map(project => {
+            {projects.map(project => {
               return <ProjectCard key={project.id} project={project} />;
             })}
           </List>

@@ -5,9 +5,13 @@ import { proposalResolver } from './resolvers';
 import { EXAMPLE_DAO_PROPOSALS } from '../graphQL/example-queries';
 import { fetchMetaData } from './metadata';
 import { DAO_OVERVIEW } from '../graphQL/general';
+import {
+  MEMBERSHIPS_QUERY,
+  PROJECTS_DAOS_QUERY,
+  PROJECTS_SHAMANS_QUERY,
+} from '../graphQL/projects';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
-  console.log('args', args);
   try {
     const { endpoint, query, variables, subfield } = args;
     const result = await graphQuery({
@@ -18,6 +22,7 @@ export const graphFetchAll = async (args, items = [], skip = 0) => {
         skip,
       },
     });
+
     const newItems = result[subfield];
     if (newItems.length === 1000) {
       return graphFetchAll(args, [...newItems, ...items], skip + 1000);
@@ -105,53 +110,69 @@ const buildCrossChainQuery = (supportedChains, endpointType) => {
 };
 
 export const projectsCrossChainQuery = async ({
-  query,
   supportedChains,
-  endpointType,
+  apiFetcher,
   reactSetter,
-  // apiFetcher,
-  variables,
 }) => {
-  // const metaDataMap = await apiFetcher();
+  const metaDataMap = await apiFetcher();
 
-  // const daoMapLookup = (address, chainName) => {
-  //   const daoMatch = metaDataMap[address] || [];
+  const daoMapLookup = (address, chainName) => {
+    const daoMatch = metaDataMap[address] || [];
 
-  //   return daoMatch.find(dao => dao.network === chainName) || null;
-  // };
-  buildCrossChainQuery(supportedChains, endpointType).forEach(async chain => {
+    return daoMatch.find(dao => dao.network === chainName) || null;
+  };
+  buildCrossChainQuery(supportedChains).forEach(async chain => {
     try {
       const daoData = await graphFetchAll({
-        endpoint: chain.endpoint,
-        query,
-        variables,
+        endpoint: supportedChains[chain.networkID].subgraph_url,
+        query: PROJECTS_DAOS_QUERY,
         subfield: 'moloches',
       });
 
-      console.log('daoData', daoData);
+      const shamanData = await graphFetchAll({
+        endpoint: supportedChains[chain.networkID].shaman_graph_url,
+        query: PROJECTS_SHAMANS_QUERY,
+        subfield: 'shamans',
+      });
 
-      // const shamanData = await graphQuery({
-      //   endpoint: chain.endpoint,
-      //   query,
-      //   variables,
-      // });
+      const withMetaData = daoData.map(dao => {
+        return {
+          ...dao,
+          meta: daoMapLookup(dao?.id, chain.apiMatch),
+        };
+      });
 
-      // const withMetaData = daoData
-      //   .map(dao => {
-      //     return {
-      //       ...dao,
-      //       meta: daoMapLookup(dao?.id, chain.apiMatch),
-      //     };
-      //   })
-      //   .filter(dao => {
-      //     return dao.version === '2.2';
-      //   });
+      const yeeters = shamanData.filter(shaman => {
+        return shaman.shamanType === 'yeeter';
+      });
 
       reactSetter(prevState => [
         ...prevState,
-        // { ...chain, data: withMetaData },
-        { ...chain, data: daoData },
+        { ...chain, daos: withMetaData, yeeters },
       ]);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+};
+
+export const membershipsChainQuery = async ({
+  supportedChains,
+  reactSetter,
+  variables,
+}) => {
+  buildCrossChainQuery(supportedChains).forEach(async chain => {
+    try {
+      const memberData = await graphFetchAll({
+        endpoint: supportedChains[chain.networkID].subgraph_url,
+        query: MEMBERSHIPS_QUERY,
+        variables,
+        subfield: 'membersHub',
+      });
+
+      const yeeterDaos = memberData.filter(dao => dao.moloch.version === '2.2');
+
+      reactSetter(prevState => [...prevState, { ...chain, daos: yeeterDaos }]);
     } catch (error) {
       console.error(error);
     }
