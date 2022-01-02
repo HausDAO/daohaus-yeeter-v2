@@ -78,3 +78,80 @@ export const MEMBERSHIPS_QUERY = gql`
     }
   }
 `;
+
+export const PROJECT_DETAILS_QUERY = gql`
+  query moloch($contractAddr: String!) {
+    moloch(id: $contractAddr) {
+      id
+      summoner
+      summoningTime
+      newContract
+      totalShares
+      dilutionBound
+      totalLoot
+      version
+      periodDuration
+      votingPeriodLength
+      gracePeriodLength
+      proposalDeposit
+      processingReward
+      guildBankAddress
+      minions {
+        createdAt
+        minionAddress
+        minionType
+        details
+        minQuorum
+        safeAddress
+        uberHausAddress
+        uberHausDelegate
+        uberHausDelegateRewardFactor
+      }
+      depositToken {
+        tokenAddress
+        symbol
+        decimals
+      }
+      tokenBalances(where: { guildBank: true }, first: 500) {
+        id
+        token {
+          tokenAddress
+          symbol
+          decimals
+        }
+        tokenBalance
+        guildBank
+      }
+      shamans {
+        shamanAddress
+        enabled
+      }
+    }
+  }
+`;
+
+export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
+  query shamans($contractAddr: String!) {
+    shamans(where: { shamanType: "yeeter", molochAddress: $contractAddr }) {
+      id
+      createdAt
+      shamanAddress
+      molochAddress
+      details
+      shamanType
+      yeeterConfig {
+        id
+        maxTarget
+        raiseEndTime
+        raiseStartTime
+        maxUnits
+        pricePerUnit
+      }
+      yeets {
+        createdAt
+        contributorAddress
+        amount
+      }
+    }
+  }
+`;

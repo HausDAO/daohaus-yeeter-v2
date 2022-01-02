@@ -8,6 +8,7 @@ import React, {
 import { useParams } from 'react-router-dom';
 
 import { TXProvider } from './TXContext';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
@@ -21,6 +22,11 @@ export const DaoProvider = ({ children }) => {
 
   const [daoOverview, setDaoOverview] = useState();
   const [daoProposals, setDaoProposals] = useState();
+  const [daoShamans, setDaoShamans] = useState();
+  const [currentProject, setCurrentProject] = useSessionStorage(
+    'currentProject',
+    null,
+  );
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
@@ -28,7 +34,8 @@ export const DaoProvider = ({ children }) => {
   useEffect(() => {
     // This condition is brittle. If one request passes, but the rest fail
     // this stops the app from fetching. We'll need something better later on.
-    if (daoOverview || daoProposals) {
+
+    if (daoOverview || daoProposals || daoShamans) {
       return;
     }
     if (
@@ -53,12 +60,47 @@ export const DaoProvider = ({ children }) => {
           getter: 'getProposals',
           setter: setDaoProposals,
         },
+        {
+          getter: 'getShamans',
+          setter: setDaoShamans,
+        },
       ],
     };
 
     bigGraphQuery(bigQueryOptions);
     hasPerformedBatchQuery.current = true;
-  }, [daoid, daochain, daoNetworkData, daoOverview, setDaoOverview]);
+  }, [daoid, daochain, daoNetworkData, daoOverview, daoShamans, daoProposals]);
+
+  useEffect(() => {
+    const hydrateProjectData = () => {
+      console.log('hit hydrate', daoOverview, daoProposals, daoProposals);
+      const project = {
+        ...daoOverview,
+        proposals: daoProposals,
+        yeeter: daoProposals,
+      };
+
+      setCurrentProject(project);
+    };
+
+    if (
+      hasPerformedBatchQuery.current &&
+      daoOverview &&
+      daoProposals &&
+      daoShamans &&
+      !currentProject
+    ) {
+      // TODO: does hasPerformedBatchQuery ensure it refires on dao nav?
+      hydrateProjectData();
+    }
+  }, [
+    daoOverview,
+    daoProposals,
+    daoShamans,
+    currentProject,
+    setCurrentProject,
+    hasPerformedBatchQuery,
+  ]);
 
   const refetch = () => {
     const bigQueryOptions = {
@@ -71,6 +113,10 @@ export const DaoProvider = ({ children }) => {
         {
           getter: 'getProposals',
           setter: setDaoProposals,
+        },
+        {
+          getter: 'getShaman',
+          setter: setDaoShamans,
         },
       ],
     };
@@ -86,8 +132,7 @@ export const DaoProvider = ({ children }) => {
   return (
     <DaoContext.Provider
       value={{
-        daoProposals,
-        daoOverview,
+        currentProject,
         refetch,
         refreshAllDaoVaults,
         hasPerformedBatchQuery, // Ref, not state
@@ -99,14 +144,12 @@ export const DaoProvider = ({ children }) => {
 };
 export const useDao = () => {
   const {
-    daoProposals,
-    daoOverview,
+    currentProject,
     refetch,
     hasPerformedBatchQuery, // Ref, not state
   } = useContext(DaoContext);
   return {
-    daoProposals,
-    daoOverview,
+    currentProject,
     refetch,
     hasPerformedBatchQuery,
   };

@@ -30,7 +30,6 @@ export const ProjectsContextProvider = ({ children }) => {
 
   useEffect(() => {
     const hydrateProjectData = () => {
-      console.log('hit hydrate', projectData);
       const all = projectData.reduce((allProjects, network) => {
         const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
           yeets[yeeter.molochAddress] = yeeter;
@@ -44,7 +43,6 @@ export const ProjectsContextProvider = ({ children }) => {
         return [...allProjects, ...networkDaos];
       }, []);
 
-      console.log('all', all);
       setProjects(all);
     };
 

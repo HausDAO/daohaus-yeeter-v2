@@ -4,11 +4,12 @@ import { getGraphEndpoint } from './chain';
 import { proposalResolver } from './resolvers';
 import { EXAMPLE_DAO_PROPOSALS } from '../graphQL/example-queries';
 import { fetchMetaData } from './metadata';
-import { DAO_OVERVIEW } from '../graphQL/general';
 import {
   MEMBERSHIPS_QUERY,
   PROJECTS_DAOS_QUERY,
+  PROJECTS_DETAIL_SHAMAN_QUERY,
   PROJECTS_SHAMANS_QUERY,
+  PROJECT_DETAILS_QUERY,
 } from '../graphQL/projects';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
@@ -40,7 +41,7 @@ const completeQueries = {
 
       const graphOverview = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
-        query: DAO_OVERVIEW,
+        query: PROJECT_DETAILS_QUERY,
         variables: {
           contractAddr: args.daoID,
         },
@@ -51,9 +52,26 @@ const completeQueries = {
       console.error(error);
     }
   },
+  async getShamans(args, setter) {
+    try {
+      const graphShamans = await graphQuery({
+        endpoint: getGraphEndpoint(args.chainID, 'shaman_graph_url'),
+        query: PROJECTS_DETAIL_SHAMAN_QUERY,
+        variables: {
+          contractAddr: args.daoID,
+        },
+      });
+
+      setter(graphShamans.shamans);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   async getProposals(args, setter) {
     try {
       // only fetching the newest proposals in this example
+      // TODO: new query for latest ragequittable
+      // might need to filter here
       const graphProposals = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
         query: EXAMPLE_DAO_PROPOSALS,

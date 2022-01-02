@@ -9,32 +9,34 @@ import { themeImagePath } from '../utils/metadata';
 import DaohausLink from '../components/daohausLink';
 
 const DaoHome = () => {
-  const { daoOverview } = useDao();
+  const { currentProject } = useDao();
   const { daoid } = useParams();
 
   return (
     <Box p={10}>
-      {daoOverview && (
+      {currentProject && (
         <>
           <Flex mb={5} align='center'>
             <Avatar
               src={
-                daoOverview.metadata?.avatarImg
-                  ? themeImagePath(daoOverview.metadata?.avatarImg)
+                currentProject.metadata?.avatarImg
+                  ? themeImagePath(currentProject.metadata?.avatarImg)
                   : makeBlockie(daoid || '0x0')
               }
               mr={6}
             />
-            <Text fontSize='xl'>{daoOverview.metadata?.name}</Text>
+            <Text fontSize='xl'>{currentProject.metadata?.name}</Text>
           </Flex>
-          <Text fontSize='sm'>{daoOverview.id}</Text>
-          <Text fontSize='sm'>{daoOverview.metadata.description}</Text>
-          <Text fontSize='sm'>Shares: {daoOverview.totalShares}</Text>
-          <Text fontSize='sm'>Loot: {daoOverview.totalLoot}</Text>
+          <Text fontSize='sm'>{currentProject.id}</Text>
+          <Text fontSize='sm'>{currentProject.metadata.description}</Text>
+          <Text fontSize='sm'>Shares: {currentProject.totalShares}</Text>
+          <Text fontSize='sm'>Loot: {currentProject.totalLoot}</Text>
           <Text fontSize='sm'>
-            Guildbank Token Count: {daoOverview.tokenBalances.length}
+            Guildbank Token Count: {currentProject.tokenBalances.length}
           </Text>
-          <Text fontSize='sm'>Minion Count: {daoOverview.minions.length}</Text>
+          <Text fontSize='sm'>
+            Minion Count: {currentProject.minions.length}
+          </Text>
 
           <DaohausLink linkText='View on Daohaus' />
         </>

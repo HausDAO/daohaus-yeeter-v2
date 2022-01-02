@@ -7,26 +7,28 @@ import FourOhFour from '../pages/404';
 import Faq from '../pages/Faq';
 import BaseLayout from './baseLayout';
 
+// TODO: move base layout - theme reset not needed?
+
 const BaseRouter = () => {
   return (
-    <Switch>
-      <BaseLayout>
+    <BaseLayout>
+      <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
         <Route exact path='/faq'>
           <Faq />
         </Route>
-      </BaseLayout>
 
-      <Route
-        path='/dao/:daochain/:daoid'
-        render={routeProps => {
-          return <Dao key={routeProps.match.params.daoid} {...routeProps} />;
-        }}
-      />
-      <Route path='*' component={FourOhFour} />
-    </Switch>
+        <Route
+          path='/dao/:daochain/:daoid'
+          render={routeProps => {
+            return <Dao key={routeProps.match.params.daoid} {...routeProps} />;
+          }}
+        />
+        <Route path='*' component={FourOhFour} />
+      </Switch>
+    </BaseLayout>
   );
 };
 
