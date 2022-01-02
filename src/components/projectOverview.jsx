@@ -27,7 +27,7 @@ const ProjectOverview = ({ project }) => {
           {daoid ? (
             project?.meta?.name || '--'
           ) : (
-            <RouterLink to={`/dao/${project?.chainID}/${project?.id}`}>
+            <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
               {project?.meta?.name || '--'}
             </RouterLink>
           )}
