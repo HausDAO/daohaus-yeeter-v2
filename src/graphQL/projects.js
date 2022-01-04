@@ -113,6 +113,12 @@ export const PROJECT_DETAILS_QUERY = gql`
         symbol
         decimals
       }
+      members(where: { shares_gt: "0" }) {
+        id
+        memberAddress
+        shares
+        loot
+      }
       tokenBalances(where: { guildBank: true }, first: 500) {
         id
         token {
