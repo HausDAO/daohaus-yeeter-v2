@@ -77,7 +77,7 @@ export const DaoProvider = ({ children }) => {
       const project = {
         ...daoOverview,
         proposals: daoProposals,
-        yeeter: daoProposals,
+        yeeter: daoShamans,
       };
 
       setCurrentProject(project);

@@ -12,6 +12,8 @@ const DaoHome = () => {
   const { currentProject } = useDao();
   const { daoid } = useParams();
 
+  console.log('currentProject', currentProject);
+
   return (
     <Box p={10}>
       {currentProject && (

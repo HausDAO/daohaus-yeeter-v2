@@ -18,6 +18,7 @@ export const PROJECTS_DAOS_QUERY = gql`
         guildBank
         token {
           decimals
+          symbol
           tokenAddress
         }
       }

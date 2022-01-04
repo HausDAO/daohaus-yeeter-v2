@@ -164,8 +164,6 @@ export const projectsCrossChainQuery = async ({
         return shaman.shamanType === 'yeeter';
       });
 
-      // TODO: filter out daos with shaman not enabled
-
       reactSetter(prevState => [
         ...prevState,
         { ...chain, daos: withMetaData, yeeters },
