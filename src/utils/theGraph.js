@@ -62,7 +62,7 @@ const completeQueries = {
         },
       });
 
-      setter(graphShamans.shamans);
+      setter(graphShamans.shamans[0]);
     } catch (error) {
       console.error(error);
     }
@@ -163,8 +163,6 @@ export const projectsCrossChainQuery = async ({
       const yeeters = shamanData.filter(shaman => {
         return shaman.shamanType === 'yeeter';
       });
-
-      // TODO: filter out daos with shaman not enabled
 
       reactSetter(prevState => [
         ...prevState,

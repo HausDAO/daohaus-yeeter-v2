@@ -6,7 +6,7 @@ import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import { useProjects } from '../contexts/ProjectsContext';
 
 import { projectData } from '../data/temp';
-import ProjectCard from './projectCard';
+import ProjectListCard from './projectListCard';
 import ProjectListFilters from './projectListFilters';
 
 const ProjectsList = () => {
@@ -14,10 +14,9 @@ const ProjectsList = () => {
   const { projects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
 
-  console.log('projects', projects);
-
   useEffect(() => {
     if (projects.length) {
+      console.log('projects', projects);
       setListProjects(projects);
     }
   }, [projects]);
@@ -39,13 +38,15 @@ const ProjectsList = () => {
           <Text fontSize='2xl' mb={3}>
             All Projects
           </Text>
-          <ProjectListFilters
-            projectCount={projectData?.length}
-            handleSearchFilter={searchFilter}
-          />
+          <Box mb={5}>
+            <ProjectListFilters
+              projectCount={projectData?.length}
+              handleSearchFilter={searchFilter}
+            />
+          </Box>
           <List spacing={3}>
             {listProjects.map(project => {
-              return <ProjectCard key={project.id} project={project} />;
+              return <ProjectListCard key={project.id} project={project} />;
             })}
           </List>
         </>

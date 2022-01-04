@@ -4,6 +4,7 @@ import { useSessionStorage } from '../hooks/useSessionStorage';
 import { projectsCrossChainQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { getApiMetadata } from '../utils/metadata';
+import { hydrateProjectsData } from '../utils/projects';
 
 const numOfSupportedChains = Object.keys(supportedChains).length;
 
@@ -29,31 +30,8 @@ export const ProjectsContextProvider = ({ children }) => {
   }, [projects, projectData, setProjectData]);
 
   useEffect(() => {
-    const hydrateProjectData = () => {
-      const all = projectData
-        .reduce((allProjects, network) => {
-          const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
-            yeets[yeeter.molochAddress] = yeeter;
-            return yeets;
-          }, {});
-
-          const networkDaos = network.daos.map(dao => {
-            return {
-              ...dao,
-              yeeter: yeeterMap[dao.id],
-              networkID: network.networkID,
-            };
-          });
-
-          return [...allProjects, ...networkDaos];
-        }, [])
-        .filter(project => project.yeeter);
-
-      setProjects(all);
-    };
-
     if (projectData.length === numOfSupportedChains && !projects.length) {
-      hydrateProjectData();
+      setProjects(hydrateProjectsData(projectData));
     }
   }, [projects, setProjects, projectData]);
 

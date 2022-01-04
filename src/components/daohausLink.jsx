@@ -11,7 +11,6 @@ const DaohausLink = ({ linkText, project }) => {
       href={`https://app.daohaus.club/dao/${project?.networkID ||
         daochain}/${project?.id || daoid}`}
       isExternal
-      ml={2}
     >
       <Flex align='center'>
         {linkText}
