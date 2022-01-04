@@ -62,7 +62,7 @@ const completeQueries = {
         },
       });
 
-      setter(graphShamans.shamans);
+      setter(graphShamans.shamans[0]);
     } catch (error) {
       console.error(error);
     }
