@@ -30,18 +30,24 @@ export const ProjectsContextProvider = ({ children }) => {
 
   useEffect(() => {
     const hydrateProjectData = () => {
-      const all = projectData.reduce((allProjects, network) => {
-        const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
-          yeets[yeeter.molochAddress] = yeeter;
-          return yeets;
-        }, {});
+      const all = projectData
+        .reduce((allProjects, network) => {
+          const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
+            yeets[yeeter.molochAddress] = yeeter;
+            return yeets;
+          }, {});
 
-        const networkDaos = network.daos.map(dao => {
-          return { ...dao, yeeter: yeeterMap[dao.id], ...network };
-        });
+          const networkDaos = network.daos.map(dao => {
+            return {
+              ...dao,
+              yeeter: yeeterMap[dao.id],
+              networkID: network.networkID,
+            };
+          });
 
-        return [...allProjects, ...networkDaos];
-      }, []);
+          return [...allProjects, ...networkDaos];
+        }, [])
+        .filter(project => project.yeeter);
 
       setProjects(all);
     };
