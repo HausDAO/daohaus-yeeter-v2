@@ -12,7 +12,7 @@ import { truncateAddr } from '../utils/general';
 
 const LeaderBoardList = ({ yeets }) => {
   const { daochain } = useParams();
-  const [amountSort, setAmountSort] = useState(true);
+  const [amountSort, setAmountSort] = useState(false);
   const [sortedYeets, setSortedYeets] = useState([]);
 
   useEffect(() => {
