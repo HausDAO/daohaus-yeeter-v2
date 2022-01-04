@@ -41,7 +41,7 @@ const Layout = ({ children, isDao }) => {
       <Flex
         w='100%'
         ml={[0, null, null, null]}
-        mt={['80px', null, null, '0px']}
+        // mt={['80px', null, null, '0px']}
         flexDirection='column'
       >
         {children}

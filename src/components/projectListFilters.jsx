@@ -21,12 +21,16 @@ export const sortOptions = [
 
 export const filterOptions = [
   {
+    name: 'All',
+    value: 'all',
+  },
+  {
     name: 'Rinkeby',
     value: 'rinkeby',
   },
   {
-    name: 'Mainnet',
-    value: 'mainnet',
+    name: 'Kovan',
+    value: 'kovan',
   },
 ];
 

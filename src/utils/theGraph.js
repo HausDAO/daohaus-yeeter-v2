@@ -10,7 +10,7 @@ import {
   PROJECTS_DETAIL_SHAMAN_QUERY,
   PROJECTS_SHAMANS_QUERY,
   PROJECT_DETAILS_QUERY,
-} from '../graphQL/projects';
+} from '../graphQL/project-queries';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
   try {

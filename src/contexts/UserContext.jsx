@@ -46,12 +46,23 @@ export const UserContextProvider = ({ children }) => {
     setMemberships([]);
   };
 
+  const userContributions = project => {
+    if (!address) {
+      return false;
+    }
+
+    return project.yeeter.yeets.filter(yeet => {
+      return yeet.contributorAddress === address;
+    });
+  };
+
   return (
     <UserContext.Provider
       value={{
         userMemberships,
         hasLoadedMemberships,
         refetchUserMemberships,
+        userContributions,
       }}
     >
       {children}
@@ -63,10 +74,12 @@ export const useUser = () => {
     userMemberships,
     hasLoadedMemberships,
     refetchUserMemberships,
+    userContributions,
   } = useContext(UserContext);
   return {
     userMemberships,
     hasLoadedMemberships,
     refetchUserMemberships,
+    userContributions,
   };
 };
