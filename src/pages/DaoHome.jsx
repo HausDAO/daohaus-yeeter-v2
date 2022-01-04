@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { useDao } from '../contexts/DaoContext';
 import { themeImagePath } from '../utils/metadata';
 import DaohausLink from '../components/daohausLink';
+import CoreTeamList from '../components/coreTeamList';
 
 const DaoHome = () => {
   const { currentProject } = useDao();
@@ -39,6 +40,12 @@ const DaoHome = () => {
           </Text>
 
           <DaohausLink linkText='View on Daohaus' />
+          {currentProject?.members && (
+            <CoreTeamList
+              coreTeam={currentProject.members}
+              totalShares={currentProject.totalShares}
+            />
+          )}
         </>
       )}
     </Box>
