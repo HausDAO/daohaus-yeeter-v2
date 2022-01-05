@@ -8,7 +8,7 @@ import React, {
 import { useParams } from 'react-router-dom';
 
 import { TXProvider } from './TXContext';
-import { useSessionStorage } from '../hooks/useSessionStorage';
+// import { useSessionStorage } from '../hooks/useSessionStorage';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
