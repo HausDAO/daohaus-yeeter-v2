@@ -23,10 +23,12 @@ export const DaoProvider = ({ children }) => {
   const [daoOverview, setDaoOverview] = useState();
   const [daoProposals, setDaoProposals] = useState();
   const [daoShamans, setDaoShamans] = useState();
-  const [currentProject, setCurrentProject] = useSessionStorage(
-    'currentProject',
-    null,
-  );
+  // const [currentProject, setCurrentProject] = useSessionStorage(
+  //   'currentProject',
+  //   null,
+  // );
+
+  const [currentProject, setCurrentProject] = useState(null);
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
@@ -90,7 +92,6 @@ export const DaoProvider = ({ children }) => {
       daoShamans &&
       !currentProject
     ) {
-      // TODO: does hasPerformedBatchQuery ensure it refires on dao nav?
       hydrateProjectData();
     }
   }, [
