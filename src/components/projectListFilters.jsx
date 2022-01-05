@@ -9,17 +9,33 @@ import { debounce } from '../utils/general';
 import { filterAndSortProjects } from '../utils/projects';
 
 export const sortOptions = [
+  // {
+  //   name: 'Time Remaining',
+  //   value: 'time',
+  // },
+  // {
+  //   name: 'Your Contributed Projects',
+  //   value: 'yours',
+  // },
+  // {
+  //   name: 'Highest Amount',
+  //   value: 'amountDesc',
+  // },
   {
-    name: 'Time Remaining',
-    value: 'time',
+    name: 'Active',
+    value: 'active',
   },
   {
-    name: 'Your Contributed Projects',
-    value: 'yours',
+    name: 'Upcoming',
+    value: 'upcoming',
   },
   {
-    name: 'Highest Amount',
-    value: 'amountDesc',
+    name: 'Funded',
+    value: 'funded',
+  },
+  {
+    name: 'Failed',
+    value: 'failed',
   },
 ];
 
