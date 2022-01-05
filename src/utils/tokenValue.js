@@ -157,9 +157,11 @@ export const valToDecimalString = (value, tokenAddress, tokens) => {
     .toString();
 };
 
-export const displayBalance = (tokenBalance, decimals) => {
+export const displayBalance = (tokenBalance, decimals, wholeNumber = false) => {
   if (tokenBalance && decimals) {
-    return parseFloat(Number(tokenBalance) / 10 ** Number(decimals)).toFixed(4);
+    return parseFloat(Number(tokenBalance) / 10 ** Number(decimals)).toFixed(
+      !wholeNumber ? 4 : null,
+    );
   }
 };
 

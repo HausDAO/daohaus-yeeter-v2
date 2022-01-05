@@ -1,22 +1,22 @@
 import { rgba } from 'polished';
 
 import BrandImg from '../assets/img/Daohaus__Castle--Dark.svg';
-import BgImg from '../assets/img/daohaus__hero--falling.jpg';
+// import BgImg from '../assets/img/daohaus__hero--falling.jpg';
 
 export const defaultTheme = {
-  primary500: '#050A1B',
-  primaryAlpha: rgba('#050A1B', 0.9),
-  secondary500: '#EB8A23',
-  secondaryAlpha: rgba('#050A1B', 0.75),
-  bg500: '#03061B',
+  primary500: '#050a1b',
+  primaryAlpha: rgba('#050a1b', 0.9),
+  secondary500: '#38a169',
+  secondaryAlpha: rgba('#050a1b', 0.75),
+  bg500: '#050a1b',
   bgAlpha: '#03061B',
-  bgOverlayOpacity: 0.75,
+  bgOverlayOpacity: 0.91,
   modeAlpha500: '#FFFFFF',
   headingFont: 'Mulish',
-  bodyFont: 'Rubik',
+  bodyFont: 'Mulish',
   monoFont: 'Space Mono',
   avatarImg: BrandImg,
-  bgImg: BgImg,
+  bgImg: 'QmVN9y2xBgrwmWChor42PLMvp32UkV1zZJGhbqvd8Ytqhk',
   daoMeta: {
     proposals: 'Proposals',
     proposal: 'Proposal',
