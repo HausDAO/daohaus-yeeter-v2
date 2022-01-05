@@ -8,12 +8,11 @@ import { useDao } from '../contexts/DaoContext';
 import { themeImagePath } from '../utils/metadata';
 import DaohausLink from '../components/daohausLink';
 import CoreTeamList from '../components/coreTeamList';
+import LeaderBoardList from '../components/leaderBoardList';
 
 const DaoHome = () => {
   const { currentProject } = useDao();
   const { daoid } = useParams();
-
-  console.log('currentProject', currentProject);
 
   return (
     <Box p={10}>
@@ -42,12 +41,21 @@ const DaoHome = () => {
           </Text>
 
           <DaohausLink linkText='View on Daohaus' />
-          {currentProject?.members && (
-            <CoreTeamList
-              coreTeam={currentProject.members}
-              totalShares={currentProject.totalShares}
-            />
-          )}
+          <Flex>
+            {currentProject?.yeeter?.yeets && (
+              <Box flexGrow='1'>
+                <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
+              </Box>
+            )}
+            {currentProject?.members && (
+              <Box flexGrow='1'>
+                <CoreTeamList
+                  coreTeam={currentProject.members}
+                  totalShares={currentProject.totalShares}
+                />
+              </Box>
+            )}
+          </Flex>
         </>
       )}
     </Box>
