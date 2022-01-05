@@ -8,10 +8,10 @@ import { truncateAddr } from '../utils/general';
 
 const CoreTeamList = ({ coreTeam, totalShares }) => {
   const { daochain } = useParams();
-  console.log('coreTeam', coreTeam);
 
   return (
-    <List>
+    <List backgroundColor='primary.500' m={6}>
+      <Text fontSize='xl'>Core Team</Text>
       {coreTeam.map(member => (
         <Flex flexDirection='column' key={member.memberAddress}>
           <Flex>
