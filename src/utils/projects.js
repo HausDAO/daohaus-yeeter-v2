@@ -142,3 +142,10 @@ export const filterAndSortProjects = (projects, args) => {
     projectListFilter(args.filter),
   ])(projects);
 };
+
+export const contributionSharePercentage = (loot, project) => {
+  return (
+    (Number(loot) / (Number(project.totalLoot) + Number(project.totalShares))) *
+    100
+  ).toFixed(2);
+};

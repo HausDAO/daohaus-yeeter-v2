@@ -56,6 +56,21 @@ export const UserContextProvider = ({ children }) => {
     });
   };
 
+  // const currentMembership = project => {
+  //   if (!userMemberships) {
+  //     return null;
+  //   }
+  //   console.log('userMemberships', userMemberships);
+  //   const networkDaos = userMemberships.find(
+  //     network => project.networkID === network.networkID,
+  //   );
+
+  //   console.log('networkDaos', networkDaos);
+  //   return networkDaos?.daos.find(membership => {
+  //     return membership.daos.find(dao => dao.molochAddress === project.id);
+  //   });
+  // };
+
   return (
     <UserContext.Provider
       value={{
@@ -63,6 +78,7 @@ export const UserContextProvider = ({ children }) => {
         hasLoadedMemberships,
         refetchUserMemberships,
         userContributions,
+        // currentMembership,
       }}
     >
       {children}
@@ -75,11 +91,13 @@ export const useUser = () => {
     hasLoadedMemberships,
     refetchUserMemberships,
     userContributions,
+    // currentMembership,
   } = useContext(UserContext);
   return {
     userMemberships,
     hasLoadedMemberships,
     refetchUserMemberships,
     userContributions,
+    // currentMembership,
   };
 };

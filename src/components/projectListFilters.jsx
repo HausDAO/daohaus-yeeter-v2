@@ -33,8 +33,8 @@ export const filterOptions = [
     value: '0x4',
   },
   {
-    name: 'Kovan',
-    value: '0x2a',
+    name: 'Gnosis Chain',
+    value: '0x64',
   },
 ];
 
