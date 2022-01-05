@@ -24,8 +24,6 @@ const UserContribution = ({ project }) => {
         return dao.molochAddress === project.id;
       });
 
-      console.log('currentMembership', currentMembership);
-
       const total = yeets.reduce((sum, yeet) => {
         sum += yeet.amount;
         return sum;

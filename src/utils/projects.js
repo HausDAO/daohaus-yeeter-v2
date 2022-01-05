@@ -170,3 +170,10 @@ export const contributionSharePercentage = (loot, project) => {
     100
   ).toFixed(2);
 };
+
+export const maxContribution = project => {
+  const max =
+    Number(project.yeeter.yeeterConfig.maxUnits) *
+    Number(project.yeeter.yeeterConfig.pricePerUnit);
+  return displayBalance(max, project.yeeterTokenDecimals);
+};

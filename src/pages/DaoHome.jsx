@@ -36,8 +36,12 @@ const DaoHome = () => {
               backgroundColor='primary.500'
               p={10}
             >
-              <ProjectFundingStatus project={currentProject} />
-              <ProjectContributionActions project={currentProject} />
+              <Box mb={5}>
+                <ProjectFundingStatus project={currentProject} />
+              </Box>
+              <Box>
+                <ProjectContributionActions project={currentProject} />
+              </Box>
             </Flex>
           </Flex>
 
