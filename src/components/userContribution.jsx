@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { useUser } from '../contexts/UserContext';
 import { contributionSharePercentage } from '../utils/projects';
+import { displayBalance } from '../utils/tokenValue';
 
 const UserContribution = ({ project }) => {
   const { userContributions, userMemberships } = useUser();
@@ -45,19 +46,21 @@ const UserContribution = ({ project }) => {
       </Text>
       <Flex justify='space-between'>
         <Flex fontFamily='mono' direction='column' alignItems='flex-start'>
-          <Box fontSize='lg'>{contributions.total}</Box>
+          <Box fontSize='xl'>
+            {displayBalance(contributions.total, project.yeeterTokenDecimals)}
+          </Box>
           <Box fontSize='xs' color='gray.500'>
             Contributed
           </Box>
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='flex-start'>
-          <Box fontSize='2xl'>{contributions.currentMembership.loot}</Box>
+          <Box fontSize='xl'>{contributions.currentMembership.loot}</Box>
           <Box fontSize='xs' color='gray.500'>
             Loot
           </Box>
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='flex-start'>
-          <Box fontSize='2xl'>
+          <Box fontSize='xl'>
             {contributionSharePercentage(
               contributions.currentMembership.loot,
               project,

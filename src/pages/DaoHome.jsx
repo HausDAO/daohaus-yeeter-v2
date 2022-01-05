@@ -23,7 +23,7 @@ const DaoHome = () => {
               backgroundColor='primary.500'
               p={10}
             >
-              <Box mb={7}>
+              <Box mb={10}>
                 <ProjectOverview project={currentProject} />
               </Box>
               <Box>

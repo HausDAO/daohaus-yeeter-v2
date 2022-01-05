@@ -29,6 +29,34 @@ export const addCurrentBalance = (dao, networkID) => {
   };
 };
 
+export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
+  const decimals =
+    dao.tokenBalances.find(
+      balance =>
+        balance.token.tokenAddress ===
+        supportedChains[networkID].wrapper_contract.toLowerCase(),
+    )?.decimals || '18';
+
+  if (!yeeter) {
+    return {
+      balance: 0,
+      displayBalance: 0,
+      yeeterTokenDecimals: decimals,
+    };
+  }
+
+  const total = yeeter.yeets.reduce((sum, yeet) => {
+    sum += Number(yeet.amount);
+    return sum;
+  }, 0);
+
+  return {
+    balance: total,
+    displayBalance: displayBalance(total, decimals),
+    yeeterTokenDecimals: decimals,
+  };
+};
+
 const filterInactiveYeeters = yeeters => {
   return yeeters.filter(project => {
     return project.yeeter && project.yeeter.enabled;
@@ -52,7 +80,8 @@ const combineDaosAndYeeters = projectData => {
           ).enabled,
         },
         networkID: network.networkID,
-        ...addCurrentBalance(dao, network.networkID),
+        // ...addCurrentBalance(dao, network.networkID),
+        ...addCurrentYeetBalance(yeeterMap[dao.id], dao, network.networkID),
       };
     });
 

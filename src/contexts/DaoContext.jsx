@@ -12,7 +12,7 @@ import { TXProvider } from './TXContext';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
-import { addCurrentBalance } from '../utils/projects';
+import { addCurrentBalance, addCurrentYeetBalance } from '../utils/projects';
 
 export const DaoContext = createContext();
 
@@ -81,7 +81,7 @@ export const DaoProvider = ({ children }) => {
         proposals: daoProposals,
         yeeter: daoShamans,
         networkID: daochain,
-        ...addCurrentBalance(daoOverview, daochain),
+        ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
       };
 
       setCurrentProject(project);
