@@ -2,15 +2,20 @@ import React, { useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Tooltip } from '@chakra-ui/tooltip';
 import { Icon } from '@chakra-ui/react';
-import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import {
+  AiOutlineExclamationCircle,
+  AiOutlineQuestionCircle,
+} from 'react-icons/ai';
 
 import CopyButton from './copyButton';
 import { maxContribution, yeetStatus } from '../utils/projects';
 import { supportedChains } from '../utils/chain';
 import { truncateAddr } from '../utils/general';
 import EtherscanLink from './etherscanLink';
+import { displayBalance } from '../utils/tokenValue';
 
-const yeetNotice = project => {
+const yeetNotice = (project, contributions) => {
+  console.log('contributions', contributions);
   return (
     <Box>
       <Flex justify='space-between' align='center' mb={2} fontSize='xs'>
@@ -60,16 +65,31 @@ const yeetNotice = project => {
             {supportedChains[project.networkID].name}
           </Box>
           <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
-            Max {maxContribution(project)}{' '}
+            Max{' '}
+            {displayBalance(
+              maxContribution(project),
+              project.yeeterTokenDecimals,
+            )}{' '}
             {supportedChains[project.networkID].nativeCurrency} contribution
           </Box>
         </Flex>
+        {Number(contributions.total) >= maxContribution(project) && (
+          <Flex
+            direction='row'
+            justify='flex-start'
+            align='center'
+            color='red.600'
+          >
+            <Icon as={AiOutlineExclamationCircle} mr={3} />
+            <Box mt={2}>You’ve reached your individual contribution cap!</Box>
+          </Flex>
+        )}
       </Flex>
     </Box>
   );
 };
 
-const ProjectContributionActions = ({ project }) => {
+const ProjectContributionActions = ({ project, contributions }) => {
   const projectStatus = useMemo(() => {
     if (project) {
       console.log('project', project);
@@ -78,15 +98,13 @@ const ProjectContributionActions = ({ project }) => {
     return null;
   }, [project]);
 
-  console.log('projectStatus', projectStatus);
-
   if (!projectStatus) {
     return null;
   }
 
   return (
     <Box direction='column'>
-      {projectStatus !== 'active' && yeetNotice(project)}
+      {projectStatus !== 'active' && yeetNotice(project, contributions)}
     </Box>
   );
 };

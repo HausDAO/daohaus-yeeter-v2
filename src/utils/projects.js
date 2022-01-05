@@ -172,8 +172,24 @@ export const contributionSharePercentage = (loot, project) => {
 };
 
 export const maxContribution = project => {
-  const max =
+  return (
     Number(project.yeeter.yeeterConfig.maxUnits) *
-    Number(project.yeeter.yeeterConfig.pricePerUnit);
-  return displayBalance(max, project.yeeterTokenDecimals);
+    Number(project.yeeter.yeeterConfig.pricePerUnit)
+  );
+};
+
+export const userContributionData = (project, userMemberships, yeets) => {
+  const networkDaos = userMemberships.find(
+    network => network.networkID === project.networkID,
+  );
+  const currentMembership = networkDaos?.daos.find(dao => {
+    return dao.molochAddress === project.id;
+  });
+
+  const total = yeets.reduce((sum, yeet) => {
+    sum += yeet.amount;
+    return sum;
+  }, 0);
+
+  return { total, yeets, currentMembership };
 };
