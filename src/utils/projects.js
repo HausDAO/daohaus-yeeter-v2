@@ -4,7 +4,7 @@ import { supportedChains } from './chain';
 import { pipe } from './general';
 import { displayBalance } from './tokenValue';
 
-const addCurrentBalance = (dao, networkID) => {
+export const addCurrentBalance = (dao, networkID) => {
   const total = dao.tokenBalances.reduce((sum, balance) => {
     if (
       balance.token.tokenAddress ===
@@ -141,4 +141,11 @@ export const filterAndSortProjects = (projects, args) => {
     projectListSort(args.sort),
     projectListFilter(args.filter),
   ])(projects);
+};
+
+export const contributionSharePercentage = (loot, project) => {
+  return (
+    (Number(loot) / (Number(project.totalLoot) + Number(project.totalShares))) *
+    100
+  ).toFixed(2);
 };

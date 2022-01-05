@@ -5,7 +5,7 @@ import CopyButton from './copyButton';
 const ProjectContributionActions = ({ project }) => {
   return (
     <Flex direction='column'>
-      <Text textTransform='uppercase'>Yeet xdai to</Text>
+      <Text textTransform='uppercase'>Yeet Rinkeby ETH to</Text>
       <Box>{project?.yeeter?.shamanAddress}</Box>
       <CopyButton text={project?.yeeter?.shamanAddress} />
     </Flex>
