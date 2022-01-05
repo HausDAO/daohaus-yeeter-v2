@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
 import Web3 from 'web3';
 
 import { useParams } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { RiExternalLinkLine } from 'react-icons/ri';
 import { TiArrowUnsorted } from 'react-icons/ti';
 
 import { supportedChains } from '../utils/chain';
-import { truncateAddr } from '../utils/general';
+import { timeToNow, truncateAddr } from '../utils/general';
 
 const LeaderBoardList = ({ yeets }) => {
   const { daochain } = useParams();
@@ -50,7 +49,7 @@ const LeaderBoardList = ({ yeets }) => {
               </Link>
             </Text>
             <Text>{Web3.utils.fromWei(yeet.amount)}</Text>
-            <Text>{moment(new Date(yeet.createdAt * 1000)).fromNow()}</Text>
+            <Text>{timeToNow(yeet.createdAt)}</Text>
           </Flex>
         ))}
       </Flex>
