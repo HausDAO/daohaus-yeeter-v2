@@ -4,31 +4,6 @@ import { supportedChains } from './chain';
 import { pipe } from './general';
 import { displayBalance } from './tokenValue';
 
-export const addCurrentBalance = (dao, networkID) => {
-  const total = dao.tokenBalances.reduce((sum, balance) => {
-    if (
-      balance.token.tokenAddress ===
-      supportedChains[networkID].wrapper_contract.toLowerCase()
-    ) {
-      sum += balance.tokenBalance;
-    }
-    return sum;
-  }, 0);
-
-  const decimals =
-    dao.tokenBalances.find(
-      balance =>
-        balance.token.tokenAddress ===
-        supportedChains[networkID].wrapper_contract.toLowerCase(),
-    )?.decimals || '18';
-
-  return {
-    balance: total,
-    displayBalance: displayBalance(total, decimals),
-    yeeterTokenDecimals: decimals,
-  };
-};
-
 export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
   const decimals =
     dao.tokenBalances.find(
@@ -80,7 +55,6 @@ const combineDaosAndYeeters = projectData => {
           ).enabled,
         },
         networkID: network.networkID,
-        // ...addCurrentBalance(dao, network.networkID),
         ...addCurrentYeetBalance(yeeterMap[dao.id], dao, network.networkID),
       };
     });
