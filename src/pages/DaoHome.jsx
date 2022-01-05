@@ -6,6 +6,8 @@ import CoreTeamList from '../components/coreTeamList';
 import LeaderBoardList from '../components/leaderBoardList';
 import ProjectOverview from '../components/projectOverview';
 import ProjectFundingStatus from '../components/projectFundingStatus';
+import UserContribution from '../components/userContribution';
+import ProjectContributionActions from '../components/projectContributionActions';
 
 const DaoHome = () => {
   const { currentProject } = useDao();
@@ -21,7 +23,12 @@ const DaoHome = () => {
               backgroundColor='primary.500'
               p={10}
             >
-              <ProjectOverview project={currentProject} />
+              <Box mb={7}>
+                <ProjectOverview project={currentProject} />
+              </Box>
+              <Box>
+                <UserContribution project={currentProject} />
+              </Box>
             </Flex>
             <Flex
               direction='column'
@@ -30,6 +37,7 @@ const DaoHome = () => {
               p={10}
             >
               <ProjectFundingStatus project={currentProject} />
+              <ProjectContributionActions project={currentProject} />
             </Flex>
           </Flex>
 
