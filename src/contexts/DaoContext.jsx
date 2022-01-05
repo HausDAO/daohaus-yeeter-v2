@@ -73,11 +73,11 @@ export const DaoProvider = ({ children }) => {
 
   useEffect(() => {
     const hydrateProjectData = () => {
-      console.log('hit hydrate', daoOverview, daoProposals, daoProposals);
       const project = {
         ...daoOverview,
         proposals: daoProposals,
         yeeter: daoShamans,
+        networkID: daochain,
       };
 
       setCurrentProject(project);
