@@ -104,7 +104,8 @@ const ProjectContributionActions = ({ project, contributions }) => {
 
   return (
     <Box direction='column'>
-      {projectStatus !== 'active' && yeetNotice(project, contributions)}
+      {/* {projectStatus !== 'active' && yeetNotice(project, contributions)} */}
+      {yeetNotice(project, contributions)}
     </Box>
   );
 };
