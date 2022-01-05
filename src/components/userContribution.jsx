@@ -1,40 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { useUser } from '../contexts/UserContext';
 import { contributionSharePercentage } from '../utils/projects';
 import { displayBalance } from '../utils/tokenValue';
 
-const UserContribution = ({ project }) => {
-  const { userContributions, userMemberships } = useUser();
-  const [contributions, setContributions] = useState({
-    total: 0,
-    yeets: [],
-    currentMembership: null,
-  });
-
-  useEffect(() => {
-    if (project && userMemberships.length) {
-      const yeets = userContributions(project);
-
-      // TODO: move somewhere resuable
-      const networkDaos = userMemberships.find(
-        network => network.networkID === project.networkID,
-      );
-      const currentMembership = networkDaos?.daos.find(dao => {
-        return dao.molochAddress === project.id;
-      });
-
-      console.log('currentMembership', currentMembership);
-
-      const total = yeets.reduce((sum, yeet) => {
-        sum += yeet.amount;
-        return sum;
-      }, 0);
-
-      setContributions({ total, yeets, currentMembership });
-    }
-  }, [project, userMemberships]);
-
+const UserContribution = ({ project, contributions }) => {
   if (!contributions.yeets.length || !contributions.currentMembership) {
     return null;
   }

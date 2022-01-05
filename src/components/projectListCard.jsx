@@ -7,10 +7,10 @@ import ProjectFundingStatus from './projectFundingStatus';
 const ProjectListCard = ({ project }) => {
   return (
     <Flex p={10} backgroundColor='primary.500' wrap='wrap'>
-      <Flex direction='column' w={['100%', null, null, '60%', '60%']}>
+      <Flex direction='column' w={['100%', null, null, '65%', '65%']}>
         <ProjectOverview project={project} />
       </Flex>
-      <Flex direction='column' w={['100%', null, null, '40%', '40%']}>
+      <Flex direction='column' w={['100%', null, null, '35%', '35%']}>
         <ProjectFundingStatus project={project} />
       </Flex>
     </Flex>

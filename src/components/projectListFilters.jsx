@@ -9,18 +9,25 @@ import { debounce } from '../utils/general';
 import { filterAndSortProjects } from '../utils/projects';
 
 export const sortOptions = [
-  // {
-  //   name: 'Time Remaining',
-  //   value: 'time',
-  // },
-  // {
-  //   name: 'Your Contributed Projects',
-  //   value: 'yours',
-  // },
-  // {
-  //   name: 'Highest Amount',
-  //   value: 'amountDesc',
-  // },
+  {
+    name: 'Time Remaining',
+    value: 'time',
+  },
+  {
+    name: 'Your Contributed Projects',
+    value: 'yours',
+  },
+  {
+    name: 'Highest Amount',
+    value: 'amountDesc',
+  },
+];
+
+export const statusFilterOptions = [
+  {
+    name: 'All',
+    value: 'all',
+  },
   {
     name: 'Active',
     value: 'active',
@@ -52,28 +59,38 @@ export const filterOptions = [
     name: 'Gnosis Chain',
     value: '0x64',
   },
+  {
+    name: 'Mainnet',
+    value: '0x64',
+  },
 ];
 
 const ProjectListFilters = ({ listProjects, setListProjects }) => {
   const { projects } = useProjects();
 
-  const [sort, setSort] = useState(sortOptions[0].value);
+  // const [sort, setSort] = useState(sortOptions[0].value);
+  const [sort] = useState(sortOptions[0].value);
+
+  const [statusFilter, setStatusFilter] = useState(
+    statusFilterOptions[0].value,
+  );
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState(null);
 
   useEffect(() => {
-    console.log(sort, filter, searchTerm);
+    console.log(projects);
 
-    if ((sort, filter)) {
+    if ((sort, filter, statusFilter)) {
       setListProjects(
         filterAndSortProjects(projects, {
           sort: sort.value,
           filter: filter.value,
+          statusFilter: statusFilter.value,
           searchTerm,
         }),
       );
     }
-  }, [sort, filter, searchTerm]);
+  }, [sort, filter, statusFilter, searchTerm]);
 
   const handleSearchFilter = e => {
     setSearchTerm(e.target.value);
@@ -96,7 +113,13 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
         onChange={debouncedHandleChange}
       />
       <Box mr={5}>
-        <ListSort sort={sort} setSort={setSort} options={sortOptions} />
+        {/* <ListSort sort={sort} setSort={setSort} options={sortOptions} /> */}
+        <ListFilter
+          filter={statusFilter}
+          setFilter={setStatusFilter}
+          options={statusFilterOptions}
+          labelText='Status'
+        />
       </Box>
       <ListFilter
         filter={filter}

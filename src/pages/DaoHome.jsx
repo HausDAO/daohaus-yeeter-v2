@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
 import { useDao } from '../contexts/DaoContext';
@@ -8,9 +8,26 @@ import ProjectOverview from '../components/projectOverview';
 import ProjectFundingStatus from '../components/projectFundingStatus';
 import UserContribution from '../components/userContribution';
 import ProjectContributionActions from '../components/projectContributionActions';
+import { useUser } from '../contexts/UserContext';
+import { userContributionData } from '../utils/projects';
 
 const DaoHome = () => {
   const { currentProject } = useDao();
+  const { userContributions, userMemberships } = useUser();
+  const [contributions, setContributions] = useState({
+    total: 0,
+    yeets: [],
+    currentMembership: null,
+  });
+
+  useEffect(() => {
+    if (currentProject && userMemberships.length) {
+      const yeets = userContributions(currentProject);
+      setContributions(
+        userContributionData(currentProject, userMemberships, yeets),
+      );
+    }
+  }, [currentProject, userMemberships]);
 
   return (
     <Box p={10}>
@@ -27,7 +44,10 @@ const DaoHome = () => {
                 <ProjectOverview project={currentProject} />
               </Box>
               <Box>
-                <UserContribution project={currentProject} />
+                <UserContribution
+                  project={currentProject}
+                  contributions={contributions}
+                />
               </Box>
             </Flex>
             <Flex
@@ -36,8 +56,15 @@ const DaoHome = () => {
               backgroundColor='primary.500'
               p={10}
             >
-              <ProjectFundingStatus project={currentProject} />
-              <ProjectContributionActions project={currentProject} />
+              <Box mb={5}>
+                <ProjectFundingStatus project={currentProject} />
+              </Box>
+              <Box>
+                <ProjectContributionActions
+                  project={currentProject}
+                  contributions={contributions}
+                />
+              </Box>
             </Flex>
           </Flex>
 
