@@ -47,7 +47,7 @@ const completeQueries = {
         },
       });
 
-      setter({ ...graphOverview.moloch, metadata: metadata[0] });
+      setter({ ...graphOverview.moloch, meta: metadata[0] });
     } catch (error) {
       console.error(error);
     }
