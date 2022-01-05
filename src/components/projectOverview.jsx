@@ -13,7 +13,6 @@ import DaohausLink from './daohausLink';
 const ProjectOverview = ({ project }) => {
   const { daoid } = useParams();
 
-  console.log('project', project);
   return (
     <>
       <Flex alignItems='flex-start' mb={5}>

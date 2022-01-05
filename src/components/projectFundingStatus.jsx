@@ -52,6 +52,17 @@ const ProjectFundingStatus = ({ project }) => {
           <YeetCountdown project={project} />
         </Box>
       )}
+      {yeetPeriodStatus === 'funded' && (
+        <Box mb={3} fontFamily='mono' fontSize='xl'>
+          🎉 Funding Goal Met!
+        </Box>
+      )}
+      {yeetPeriodStatus === 'failed' && (
+        <Box mb={3} fontFamily='mono' fontSize='xl'>
+          Funding Goal not Met
+        </Box>
+      )}
+
       {!daoid && <ContributedIndicator project={project} />}
     </>
   );

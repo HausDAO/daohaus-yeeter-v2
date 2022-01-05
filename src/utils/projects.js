@@ -62,9 +62,16 @@ const combineDaosAndYeeters = projectData => {
     return [...allProjects, ...networkDaos];
   }, []);
 };
+const sortBySummoning = projectData => {
+  return projectData.sort(
+    (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
+  );
+};
 
 export const hydrateProjectsData = projectData => {
-  return pipe([combineDaosAndYeeters, filterInactiveYeeters])(projectData);
+  return pipe([combineDaosAndYeeters, filterInactiveYeeters, sortBySummoning])(
+    projectData,
+  );
 };
 
 export const projectCompletePercentage = project => {
@@ -79,20 +86,20 @@ export const yeetStatus = project => {
   const end = project.yeeter.yeeterConfig.raiseEndTime;
   const now = new Date().getTime() / 1000;
 
-  // if (projectCompletePercentage(project) >= 100) {
-  //   return 'funded';
-  // }
-  // if (Number(end) < now && projectCompletePercentage(project) < 100) {
-  //   return 'failed';
-  // }
+  if (projectCompletePercentage(project) >= 100) {
+    return 'funded';
+  }
+  if (Number(end) < now && projectCompletePercentage(project) < 100) {
+    return 'failed';
+  }
+  if (Number(start) < now && Number(end) > now) {
+    return 'active';
+  }
   if (Number(end) < now) {
     return 'expired';
   }
   if (Number(start) > now) {
     return 'upcoming';
-  }
-  if (Number(start) < now && Number(end) > now) {
-    return 'active';
   }
 };
 
@@ -117,16 +124,18 @@ const projectListSearch = term => projects => {
 };
 
 const projectListSort = sort => projects => {
+  console.log('sort', sort);
   /// time: sortBy raiseEndDate desc / move anything past now to the end
   /// yours: need to get their memberships and put those first, move anything past to the end
-  if (sort === 'time') {
-    return projects.sort(
-      (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
-    );
-  }
-  if (sort === 'amountDesc') {
-    return projects.sort((a, b) => Number(b.balance) - Number(a.balance));
-  }
+  // if (sort === 'time') {
+  //   return projects.sort(
+  //     (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
+  //   );
+  // }
+  // if (sort === 'amountDesc') {
+  //   return projects.sort((a, b) => Number(b.balance) - Number(a.balance));
+  // }
+
   return projects;
 };
 
@@ -135,7 +144,15 @@ const projectListFilter = filter => projects => {
     return projects;
   }
 
-  return projects.filter(project => project.networkID === filter);
+  if (
+    filter === 'active' ||
+    filter === 'upcoming' ||
+    filter === 'failed' ||
+    filter === 'funded'
+  ) {
+    return projects.filter(p => yeetStatus(p) === filter);
+  }
+  return projects.filter(p => p.networkID === filter);
 };
 
 export const filterAndSortProjects = (projects, args) => {
@@ -143,6 +160,7 @@ export const filterAndSortProjects = (projects, args) => {
     projectListSearch(args.searchTerm),
     projectListSort(args.sort),
     projectListFilter(args.filter),
+    projectListFilter(args.statusFilter),
   ])(projects);
 };
 
