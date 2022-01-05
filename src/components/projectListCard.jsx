@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box } from '@chakra-ui/layout';
+import { Flex } from '@chakra-ui/layout';
 
 import ProjectOverview from './projectOverview';
 import ProjectFundingStatus from './projectFundingStatus';

@@ -72,14 +72,16 @@ export const projectCompletePercentage = project => {
 };
 
 export const yeetStatus = project => {
+  const start = project.yeeter.yeeterConfig.raiseStartTime;
+  const end = project.yeeter.yeeterConfig.raiseEndTime;
+  const now = new Date().getTime() / 1000;
+
   // if (projectCompletePercentage(project) >= 100) {
   //   return 'funded';
   // }
-
-  const start = project.yeeter.yeeterConfig.raiseStartTime;
-  const end = project.yeeter.yeeterConfig.raiseEndTime;
-
-  const now = new Date().getTime() / 1000;
+  // if (Number(end) < now && projectCompletePercentage(project) < 100) {
+  //   return 'failed';
+  // }
   if (Number(end) < now) {
     return 'expired';
   }
@@ -102,4 +104,41 @@ export const yeetingTime = project => {
     time: formatDistanceToNow(new Date(timeTarget * 1000)),
     text: status === 'upcoming' ? 'Until Yeeting' : 'Time Left',
   };
+};
+
+const projectListSearch = term => projects => {
+  if (term) {
+    return projects.filter(p => p.meta?.name.indexOf(term) > -1);
+  }
+  return projects;
+};
+
+const projectListSort = sort => projects => {
+  /// time: sortBy raiseEndDate desc / move anything past now to the end
+  /// yours: need to get their memberships and put those first, move anything past to the end
+  if (sort === 'time') {
+    return projects.sort(
+      (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
+    );
+  }
+  if (sort === 'amountDesc') {
+    return projects.sort((a, b) => Number(b.balance) - Number(a.balance));
+  }
+  return projects;
+};
+
+const projectListFilter = filter => projects => {
+  if (filter === 'all') {
+    return projects;
+  }
+
+  return projects.filter(project => project.networkID === filter);
+};
+
+export const filterAndSortProjects = (projects, args) => {
+  return pipe([
+    projectListSearch(args.searchTerm),
+    projectListSort(args.sort),
+    projectListFilter(args.filter),
+  ])(projects);
 };

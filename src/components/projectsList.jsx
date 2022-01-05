@@ -5,7 +5,6 @@ import { Spinner } from '@chakra-ui/spinner';
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import { useProjects } from '../contexts/ProjectsContext';
 
-import { projectData } from '../data/temp';
 import ProjectListCard from './projectListCard';
 import ProjectListFilters from './projectListFilters';
 
@@ -16,18 +15,9 @@ const ProjectsList = () => {
 
   useEffect(() => {
     if (projects.length) {
-      console.log('projects', projects);
       setListProjects(projects);
     }
   }, [projects]);
-
-  // TODO: tie in all filter/search stuff
-
-  const searchFilter = e => {
-    setListProjects(
-      projects.filter(p => p.meta?.name.indexOf(e.target.value) > -1),
-    );
-  };
 
   return (
     <Box p={7}>
@@ -40,8 +30,8 @@ const ProjectsList = () => {
           </Text>
           <Box mb={5}>
             <ProjectListFilters
-              projectCount={projectData?.length}
-              handleSearchFilter={searchFilter}
+              listProjects={listProjects}
+              setListProjects={setListProjects}
             />
           </Box>
           <List spacing={3}>
