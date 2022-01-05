@@ -12,7 +12,7 @@ import { TXProvider } from './TXContext';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
-import { addCurrentBalance, addCurrentYeetBalance } from '../utils/projects';
+import { addCurrentYeetBalance } from '../utils/projects';
 
 export const DaoContext = createContext();
 
