@@ -3,7 +3,7 @@ import { Box, Text, Flex } from '@chakra-ui/layout';
 import { Input } from '@chakra-ui/input';
 
 import { useProjects } from '../contexts/ProjectsContext';
-import ListSort from './listSort';
+// import ListSort from './listSort';
 import ListFilter from './listFilter';
 import { debounce } from '../utils/general';
 import { filterAndSortProjects } from '../utils/projects';
