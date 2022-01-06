@@ -52,7 +52,7 @@ const combineDaosAndYeeters = projectData => {
           ...yeeterMap[dao.id],
           enabled: dao.shamans.find(
             shaman => shaman.shamanAddress === yeeterMap[dao.id].id,
-          ).enabled,
+          )?.enabled,
         },
         networkID: network.networkID,
         ...addCurrentYeetBalance(yeeterMap[dao.id], dao, network.networkID),
