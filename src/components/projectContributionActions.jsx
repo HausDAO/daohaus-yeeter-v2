@@ -1,11 +1,7 @@
 import React, { useMemo } from 'react';
-import { Box, Flex, Link, Text } from '@chakra-ui/layout';
-import { Tooltip } from '@chakra-ui/tooltip';
-import { Button, Icon } from '@chakra-ui/react';
-import {
-  AiOutlineExclamationCircle,
-  AiOutlineQuestionCircle,
-} from 'react-icons/ai';
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Icon } from '@chakra-ui/react';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 import CopyButton from './copyButton';
 import { maxContribution, yeetStatus } from '../utils/projects';
