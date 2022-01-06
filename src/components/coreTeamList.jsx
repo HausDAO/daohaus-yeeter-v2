@@ -1,14 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Avatar, Flex, Icon, Link, List, Text } from '@chakra-ui/react';
-import { RiExternalLinkLine } from 'react-icons/ri';
+import { Avatar, Flex, List, Text } from '@chakra-ui/react';
 
-import { supportedChains } from '../utils/chain';
-import { truncateAddr } from '../utils/general';
+import EnsDisplay from './ensDisplay';
 
 const CoreTeamList = ({ coreTeam, totalShares }) => {
-  const { daochain } = useParams();
-
   return (
     <List backgroundColor='primary.500' m={6}>
       <Text fontSize='xl'>Core Team</Text>
@@ -16,16 +11,7 @@ const CoreTeamList = ({ coreTeam, totalShares }) => {
         <Flex flexDirection='column' key={member.memberAddress}>
           <Flex>
             <Avatar />
-            <Text>
-              {truncateAddr(member.memberAddress)}
-              <Link
-                href={`${supportedChains[daochain].block_explorer}/address/${member.memberAddress}`}
-                isExternal
-                ml={2}
-              >
-                <Icon as={RiExternalLinkLine} name='transaction link' />
-              </Link>
-            </Text>
+            <EnsDisplay address={member.memberAddress} />
           </Flex>
           <Flex alignItems='center' justifyContent='space-between'>
             <Flex flexDirection='column'>

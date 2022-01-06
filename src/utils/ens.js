@@ -80,6 +80,9 @@ export const handleGetENS = async address => {
 };
 
 export const lookupENS = async ens => {
+  // console.log('chain', chainByID('0x1').rpc_url);
+  console.log('chain', chainByID('0x1'));
+
   try {
     const ethersProvider = ethers.getDefaultProvider(chainByID('0x1').rpc_url);
     const address = await ethersProvider.resolveName(ens);
