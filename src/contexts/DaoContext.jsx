@@ -118,13 +118,14 @@ export const DaoProvider = ({ children }) => {
           setter: setDaoProposals,
         },
         {
-          getter: 'getShaman',
+          getter: 'getShamans',
           setter: setDaoShamans,
         },
       ],
     };
     currentDao.current = null;
     bigGraphQuery(bigQueryOptions);
+    hasPerformedBatchQuery.current = true;
   };
 
   const refreshAllDaoVaults = async () => {
