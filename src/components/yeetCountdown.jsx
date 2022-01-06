@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
+import { useParams } from 'react-router';
 import useInterval from '../hooks/useInterval';
 import { yeetingTime } from '../utils/projects';
+import RefreshButton from './refreshButton';
 
 const YeetCountdown = ({ project }) => {
+  const { daoid } = useParams();
   const [countdownTime, setCountdownTime] = useState(null);
 
   useEffect(() => {
@@ -22,11 +25,14 @@ const YeetCountdown = ({ project }) => {
   }
 
   return (
-    <Flex direction='column' fontFamily='mono'>
-      <Box fontSize='2xl'>{countdownTime.time}</Box>
-      <Box fontSize='xs' color='gray.500'>
-        {countdownTime.text}
-      </Box>
+    <Flex justify='space-between' align='center'>
+      <Flex direction='column' fontFamily='mono'>
+        <Box fontSize='2xl'>{countdownTime.time}</Box>
+        <Box fontSize='xs' color='gray.500'>
+          {countdownTime.text}
+        </Box>
+      </Flex>
+      {daoid && <RefreshButton />}
     </Flex>
   );
 };

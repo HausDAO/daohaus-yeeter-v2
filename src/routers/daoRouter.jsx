@@ -14,9 +14,6 @@ const DaoRouter = () => {
       <Route exact path={`${path}/`}>
         <DaoHome />
       </Route>
-      {/* <Route exact path={`${path}/proposals`}>
-          <DaoProposals />
-        </Route> */}
     </Switch>
     // </Layout>
   );

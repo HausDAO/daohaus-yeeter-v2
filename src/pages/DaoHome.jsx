@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
+import { Spinner } from '@chakra-ui/spinner';
 import { useDao } from '../contexts/DaoContext';
 import CoreTeamList from '../components/coreTeamList';
 import LeaderBoardList from '../components/leaderBoardList';
@@ -10,9 +11,11 @@ import UserContribution from '../components/userContribution';
 import ProjectContributionActions from '../components/projectContributionActions';
 import { useUser } from '../contexts/UserContext';
 import { userContributionData } from '../utils/projects';
+import useInterval from '../hooks/useInterval';
+import ProjectProposals from '../components/projectProposals';
 
 const DaoHome = () => {
-  const { currentProject } = useDao();
+  const { currentProject, refetch } = useDao();
   const { userContributions, userMemberships } = useUser();
   const [contributions, setContributions] = useState({
     total: 0,
@@ -29,13 +32,17 @@ const DaoHome = () => {
     }
   }, [currentProject, userMemberships]);
 
+  useInterval(() => {
+    refetch();
+  }, 30000);
+
   return (
     <Box p={10}>
+      {!currentProject && <Spinner />}
       {currentProject && (
         <>
-          <Flex wrap='wrap' justify='space-between'>
-            <Flex
-              direction='column'
+          <Flex wrap='wrap' justify='space-between' mb={10}>
+            <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
               p={10}
@@ -49,9 +56,8 @@ const DaoHome = () => {
                   contributions={contributions}
                 />
               </Box>
-            </Flex>
-            <Flex
-              direction='column'
+            </Box>
+            <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
               p={10}
@@ -65,19 +71,28 @@ const DaoHome = () => {
                   contributions={contributions}
                 />
               </Box>
-            </Flex>
+            </Box>
           </Flex>
 
-          <Flex>
-            <Box flexGrow='1'>
-              {currentProject?.yeeter?.yeets.length > 0 && (
-                <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
-              )}
-              {currentProject?.yeeter?.yeets.length === 0 && (
-                <Box>No Yeets Yet</Box>
-              )}
+          <Flex wrap='wrap' justify='space-between'>
+            <Box
+              w={['100%', null, null, '65%', '65%']}
+              p={10}
+              backgroundColor='primary.500'
+            >
+              <Box mb={10}>
+                {currentProject?.yeeter?.yeets.length > 0 && (
+                  <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
+                )}
+                {currentProject?.yeeter?.yeets.length === 0 && (
+                  <Box>No Yeets Yet</Box>
+                )}
+              </Box>
             </Box>
-            <Box flexGrow='1'>
+            <Box
+              w={['100%', null, null, '30%', '30%']}
+              backgroundColor='primary.500'
+            >
               {currentProject?.members.length > 0 && (
                 <CoreTeamList
                   coreTeam={currentProject.members}
@@ -85,10 +100,7 @@ const DaoHome = () => {
                 />
               )}
               {currentProject?.proposals.length > 0 && (
-                <CoreTeamList
-                  coreTeam={currentProject.members}
-                  totalShares={currentProject.totalShares}
-                />
+                <ProjectProposals project={currentProject} />
               )}
             </Box>
           </Flex>

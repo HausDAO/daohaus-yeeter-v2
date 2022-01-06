@@ -7,13 +7,18 @@ import YeetCountdown from './yeetCountdown';
 import ContributedIndicator from './contributedIndicator';
 import { supportedChains } from '../utils/chain';
 import { displayBalance } from '../utils/tokenValue';
-import { projectCompletePercentage, yeetStatus } from '../utils/projects';
+import {
+  projectCompletePercentage,
+  totalYeeters,
+  yeetStatus,
+} from '../utils/projects';
 
 const ProjectFundingStatus = ({ project }) => {
   const { daoid } = useParams();
 
   const projectComplete = projectCompletePercentage(project);
   const yeetPeriodStatus = yeetStatus(project);
+  const yeeterCount = totalYeeters(project);
 
   return (
     <>
@@ -33,7 +38,7 @@ const ProjectFundingStatus = ({ project }) => {
           </Box>
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
-          <Box fontSize='2xl'>{project.yeeter.yeets.length}</Box>
+          <Box fontSize='2xl'>{yeeterCount}</Box>
           <Box fontSize='xs' color='gray.500'>
             Yeeters
           </Box>
@@ -46,11 +51,13 @@ const ProjectFundingStatus = ({ project }) => {
         backgroundColor='primary.400'
         mb={3}
       />
-      {yeetPeriodStatus !== 'expired' && yeetPeriodStatus !== 'funded' && (
-        <Box mb={3}>
-          <YeetCountdown project={project} />
-        </Box>
-      )}
+      {yeetPeriodStatus !== 'expired' &&
+        yeetPeriodStatus !== 'funded' &&
+        yeetPeriodStatus !== 'failed' && (
+          <Box mb={3}>
+            <YeetCountdown project={project} />
+          </Box>
+        )}
       {yeetPeriodStatus === 'funded' && (
         <Box mb={3} fontFamily='mono' fontSize='xl'>
           🎉 Funding Goal Met!

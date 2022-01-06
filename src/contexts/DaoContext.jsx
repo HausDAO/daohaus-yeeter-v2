@@ -78,7 +78,9 @@ export const DaoProvider = ({ children }) => {
     const hydrateProjectData = () => {
       const project = {
         ...daoOverview,
-        proposals: daoProposals,
+        proposals: daoProposals.sort((a, b) => {
+          return Number(a.proposalIndex) - Number(b.proposalIndex);
+        }),
         yeeter: daoShamans,
         networkID: daochain,
         ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
@@ -118,13 +120,14 @@ export const DaoProvider = ({ children }) => {
           setter: setDaoProposals,
         },
         {
-          getter: 'getShaman',
+          getter: 'getShamans',
           setter: setDaoShamans,
         },
       ],
     };
     currentDao.current = null;
     bigGraphQuery(bigQueryOptions);
+    hasPerformedBatchQuery.current = true;
   };
 
   const refreshAllDaoVaults = async () => {

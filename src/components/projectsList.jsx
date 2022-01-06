@@ -7,10 +7,11 @@ import { useProjects } from '../contexts/ProjectsContext';
 
 import ProjectListCard from './projectListCard';
 import ProjectListFilters from './projectListFilters';
+import useInterval from '../hooks/useInterval';
 
 const ProjectsList = () => {
   const { address } = useInjectedProvider();
-  const { projects } = useProjects();
+  const { projects, refetchProjects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
 
   useEffect(() => {
@@ -18,6 +19,10 @@ const ProjectsList = () => {
       setListProjects(projects);
     }
   }, [projects]);
+
+  useInterval(() => {
+    refetchProjects();
+  }, 30000);
 
   return (
     <Box p={7}>
