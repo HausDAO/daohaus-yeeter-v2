@@ -35,15 +35,6 @@ const yeetNotice = (project, contributions) => {
         <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
           {supportedChains[project.networkID].name}
         </Box>
-
-        {/* <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
-          Min{' '}
-          {displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
-            project.yeeterTokenDecimals,
-          )}{' '}
-          {supportedChains[project.networkID].nativeCurrency}
-        </Box> */}
         <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
           Contribute in increments of{' '}
           {displayBalance(

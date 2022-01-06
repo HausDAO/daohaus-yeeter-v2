@@ -187,7 +187,7 @@ export const userContributionData = (project, userMemberships, yeets) => {
   });
 
   const total = yeets.reduce((sum, yeet) => {
-    sum += yeet.amount;
+    sum += Number(yeet.amount);
     return sum;
   }, 0);
 
