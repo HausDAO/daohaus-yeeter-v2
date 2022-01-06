@@ -48,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
 
   const userContributions = project => {
     if (!address) {
-      return false;
+      return [];
     }
 
     return project.yeeter.yeets.filter(yeet => {

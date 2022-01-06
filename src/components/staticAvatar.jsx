@@ -1,11 +1,22 @@
 import React, { useMemo } from 'react';
-import { Flex, Avatar, Box, Text } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+import { Flex, Avatar, Box, Text, Link, Icon } from '@chakra-ui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 
+import { RiExternalLinkLine } from 'react-icons/ri';
 import CopyButton from './copyButton';
 import { truncateAddr } from '../utils/general';
+import { supportedChains } from '../utils/chain';
 
-const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
+const StaticAvatar = ({
+  address,
+  avatarImg,
+  name,
+  hideCopy,
+  emoji,
+  hideEtherscanLink,
+}) => {
+  const { daochain } = useParams();
   const blockie = useMemo(() => {
     if (address) {
       return makeBlockie(address);
@@ -17,7 +28,7 @@ const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
     <Flex direction='row' alignItems='center'>
       <Flex direction='row' alignItems='center'>
         <Avatar name={name || address} src={avImg} size='sm' />
-        <Flex>
+        <Flex align='center'>
           <Text fontSize='sm' fontFamily='heading' ml={3}>
             {name || truncateAddr(address)}
           </Text>
@@ -25,6 +36,15 @@ const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
             {emoji}
           </Box>
           {hideCopy || <CopyButton text={address} />}
+          {(!daochain && hideEtherscanLink) || (
+            <Link
+              href={`${supportedChains[daochain]?.block_explorer}/address/${address}`}
+              isExternal
+              mt='-1'
+            >
+              <Icon as={RiExternalLinkLine} name='transaction link' />
+            </Link>
+          )}
         </Flex>
       </Flex>
     </Flex>

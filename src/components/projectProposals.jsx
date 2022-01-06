@@ -10,7 +10,7 @@ const proposalCard = (proposal, project) => {
       direction='column'
       align='flex-start'
       justify='flex-start'
-      my={5}
+      mb={5}
     >
       <DaohausLink linkText={proposal.title} project={project} />
       <Flex justify='space-between' w='100%' mt={3}>
@@ -31,25 +31,26 @@ const proposalCard = (proposal, project) => {
   );
 };
 
+const PROPOSAL_DISPLAY_COUNT = 3;
+
 const ProjectProposals = ({ project }) => {
-  const remainingCount = project.proposals.length - 3;
+  const remainingCount = project.proposals.length - PROPOSAL_DISPLAY_COUNT;
+
   return (
-    <Box backgroundColor='primary.500' p={5}>
-      <Text fontSize='xl' textTransform='uppercase'>
+    <Box>
+      <Text fontSize='lg' textTransform='uppercase' mb={1}>
         DAO Activity
       </Text>
       <List>
-        {project.proposals.map(proposal => {
+        {project.proposals.slice(0, PROPOSAL_DISPLAY_COUNT).map(proposal => {
           return proposalCard(proposal, project);
         })}
       </List>
       {remainingCount > 0 && (
-        <Flex>
-          <Text color='secondary.500' mr={2}>
-            {remainingCount} more
-          </Text>
-          <DaohausLink linkText='Visit the DAO' project={project} />
-        </Flex>
+        <DaohausLink
+          linkText={`View ${remainingCount} more on DAOHaus`}
+          project={project}
+        />
       )}
     </Box>
   );

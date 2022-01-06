@@ -78,6 +78,9 @@ export const DaoProvider = ({ children }) => {
     const hydrateProjectData = () => {
       const project = {
         ...daoOverview,
+        members: daoOverview.members.sort(
+          (a, b) => Number(b.shares) - Number(a.shares),
+        ),
         proposals: daoProposals.sort((a, b) => {
           return Number(a.proposalIndex) - Number(b.proposalIndex);
         }),
