@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, List, Text } from '@chakra-ui/layout';
 import AddressAvatar from './addressAvatar';
 import DaohausLink from './daohausLink';
+import { ProposalStatusDisplay } from '../utils/proposalUtils';
 
 const proposalCard = (proposal, project) => {
   return (
@@ -10,6 +11,7 @@ const proposalCard = (proposal, project) => {
       direction='column'
       align='flex-start'
       justify='flex-start'
+      wrap='wrap'
       mb={5}
     >
       <DaohausLink linkText={proposal.title} project={project} />
@@ -21,7 +23,7 @@ const proposalCard = (proposal, project) => {
           </Box>
         </Box>
         <Box>
-          <Box>{proposal.status}</Box>
+          <Box>{ProposalStatusDisplay[proposal.status]}</Box>
           <Box fontSize='xs' color='gray.500'>
             Currently
           </Box>

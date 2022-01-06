@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { Flex, Avatar, Box, Text, Link, Icon } from '@chakra-ui/react';
+import { Flex, Avatar, Box, Link, Icon } from '@chakra-ui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 
 import { RiExternalLinkLine } from 'react-icons/ri';
 import CopyButton from './copyButton';
-import { truncateAddr } from '../utils/general';
 import { supportedChains } from '../utils/chain';
+import EnsDisplay from './ensDisplay';
 
 const StaticAvatar = ({
   address,
@@ -28,10 +28,9 @@ const StaticAvatar = ({
     <Flex direction='row' alignItems='center'>
       <Flex direction='row' alignItems='center'>
         <Avatar name={name || address} src={avImg} size='sm' />
-        <Flex align='center'>
-          <Text fontSize='sm' fontFamily='heading' ml={3}>
-            {name || truncateAddr(address)}
-          </Text>
+        <Flex>
+          <EnsDisplay address={address} noLink />
+
           <Box as='span' mx={1}>
             {emoji}
           </Box>
