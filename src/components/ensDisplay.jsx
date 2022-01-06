@@ -14,7 +14,6 @@ const EnsDisplay = ({ address }) => {
 
   const getEns = async memberAddress => {
     const ensResult = await handleGetENS(memberAddress);
-    console.log('rez', ensResult, memberAddress);
     if (ensResult) {
       return { name: ensResult };
     }
