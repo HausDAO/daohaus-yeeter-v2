@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Flex, Avatar, Box, Text } from '@chakra-ui/react';
+import { Flex, Avatar, Box } from '@chakra-ui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 
 import CopyButton from './copyButton';
@@ -18,9 +18,8 @@ const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
       <Flex direction='row' alignItems='center'>
         <Avatar name={name || address} src={avImg} size='sm' />
         <Flex>
-          <Text fontSize='sm' fontFamily='heading' ml={3}>
-            <EnsDisplay address={address} noLink />
-          </Text>
+          <EnsDisplay address={address} noLink />
+
           <Box as='span' mx={1}>
             {emoji}
           </Box>

@@ -29,7 +29,7 @@ const EnsDisplay = ({ address, noLink }) => {
     setUp();
   }, [address]);
   return (
-    <Text>
+    <Text fontSize='sm' fontFamily='heading' ml={3}>
       {ensName || truncateAddr(address)}
       {!noLink && (
         <Link
