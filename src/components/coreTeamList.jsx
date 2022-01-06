@@ -1,7 +1,7 @@
 import React from 'react';
-import { Avatar, Flex, List, Text } from '@chakra-ui/react';
+import { Flex, List, Text } from '@chakra-ui/react';
 
-import EnsDisplay from './ensDisplay';
+import StaticAvatar from './staticAvatar';
 
 const CoreTeamList = ({ coreTeam, totalShares }) => {
   return (
@@ -10,8 +10,7 @@ const CoreTeamList = ({ coreTeam, totalShares }) => {
       {coreTeam.map(member => (
         <Flex flexDirection='column' key={member.memberAddress}>
           <Flex>
-            <Avatar />
-            <EnsDisplay address={member.memberAddress} />
+            <StaticAvatar address={member.memberAddress} />
           </Flex>
           <Flex alignItems='center' justifyContent='space-between'>
             <Flex flexDirection='column'>

@@ -3,7 +3,7 @@ import { Flex, Avatar, Box, Text } from '@chakra-ui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 
 import CopyButton from './copyButton';
-import { truncateAddr } from '../utils/general';
+import EnsDisplay from './ensDisplay';
 
 const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
   const blockie = useMemo(() => {
@@ -19,7 +19,7 @@ const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
         <Avatar name={name || address} src={avImg} size='sm' />
         <Flex>
           <Text fontSize='sm' fontFamily='heading' ml={3}>
-            {name || truncateAddr(address)}
+            <EnsDisplay address={address} noLink />
           </Text>
           <Box as='span' mx={1}>
             {emoji}

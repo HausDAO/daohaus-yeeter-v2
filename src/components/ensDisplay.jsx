@@ -7,7 +7,7 @@ import { truncateAddr } from '../utils/general';
 import { handleGetENS } from '../utils/ens';
 import { supportedChains } from '../utils/chain';
 
-const EnsDisplay = ({ address }) => {
+const EnsDisplay = ({ address, noLink }) => {
   const { daochain } = useParams();
 
   const [ensName, setEnsName] = useState();
@@ -31,13 +31,15 @@ const EnsDisplay = ({ address }) => {
   return (
     <Text>
       {ensName || truncateAddr(address)}
-      <Link
-        href={`${supportedChains[daochain].block_explorer}/address/${address}`}
-        isExternal
-        ml={2}
-      >
-        <Icon as={RiExternalLinkLine} name='transaction link' />
-      </Link>
+      {!noLink && (
+        <Link
+          href={`${supportedChains[daochain].block_explorer}/address/${address}`}
+          isExternal
+          ml={2}
+        >
+          <Icon as={RiExternalLinkLine} name='transaction link' />
+        </Link>
+      )}
     </Text>
   );
 };
