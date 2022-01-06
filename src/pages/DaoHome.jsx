@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
+import { Spinner } from '@chakra-ui/spinner';
 import { useDao } from '../contexts/DaoContext';
 import CoreTeamList from '../components/coreTeamList';
 import LeaderBoardList from '../components/leaderBoardList';
@@ -11,6 +12,7 @@ import ProjectContributionActions from '../components/projectContributionActions
 import { useUser } from '../contexts/UserContext';
 import { userContributionData } from '../utils/projects';
 import useInterval from '../hooks/useInterval';
+import ProjectProposals from '../components/projectProposals';
 
 const DaoHome = () => {
   const { currentProject, refetch } = useDao();
@@ -36,9 +38,10 @@ const DaoHome = () => {
 
   return (
     <Box p={10}>
+      {!currentProject && <Spinner />}
       {currentProject && (
         <>
-          <Flex wrap='wrap' justify='space-between'>
+          <Flex wrap='wrap' justify='space-between' mb={10}>
             <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
@@ -72,15 +75,24 @@ const DaoHome = () => {
           </Flex>
 
           <Flex wrap='wrap' justify='space-between'>
-            <Box w={['100%', null, null, '65%', '65%']}>
-              {currentProject?.yeeter?.yeets.length > 0 && (
-                <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
-              )}
-              {currentProject?.yeeter?.yeets.length === 0 && (
-                <Box>No Yeets Yet</Box>
-              )}
+            <Box
+              w={['100%', null, null, '65%', '65%']}
+              p={10}
+              backgroundColor='primary.500'
+            >
+              <Box mb={10}>
+                {currentProject?.yeeter?.yeets.length > 0 && (
+                  <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
+                )}
+                {currentProject?.yeeter?.yeets.length === 0 && (
+                  <Box>No Yeets Yet</Box>
+                )}
+              </Box>
             </Box>
-            <Box w={['100%', null, null, '30%', '30%']}>
+            <Box
+              w={['100%', null, null, '30%', '30%']}
+              backgroundColor='primary.500'
+            >
               {currentProject?.members.length > 0 && (
                 <CoreTeamList
                   coreTeam={currentProject.members}
@@ -88,10 +100,7 @@ const DaoHome = () => {
                 />
               )}
               {currentProject?.proposals.length > 0 && (
-                <CoreTeamList
-                  coreTeam={currentProject.members}
-                  totalShares={currentProject.totalShares}
-                />
+                <ProjectProposals project={currentProject} />
               )}
             </Box>
           </Flex>
