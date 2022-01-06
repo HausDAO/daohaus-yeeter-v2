@@ -81,6 +81,14 @@ export const projectCompletePercentage = project => {
   );
 };
 
+export const totalYeeters = project => {
+  if (!project?.yeeter?.yeets) {
+    return;
+  }
+  return [...new Set(project.yeeter.yeets.map(yeet => yeet.contributorAddress))]
+    .length;
+};
+
 export const yeetStatus = project => {
   const start = project.yeeter.yeeterConfig.raiseStartTime;
   const end = project.yeeter.yeeterConfig.raiseEndTime;
