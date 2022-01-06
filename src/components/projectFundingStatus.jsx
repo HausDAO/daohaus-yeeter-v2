@@ -51,11 +51,13 @@ const ProjectFundingStatus = ({ project }) => {
         backgroundColor='primary.400'
         mb={3}
       />
-      {yeetPeriodStatus !== 'expired' && yeetPeriodStatus !== 'funded' && (
-        <Box mb={3}>
-          <YeetCountdown project={project} />
-        </Box>
-      )}
+      {yeetPeriodStatus !== 'expired' &&
+        yeetPeriodStatus !== 'funded' &&
+        yeetPeriodStatus !== 'failed' && (
+          <Box mb={3}>
+            <YeetCountdown project={project} />
+          </Box>
+        )}
       {yeetPeriodStatus === 'funded' && (
         <Box mb={3} fontFamily='mono' fontSize='xl'>
           🎉 Funding Goal Met!
