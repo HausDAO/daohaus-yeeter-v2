@@ -7,13 +7,18 @@ import YeetCountdown from './yeetCountdown';
 import ContributedIndicator from './contributedIndicator';
 import { supportedChains } from '../utils/chain';
 import { displayBalance } from '../utils/tokenValue';
-import { projectCompletePercentage, yeetStatus } from '../utils/projects';
+import {
+  projectCompletePercentage,
+  totalYeeters,
+  yeetStatus,
+} from '../utils/projects';
 
 const ProjectFundingStatus = ({ project }) => {
   const { daoid } = useParams();
 
   const projectComplete = projectCompletePercentage(project);
   const yeetPeriodStatus = yeetStatus(project);
+  const yeeterCount = totalYeeters(project);
 
   return (
     <>
@@ -33,7 +38,7 @@ const ProjectFundingStatus = ({ project }) => {
           </Box>
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
-          <Box fontSize='2xl'>{project.yeeter.yeets.length}</Box>
+          <Box fontSize='2xl'>{yeeterCount}</Box>
           <Box fontSize='xs' color='gray.500'>
             Yeeters
           </Box>
