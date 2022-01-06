@@ -3,6 +3,8 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Link } from '@chakra-ui/layout';
 import { Avatar } from '@chakra-ui/avatar';
 import makeBlockie from 'ethereum-blockies-base64';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 import { RiDiscordFill, RiGithubFill, RiTwitterFill } from 'react-icons/ri';
 import Icon from '@chakra-ui/icon';
@@ -34,7 +36,11 @@ const ProjectOverview = ({ project }) => {
           )}
         </Box>
       </Flex>
-      <Box mb={5}>{project?.meta?.description}</Box>
+      <Box mb={5}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {project?.meta?.description}
+        </ReactMarkdown>
+      </Box>
       <Flex alignItems='center'>
         {project?.meta?.links?.twitter && (
           <Link
