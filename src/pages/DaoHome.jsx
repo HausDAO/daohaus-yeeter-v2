@@ -77,12 +77,15 @@ const DaoHome = () => {
           <Flex wrap='wrap' justify='space-between'>
             <Box
               w={['100%', null, null, '65%', '65%']}
-              p={10}
               backgroundColor='primary.500'
+              p={10}
             >
-              <Box mb={10}>
+              <Box>
                 {currentProject?.yeeter?.yeets.length > 0 && (
-                  <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
+                  <LeaderBoardList
+                    yeets={currentProject.yeeter?.yeets}
+                    project={currentProject}
+                  />
                 )}
                 {currentProject?.yeeter?.yeets.length === 0 && (
                   <Box>No Yeets Yet</Box>
@@ -92,13 +95,18 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
+              p={10}
             >
               {currentProject?.members.length > 0 && (
-                <CoreTeamList
-                  coreTeam={currentProject.members}
-                  totalShares={currentProject.totalShares}
-                />
+                <Box mb={3}>
+                  <CoreTeamList
+                    coreTeam={currentProject.members}
+                    totalShares={currentProject.totalShares}
+                    project={currentProject}
+                  />
+                </Box>
               )}
+
               {currentProject?.proposals.length > 0 && (
                 <ProjectProposals project={currentProject} />
               )}

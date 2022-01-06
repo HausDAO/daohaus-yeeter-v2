@@ -1,11 +1,22 @@
 import React, { useMemo } from 'react';
-import { Flex, Avatar, Box } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+import { Flex, Avatar, Box, Link, Icon } from '@chakra-ui/react';
 import makeBlockie from 'ethereum-blockies-base64';
 
+import { RiExternalLinkLine } from 'react-icons/ri';
 import CopyButton from './copyButton';
+import { supportedChains } from '../utils/chain';
 import EnsDisplay from './ensDisplay';
 
-const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
+const StaticAvatar = ({
+  address,
+  avatarImg,
+  name,
+  hideCopy,
+  emoji,
+  hideEtherscanLink,
+}) => {
+  const { daochain } = useParams();
   const blockie = useMemo(() => {
     if (address) {
       return makeBlockie(address);
@@ -24,6 +35,15 @@ const StaticAvatar = ({ address, avatarImg, name, hideCopy, emoji }) => {
             {emoji}
           </Box>
           {hideCopy || <CopyButton text={address} />}
+          {(!daochain && hideEtherscanLink) || (
+            <Link
+              href={`${supportedChains[daochain]?.block_explorer}/address/${address}`}
+              isExternal
+              mt='-1'
+            >
+              <Icon as={RiExternalLinkLine} name='transaction link' />
+            </Link>
+          )}
         </Flex>
       </Flex>
     </Flex>

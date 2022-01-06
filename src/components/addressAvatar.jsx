@@ -1,23 +1,20 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import StaticAvatar from './staticAvatar';
 import { handleGetENS } from '../utils/ens';
 
-const AddressAvatar = React.memo(({ addr, hideCopy }) => {
+const AddressAvatar = React.memo(({ addr, hideCopy, hideEtherscanLink }) => {
   const [profile, setProfile] = useState(null);
-
-  const shouldFetchENS = useRef(false);
 
   useEffect(() => {
     const tryENS = async () => {
-      shouldFetchENS.current = false;
       const result = await handleGetENS(addr);
       if (result) {
         setProfile({ name: result });
       }
     };
 
-    if (profile === false && shouldFetchENS.current) {
+    if (!profile) {
       tryENS();
     }
   }, [profile, addr]);
@@ -35,6 +32,7 @@ const AddressAvatar = React.memo(({ addr, hideCopy }) => {
       avatarImg={avatarImage}
       name={profile?.name}
       hideCopy={hideCopy}
+      hideEtherscanLink={hideEtherscanLink}
     />
   );
 });

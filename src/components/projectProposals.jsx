@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, List, Text } from '@chakra-ui/layout';
 import AddressAvatar from './addressAvatar';
 import DaohausLink from './daohausLink';
+import { ProposalStatusDisplay } from '../utils/proposalUtils';
 
 const proposalCard = (proposal, project) => {
   return (
@@ -10,7 +11,8 @@ const proposalCard = (proposal, project) => {
       direction='column'
       align='flex-start'
       justify='flex-start'
-      my={5}
+      wrap='wrap'
+      mb={5}
     >
       <DaohausLink linkText={proposal.title} project={project} />
       <Flex justify='space-between' w='100%' mt={3}>
@@ -21,7 +23,7 @@ const proposalCard = (proposal, project) => {
           </Box>
         </Box>
         <Box>
-          <Box>{proposal.status}</Box>
+          <Box>{ProposalStatusDisplay[proposal.status]}</Box>
           <Box fontSize='xs' color='gray.500'>
             Currently
           </Box>
@@ -31,25 +33,26 @@ const proposalCard = (proposal, project) => {
   );
 };
 
+const PROPOSAL_DISPLAY_COUNT = 3;
+
 const ProjectProposals = ({ project }) => {
-  const remainingCount = project.proposals.length - 3;
+  const remainingCount = project.proposals.length - PROPOSAL_DISPLAY_COUNT;
+
   return (
-    <Box backgroundColor='primary.500' p={5}>
-      <Text fontSize='xl' textTransform='uppercase'>
+    <Box>
+      <Text fontSize='lg' textTransform='uppercase' mb={1}>
         DAO Activity
       </Text>
       <List>
-        {project.proposals.map(proposal => {
+        {project.proposals.slice(0, PROPOSAL_DISPLAY_COUNT).map(proposal => {
           return proposalCard(proposal, project);
         })}
       </List>
       {remainingCount > 0 && (
-        <Flex>
-          <Text color='secondary.500' mr={2}>
-            {remainingCount} more
-          </Text>
-          <DaohausLink linkText='Visit the DAO' project={project} />
-        </Flex>
+        <DaohausLink
+          linkText={`View ${remainingCount} more on DAOHaus`}
+          project={project}
+        />
       )}
     </Box>
   );

@@ -17,6 +17,17 @@ export const ProposalStatus = {
   Unsponsored: 'Unsponsored',
 };
 
+export const ProposalStatusDisplay = {
+  InQueue: 'In Queue',
+  VotingPeriod: 'Voting',
+  GracePeriod: 'In Grace',
+  // Cancelled: 'Cancelled',
+  // Passed: 'Passed',
+  // Failed: 'Failed',
+  ReadyForProcessing: 'Needs Processing',
+  // Unsponsored: 'Unsponsored',
+};
+
 export const PROPOSAL_TYPES = {
   CORE: 'Core',
   MEMBER: 'Member Proposal',

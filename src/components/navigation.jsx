@@ -21,7 +21,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
-import { useOverlay } from '../contexts/OverlayContext';
+// import { useOverlay } from '../contexts/OverlayContext';
 import AddressAvatar from './addressAvatar';
 import Brand from './brand';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
@@ -59,11 +59,11 @@ const NAV_ITEMS = [
 const Navigation = ({ isDao }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { address, requestWallet } = useInjectedProvider();
-  const { setHubAccountModal } = useOverlay();
+  // const { setHubAccountModal } = useOverlay();
 
-  const toggleAccountModal = () => {
-    setHubAccountModal(prevState => !prevState);
-  };
+  // const toggleAccountModal = () => {
+  //   setHubAccountModal(prevState => !prevState);
+  // };
 
   return (
     <Box>
@@ -99,8 +99,8 @@ const Navigation = ({ isDao }) => {
         {isDao && <WrongNetworkToolTip />}
 
         {address ? (
-          <Button variant='outline' onClick={toggleAccountModal}>
-            <AddressAvatar addr={address} hideCopy />
+          <Button variant='outline'>
+            <AddressAvatar addr={address} hideCopy hideEtherscanLink />
           </Button>
         ) : (
           <Button variant='outline' onClick={requestWallet}>
