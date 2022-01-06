@@ -31,9 +31,26 @@ const yeetNotice = (project, contributions) => {
           <EtherscanLink address={project.yeeter.shamanAddress} />
         </Box>
       </Flex>
-      <Flex direction='row' justify='space-between' wrap='wrap'>
-        <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
+      <Flex direction='column' justify='space-between' wrap='wrap'>
+        <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
           {supportedChains[project.networkID].name}
+        </Box>
+
+        {/* <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
+          Min{' '}
+          {displayBalance(
+            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterTokenDecimals,
+          )}{' '}
+          {supportedChains[project.networkID].nativeCurrency}
+        </Box> */}
+        <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
+          Contribute in increments of{' '}
+          {displayBalance(
+            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterTokenDecimals,
+          )}{' '}
+          {supportedChains[project.networkID].nativeCurrency}{' '}
         </Box>
         <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
           Max{' '}
@@ -41,7 +58,7 @@ const yeetNotice = (project, contributions) => {
             maxContribution(project),
             project.yeeterTokenDecimals,
           )}{' '}
-          {supportedChains[project.networkID].nativeCurrency} contribution
+          {supportedChains[project.networkID].nativeCurrency}
         </Box>
       </Flex>
       {Number(contributions.total) >= maxContribution(project) && (

@@ -69,19 +69,22 @@ const DaoHome = () => {
           </Flex>
 
           <Flex>
-            {currentProject?.yeeter?.yeets && (
-              <Box flexGrow='1'>
-                <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
-              </Box>
-            )}
             <Box flexGrow='1'>
-              {currentProject?.members && (
+              {currentProject?.yeeter?.yeets.length > 0 && (
+                <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
+              )}
+              {currentProject?.yeeter?.yeets.length === 0 && (
+                <Box>No Yeets Yet</Box>
+              )}
+            </Box>
+            <Box flexGrow='1'>
+              {currentProject?.members.length > 0 && (
                 <CoreTeamList
                   coreTeam={currentProject.members}
                   totalShares={currentProject.totalShares}
                 />
               )}
-              {currentProject?.proposals && (
+              {currentProject?.proposals.length > 0 && (
                 <CoreTeamList
                   coreTeam={currentProject.members}
                   totalShares={currentProject.totalShares}
