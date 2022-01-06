@@ -147,7 +147,7 @@ escrow {
 export const EXAMPLE_DAO_PROPOSALS = gql`
   query molochActivities($contractAddr: String!) {
     proposals(
-      where: { molochAddress: $contractAddr }
+      where: { molochAddress: $contractAddr, cancelled: false, sponsored: true, processed: false }
       orderBy: createdAt
       orderDirection: desc
       first: 100
