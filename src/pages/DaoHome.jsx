@@ -74,14 +74,20 @@ const DaoHome = () => {
                 <LeaderBoardList yeets={currentProject.yeeter?.yeets} />
               </Box>
             )}
-            {currentProject?.members && (
-              <Box flexGrow='1'>
+            <Box flexGrow='1'>
+              {currentProject?.members && (
                 <CoreTeamList
                   coreTeam={currentProject.members}
                   totalShares={currentProject.totalShares}
                 />
-              </Box>
-            )}
+              )}
+              {currentProject?.proposals && (
+                <CoreTeamList
+                  coreTeam={currentProject.members}
+                  totalShares={currentProject.totalShares}
+                />
+              )}
+            </Box>
           </Flex>
         </>
       )}
