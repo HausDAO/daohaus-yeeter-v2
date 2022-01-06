@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
 
-import { useParams } from 'react-router-dom';
-import { Flex, Icon, Link, List, Text } from '@chakra-ui/react';
-import { RiExternalLinkLine } from 'react-icons/ri';
+import { Flex, Icon, List, Text } from '@chakra-ui/react';
 import { TiArrowUnsorted } from 'react-icons/ti';
 
-import { supportedChains } from '../utils/chain';
-import { timeToNow, truncateAddr } from '../utils/general';
+import { timeToNow } from '../utils/general';
+import EnsDisplay from './ensDisplay';
 
 const LeaderBoardList = ({ yeets }) => {
-  const { daochain } = useParams();
   const [amountSort, setAmountSort] = useState(false);
   const [sortedYeets, setSortedYeets] = useState([]);
 
@@ -38,16 +35,7 @@ const LeaderBoardList = ({ yeets }) => {
         </Flex>
         {sortedYeets.map((yeet, idx) => (
           <Flex alignItems='center' justifyContent='space-between' key={idx}>
-            <Text>
-              {truncateAddr(yeet.contributorAddress)}
-              <Link
-                href={`${supportedChains[daochain].block_explorer}/address/${yeet.contributorAddress}`}
-                isExternal
-                ml={2}
-              >
-                <Icon as={RiExternalLinkLine} name='transaction link' />
-              </Link>
-            </Text>
+            <EnsDisplay address={yeet.contributorAddress} />
             <Text>{Web3.utils.fromWei(yeet.amount)}</Text>
             <Text>{timeToNow(yeet.createdAt)}</Text>
           </Flex>
