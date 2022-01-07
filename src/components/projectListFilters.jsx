@@ -52,17 +52,17 @@ export const filterOptions = [
     value: 'all',
   },
   {
-    name: 'Rinkeby',
-    value: '0x4',
-  },
-  {
     name: 'Gnosis Chain',
     value: '0x64',
   },
   {
-    name: 'Mainnet',
-    value: '0x64',
+    name: 'Rinkeby',
+    value: '0x4',
   },
+  // {
+  //   name: 'Mainnet',
+  //   value: '0x64',
+  // },
 ];
 
 const ProjectListFilters = ({ listProjects, setListProjects }) => {

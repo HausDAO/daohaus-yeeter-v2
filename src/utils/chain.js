@@ -107,48 +107,48 @@ export const supportedChains = {
     escrow_minion: '0xEB28321b7952CC34bFb734413b58496A889C9660',
     disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
   },
-  '0x2a': {
-    name: 'Ethereum Kovan',
-    short_name: 'kovan',
-    nativeCurrency: 'ETH',
-    network: 'kovan',
-    network_id: 42,
-    chain_id: '0x2a',
-    hub_sort_order: 7,
-    providers: ['walletconnect'],
-    // , 'portis', 'fortmatic'
-    rpc_url: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`,
-    abi_api_url:
-      'https://api-kovan.etherscan.io/api?module=contract&action=getabi&address=',
-    tokenlist_api_url: 'https://api-kovan.etherscan.io/api',
-    subgraph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-kovan',
-    stats_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-kovan',
-    boosts_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts-kovan',
-    erc721_graph_url:
-      'https://api.thegraph.com/subgraphs/name/sunguru98/erc721-kovan-subgraph',
-    erc1155_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/erc1155-kovan-subgraph',
-    shaman_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-rinkeby',
-    minion_factory_addr: '0xCE63803E265617c55567a7A7b584fF2dbD76210B',
-    uberhaus_minion_factory_addr: '0x03042577463E3820F9cA6Ca3906BAad599ba9382',
-    transmutation_factory_addr: '0xbca622291fFe797C77a8Bc6D000584b22877e971',
-    moloch_factory_addr: '0x9c5d087f912e7187D9c75e90999b03FB31Ee17f5',
-    dai_contract: '0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa',
-    wrapper_contract: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
-    wrap_n_zap_factory_addr: '0xbf9e327d465A4A160fA7805282Fb8C7aB892770a',
-    escrow_minion: '0xc9f9e7fc92a7d3b2b3554be850fff462b7b382e7',
-    block_explorer: 'https://kovan.etherscan.io',
-    safeMinion: {
-      minion_factory_addr: '0xA1b97D22e22507498B350A9edeA85c44bA7DBC01',
-      safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
-      safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
-    },
-    disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
-  },
+  // '0x2a': {
+  //   name: 'Ethereum Kovan',
+  //   short_name: 'kovan',
+  //   nativeCurrency: 'ETH',
+  //   network: 'kovan',
+  //   network_id: 42,
+  //   chain_id: '0x2a',
+  //   hub_sort_order: 7,
+  //   providers: ['walletconnect'],
+  //   // , 'portis', 'fortmatic'
+  //   rpc_url: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`,
+  //   abi_api_url:
+  //     'https://api-kovan.etherscan.io/api?module=contract&action=getabi&address=',
+  //   tokenlist_api_url: 'https://api-kovan.etherscan.io/api',
+  //   subgraph_url:
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-kovan',
+  //   stats_graph_url:
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-kovan',
+  //   boosts_graph_url:
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts-kovan',
+  //   erc721_graph_url:
+  //     'https://api.thegraph.com/subgraphs/name/sunguru98/erc721-kovan-subgraph',
+  //   erc1155_graph_url:
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/erc1155-kovan-subgraph',
+  //   shaman_graph_url:
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-rinkeby',
+  //   minion_factory_addr: '0xCE63803E265617c55567a7A7b584fF2dbD76210B',
+  //   uberhaus_minion_factory_addr: '0x03042577463E3820F9cA6Ca3906BAad599ba9382',
+  //   transmutation_factory_addr: '0xbca622291fFe797C77a8Bc6D000584b22877e971',
+  //   moloch_factory_addr: '0x9c5d087f912e7187D9c75e90999b03FB31Ee17f5',
+  //   dai_contract: '0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa',
+  //   wrapper_contract: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
+  //   wrap_n_zap_factory_addr: '0xbf9e327d465A4A160fA7805282Fb8C7aB892770a',
+  //   escrow_minion: '0xc9f9e7fc92a7d3b2b3554be850fff462b7b382e7',
+  //   block_explorer: 'https://kovan.etherscan.io',
+  //   safeMinion: {
+  //     minion_factory_addr: '0xA1b97D22e22507498B350A9edeA85c44bA7DBC01',
+  //     safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
+  //     safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
+  //   },
+  //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
+  // },
   // '0x64': {
   //   name: 'xDAI Chain',
   //   short_name: 'xdai',
@@ -175,7 +175,7 @@ export const supportedChains = {
   //   poap_graph_url:
   //     'https://api.thegraph.com/subgraphs/name/poap-xyz/poap-xdai',
   //   shaman_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-rinkeby',
+  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-xdai',
   //   minion_factory_addr: '0x53508D981439Ce6A3283597a4775F6f23504d4A2',
   //   moloch_factory_addr: '0x0F50B2F3165db96614fbB6E4262716acc9F9e098',
   //   wrapper_contract: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
@@ -204,6 +204,7 @@ export const supportedChains = {
   //     version: 'v1',
   //   },
   //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
+  //   dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
   // },
   // '0x89': {
   //   name: 'Matic',
@@ -215,7 +216,7 @@ export const supportedChains = {
   //   chain_id: '0x89',
   //   hub_sort_order: 3,
   //   providers: ['walletconnect'],
-  //   rpc_url: 'https://rpc-mainnet.maticvigil.com/',
+  //   rpc_url: 'https://polygon-rpc.com/',
   //   abi_api_url:
   //     'https://api.polygonscan.com/api?module=contract&action=getabi&address=',
   //   tokenlist_api_url: 'https://api.polygonscan.com/api',

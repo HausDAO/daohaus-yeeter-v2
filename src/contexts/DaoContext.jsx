@@ -24,6 +24,8 @@ export const DaoProvider = ({ children }) => {
   const [daoOverview, setDaoOverview] = useState();
   const [daoProposals, setDaoProposals] = useState();
   const [daoShamans, setDaoShamans] = useState();
+  const [daoYeets, setDaoYeets] = useState();
+
   // const [currentProject, setCurrentProject] = useSessionStorage(
   //   'currentProject',
   //   null,
@@ -38,7 +40,7 @@ export const DaoProvider = ({ children }) => {
     // This condition is brittle. If one request passes, but the rest fail
     // this stops the app from fetching. We'll need something better later on.
 
-    if (daoOverview || daoProposals || daoShamans) {
+    if (daoOverview || daoProposals || daoShamans || daoYeets) {
       return;
     }
     if (
@@ -67,15 +69,28 @@ export const DaoProvider = ({ children }) => {
           getter: 'getShamans',
           setter: setDaoShamans,
         },
+        {
+          getter: 'getYeets',
+          setter: setDaoYeets,
+        },
       ],
     };
 
     bigGraphQuery(bigQueryOptions);
     hasPerformedBatchQuery.current = true;
-  }, [daoid, daochain, daoNetworkData, daoOverview, daoShamans, daoProposals]);
+  }, [
+    daoid,
+    daochain,
+    daoNetworkData,
+    daoOverview,
+    daoShamans,
+    daoProposals,
+    daoYeets,
+  ]);
 
   useEffect(() => {
     const hydrateProjectData = () => {
+      console.log('daoShamans', daoShamans);
       const project = {
         ...daoOverview,
         members: daoOverview.members.sort(
@@ -85,6 +100,7 @@ export const DaoProvider = ({ children }) => {
           return Number(a.proposalIndex) - Number(b.proposalIndex);
         }),
         yeeter: daoShamans,
+        yeets: daoYeets,
         networkID: daochain,
         ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
       };
@@ -97,6 +113,7 @@ export const DaoProvider = ({ children }) => {
       daoOverview &&
       daoProposals &&
       daoShamans &&
+      daoYeets &&
       !currentProject
     ) {
       hydrateProjectData();
@@ -105,6 +122,7 @@ export const DaoProvider = ({ children }) => {
     daoOverview,
     daoProposals,
     daoShamans,
+    daoYeets,
     currentProject,
     setCurrentProject,
     hasPerformedBatchQuery,
@@ -125,6 +143,10 @@ export const DaoProvider = ({ children }) => {
         {
           getter: 'getShamans',
           setter: setDaoShamans,
+        },
+        {
+          getter: 'getYeets',
+          setter: setDaoYeets,
         },
       ],
     };

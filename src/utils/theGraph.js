@@ -8,6 +8,7 @@ import {
   MEMBERSHIPS_QUERY,
   PROJECTS_DAOS_QUERY,
   PROJECTS_DETAIL_SHAMAN_QUERY,
+  PROJECTS_DETAIL_YEETS_QUERY,
   PROJECTS_SHAMANS_QUERY,
   PROJECT_DETAILS_QUERY,
 } from '../graphQL/project-queries';
@@ -67,6 +68,22 @@ const completeQueries = {
       console.error(error);
     }
   },
+  async getYeets(args, setter) {
+    try {
+      const graphYeets = await graphFetchAll({
+        endpoint: getGraphEndpoint(args.chainID, 'shaman_graph_url'),
+        query: PROJECTS_DETAIL_YEETS_QUERY,
+        subfield: 'yeets',
+        variables: {
+          contractAddr: args.daoID,
+        },
+      });
+
+      setter(graphYeets);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   async getProposals(args, setter) {
     try {
       // only fetching the newest proposals in this example
@@ -75,6 +92,7 @@ const completeQueries = {
       const graphProposals = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
         query: EXAMPLE_DAO_PROPOSALS,
+
         variables: {
           contractAddr: args.daoID,
         },

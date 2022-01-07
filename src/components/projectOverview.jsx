@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Link, Text, Heading } from '@chakra-ui/layout';
 import { Divider } from '@chakra-ui/react';
@@ -16,6 +16,7 @@ import DaohausLink from './daohausLink';
 
 const ProjectOverview = ({ project, longDescription }) => {
   const { daoid } = useParams();
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
     <>
@@ -48,17 +49,29 @@ const ProjectOverview = ({ project, longDescription }) => {
             <Text> {project?.meta?.description}</Text>
             {project?.meta?.longDescription && (
               <>
-                <Heading as='h4' size='md' mt={6}>
-                  Yeet Deets:
-                </Heading>
-                <Divider />
-                <ReactMarkdown
-                  components={ChakraUIRenderer()}
-                  skipHtml
-                  remarkPlugins={[remarkGfm]}
+                <Text
+                  onClick={() => setShowDetails(!showDetails)}
+                  _hover={{ cursor: 'pointer' }}
+                  color='secondary.500'
+                  fontSize='sm'
                 >
-                  {project?.meta?.longDescription}
-                </ReactMarkdown>
+                  Show {!showDetails ? `More` : `Less`}
+                </Text>
+                {showDetails && (
+                  <>
+                    <Heading as='h4' size='md' mt={6}>
+                      Yeet Deets:
+                    </Heading>
+                    <Divider />
+                    <ReactMarkdown
+                      components={ChakraUIRenderer()}
+                      skipHtml
+                      remarkPlugins={[remarkGfm]}
+                    >
+                      {project?.meta?.longDescription}
+                    </ReactMarkdown>
+                  </>
+                )}
               </>
             )}
           </>
@@ -98,7 +111,14 @@ const ProjectOverview = ({ project, longDescription }) => {
             <Icon as={RiGithubFill} h='30px' w='30px' color='secondary.500' />
           </Link>
         )}
-        <DaohausLink linkText='Visit the DAO' project={project} />
+
+        {!daoid && (
+          <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+            View Project
+          </RouterLink>
+        )}
+
+        {daoid && <DaohausLink linkText='Visit the DAO' project={project} />}
       </Flex>
     </>
   );

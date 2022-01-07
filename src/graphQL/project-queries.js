@@ -162,3 +162,18 @@ export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
     }
   }
 `;
+
+export const PROJECTS_DETAIL_YEETS_QUERY = gql`
+  query yeets($contractAddr: String!, $skip: Int) {
+    yeets(
+      orderBy: createdAt
+      first: 1000
+      skip: $skip
+      where: { molochAddress: $contractAddr }
+    ) {
+      createdAt
+      contributorAddress
+      amount
+    }
+  }
+`;
