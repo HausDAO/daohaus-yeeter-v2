@@ -48,7 +48,7 @@ const DaoHome = () => {
               p={10}
             >
               <Box mb={10}>
-                <ProjectOverview project={currentProject} />
+                <ProjectOverview project={currentProject} longDescription />
               </Box>
               <Box>
                 <UserContribution

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
-import { Box, Flex, Link } from '@chakra-ui/layout';
+import { Box, Flex, Link, Text } from '@chakra-ui/layout';
 import { Avatar } from '@chakra-ui/avatar';
 import makeBlockie from 'ethereum-blockies-base64';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 import { RiDiscordFill, RiGithubFill, RiTwitterFill } from 'react-icons/ri';
 import Icon from '@chakra-ui/icon';
@@ -12,7 +13,7 @@ import { themeImagePath } from '../utils/metadata';
 import { fixSocialLink } from '../utils/general';
 import DaohausLink from './daohausLink';
 
-const ProjectOverview = ({ project }) => {
+const ProjectOverview = ({ project, longDescription }) => {
   const { daoid } = useParams();
 
   return (
@@ -37,9 +38,17 @@ const ProjectOverview = ({ project }) => {
         </Box>
       </Flex>
       <Box mb={5}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {project?.meta?.description}
-        </ReactMarkdown>
+        {longDescription ? (
+          <ReactMarkdown
+            components={ChakraUIRenderer()}
+            skipHtml
+            remarkPlugins={[remarkGfm]}
+          >
+            {project?.meta?.longDescription}
+          </ReactMarkdown>
+        ) : (
+          <Text>{project?.meta?.description}</Text>
+        )}
       </Box>
       <Flex alignItems='center'>
         {project?.meta?.links?.twitter && (
