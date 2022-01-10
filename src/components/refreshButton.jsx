@@ -16,10 +16,10 @@ const RefreshButton = () => {
     }, 2000);
   };
 
-  const turnOff = true;
-  if (turnOff) {
-    return null;
-  }
+  // const turnOff = true;
+  // if (turnOff) {
+  //   return null;
+  // }
 
   if (fetching) {
     return <Spinner color='secondary.500' />;

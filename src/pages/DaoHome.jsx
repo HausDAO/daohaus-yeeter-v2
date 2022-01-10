@@ -34,8 +34,7 @@ const DaoHome = () => {
 
   useInterval(() => {
     refetch();
-  }, 5000);
-  // }, 30000);
+  }, 30000);
 
   return (
     <Box p={10}>

@@ -7,7 +7,14 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
-import { RiDiscordFill, RiGithubFill, RiTwitterFill } from 'react-icons/ri';
+import {
+  RiDiscordFill,
+  RiGithubFill,
+  RiGlobeLine,
+  RiMediumFill,
+  RiTelegramFill,
+  RiTwitterFill,
+} from 'react-icons/ri';
 import Icon from '@chakra-ui/icon';
 import { themeImagePath } from '../utils/metadata';
 import { fixSocialLink } from '../utils/general';
@@ -100,6 +107,40 @@ const ProjectOverview = ({ project, longDescription }) => {
             mr={3}
           >
             <Icon as={RiGithubFill} h='30px' w='30px' color='secondary.500' />
+          </Link>
+        )}
+
+        {project?.meta?.links?.website && (
+          <Link
+            href={project.meta.links.website}
+            target='_blank'
+            rel='noreferrer noopener'
+            m={3}
+            ml={0}
+          >
+            <Icon as={RiGlobeLine} h='30px' w='30px' color='secondary.500' />
+          </Link>
+        )}
+
+        {project?.meta?.links?.telegram && (
+          <Link
+            href={fixSocialLink('telegram', project.meta.links.telegram)}
+            target='_blank'
+            rel='noreferrer noopener'
+            m={3}
+          >
+            <Icon as={RiTelegramFill} h='30px' w='30px' color='secondary.500' />
+          </Link>
+        )}
+
+        {project?.meta?.links?.medium && (
+          <Link
+            href={fixSocialLink('medium', project.meta.links.medium)}
+            target='_blank'
+            rel='noreferrer noopener'
+            m={3}
+          >
+            <Icon as={RiMediumFill} h='30px' w='30px' color='secondary.500' />
           </Link>
         )}
 
