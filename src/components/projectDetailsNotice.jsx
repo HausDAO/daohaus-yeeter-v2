@@ -4,7 +4,13 @@ import { Tooltip } from '@chakra-ui/tooltip';
 import Icon from '@chakra-ui/icon';
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
 
-const ProjectDetailsNotice = ({ children, title, toolLabel, toolContent }) => {
+const ProjectDetailsNotice = ({
+  children,
+  title,
+  toolLabel,
+  toolContent,
+  borderOverride,
+}) => {
   return (
     <Box>
       <Flex justify='space-between' align='center' mb={2} fontSize='xs'>
@@ -26,7 +32,7 @@ const ProjectDetailsNotice = ({ children, title, toolLabel, toolContent }) => {
       </Flex>
       <Flex
         direction='column'
-        border='1px solid'
+        border={borderOverride ? 'none' : '1px solid'}
         borderColor='secondary.500'
         borderRadius='10'
         padding={5}

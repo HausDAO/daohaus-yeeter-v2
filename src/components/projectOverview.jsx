@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
-import { Box, Flex, Link, Text, Heading } from '@chakra-ui/layout';
-import { Divider } from '@chakra-ui/react';
+import { Box, Flex, Link, Text } from '@chakra-ui/layout';
 import { Avatar } from '@chakra-ui/avatar';
 import makeBlockie from 'ethereum-blockies-base64';
 import ReactMarkdown from 'react-markdown';
@@ -42,10 +41,6 @@ const ProjectOverview = ({ project, longDescription }) => {
       <Box mb={5}>
         {longDescription ? (
           <>
-            <Heading as='h4' size='md'>
-              TLDR:
-            </Heading>
-            <Divider />
             <Text> {project?.meta?.description}</Text>
             {project?.meta?.longDescription && (
               <>
@@ -59,10 +54,6 @@ const ProjectOverview = ({ project, longDescription }) => {
                 </Text>
                 {showDetails && (
                   <>
-                    <Heading as='h4' size='md' mt={6}>
-                      Yeet Deets:
-                    </Heading>
-                    <Divider />
                     <ReactMarkdown
                       components={ChakraUIRenderer()}
                       skipHtml
