@@ -131,8 +131,9 @@ const projectListSearch = term => projects => {
   return projects;
 };
 
-const projectListSort = sort => projects => {
-  console.log('sort', sort);
+// const projectListSort = sort => projects => {
+const projectListSort = () => projects => {
+  // console.log('sort', sort);
   /// time: sortBy raiseEndDate desc / move anything past now to the end
   /// yours: need to get their memberships and put those first, move anything past to the end
   // if (sort === 'time') {

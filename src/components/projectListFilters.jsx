@@ -48,10 +48,6 @@ export const statusFilterOptions = [
 
 export const filterOptions = [
   {
-    name: 'All',
-    value: 'all',
-  },
-  {
     name: 'Gnosis Chain',
     value: '0x64',
   },
@@ -59,9 +55,13 @@ export const filterOptions = [
     name: 'Rinkeby',
     value: '0x4',
   },
+  {
+    name: 'All',
+    value: 'all',
+  },
   // {
   //   name: 'Mainnet',
-  //   value: '0x64',
+  //   value: '0x1',
   // },
 ];
 
@@ -69,18 +69,14 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
   const { projects } = useProjects();
 
   // const [sort, setSort] = useState(sortOptions[0].value);
-  const [sort] = useState(sortOptions[0].value);
+  const [sort] = useState(sortOptions[0]);
 
-  const [statusFilter, setStatusFilter] = useState(
-    statusFilterOptions[0].value,
-  );
-  const [filter, setFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState(statusFilterOptions[0]);
+  const [filter, setFilter] = useState(filterOptions[0]);
   const [searchTerm, setSearchTerm] = useState(null);
 
   useEffect(() => {
-    console.log(projects);
-
-    if ((sort, filter, statusFilter)) {
+    if ((sort, filter, statusFilter, projects.length > 0)) {
       setListProjects(
         filterAndSortProjects(projects, {
           sort: sort.value,
@@ -90,7 +86,7 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
         }),
       );
     }
-  }, [sort, filter, statusFilter, searchTerm]);
+  }, [sort, filter, statusFilter, searchTerm, projects]);
 
   const handleSearchFilter = e => {
     setSearchTerm(e.target.value);

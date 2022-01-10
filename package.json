@@ -75,5 +75,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^4.0.1",
     "prettier": "^1.19.1"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }

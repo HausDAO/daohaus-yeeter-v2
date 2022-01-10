@@ -149,63 +149,63 @@ export const supportedChains = {
   //   },
   //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
   // },
-  // '0x64': {
-  //   name: 'xDAI Chain',
-  //   short_name: 'xdai',
-  //   nativeCurrency: 'xDai',
-  //   network: 'xdai',
-  //   network_id: 100,
-  //   chain_id: '0x64',
-  //   hub_sort_order: 2,
-  //   providers: ['walletconnect'],
-  //   rpc_url: 'https://dai.poa.network',
-  //   abi_api_url:
-  //     'https://blockscout.com/xdai/mainnet/api?module=contract&action=getabi&address=',
-  //   tokenlist_api_url: 'https://blockscout.com/xdai/mainnet/api',
-  //   subgraph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-xdai',
-  //   stats_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-xdai',
-  //   boosts_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts-xdai',
-  //   erc721_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/sunguru98/erc721-xdai-subgraph',
-  //   erc1155_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/sunguru98/erc1155-xdai-subgraph',
-  //   poap_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/poap-xyz/poap-xdai',
-  //   shaman_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-xdai',
-  //   minion_factory_addr: '0x53508D981439Ce6A3283597a4775F6f23504d4A2',
-  //   moloch_factory_addr: '0x0F50B2F3165db96614fbB6E4262716acc9F9e098',
-  //   wrapper_contract: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
-  //   wrap_n_zap_factory_addr: '0x8464135c8F25Da09e49BC8782676a84730C318bC',
-  //   escrow_minion: '0xc9f9E7FC92A7D3B2b3554be850fFF462B7b382E7',
-  //   block_explorer: 'https://blockscout.com/poa/xdai',
-  //   safeMinion: {
-  //     minion_factory_addr: '0xA1b97D22e22507498B350A9edeA85c44bA7DBC01',
-  //     safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
-  //     safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
-  //   },
-  //   uberhaus_minion_factory_addr: '0xf5106077892992B84c33C35CA8763895eb80B298',
-  //   transmutation_factory_addr: '0x7F94ec015665743fE84A7f59297eD86A0470e069',
-  //   superfluid: {
-  //     minion_factory_addr: '0xfC86DfDd3b2e560729c78b51dF200384cfe87438',
-  //     resolver: '0xD2009765189164b495c110D61e4D301729079911',
-  //     subgraph_url:
-  //       'https://api.thegraph.com/subgraphs/name/superfluid-finance/superfluid-xdai',
-  //     superapp_addr: {
-  //       v1: '0x9fc9420F277b7C25E17B67008b35CCB01c5c9B63',
-  //     },
-  //     version: 'v1',
-  //   },
-  //   niftyMinion: {
-  //     minion_factory_addr: '0xA6B75C3EBfA5a5F801F634812ABCb6Fd7055fd6d',
-  //     version: 'v1',
-  //   },
-  //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
-  //   dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
-  // },
+  '0x64': {
+    name: 'xDAI Chain',
+    short_name: 'xdai',
+    nativeCurrency: 'xDai',
+    network: 'xdai',
+    network_id: 100,
+    chain_id: '0x64',
+    hub_sort_order: 2,
+    providers: ['walletconnect'],
+    rpc_url: 'https://dai.poa.network',
+    abi_api_url:
+      'https://blockscout.com/xdai/mainnet/api?module=contract&action=getabi&address=',
+    tokenlist_api_url: 'https://blockscout.com/xdai/mainnet/api',
+    subgraph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-xdai',
+    stats_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-xdai',
+    boosts_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts-xdai',
+    erc721_graph_url:
+      'https://api.thegraph.com/subgraphs/name/sunguru98/erc721-xdai-subgraph',
+    erc1155_graph_url:
+      'https://api.thegraph.com/subgraphs/name/sunguru98/erc1155-xdai-subgraph',
+    poap_graph_url:
+      'https://api.thegraph.com/subgraphs/name/poap-xyz/poap-xdai',
+    shaman_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-xdai',
+    minion_factory_addr: '0x53508D981439Ce6A3283597a4775F6f23504d4A2',
+    moloch_factory_addr: '0x0F50B2F3165db96614fbB6E4262716acc9F9e098',
+    wrapper_contract: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
+    wrap_n_zap_factory_addr: '0x8464135c8F25Da09e49BC8782676a84730C318bC',
+    escrow_minion: '0xc9f9E7FC92A7D3B2b3554be850fFF462B7b382E7',
+    block_explorer: 'https://blockscout.com/poa/xdai',
+    safeMinion: {
+      minion_factory_addr: '0xA1b97D22e22507498B350A9edeA85c44bA7DBC01',
+      safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
+      safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
+    },
+    uberhaus_minion_factory_addr: '0xf5106077892992B84c33C35CA8763895eb80B298',
+    transmutation_factory_addr: '0x7F94ec015665743fE84A7f59297eD86A0470e069',
+    superfluid: {
+      minion_factory_addr: '0xfC86DfDd3b2e560729c78b51dF200384cfe87438',
+      resolver: '0xD2009765189164b495c110D61e4D301729079911',
+      subgraph_url:
+        'https://api.thegraph.com/subgraphs/name/superfluid-finance/superfluid-xdai',
+      superapp_addr: {
+        v1: '0x9fc9420F277b7C25E17B67008b35CCB01c5c9B63',
+      },
+      version: 'v1',
+    },
+    niftyMinion: {
+      minion_factory_addr: '0xA6B75C3EBfA5a5F801F634812ABCb6Fd7055fd6d',
+      version: 'v1',
+    },
+    disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
+    dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
+  },
   // '0x89': {
   //   name: 'Matic',
   //   short_name: 'matic',

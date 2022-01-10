@@ -15,7 +15,6 @@ const ListFilter = ({ filter, setFilter, options, labelText }) => {
 
   useEffect(() => {
     setFilterOptions(options);
-    setFilter(options[0]);
   }, []);
 
   const handleFilterSelect = option => {
