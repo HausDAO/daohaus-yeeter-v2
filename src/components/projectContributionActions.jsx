@@ -133,7 +133,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
 
   return (
     <Box direction='column'>
-      {projectStatus !== 'active' && (
+      {projectStatus === 'active' && (
         <ProjectDetailsNotice
           title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
           borderOverride

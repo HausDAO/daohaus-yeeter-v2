@@ -31,7 +31,6 @@ export const ProjectsContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (projectData.length === numOfSupportedChains && !projects.length) {
-      console.log('projectData', projectData);
       setProjects(hydrateProjectsData(projectData));
     }
   }, [projects, setProjects, projectData]);
