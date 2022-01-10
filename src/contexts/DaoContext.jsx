@@ -11,7 +11,6 @@ import { TXProvider } from './TXContext';
 // import { useSessionStorage } from '../hooks/useSessionStorage';
 import { bigGraphQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
-import { putRefreshApiVault } from '../utils/metadata';
 import { addCurrentYeetBalance } from '../utils/projects';
 
 // TODO: get rid of flash
@@ -27,6 +26,7 @@ export const DaoProvider = ({ children }) => {
   const [daoProposals, setDaoProposals] = useState();
   const [daoShamans, setDaoShamans] = useState();
   const [daoYeets, setDaoYeets] = useState();
+  const [refetchComplete, setRefetchComplete] = useState(false);
 
   // const [currentProject, setCurrentProject] = useSessionStorage(
   //   'currentProject',
@@ -37,25 +37,6 @@ export const DaoProvider = ({ children }) => {
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
-
-  const hydrateProjectData = () => {
-    const project = {
-      ...daoOverview,
-      members: daoOverview.members.sort(
-        (a, b) => Number(b.shares) - Number(a.shares),
-      ),
-      proposals: daoProposals.sort((a, b) => {
-        return Number(a.proposalIndex) - Number(b.proposalIndex);
-      }),
-      yeeter: daoShamans,
-      yeets: daoYeets,
-      networkID: daochain,
-      ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
-    };
-
-    console.log('hydrating', project);
-    setCurrentProject(project);
-  };
 
   useEffect(() => {
     // This condition is brittle. If one request passes, but the rest fail
@@ -110,34 +91,34 @@ export const DaoProvider = ({ children }) => {
   ]);
 
   useEffect(() => {
-    // const hydrateProjectData = () => {
-    //   const project = {
-    //     ...daoOverview,
-    //     members: daoOverview.members.sort(
-    //       (a, b) => Number(b.shares) - Number(a.shares),
-    //     ),
-    //     proposals: daoProposals.sort((a, b) => {
-    //       return Number(a.proposalIndex) - Number(b.proposalIndex);
-    //     }),
-    //     yeeter: daoShamans,
-    //     yeets: daoYeets,
-    //     networkID: daochain,
-    //     ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
-    //   };
+    const hydrateProjectData = () => {
+      const project = {
+        ...daoOverview,
+        members: daoOverview.members.sort(
+          (a, b) => Number(b.shares) - Number(a.shares),
+        ),
+        proposals: daoProposals.sort((a, b) => {
+          return Number(a.proposalIndex) - Number(b.proposalIndex);
+        }),
+        yeeter: daoShamans,
+        yeets: daoYeets,
+        networkID: daochain,
+        ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
+      };
 
-    //   console.log('hydrating', project);
-    //   setCurrentProject(project);
-    // };
+      // console.log('hydrating', project);
+      setCurrentProject(project);
+      setRefetchComplete(false);
+    };
 
-    // console.log('checking on refetch', hasPerformedBatchQuery.current);
-
+    const noProjectOrRefresh = !currentProject || refetchComplete;
     if (
       hasPerformedBatchQuery.current &&
       daoOverview &&
       daoProposals &&
       daoShamans &&
       daoYeets &&
-      !currentProject
+      noProjectOrRefresh
     ) {
       hydrateProjectData();
     }
@@ -152,10 +133,16 @@ export const DaoProvider = ({ children }) => {
   ]);
 
   const refetch = () => {
+    setDaoOverview(null);
+    setDaoProposals(null);
+    setDaoShamans(null);
+    setDaoYeets(null);
+
     const bigQueryOptions = {
       args: {
         daoID: daoid.toLowerCase(),
         chainID: daochain,
+        refetchSetter: setRefetchComplete,
       },
       getSetters: [
         { getter: 'getOverview', setter: setDaoOverview },
@@ -175,15 +162,8 @@ export const DaoProvider = ({ children }) => {
     };
     currentDao.current = null;
 
-    console.log('doing big query');
     bigGraphQuery(bigQueryOptions);
-    // setCurrentProject(null);
-    // hasPerformedBatchQuery.current = true;
-  };
-
-  const refreshAllDaoVaults = async () => {
-    const { network } = supportedChains[daochain];
-    await putRefreshApiVault({ network, molochAddress: daoid });
+    hasPerformedBatchQuery.current = true;
   };
 
   return (
@@ -191,7 +171,6 @@ export const DaoProvider = ({ children }) => {
       value={{
         currentProject,
         refetch,
-        refreshAllDaoVaults,
         hasPerformedBatchQuery, // Ref, not state
       }}
     >

@@ -123,6 +123,11 @@ export const bigGraphQuery = ({ args, getSetters }) => {
     const { getter, setter } = getSetter;
     completeQueries[getter](args, setter);
   }
+
+  if (args.refetchSetter) {
+    console.log('refetchSetter ');
+    args.refetchSetter(true);
+  }
 };
 
 const buildCrossChainQuery = (supportedChains, endpointType) => {
