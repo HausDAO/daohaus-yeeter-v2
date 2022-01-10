@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, List, Text } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 
@@ -13,12 +13,6 @@ const ProjectsList = () => {
   const { address } = useInjectedProvider();
   const { projects, refetchProjects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
-
-  useEffect(() => {
-    if (projects.length) {
-      setListProjects(projects);
-    }
-  }, [projects]);
 
   useInterval(() => {
     refetchProjects();
