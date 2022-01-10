@@ -16,7 +16,11 @@ const UserContribution = ({ project, contributions }) => {
       <Flex justify='space-between'>
         <Flex fontFamily='mono' direction='column' alignItems='flex-start'>
           <Box fontSize='xl'>
-            {displayBalance(contributions.total, project.yeeterTokenDecimals)}
+            {displayBalance(
+              contributions.total,
+              project.yeeterTokenDecimals,
+              2,
+            )}
           </Box>
           <Box fontSize='xs' color='gray.500'>
             Contributed

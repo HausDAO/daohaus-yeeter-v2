@@ -33,6 +33,7 @@ const ProjectFundingStatus = ({ project }) => {
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
+              2,
             )}{' '}
             {supportedChains[project.networkID].nativeCurrency}
           </Box>

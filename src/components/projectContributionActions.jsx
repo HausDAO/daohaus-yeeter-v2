@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Icon } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
+import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useAppModal } from '../hooks/useModals';
 import CopyButton from './copyButton';
 import { maxContribution, yeetStatus } from '../utils/projects';
 import { supportedChains } from '../utils/chain';
@@ -11,9 +13,9 @@ import EtherscanLink from './etherscanLink';
 import { displayBalance } from '../utils/tokenValue';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import Contribute from './Contribute';
 
-const yeetNotice = (project, contributions) => {
+export const yeetNotice = (project, contributions) => {
   return (
     <>
       <Flex
@@ -111,13 +113,19 @@ const failedNotice = (project, address) => {
 
 const ProjectContributionActions = ({ project, contributions }) => {
   const { address } = useInjectedProvider();
+  const { genericModal } = useAppModal();
   const projectStatus = useMemo(() => {
     if (project) {
-      console.log('project', project);
       return yeetStatus(project);
     }
     return null;
   }, [project]);
+
+  const openContribute = () =>
+    genericModal({
+      title: 'Contribute!',
+      body: <Contribute project={project} contributions={contributions} />,
+    });
 
   if (!projectStatus) {
     return null;
@@ -127,15 +135,27 @@ const ProjectContributionActions = ({ project, contributions }) => {
     <Box direction='column'>
       {projectStatus === 'active' && (
         <ProjectDetailsNotice
-          title={`Yeet ${supportedChains[project.networkID].short_name} ${
-            supportedChains[project.networkID].nativeCurrency
-          } to`}
+          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
+          borderOverride
+          toolLabel='What to know!'
+          toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
+        >
+          <Flex fontSize='lg' align='center' mb={3} justify='center'>
+            <Button w='100%' fontWeight='700' onClick={openContribute}>
+              Contribute!
+            </Button>
+          </Flex>
+        </ProjectDetailsNotice>
+      )}
+      {/* {projectStatus === 'active' && (
+        <ProjectDetailsNotice
+          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
           toolLabel='What to know!'
           toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
         >
           {yeetNotice(project, contributions)}
         </ProjectDetailsNotice>
-      )}
+      )} */}
       {projectStatus === 'failed' && (
         <ProjectDetailsNotice
           title="What's Next"

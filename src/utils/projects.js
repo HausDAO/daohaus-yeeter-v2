@@ -4,6 +4,16 @@ import { supportedChains } from './chain';
 import { pipe } from './general';
 import { displayBalance } from './tokenValue';
 
+// TODO: pull from subgraph
+export const LOOT_PER_UNIT = 100;
+
+export const lootFromContribution = (contributionTotal, project) => {
+  return (
+    (contributionTotal / project.yeeter.yeeterConfig.pricePerUnit) *
+    LOOT_PER_UNIT
+  );
+};
+
 export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
   const decimals =
     dao.tokenBalances.find(
@@ -27,7 +37,7 @@ export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
 
   return {
     balance: total,
-    displayBalance: displayBalance(total, decimals),
+    displayBalance: displayBalance(total, decimals, 2),
     yeeterTokenDecimals: decimals,
   };
 };

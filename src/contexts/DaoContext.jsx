@@ -14,6 +14,8 @@ import { supportedChains } from '../utils/chain';
 import { putRefreshApiVault } from '../utils/metadata';
 import { addCurrentYeetBalance } from '../utils/projects';
 
+// TODO: get rid of flash
+
 export const DaoContext = createContext();
 
 export const DaoProvider = ({ children }) => {
@@ -35,6 +37,25 @@ export const DaoProvider = ({ children }) => {
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
+
+  const hydrateProjectData = () => {
+    const project = {
+      ...daoOverview,
+      members: daoOverview.members.sort(
+        (a, b) => Number(b.shares) - Number(a.shares),
+      ),
+      proposals: daoProposals.sort((a, b) => {
+        return Number(a.proposalIndex) - Number(b.proposalIndex);
+      }),
+      yeeter: daoShamans,
+      yeets: daoYeets,
+      networkID: daochain,
+      ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
+    };
+
+    console.log('hydrating', project);
+    setCurrentProject(project);
+  };
 
   useEffect(() => {
     // This condition is brittle. If one request passes, but the rest fail
@@ -89,24 +110,26 @@ export const DaoProvider = ({ children }) => {
   ]);
 
   useEffect(() => {
-    const hydrateProjectData = () => {
-      console.log('daoShamans', daoShamans);
-      const project = {
-        ...daoOverview,
-        members: daoOverview.members.sort(
-          (a, b) => Number(b.shares) - Number(a.shares),
-        ),
-        proposals: daoProposals.sort((a, b) => {
-          return Number(a.proposalIndex) - Number(b.proposalIndex);
-        }),
-        yeeter: daoShamans,
-        yeets: daoYeets,
-        networkID: daochain,
-        ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
-      };
+    // const hydrateProjectData = () => {
+    //   const project = {
+    //     ...daoOverview,
+    //     members: daoOverview.members.sort(
+    //       (a, b) => Number(b.shares) - Number(a.shares),
+    //     ),
+    //     proposals: daoProposals.sort((a, b) => {
+    //       return Number(a.proposalIndex) - Number(b.proposalIndex);
+    //     }),
+    //     yeeter: daoShamans,
+    //     yeets: daoYeets,
+    //     networkID: daochain,
+    //     ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
+    //   };
 
-      setCurrentProject(project);
-    };
+    //   console.log('hydrating', project);
+    //   setCurrentProject(project);
+    // };
+
+    // console.log('checking on refetch', hasPerformedBatchQuery.current);
 
     if (
       hasPerformedBatchQuery.current &&
@@ -151,8 +174,11 @@ export const DaoProvider = ({ children }) => {
       ],
     };
     currentDao.current = null;
+
+    console.log('doing big query');
     bigGraphQuery(bigQueryOptions);
-    hasPerformedBatchQuery.current = true;
+    // setCurrentProject(null);
+    // hasPerformedBatchQuery.current = true;
   };
 
   const refreshAllDaoVaults = async () => {

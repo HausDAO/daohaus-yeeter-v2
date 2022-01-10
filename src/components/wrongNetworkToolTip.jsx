@@ -1,7 +1,7 @@
 import React from 'react';
-import { RiInformationLine } from 'react-icons/ri';
+// import { RiInformationLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
-import { Box, Button, Flex, Icon, Tooltip } from '@chakra-ui/react';
+import { Box, Button, Flex, Tooltip } from '@chakra-ui/react';
 
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import useCanInteract from '../hooks/useCanInteract';
@@ -56,14 +56,12 @@ const WrongNetworkToolTip = () => {
           >
             <Flex
               align='center'
-              mr={5}
               background='secondary.500'
               p='5px 12px'
               borderRadius='20px'
             >
-              <Icon as={RiInformationLine} mr={2} />
               <Box fontSize='md' as='i' fontWeight={600}>
-                {daoChainName}
+                Switch to {daoChainName}
               </Box>
             </Flex>
           </Button>
@@ -82,9 +80,8 @@ const WrongNetworkToolTip = () => {
             p='5px 12px'
             borderRadius='20px'
           >
-            <Icon as={RiInformationLine} mr={2} />
             <Box fontSize='md' as='i' fontWeight={600}>
-              {daoChainName}
+              Switch to {daoChainName}
             </Box>
           </Flex>
         </Tooltip>

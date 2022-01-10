@@ -157,10 +157,15 @@ export const valToDecimalString = (value, tokenAddress, tokens) => {
     .toString();
 };
 
-export const displayBalance = (tokenBalance, decimals, wholeNumber = false) => {
+export const displayBalance = (
+  tokenBalance,
+  decimals,
+  places = 4,
+  wholeNumber = false,
+) => {
   if (tokenBalance && decimals) {
     return parseFloat(Number(tokenBalance) / 10 ** Number(decimals)).toFixed(
-      !wholeNumber ? 4 : null,
+      !wholeNumber ? places : null,
     );
   }
 };

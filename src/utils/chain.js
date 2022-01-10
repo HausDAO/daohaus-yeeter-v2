@@ -150,7 +150,7 @@ export const supportedChains = {
   //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
   // },
   '0x64': {
-    name: 'xDAI Chain',
+    name: 'Gnosis Chain',
     short_name: 'xdai',
     nativeCurrency: 'xDai',
     network: 'xdai',
