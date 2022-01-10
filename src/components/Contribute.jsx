@@ -18,13 +18,20 @@ import { displayBalance } from '../utils/tokenValue';
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
 import { useAppModal } from '../hooks/useModals';
+import { useDao } from '../contexts/DaoContext';
 
 const Contribute = ({ project, contributions }) => {
   const { daochain } = useParams();
   const { injectedChain } = useInjectedProvider();
   const { closeModal } = useAppModal();
+  const { refetch } = useDao();
 
   const chainMatch = daochain === injectedChain.chainId;
+
+  const handleDone = () => {
+    refetch();
+    closeModal();
+  };
 
   return (
     <>
@@ -141,7 +148,7 @@ const Contribute = ({ project, contributions }) => {
         <Button variant='outline' onClick={closeModal}>
           Nevermind
         </Button>
-        <Button ml={5} onClick={closeModal}>
+        <Button ml={5} onClick={handleDone}>
           Done!
         </Button>
       </Flex>

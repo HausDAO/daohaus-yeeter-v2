@@ -125,7 +125,6 @@ export const bigGraphQuery = ({ args, getSetters }) => {
   }
 
   if (args.refetchSetter) {
-    console.log('refetchSetter ');
     args.refetchSetter(true);
   }
 };
