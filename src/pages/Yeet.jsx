@@ -52,10 +52,10 @@ const Yeet = () => {
             my={5}
           >
             <Box>
-              <Box mb={3} mr={10} fontWeight='700'>
+              <Box mb={2} mr={10} fontWeight='700'>
                 If you yeet
               </Box>
-              <Box mb={3}>
+              <Box mb={2}>
                 {displayBalance(
                   currentProject.yeeter.yeeterConfig.pricePerUnit,
                   currentProject.yeeterTokenDecimals,
@@ -73,10 +73,10 @@ const Yeet = () => {
               </Box>
             </Box>
             <Box>
-              <Box mb={3} fontWeight='700'>
+              <Box mb={2} fontWeight='700'>
                 You receive
               </Box>
-              <Box mb={3}>{LOOT_PER_UNIT} Loot</Box>
+              <Box mb={2}>{LOOT_PER_UNIT} Loot</Box>
               <Box>
                 {lootFromContribution(
                   maxContribution(currentProject),
