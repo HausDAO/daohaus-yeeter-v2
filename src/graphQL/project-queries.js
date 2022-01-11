@@ -71,6 +71,11 @@ export const MEMBERSHIPS_QUERY = gql`
         version
         summoner
       }
+      tokenBalances {
+        token
+        molochAddress
+        tokenBalance
+      }
     }
   }
 `;
