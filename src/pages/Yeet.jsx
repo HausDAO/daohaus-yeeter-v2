@@ -23,7 +23,7 @@ const Yeet = () => {
         <>
           <Flex wrap='wrap' justify='center'>
             <Box
-              fontSize='12vh'
+              fontSize={['12vw', null, null, '10vw', '10vw']}
               lineHeight='1'
               inlineSize='100%'
               overflowWrap='break-word'
@@ -37,11 +37,19 @@ const Yeet = () => {
               iconProps={{ height: '100px', width: '100px' }}
             />
           </Flex>
-          <Text textAlign='center' mt={10} fontSize='5xl'>
+          <Text
+            textAlign='center'
+            mt={10}
+            fontSize={['xl', '2xl', '5xl', '5xl', '5xl']}
+          >
             1. Send {supportedChains[currentProject.networkID].nativeCurrency}{' '}
             on {supportedChains[currentProject.networkID].name}
           </Text>
-          <Text textAlign='center' mt={1} fontSize='5xl'>
+          <Text
+            textAlign='center'
+            mt={1}
+            fontSize={['xl', '2xl', '5xl', '5xl', '5xl']}
+          >
             2. Get back Loot and DAO membership
           </Text>
           <Flex
