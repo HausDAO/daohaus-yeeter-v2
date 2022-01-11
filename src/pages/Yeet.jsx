@@ -113,7 +113,7 @@ const Yeet = () => {
             mt={1}
             fontSize={['xl', '2xl', '5xl', '5xl', '5xl']}
           >
-            2. Get back Loot and Project DAO membership
+            2. Get back Loot in the project DAO
           </Text>
           <Flex
             wrap='wrap'

@@ -11,7 +11,6 @@ import {
   LOOT_PER_UNIT,
   maxContribution,
 } from '../utils/projects';
-import { truncateAddr } from '../utils/general';
 import CopyButton from './copyButton';
 import EtherscanLink from './etherscanLink';
 import { displayBalance } from '../utils/tokenValue';
@@ -35,6 +34,59 @@ const Contribute = ({ project, contributions }) => {
 
   return (
     <>
+      <ProjectDetailsNotice
+        title='How to Contribute'
+        toolLabel='What to know!'
+        toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
+      >
+        <Text color='secondary.500' fontSize='sm' textAlign='center'>
+          From your Wallet, send{' '}
+          {supportedChains[project.networkID].nativeCurrency} to the following
+          address:
+        </Text>
+        <Flex
+          fontSize='lg'
+          fontFamily='mono'
+          align='center'
+          mb={3}
+          justify='center'
+        >
+          <Text fontSize='sm' ml={3} my={5}>
+            {/* {truncateAddr(project.yeeter.shamanAddress)} */}
+            {project.yeeter.shamanAddress}
+          </Text>
+          <CopyButton text={project.yeeter.shamanAddress} />
+          <Box>
+            <EtherscanLink address={project.yeeter.shamanAddress} />
+          </Box>
+        </Flex>
+        <Flex
+          direction='row'
+          justify='space-between'
+          wrap='wrap'
+          align='center'
+        >
+          <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
+            {supportedChains[project.networkID].name}
+          </Box>
+
+          {!chainMatch && <WrongNetworkToolTip />}
+        </Flex>
+        {Number(contributions.total) >= maxContribution(project) && (
+          <Flex
+            direction='row'
+            justify='flex-start'
+            align='center'
+            color='red.600'
+          >
+            <Icon as={AiOutlineExclamationCircle} mr={3} />
+            <Box mt={2}>You’ve reached your individual contribution cap!</Box>
+          </Flex>
+        )}
+      </ProjectDetailsNotice>
+
+      <Divider my={7} />
+
       <Flex
         wrap='wrap'
         justify='space-between'
@@ -87,7 +139,7 @@ const Contribute = ({ project, contributions }) => {
       >
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
-          Amounts must be in increments of{' '}
+          Yeeter accepts increments of{' '}
           {displayBalance(
             project.yeeter.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
@@ -96,54 +148,7 @@ const Contribute = ({ project, contributions }) => {
           {supportedChains[project.networkID].nativeCurrency}
         </Box>
       </Flex>
-      <Divider my={7} />
-      <ProjectDetailsNotice
-        title='How to Contribute'
-        toolLabel='What to know!'
-        toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
-      >
-        <Text color='secondary.500' fontSize='sm' textAlign='center'>
-          From your Wallet, send DAI to the following address:
-        </Text>
-        <Flex
-          fontSize='lg'
-          fontFamily='mono'
-          align='center'
-          mb={3}
-          justify='center'
-        >
-          <Text ml={3} mt={2}>
-            {truncateAddr(project.yeeter.shamanAddress)}
-          </Text>
-          <CopyButton text={project.yeeter.shamanAddress} />
-          <Box>
-            <EtherscanLink address={project.yeeter.shamanAddress} />
-          </Box>
-        </Flex>
-        <Flex
-          direction='row'
-          justify='space-between'
-          wrap='wrap'
-          align='center'
-        >
-          <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
-            {supportedChains[project.networkID].name}
-          </Box>
 
-          {!chainMatch && <WrongNetworkToolTip />}
-        </Flex>
-        {Number(contributions.total) >= maxContribution(project) && (
-          <Flex
-            direction='row'
-            justify='flex-start'
-            align='center'
-            color='red.600'
-          >
-            <Icon as={AiOutlineExclamationCircle} mr={3} />
-            <Box mt={2}>You’ve reached your individual contribution cap!</Box>
-          </Flex>
-        )}
-      </ProjectDetailsNotice>
       <Flex justify='flex-end' mt={5}>
         <Button variant='outline' onClick={closeModal}>
           Nevermind
