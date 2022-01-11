@@ -136,7 +136,9 @@ export const yeetingTime = project => {
 
 const projectListSearch = term => projects => {
   if (term) {
-    return projects.filter(p => p.meta?.name.indexOf(term) > -1);
+    return projects.filter(
+      p => p.meta?.name.toLowerCase().indexOf(term.toLowerCase()) > -1,
+    );
   }
   return projects;
 };
