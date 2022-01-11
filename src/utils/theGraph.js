@@ -8,8 +8,9 @@ import {
   MEMBERSHIPS_QUERY,
   PROJECTS_DAOS_QUERY,
   PROJECTS_DETAIL_SHAMAN_QUERY,
-  PROJECTS_DETAIL_YEETS_QUERY,
+  PROJECT_DETAIL_YEETS_QUERY,
   PROJECTS_SHAMANS_QUERY,
+  PROJECTS_YEETS_QUERY,
   PROJECT_DETAILS_QUERY,
 } from '../graphQL/project-queries';
 
@@ -72,7 +73,7 @@ const completeQueries = {
     try {
       const graphYeets = await graphFetchAll({
         endpoint: getGraphEndpoint(args.chainID, 'shaman_graph_url'),
-        query: PROJECTS_DETAIL_YEETS_QUERY,
+        query: PROJECT_DETAIL_YEETS_QUERY,
         subfield: 'yeets',
         variables: {
           contractAddr: args.daoID,
@@ -175,6 +176,21 @@ export const projectsCrossChainQuery = async ({
         subfield: 'shamans',
       });
 
+      const yeetsData = await graphFetchAll({
+        endpoint: supportedChains[chain.networkID].shaman_graph_url,
+        query: PROJECTS_YEETS_QUERY,
+        subfield: 'yeets',
+      });
+
+      const yeetsMap = yeetsData.reduce((coll, yeet) => {
+        if (coll[yeet.shamanAddress]) {
+          coll[yeet.shamanAddress].push(yeet);
+        } else {
+          coll[yeet.shamanAddress] = [yeet];
+        }
+        return coll;
+      }, {});
+
       const withMetaData = daoData.map(dao => {
         return {
           ...dao,
@@ -186,9 +202,13 @@ export const projectsCrossChainQuery = async ({
         return shaman.shamanType === 'yeeter';
       });
 
+      const yeetersWithYeets = yeeters.map(yeeter => {
+        return { ...yeeter, yeets: yeetsMap[yeeter.shamanAddress] || [] };
+      });
+
       reactSetter(prevState => [
         ...prevState,
-        { ...chain, daos: withMetaData, yeeters },
+        { ...chain, daos: withMetaData, yeeters: yeetersWithYeets },
       ]);
     } catch (error) {
       console.error(error);
