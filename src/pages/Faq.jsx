@@ -19,7 +19,7 @@ const ParagraphText = props => {
 
 const Faq = () => {
   return (
-    <Box p={10}>
+    <Box p={10} w={['100%', null, null, '65%', '65%']}>
       <Text fontSize='2xl' mb={5}>
         FAQ
       </Text>
