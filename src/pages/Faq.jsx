@@ -365,8 +365,9 @@ const Faq = () => {
               <Link to='https://uberhaus.club/' isExternal>
                 UberHaus
               </Link>
-              , the DAO of DAOs that governs DAOhaus and it funds future upgrades, maintenance, and
-              security audits. In your project DAO, a UberHaus-owned address will hold 3% of Loot (i.e. funds raised) 
+              , the DAO of DAOs that governs DAOhaus and it funds future
+              upgrades, maintenance, and security audits. In your project DAO, a
+              UberHaus-owned address will hold 3% of Loot (i.e. funds raised)
             </ParagraphText>
           </AccordionPanel>
         </AccordionItem>
@@ -382,7 +383,32 @@ const Faq = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <ParagraphText>todo</ParagraphText>
+            <ParagraphText mb={1}>
+              As compared with other Web3 crowdfunding tools, the DAOhaus
+              Yeeter:
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Automatically sets up a Moloch DAO (accessible via DAOhaus app)
+              for your team & capital contributors
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Creates greater funding transparency, so it is easier to attract
+              more funding
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Is available on Gnosis Chain (and Mainnet soon)
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Equips your DAO with{' '}
+              <Link
+                to='https://daohaus.club/docs/users/boosts/boosts'
+                isExternal
+              >
+                DAOhaus Boosts
+              </Link>{' '}
+              to better run your project & community (e.g. Discord
+              Notifications, Rarible, Disperse etc.)
+            </ParagraphText>
           </AccordionPanel>
         </AccordionItem>
 
@@ -396,7 +422,10 @@ const Faq = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <ParagraphText>todo</ParagraphText>
+            <ParagraphText>
+              Currently, creation of new DAOhaus Yeeter projects are by request
+              only. Say gm in our Discord to tell us more about your project!
+            </ParagraphText>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
@@ -440,7 +469,32 @@ const Faq = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <ParagraphText>todo</ParagraphText>
+            <ParagraphText mb={1}>
+              As compared with other Web3 crowdfunding tools, the DAOhaus
+              Yeeter:
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Creates greater transparency in how DAO funds are used, lowering
+              the likelihood of a rug-pull
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Gives you custody over your contribution (via Loot Shares & the
+              ability to rage quit at anytime)
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Is available on Gnosis Chain (and Mainnet soon)
+            </ParagraphText>
+            <ParagraphText pl={4} mb={1}>
+              - Creates a smoother DAo experience with{' '}
+              <Link
+                to='https://daohaus.club/docs/users/boosts/boosts'
+                isExternal
+              >
+                DAOhaus Boosts
+              </Link>{' '}
+              to better run your project & community (e.g. Discord
+              Notifications, Rarible, Disperse etc.)
+            </ParagraphText>
           </AccordionPanel>
         </AccordionItem>
 
