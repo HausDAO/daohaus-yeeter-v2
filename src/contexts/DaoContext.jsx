@@ -92,6 +92,7 @@ export const DaoProvider = ({ children }) => {
 
   useEffect(() => {
     const hydrateProjectData = () => {
+      const yeeterWithYeets = { ...daoShamans, yeets: daoYeets };
       const project = {
         ...daoOverview,
         members: daoOverview.members.sort(
@@ -100,13 +101,11 @@ export const DaoProvider = ({ children }) => {
         proposals: daoProposals.sort((a, b) => {
           return Number(a.proposalIndex) - Number(b.proposalIndex);
         }),
-        yeeter: daoShamans,
-        yeets: daoYeets,
+        yeeter: yeeterWithYeets,
         networkID: daochain,
-        ...addCurrentYeetBalance(daoShamans, daoOverview, daochain),
+        ...addCurrentYeetBalance(yeeterWithYeets, daoOverview, daochain),
       };
 
-      // console.log('hydrating', project);
       setCurrentProject(project);
       setRefetchComplete(false);
     };

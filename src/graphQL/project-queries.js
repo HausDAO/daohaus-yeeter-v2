@@ -52,11 +52,6 @@ export const PROJECTS_SHAMANS_QUERY = gql`
         maxUnits
         pricePerUnit
       }
-      yeets {
-        createdAt
-        contributorAddress
-        amount
-      }
     }
   }
 `;
@@ -154,16 +149,23 @@ export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
         maxUnits
         pricePerUnit
       }
-      yeets {
-        createdAt
-        contributorAddress
-        amount
-      }
     }
   }
 `;
 
-export const PROJECTS_DETAIL_YEETS_QUERY = gql`
+export const PROJECTS_YEETS_QUERY = gql`
+  query yeets($skip: Int) {
+    yeets(orderBy: createdAt, first: 1000, skip: $skip) {
+      createdAt
+      contributorAddress
+      amount
+      shamanAddress
+      molochAddress
+    }
+  }
+`;
+
+export const PROJECT_DETAIL_YEETS_QUERY = gql`
   query yeets($contractAddr: String!, $skip: Int) {
     yeets(
       orderBy: createdAt
@@ -174,6 +176,8 @@ export const PROJECTS_DETAIL_YEETS_QUERY = gql`
       createdAt
       contributorAddress
       amount
+      shamanAddress
+      molochAddress
     }
   }
 `;

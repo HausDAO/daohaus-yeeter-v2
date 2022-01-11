@@ -81,7 +81,7 @@ const DaoHome = () => {
               p={10}
             >
               <Box>
-                {currentProject?.yeets.length > 0 && (
+                {currentProject?.yeeter?.yeets.length > 0 && (
                   <LeaderBoardList
                     yeets={currentProject.yeeter?.yeets}
                     project={currentProject}

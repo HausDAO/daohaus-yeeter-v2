@@ -19,10 +19,14 @@ import Icon from '@chakra-ui/icon';
 import { themeImagePath } from '../utils/metadata';
 import { fixSocialLink } from '../utils/general';
 import DaohausLink from './daohausLink';
+import CopyButton from './copyButton';
+import { yeetStatus } from '../utils/projects';
 
 const ProjectOverview = ({ project, longDescription }) => {
   const { daoid } = useParams();
   const [showDetails, setShowDetails] = useState(false);
+
+  const status = yeetStatus(project);
 
   return (
     <>
@@ -152,6 +156,16 @@ const ProjectOverview = ({ project, longDescription }) => {
 
         {daoid && <DaohausLink linkText='Visit the DAO' project={project} />}
       </Flex>
+      {daoid && status === 'active' && (
+        <Flex mt={2} fontSize='sm'>
+          Get Share Link{' '}
+          <CopyButton
+            text={`https://${window.location.host}/dao/0x4/${project.id}/yeet`}
+            iconProps={{ height: '15px', width: '15px' }}
+            customMessage='URL Copied to clipboard'
+          />
+        </Flex>
+      )}
     </>
   );
 };

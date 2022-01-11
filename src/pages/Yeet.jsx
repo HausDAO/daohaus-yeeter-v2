@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 
@@ -11,19 +11,81 @@ import {
   lootFromContribution,
   LOOT_PER_UNIT,
   maxContribution,
+  yeetingTime,
+  yeetStatus,
 } from '../utils/projects';
+
+const UpcomingBlock = ({ project }) => {
+  const timeContent = yeetingTime(project);
+  return (
+    <Flex wrap='wrap' justify='center' align='center' mt={10}>
+      <Box
+        fontSize='6xl'
+        lineHeight='1'
+        inlineSize='100%'
+        overflowWrap='break-word'
+        textAlign='center'
+        mb={5}
+      >
+        Yeeting will begin {timeContent.time}
+      </Box>
+      <Text textAlign='center' fontSize='lg'>
+        <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+          See More Project Details
+        </RouterLink>
+      </Text>
+    </Flex>
+  );
+};
+
+const ExpiredBlock = ({ project }) => {
+  return (
+    <Flex wrap='wrap' justify='center' align='center' mt={10}>
+      <Box
+        fontSize='6xl'
+        lineHeight='1'
+        inlineSize='100%'
+        overflowWrap='break-word'
+        textAlign='center'
+        mb={5}
+      >
+        Yeeting has ended
+      </Box>
+      <Text textAlign='center' fontSize='lg'>
+        <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+          See More Project Details
+        </RouterLink>
+      </Text>
+    </Flex>
+  );
+};
 
 const Yeet = () => {
   const { currentProject } = useDao();
 
+  const status = useMemo(() => {
+    if (currentProject) {
+      return yeetStatus(currentProject);
+    }
+    return null;
+  }, [currentProject]);
+
   return (
     <Box p={10}>
       {!currentProject && <Spinner />}
-      {currentProject && (
+      {currentProject && status === 'upcoming' && (
+        <UpcomingBlock project={currentProject} />
+      )}
+      {currentProject &&
+        (status === 'funded' ||
+          status === 'failed' ||
+          status === 'expired') && <ExpiredBlock project={currentProject} />}
+
+      {currentProject && status === 'active' && (
         <>
           <Flex wrap='wrap' justify='center'>
             <Box
-              fontSize='12vh'
+              fontSize={['12vw', null, null, '10vw', '10vw']}
               lineHeight='1'
               inlineSize='100%'
               overflowWrap='break-word'
@@ -37,12 +99,21 @@ const Yeet = () => {
               iconProps={{ height: '100px', width: '100px' }}
             />
           </Flex>
-          <Text textAlign='center' mt={10} fontSize='5xl'>
+          <Text
+            textAlign='center'
+            mt={10}
+            fontSize={['xl', '2xl', '5xl', '5xl', '5xl']}
+          >
             1. Send {supportedChains[currentProject.networkID].nativeCurrency}{' '}
-            on {supportedChains[currentProject.networkID].name}
+            to the address above on{' '}
+            {supportedChains[currentProject.networkID].name}
           </Text>
-          <Text textAlign='center' mt={1} fontSize='5xl'>
-            2. Get back Loot and DAO membership
+          <Text
+            textAlign='center'
+            mt={1}
+            fontSize={['xl', '2xl', '5xl', '5xl', '5xl']}
+          >
+            2. Get back Loot and Project DAO membership
           </Text>
           <Flex
             wrap='wrap'
