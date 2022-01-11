@@ -365,9 +365,8 @@ const Faq = () => {
               <Link to='https://uberhaus.club/' isExternal>
                 UberHaus
               </Link>
-              , the DAO of DAOs that governs DAOhaus. Once your DAO is up and
-              running This fee is used to fund future upgrades, maintenance, and
-              security audits.
+              , the DAO of DAOs that governs DAOhaus and it funds future upgrades, maintenance, and
+              security audits. In your project DAO, a UberHaus-owned address will hold 3% of Loot (i.e. funds raised) 
             </ParagraphText>
           </AccordionPanel>
         </AccordionItem>
