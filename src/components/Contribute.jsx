@@ -127,16 +127,7 @@ const Contribute = ({ project, contributions }) => {
           <Box mb={3}>Tier 2 NFT</Box> */}
         </Box>
       </Flex>
-      <Flex
-        direction='row'
-        justify='flex-start'
-        align='center'
-        p={3}
-        mt={5}
-        border='1px solid'
-        borderColor='secondary.500'
-        borderRadius='4px'
-      >
+      <Flex direction='row' justify='flex-start' align='center' p={3} mt={5}>
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
           Yeeter accepts increments of{' '}
