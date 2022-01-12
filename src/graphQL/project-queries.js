@@ -73,7 +73,6 @@ export const MEMBERSHIPS_QUERY = gql`
       }
       tokenBalances {
         token
-        molochAddress
         tokenBalance
       }
     }
