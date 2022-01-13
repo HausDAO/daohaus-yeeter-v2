@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Flex } from '@chakra-ui/layout';
+import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Progress } from '@chakra-ui/react';
 
 import YeetCountdown from './yeetCountdown';
@@ -25,6 +25,9 @@ const ProjectFundingStatus = ({ project }) => {
       <Flex justify='space-between' w='100%' mb={3}>
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
+            <Text fontSize='xs' color='gray.500'>
+              Raised{' '}
+            </Text>
             {project.displayBalance}{' '}
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
