@@ -38,7 +38,7 @@ export const yeetNotice = (project, contributions) => {
           {supportedChains[project.networkID].name}
         </Box>
         <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
-          Contribute in increments of{' '}
+          Loot is issued in increments of 100. Contribute in increments of{' '}
           {displayBalance(
             project.yeeter.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
