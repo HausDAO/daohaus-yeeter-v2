@@ -31,6 +31,7 @@ const RefreshButton = () => {
       size='sm'
       variant='outline'
       onClick={handleRefetch}
+      ml={3}
     />
   );
 };
