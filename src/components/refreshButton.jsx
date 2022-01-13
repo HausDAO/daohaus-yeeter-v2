@@ -22,7 +22,7 @@ const RefreshButton = () => {
   // }
 
   if (fetching) {
-    return <Spinner color='secondary.500' />;
+    return <Spinner ml={3} color='secondary.500' />;
   }
   return (
     <IconButton
