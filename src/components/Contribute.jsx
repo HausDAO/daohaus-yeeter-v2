@@ -130,7 +130,7 @@ const Contribute = ({ project, contributions }) => {
       <Flex direction='row' justify='flex-start' align='center' p={3} mt={5}>
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
-          Yeeter accepts increments of{' '}
+          Loot is issued in increments of 100 with increments of{' '}
           {displayBalance(
             project.yeeter.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
