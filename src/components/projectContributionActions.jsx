@@ -1,73 +1,13 @@
 import React, { useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Button, Icon } from '@chakra-ui/react';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { Button } from '@chakra-ui/react';
 
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import { useAppModal } from '../hooks/useModals';
-import CopyButton from './copyButton';
-import { maxContribution, yeetStatus } from '../utils/projects';
-import { supportedChains } from '../utils/chain';
-import { truncateAddr } from '../utils/general';
-import EtherscanLink from './etherscanLink';
-import { displayBalance } from '../utils/tokenValue';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
 import Contribute from './Contribute';
-
-export const yeetNotice = (project, contributions) => {
-  return (
-    <>
-      <Flex
-        fontSize='lg'
-        fontFamily='mono'
-        align='center'
-        mb={3}
-        justify='center'
-      >
-        <Text ml={3} mt={1}>
-          {truncateAddr(project.yeeter.shamanAddress)}
-        </Text>
-        <CopyButton text={project.yeeter.shamanAddress} />
-        <Box>
-          <EtherscanLink address={project.yeeter.shamanAddress} />
-        </Box>
-      </Flex>
-      <Flex direction='column' justify='space-between' wrap='wrap'>
-        <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
-          {supportedChains[project.networkID].name}
-        </Box>
-        <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
-          Loot is issued in increments of 100. Contribute in increments of{' '}
-          {displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
-            project.yeeterTokenDecimals,
-          )}{' '}
-          {supportedChains[project.networkID].nativeCurrency}{' '}
-        </Box>
-        <Box fontSize='xs' textTransform='uppercase' color='gray.400'>
-          Max{' '}
-          {displayBalance(
-            maxContribution(project),
-            project.yeeterTokenDecimals,
-          )}{' '}
-          {supportedChains[project.networkID].nativeCurrency}
-        </Box>
-      </Flex>
-      {Number(contributions.total) >= maxContribution(project) && (
-        <Flex
-          direction='row'
-          justify='flex-start'
-          align='center'
-          color='red.600'
-        >
-          <Icon as={AiOutlineExclamationCircle} mr={3} />
-          <Box mt={2}>You’ve reached your individual contribution cap!</Box>
-        </Flex>
-      )}
-    </>
-  );
-};
+import { yeetStatus } from '../utils/projects';
 
 const fundedNotice = project => {
   return (
@@ -134,12 +74,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
   return (
     <Box direction='column'>
       {projectStatus === 'active' && (
-        <ProjectDetailsNotice
-          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
-          borderOverride
-          toolLabel='What to know!'
-          toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
-        >
+        <ProjectDetailsNotice borderOverride>
           <Flex fontSize='lg' align='center' mb={3} justify='center'>
             <Button w='100%' fontWeight='700' onClick={openContribute}>
               Contribute!
@@ -147,15 +82,6 @@ const ProjectContributionActions = ({ project, contributions }) => {
           </Flex>
         </ProjectDetailsNotice>
       )}
-      {/* {projectStatus === 'active' && (
-        <ProjectDetailsNotice
-          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
-          toolLabel='What to know!'
-          toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
-        >
-          {yeetNotice(project, contributions)}
-        </ProjectDetailsNotice>
-      )} */}
       {projectStatus === 'failed' && (
         <ProjectDetailsNotice
           title="What's Next"
