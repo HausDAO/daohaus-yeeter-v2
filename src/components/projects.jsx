@@ -9,6 +9,7 @@ import { exampleCrossChainQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { getApiMetadata } from '../utils/metadata';
 import { EXAMPLE_MEMBERSHIPS } from '../graphQL/example-queries';
+import Loading from './loading';
 
 const numOfSupportedChains = Object.keys(supportedChains).length;
 

@@ -39,6 +39,18 @@ const Contribute = ({ project, contributions }) => {
         toolLabel='What to know!'
         toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
       >
+        <Flex
+          direction='column'
+          justify='center'
+          wrap='wrap'
+          align='center'
+          mb={3}
+        >
+          {!chainMatch && <WrongNetworkToolTip />}
+          <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
+            On {supportedChains[project.networkID].name}
+          </Box>
+        </Flex>
         <Text color='secondary.500' fontSize='sm' textAlign='center'>
           From your Wallet, send{' '}
           {supportedChains[project.networkID].nativeCurrency} to the following
@@ -60,18 +72,7 @@ const Contribute = ({ project, contributions }) => {
             <EtherscanLink address={project.yeeter.shamanAddress} />
           </Box>
         </Flex>
-        <Flex
-          direction='row'
-          justify='space-between'
-          wrap='wrap'
-          align='center'
-        >
-          <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
-            {supportedChains[project.networkID].name}
-          </Box>
 
-          {!chainMatch && <WrongNetworkToolTip />}
-        </Flex>
         {Number(contributions.total) >= maxContribution(project) && (
           <Flex
             direction='row'
@@ -130,7 +131,7 @@ const Contribute = ({ project, contributions }) => {
       <Flex direction='row' justify='flex-start' align='center' p={3} mt={5}>
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
-          Loot is issued in increments of 100 with increments of{' '}
+          Loot is issued in increments of 100 and accepts multiples of{' '}
           {displayBalance(
             project.yeeter.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
