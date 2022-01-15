@@ -1,13 +1,13 @@
 import React, { useContext, createContext, useEffect, useState } from 'react';
 
-import { useInjectedProvider } from './InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import { useOverlay } from './OverlayContext';
 import { createPoll } from '../utils/pollService';
 
 export const TxPollContext = createContext();
 
 export const TxPollContextProvider = ({ children }) => {
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
   const { successToast, errorToast } = useOverlay();
 
   const [outstandingTXs, setOutstandingTXs] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useEffect, useRef } from 'react';
 
-import { useInjectedProvider } from './InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import { useSessionStorage } from '../hooks/useSessionStorage';
 import { membershipsChainQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
@@ -10,7 +10,7 @@ const numOfSupportedChains = Object.keys(supportedChains).length;
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
 
   const [userMemberships, setMemberships] = useSessionStorage(
     'userMemberships',

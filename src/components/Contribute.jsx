@@ -3,6 +3,7 @@ import { Box, Divider, Flex, Text } from '@chakra-ui/layout';
 import { Icon, Button } from '@chakra-ui/react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useParams } from 'react-router';
+import { useWallet } from '@raidguild/quiver';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import { supportedChains } from '../utils/chain';
 
@@ -14,18 +15,17 @@ import {
 import CopyButton from './copyButton';
 import EtherscanLink from './etherscanLink';
 import { displayBalance } from '../utils/tokenValue';
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
 import { useAppModal } from '../hooks/useModals';
 import { useDao } from '../contexts/DaoContext';
 
 const Contribute = ({ project, contributions }) => {
   const { daochain } = useParams();
-  const { injectedChain } = useInjectedProvider();
+  const { chainId } = useWallet();
   const { closeModal } = useAppModal();
   const { refetch } = useDao();
 
-  const chainMatch = daochain === injectedChain.chainId;
+  const chainMatch = Number(daochain) === chainId;
 
   const handleDone = () => {
     refetch();

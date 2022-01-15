@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/react';
 
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import { useAppModal } from '../hooks/useModals';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
@@ -52,7 +52,7 @@ const failedNotice = (project, address) => {
 };
 
 const ProjectContributionActions = ({ project, contributions }) => {
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
   const { genericModal } = useAppModal();
   const projectStatus = useMemo(() => {
     if (project) {

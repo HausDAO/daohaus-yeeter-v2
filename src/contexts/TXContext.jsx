@@ -1,8 +1,8 @@
 import React, { useContext, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useWallet } from '@raidguild/quiver';
 import { useDao } from './DaoContext';
-import { useInjectedProvider } from './InjectedProviderContext';
 import { useOverlay } from './OverlayContext';
 import { useTxPoll } from './TxPollContext';
 import {
@@ -22,7 +22,7 @@ import { handleChecklist } from '../utils/appChecks';
 export const TXContext = createContext();
 
 export const TXProvider = ({ children }) => {
-  const { injectedProvider, address, injectedChain } = useInjectedProvider();
+  const { provider, address, chainId } = useWallet();
   const { resolvePoll, cachePoll } = useTxPoll();
   const {
     hasPerformedBatchQuery,
@@ -135,7 +135,7 @@ export const TXProvider = ({ children }) => {
     const consolidatedData = {
       ...data,
       contextData,
-      injectedProvider,
+      injectedProvider: provider,
       now,
     };
     const onTxHash = createActions({
@@ -190,7 +190,9 @@ export const TXProvider = ({ children }) => {
 
     //  Searches for items within the data tree and adds them to {values}
     if (data?.tx?.exposeValues) {
-      return createTX(exposeValues({ ...data, contextData, injectedProvider }));
+      return createTX(
+        exposeValues({ ...data, contextData, injectedProvider: provider }),
+      );
     }
     return createTX(data);
   };
@@ -200,19 +202,27 @@ export const TXProvider = ({ children }) => {
   };
 
   const submitCallback = formState => {
-    return formState.onSubmit({ ...formState, contextData, injectedProvider });
+    return formState.onSubmit({
+      ...formState,
+      contextData,
+      injectedProvider: provider,
+    });
   };
 
   const hydrateString = data =>
     createHydratedString({
       ...data,
       contextData,
-      injectedProvider,
+      injectedProvider: provider,
     });
 
   const checkState = (checklist, errorDeliveryType) =>
     handleChecklist(
-      { ...contextData, injectedProvider, injectedChain },
+      {
+        ...contextData,
+        injectedProvider: provider,
+        injectedChain: `0x${chainId.toString()}`,
+      },
       checklist,
       errorDeliveryType,
     );

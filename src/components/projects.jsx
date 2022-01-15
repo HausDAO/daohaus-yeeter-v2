@@ -3,7 +3,7 @@ import { Box, List, ListIcon, ListItem, Text } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 import { MdCheckCircle } from 'react-icons/md';
 
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import { exampleCrossChainQuery } from '../utils/theGraph';
 
 import { supportedChains } from '../utils/chain';
@@ -14,7 +14,7 @@ import Loading from './loading';
 const numOfSupportedChains = Object.keys(supportedChains).length;
 
 const Projects = () => {
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
   const [userDaosExample, setUserDaosExample] = useState([]);
 
   useEffect(() => {

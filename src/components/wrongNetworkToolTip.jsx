@@ -3,13 +3,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Button, Flex, Tooltip } from '@chakra-ui/react';
 
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import useCanInteract from '../hooks/useCanInteract';
 import { capitalize } from '../utils/general';
 import { chainByID, EIP3085, MM_ADDCHAIN_DATA } from '../utils/chain';
 
 const WrongNetworkToolTip = () => {
-  const { address, injectedProvider } = useInjectedProvider();
+  const { address, provider } = useWallet();
   const { canInteract } = useCanInteract({
     checklist: ['isConnected', 'isSameChain'],
   });
@@ -35,7 +35,7 @@ const WrongNetworkToolTip = () => {
     return null;
   }
 
-  if (canInteract || !injectedProvider?.currentProvider?.isMetaMask) {
+  if (canInteract || !provider?.currentProvider?.isMetaMask) {
     return <NetworkTextBox name={daoChainName} />;
   }
 

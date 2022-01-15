@@ -4,8 +4,8 @@ import { BsCheckCircle } from 'react-icons/bs';
 import { Flex, Spinner } from '@chakra-ui/react';
 import Icon from '@chakra-ui/icon';
 
+import { useWallet } from '@raidguild/quiver';
 import { useCustomTheme } from '../contexts/CustomThemeContext';
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import ExplorerLink from './explorerLink';
 import TextBox from './textBox';
 
@@ -35,7 +35,7 @@ const ProgressIndicator = ({
   description,
 }) => {
   const { theme } = useCustomTheme();
-  const { injectedChain } = useInjectedProvider();
+  const { chainId } = useWallet();
 
   const currentUI = states?.[currentState];
   const msgText =
@@ -64,9 +64,9 @@ const ProgressIndicator = ({
             {currentUI.titleSm}
           </TextBox>
         )}
-        {currentUI?.explorerLink && injectedChain && txHash && (
+        {currentUI?.explorerLink && chainId && txHash && (
           <ExplorerLink
-            chainID={injectedChain?.id}
+            chainID={`0x${chainId.toString()}`}
             isIconLink
             type='tx'
             hash={txHash}
