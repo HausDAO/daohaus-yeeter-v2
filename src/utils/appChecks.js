@@ -6,8 +6,8 @@ const appCheckFns = Object.freeze({
       ? true
       : 'Not connected to DAOhaus.app. Please check your wallet provider.';
   },
-  isSameChain({ injectedChain, daochain }) {
-    return injectedChain?.chainId === daochain
+  isSameChain({ chainId, daochain }) {
+    return chainId === daochain
       ? true
       : 'Your wallet is not connected to same network as the DAO.';
   },
