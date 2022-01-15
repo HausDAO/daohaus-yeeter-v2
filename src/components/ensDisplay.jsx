@@ -14,7 +14,8 @@ const EnsDisplay = ({ address, noLink }) => {
 
   const getEns = async memberAddress => {
     const ensResult = await handleGetENS(memberAddress);
-    if (ensResult) {
+    if (ensResult && parseInt(ensResult) !== 0) {
+      console.log(ensResult, parseInt(ensResult));
       return { name: ensResult };
     }
 
