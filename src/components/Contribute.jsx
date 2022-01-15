@@ -25,7 +25,7 @@ const Contribute = ({ project, contributions }) => {
   const { closeModal } = useAppModal();
   const { refetch } = useDao();
 
-  const chainMatch = Number(daochain) === chainId;
+  const chainMatch = daochain === chainId;
 
   const handleDone = () => {
     refetch();

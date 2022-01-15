@@ -221,7 +221,7 @@ export const TXProvider = ({ children }) => {
       {
         ...contextData,
         injectedProvider: provider,
-        injectedChain: `0x${chainId.toString()}`,
+        injectedChain: chainId,
       },
       checklist,
       errorDeliveryType,

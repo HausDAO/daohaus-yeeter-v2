@@ -65,12 +65,7 @@ const ProgressIndicator = ({
           </TextBox>
         )}
         {currentUI?.explorerLink && chainId && txHash && (
-          <ExplorerLink
-            chainID={`0x${chainId.toString()}`}
-            isIconLink
-            type='tx'
-            hash={txHash}
-          />
+          <ExplorerLink chainID={chainId} isIconLink type='tx' hash={txHash} />
         )}
       </Flex>
       {msgText && (

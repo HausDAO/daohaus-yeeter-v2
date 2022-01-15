@@ -14,17 +14,17 @@ window.onunload = () => {
 };
 
 const SUPPORTED_NETWORKS = {
-  4: {
-    chainId: 4,
+  '0x4': {
+    chainId: '0x4',
     name: 'Ethereum Rinkeby',
     symbol: 'ETH',
     explorer: 'https://rinkeby.etherscan.io/',
     rpc: `https://${process.env.REACT_APP_RPC_URI}.rinkeby.rpc.rivet.cloud`,
   },
-  100: {
+  '0x64': {
     name: 'Gnosis Chain',
     symbol: 'xDai',
-    chainId: 100,
+    chainId: '0x64',
     rpc: 'https://dai.poa.network',
     explorer: 'https://blockscout.com/xdai/mainnet/',
   },
@@ -43,13 +43,11 @@ ReactDOM.render(
         <WalletProvider
           web3modalOptions={web3modalOptions}
           networks={SUPPORTED_NETWORKS}
-          defaultNetwork={100}
+          defaultChainId='0x64'
           handleModalEvents={(eventName, error) => {
             if (error) {
               console.log(error.message);
             }
-
-            console.log(eventName);
           }}
         >
           <App />
