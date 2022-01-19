@@ -6,11 +6,7 @@ import { useParams } from 'react-router';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import { supportedChains } from '../utils/chain';
 
-import {
-  lootFromContribution,
-  LOOT_PER_UNIT,
-  maxContribution,
-} from '../utils/projects';
+import { maxContribution } from '../utils/projects';
 import CopyButton from './copyButton';
 import EtherscanLink from './etherscanLink';
 import { displayBalance } from '../utils/tokenValue';
@@ -18,6 +14,7 @@ import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
 import { useAppModal } from '../hooks/useModals';
 import { useDao } from '../contexts/DaoContext';
+import ContributionExample from './contributionExample';
 
 const Contribute = ({ project, contributions }) => {
   const { daochain } = useParams();
@@ -25,7 +22,7 @@ const Contribute = ({ project, contributions }) => {
   const { closeModal } = useAppModal();
   const { refetch } = useDao();
 
-  const chainMatch = daochain === injectedChain.chainId;
+  const chainMatch = daochain === injectedChain?.chainId;
 
   const handleDone = () => {
     refetch();
@@ -85,49 +82,8 @@ const Contribute = ({ project, contributions }) => {
           </Flex>
         )}
       </ProjectDetailsNotice>
-
       <Divider my={7} />
-
-      <Flex
-        wrap='wrap'
-        justify='space-between'
-        textTransform='uppercase'
-        fontSize='sm'
-        mt={5}
-      >
-        <Box>
-          <Box mb={3}>If you contribute</Box>
-          <Box mb={3}>
-            {displayBalance(
-              project.yeeter.yeeterConfig.pricePerUnit,
-              project.yeeterTokenDecimals,
-              2,
-            )}{' '}
-            {supportedChains[project.networkID].nativeCurrency} (min)
-          </Box>
-          <Box>
-            {displayBalance(
-              maxContribution(project),
-              project.yeeterTokenDecimals,
-              2,
-            )}{' '}
-            {supportedChains[project.networkID].nativeCurrency} (max)
-          </Box>
-        </Box>
-        <Box>
-          <Box mb={3}>You receive</Box>
-          <Box mb={3}>{LOOT_PER_UNIT} Loot</Box>
-          <Box>
-            {lootFromContribution(maxContribution(project), project)} Loot
-          </Box>
-        </Box>
-        <Box>
-          {/* <Box mt={7} mb={3}>
-            Tier 1 NFT
-          </Box>
-          <Box mb={3}>Tier 2 NFT</Box> */}
-        </Box>
-      </Flex>
+      <ContributionExample project={project} />
       <Flex direction='row' justify='flex-start' align='center' p={3} mt={5}>
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
@@ -140,7 +96,6 @@ const Contribute = ({ project, contributions }) => {
           {supportedChains[project.networkID].nativeCurrency}
         </Box>
       </Flex>
-
       <Flex justify='flex-end' mt={5}>
         <Button variant='outline' onClick={closeModal}>
           Nevermind

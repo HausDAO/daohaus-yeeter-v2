@@ -7,6 +7,7 @@ import { useAppModal } from '../hooks/useModals';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
 import Contribute from './Contribute';
+import ContributionExample from './contributionExample';
 import { yeetStatus } from '../utils/projects';
 
 const fundedNotice = project => {
@@ -80,6 +81,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
               Contribute!
             </Button>
           </Flex>
+          <ContributionExample project={project} fontSize='xs' />
         </ProjectDetailsNotice>
       )}
       {projectStatus === 'failed' && (

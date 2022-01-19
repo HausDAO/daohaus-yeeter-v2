@@ -55,14 +55,6 @@ const ProjectOverview = ({ project, longDescription }) => {
             <Text> {project?.meta?.description}</Text>
             {project?.meta?.longDescription && (
               <>
-                <Text
-                  onClick={() => setShowDetails(!showDetails)}
-                  _hover={{ cursor: 'pointer' }}
-                  color='secondary.500'
-                  fontSize='sm'
-                >
-                  Show {!showDetails ? `More` : `Less`}
-                </Text>
                 {showDetails && (
                   <>
                     <ReactMarkdown
@@ -74,6 +66,14 @@ const ProjectOverview = ({ project, longDescription }) => {
                     </ReactMarkdown>
                   </>
                 )}
+                <Text
+                  onClick={() => setShowDetails(!showDetails)}
+                  _hover={{ cursor: 'pointer' }}
+                  color='secondary.500'
+                  fontSize='sm'
+                >
+                  Show {!showDetails ? `More` : `Less`}
+                </Text>
               </>
             )}
           </>
@@ -81,7 +81,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           <Text>{project?.meta?.description}</Text>
         )}
       </Box>
-      <Flex alignItems='center'>
+      <Flex alignItems='center' wrap='wrap'>
         {project?.meta?.links?.twitter && (
           <Link
             href={fixSocialLink('twitter', project.meta.links.twitter)}
