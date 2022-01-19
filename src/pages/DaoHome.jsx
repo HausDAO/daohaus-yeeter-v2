@@ -88,7 +88,7 @@ const DaoHome = () => {
                   />
                 )}
                 {currentProject?.yeeter?.yeets.length === 0 && (
-                  <Box>No Yeets Yet</Box>
+                  <Box>Awaiting Yeets</Box>
                 )}
               </Box>
             </Box>
