@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
-import { Spinner } from '@chakra-ui/spinner';
 import { useDao } from '../contexts/DaoContext';
 import CoreTeamList from '../components/coreTeamList';
 import LeaderBoardList from '../components/leaderBoardList';
@@ -13,6 +12,7 @@ import { useUser } from '../contexts/UserContext';
 import { userContributionData } from '../utils/projects';
 import useInterval from '../hooks/useInterval';
 import ProjectProposals from '../components/projectProposals';
+import Loading from '../components/loading';
 
 const DaoHome = () => {
   const { currentProject, refetch } = useDao();
@@ -38,7 +38,7 @@ const DaoHome = () => {
 
   return (
     <Box p={10}>
-      {!currentProject && <Spinner />}
+      {!currentProject && <Loading />}
       {currentProject && (
         <>
           <Flex wrap='wrap' justify='space-between' mb={10}>

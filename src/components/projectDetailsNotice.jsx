@@ -16,19 +16,21 @@ const ProjectDetailsNotice = ({
       <Flex justify='space-between' align='center' mb={2} fontSize='xs'>
         <Text textTransform='uppercase'>{title}</Text>
 
-        <Tooltip
-          hasArrow
-          shouldWrapChildren
-          padding={3}
-          color='#ED963A'
-          placement='bottom'
-          label={toolContent}
-        >
-          <Flex alignItems='center' color='#ED963A'>
-            <Icon mr={1} mt='2px' as={AiOutlineQuestionCircle} />
-            {toolLabel}
-          </Flex>
-        </Tooltip>
+        {toolContent && (
+          <Tooltip
+            hasArrow
+            shouldWrapChildren
+            padding={3}
+            color='#ED963A'
+            placement='bottom'
+            label={toolContent}
+          >
+            <Flex alignItems='center' color='#ED963A'>
+              <Icon mr={1} mt='2px' as={AiOutlineQuestionCircle} />
+              {toolLabel}
+            </Flex>
+          </Tooltip>
+        )}
       </Flex>
       <Flex
         direction='column'

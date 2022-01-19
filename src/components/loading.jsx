@@ -1,10 +1,11 @@
 import React from 'react';
-import { Flex, Box, Spinner, Stack } from '@chakra-ui/react';
+import { Flex, Box, Stack, Image } from '@chakra-ui/react';
 
 import TextBox from './textBox';
+import yeetSpinner from '../assets/img/y33t_logo_loading.svg';
 
 const Loading = ({ message }) => (
-  <Flex w='100%' justify='center' mt='15%'>
+  <Flex w='100%' justify='center' mt='12%'>
     <Stack spacing='20%' align='center'>
       {message && (
         <>
@@ -21,7 +22,7 @@ const Loading = ({ message }) => (
           </Box>
         </>
       )}
-      <Spinner size='xl' color='secondary.400' />
+      <Image src={yeetSpinner} w='500px' h='500px' />
     </Stack>
   </Flex>
 );
