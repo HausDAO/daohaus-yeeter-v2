@@ -14,6 +14,7 @@ import { displayBalance } from '../utils/tokenValue';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
 import Contribute from './Contribute';
+import ContributionExample from './contributionExample';
 
 export const yeetNotice = (project, contributions) => {
   return (
@@ -135,7 +136,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
     <Box direction='column'>
       {projectStatus === 'active' && (
         <ProjectDetailsNotice
-          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
+          title={`Yeet ${supportedChains[project.networkID].nativeCurrency}`}
           borderOverride
           toolLabel='What to know!'
           toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
@@ -145,17 +146,9 @@ const ProjectContributionActions = ({ project, contributions }) => {
               Contribute!
             </Button>
           </Flex>
+          <ContributionExample project={project} fontSize='xs' />
         </ProjectDetailsNotice>
       )}
-      {/* {projectStatus === 'active' && (
-        <ProjectDetailsNotice
-          title={`Yeet ${supportedChains[project.networkID].nativeCurrency} to`}
-          toolLabel='What to know!'
-          toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
-        >
-          {yeetNotice(project, contributions)}
-        </ProjectDetailsNotice>
-      )} */}
       {projectStatus === 'failed' && (
         <ProjectDetailsNotice
           title="What's Next"
