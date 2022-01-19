@@ -28,7 +28,7 @@ const ProjectFundingStatus = ({ project }) => {
             <Text fontSize='xs' color='gray.500'>
               Raised{' '}
             </Text>
-            {project.displayBalance}{' '}
+            {project.displayBalance || '0'}{' '}
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           <Box fontSize='xs' color='gray.500'>
