@@ -13,10 +13,19 @@ import { supportedChains } from '../utils/chain';
 import { lootFromContribution, maxContribution } from '../utils/projects';
 
 const ContributionExample = ({ project, fontSize = 'sm' }) => {
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(null);
 
   const sliderConfig = useMemo(() => {
     if (project) {
+      setSliderValue(
+        Number(
+          displayBalance(
+            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterTokenDecimals,
+            2,
+          ),
+        ),
+      );
       return {
         min: Number(
           displayBalance(
@@ -58,7 +67,7 @@ const ContributionExample = ({ project, fontSize = 'sm' }) => {
         </Box>
       </Box>
 
-      {sliderConfig && (
+      {sliderConfig && sliderValue && (
         <Slider
           defaultValue={sliderConfig.min}
           min={sliderConfig.min}
