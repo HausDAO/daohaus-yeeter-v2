@@ -84,7 +84,7 @@ const Contribute = ({ project, contributions }) => {
       </ProjectDetailsNotice>
       <Divider my={7} />
       <ContributionExample project={project} />
-      <Flex direction='row' justify='flex-start' align='center' p={3} mt={5}>
+      <Flex direction='row' justify='flex-start' align='center' p={3} mt={10}>
         <Icon as={AiOutlineExclamationCircle} mr={3} />
         <Box>
           Loot is issued in increments of 100 and accepts multiples of{' '}
