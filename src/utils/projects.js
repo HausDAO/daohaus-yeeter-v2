@@ -11,7 +11,7 @@ export const lootFromContribution = (contributionTotal, project) => {
   return (
     (contributionTotal / project.yeeter.yeeterConfig.pricePerUnit) *
     LOOT_PER_UNIT
-  );
+  ).toFixed(0);
 };
 
 export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
