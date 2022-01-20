@@ -23,7 +23,7 @@ import CopyButton from './copyButton';
 import { yeetStatus } from '../utils/projects';
 
 const ProjectOverview = ({ project, longDescription }) => {
-  const { daoid } = useParams();
+  const { daoid, daochain } = useParams();
   const [showDetails, setShowDetails] = useState(false);
 
   const status = yeetStatus(project);
@@ -160,7 +160,7 @@ const ProjectOverview = ({ project, longDescription }) => {
         <Flex mt={2} fontSize='sm'>
           Get Share Link{' '}
           <CopyButton
-            text={`https://${window.location.host}/dao/0x4/${project.id}/yeet`}
+            text={`https://${window.location.host}/dao/${daochain}/${project.id}/yeet`}
             iconProps={{ height: '15px', width: '15px' }}
             customMessage='URL Copied to clipboard'
           />

@@ -6,14 +6,8 @@ import { Spinner } from '@chakra-ui/spinner';
 import { useDao } from '../contexts/DaoContext';
 import CopyButton from '../components/copyButton';
 import { supportedChains } from '../utils/chain';
-import { displayBalance } from '../utils/tokenValue';
-import {
-  lootFromContribution,
-  LOOT_PER_UNIT,
-  maxContribution,
-  yeetingTime,
-  yeetStatus,
-} from '../utils/projects';
+import { yeetingTime, yeetStatus } from '../utils/projects';
+import ContributionExample from '../components/contributionExample';
 
 const UpcomingBlock = ({ project }) => {
   const timeContent = yeetingTime(project);
@@ -62,6 +56,8 @@ const ExpiredBlock = ({ project }) => {
 
 const Yeet = () => {
   const { currentProject } = useDao();
+
+  console.log('currentProject', currentProject);
 
   const status = useMemo(() => {
     if (currentProject) {
@@ -120,42 +116,10 @@ const Yeet = () => {
             justify='center'
             textTransform='uppercase'
             fontSize='sm'
-            my={5}
+            mt={5}
+            mb={10}
           >
-            <Box>
-              <Box mb={2} mr={10} fontWeight='700'>
-                If you yeet
-              </Box>
-              <Box mb={2}>
-                {displayBalance(
-                  currentProject.yeeter.yeeterConfig.pricePerUnit,
-                  currentProject.yeeterTokenDecimals,
-                  2,
-                )}{' '}
-                {supportedChains[currentProject.networkID].nativeCurrency} (min)
-              </Box>
-              <Box>
-                {displayBalance(
-                  maxContribution(currentProject),
-                  currentProject.yeeterTokenDecimals,
-                  2,
-                )}{' '}
-                {supportedChains[currentProject.networkID].nativeCurrency} (max)
-              </Box>
-            </Box>
-            <Box>
-              <Box mb={2} fontWeight='700'>
-                You receive
-              </Box>
-              <Box mb={2}>{LOOT_PER_UNIT} Loot</Box>
-              <Box>
-                {lootFromContribution(
-                  maxContribution(currentProject),
-                  currentProject,
-                )}{' '}
-                Loot
-              </Box>
-            </Box>
+            <ContributionExample project={currentProject} boxWidth='60%' />
           </Flex>
           <Text textAlign='center' fontSize='lg'>
             <RouterLink

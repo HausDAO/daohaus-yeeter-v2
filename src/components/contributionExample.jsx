@@ -12,7 +12,11 @@ import { displayBalance } from '../utils/tokenValue';
 import { supportedChains } from '../utils/chain';
 import { lootFromContribution, maxContribution } from '../utils/projects';
 
-const ContributionExample = ({ project, fontSize = 'sm' }) => {
+const ContributionExample = ({
+  project,
+  fontSize = 'sm',
+  boxWidth = '100%',
+}) => {
   const [sliderValue, setSliderValue] = useState(null);
 
   const sliderConfig = useMemo(() => {
@@ -53,6 +57,7 @@ const ContributionExample = ({ project, fontSize = 'sm' }) => {
       textTransform='uppercase'
       fontSize={fontSize}
       mt={5}
+      width={boxWidth}
     >
       <Box>
         <Box mb={3}>If you contribute</Box>
