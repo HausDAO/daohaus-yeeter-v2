@@ -101,7 +101,7 @@ const Contribute = ({ project, contributions }) => {
           Nevermind
         </Button>
         <Button ml={5} onClick={handleDone}>
-          Done!
+          Funds Sent!
         </Button>
       </Flex>
     </>
