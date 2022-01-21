@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 
-import { Spinner } from '@chakra-ui/spinner';
 import { useDao } from '../contexts/DaoContext';
 import CopyButton from '../components/copyButton';
 import { supportedChains } from '../utils/chain';
 import { yeetingTime, yeetStatus } from '../utils/projects';
 import ContributionExample from '../components/contributionExample';
+import Loading from '../components/loading';
 
 const UpcomingBlock = ({ project }) => {
   const timeContent = yeetingTime(project);
@@ -57,8 +57,6 @@ const ExpiredBlock = ({ project }) => {
 const Yeet = () => {
   const { currentProject } = useDao();
 
-  console.log('currentProject', currentProject);
-
   const status = useMemo(() => {
     if (currentProject) {
       return yeetStatus(currentProject);
@@ -68,7 +66,7 @@ const Yeet = () => {
 
   return (
     <Box p={10}>
-      {!currentProject && <Spinner />}
+      {!currentProject && <Loading />}
       {currentProject && status === 'upcoming' && (
         <UpcomingBlock project={currentProject} />
       )}

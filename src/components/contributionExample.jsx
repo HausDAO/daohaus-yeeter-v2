@@ -100,9 +100,9 @@ const ContributionExample = ({
           >
             Max {sliderConfig.max}
           </SliderMark>
-          <SliderTrack bg='secondary.500'>
+          <SliderTrack bg='primary.300'>
             <Box position='relative' right={10} />
-            <SliderFilledTrack bg='primary.400' />
+            <SliderFilledTrack bg='secondary.400' />
           </SliderTrack>
           <SliderThumb boxSize={4} />
         </Slider>
