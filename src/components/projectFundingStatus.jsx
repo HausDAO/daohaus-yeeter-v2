@@ -32,7 +32,7 @@ const ProjectFundingStatus = ({ project }) => {
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           <Box fontSize='xs' color='gray.500'>
-            With a goal of{' '}
+            With a max goal of{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -70,7 +70,7 @@ const ProjectFundingStatus = ({ project }) => {
       )}
       {yeetPeriodStatus === 'failed' && (
         <Box mb={3} fontFamily='mono' fontSize='xl'>
-          🤷 Funding Goal not Met
+          ⏰ Funding Period Over
         </Box>
       )}
 
