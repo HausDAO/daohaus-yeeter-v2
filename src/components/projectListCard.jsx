@@ -6,7 +6,12 @@ import ProjectFundingStatus from './projectFundingStatus';
 
 const ProjectListCard = ({ project }) => {
   return (
-    <Flex p={10} backgroundColor='primary.500' wrap='wrap'>
+    <Flex
+      p={{ base: 6, md: 10 }}
+      backgroundColor='primary.500'
+      wrap='wrap'
+      borderRadius='17px'
+    >
       <Flex direction='column' w={['100%', null, null, '65%', '65%']}>
         <ProjectOverview project={project} />
       </Flex>

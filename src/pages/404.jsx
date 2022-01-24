@@ -28,6 +28,7 @@ const FourOhFour = () => {
         </Box>
 
         <Button
+          mt={4}
           as={Link}
           to='/'
           textTransform='uppercase'

@@ -11,7 +11,7 @@ const Layout = ({ children, isDao }) => {
   const { theme } = useCustomTheme();
 
   return (
-    <Flex direction='column' minH='100vh' w='100vw'>
+    <Flex direction='column' minH='100vh' w='100vw' overflowX='hidden'>
       <Navigation isDao={isDao} />
 
       <Box

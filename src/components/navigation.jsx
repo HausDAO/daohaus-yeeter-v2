@@ -67,7 +67,7 @@ const Navigation = ({ isDao }) => {
 
   return (
     <Box>
-      <Flex bg='primary.500' minH='80px' p={5} align='center'>
+      <Flex bg='primary.500' minH='80px' p={5} align='center' width='100%'>
         <Flex
           flex={{ base: 1, md: 'auto' }}
           ml={{ base: -2 }}
@@ -84,6 +84,8 @@ const Navigation = ({ isDao }) => {
             }
             variant='ghost'
             aria-label='Toggle Navigation'
+            color='secondary.400'
+            size='lg'
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>

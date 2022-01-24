@@ -13,7 +13,13 @@ const ProjectDetailsNotice = ({
 }) => {
   return (
     <Box>
-      <Flex justify='space-between' align='center' mb={2} fontSize='xs'>
+      <Flex
+        justify='space-between'
+        align='center'
+        mt={{ base: 2, md: 0 }}
+        mb={2}
+        fontSize='xs'
+      >
         <Text textTransform='uppercase'>{title}</Text>
 
         {toolContent && (

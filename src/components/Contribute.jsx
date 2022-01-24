@@ -58,9 +58,10 @@ const Contribute = ({ project, contributions }) => {
           fontFamily='mono'
           align='center'
           mb={3}
+          px={{ base: 8, md: 0 }}
           justify='center'
         >
-          <Text fontSize='sm' ml={3} my={5}>
+          <Text fontSize='sm' ml={3} my={5} maxWidth={{ base: '100%' }}>
             {/* {truncateAddr(project.yeeter.shamanAddress)} */}
             {project.yeeter.shamanAddress}
           </Text>

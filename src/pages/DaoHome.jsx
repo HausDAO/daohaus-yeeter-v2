@@ -37,7 +37,7 @@ const DaoHome = () => {
   }, 30000);
 
   return (
-    <Box p={10}>
+    <Box p={{ base: 6, md: 10 }}>
       {!currentProject && <Loading />}
       {currentProject && (
         <>
@@ -45,7 +45,8 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
-              p={10}
+              p={{ base: 6, md: 10 }}
+              borderRadius='17px'
             >
               <Box mb={10}>
                 <ProjectOverview project={currentProject} longDescription />

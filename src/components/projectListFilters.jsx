@@ -99,7 +99,9 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
 
   return (
     <Flex alignContent='space-between' align='center' wrap='wrap'>
-      <Text mr={5}>{listProjects.length} Projects</Text>
+      <Text mb={{ base: 5, md: 0 }} mr={5}>
+        {listProjects.length} Projects
+      </Text>
       <Input
         type='search'
         className='input'
@@ -108,7 +110,7 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
         mr={5}
         onChange={debouncedHandleChange}
       />
-      <Box mr={5}>
+      <Box mt={{ base: 5, md: 0 }} mr={5}>
         {/* <ListSort sort={sort} setSort={setSort} options={sortOptions} /> */}
         <ListFilter
           filter={statusFilter}
@@ -117,12 +119,14 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
           labelText='Status'
         />
       </Box>
-      <ListFilter
-        filter={filter}
-        setFilter={setFilter}
-        options={filterOptions}
-        labelText='Network'
-      />
+      <Box mt={{ base: 5, md: 0 }} mr={5}>
+        <ListFilter
+          filter={filter}
+          setFilter={setFilter}
+          options={filterOptions}
+          labelText='Network'
+        />
+      </Box>
     </Flex>
   );
 };

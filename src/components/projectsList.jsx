@@ -25,7 +25,7 @@ const ProjectsList = () => {
         <Loading />
       ) : (
         <>
-          <Text fontSize='2xl' mb={3}>
+          <Text fontSize='2xl' mb={{ base: 8, md: 3 }}>
             All Projects
           </Text>
           <Box mb={5}>
