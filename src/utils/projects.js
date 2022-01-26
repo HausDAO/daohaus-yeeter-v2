@@ -121,6 +121,13 @@ export const yeetStatus = project => {
   }
 };
 
+export const softCapTag = project => {
+  const sctag = project.meta.tags.filter(tag => {
+    return tag.indexOf('sc:') !== -1;
+  });
+  return sctag.length ? sctag[0].split(':')[1] || null : null;
+};
+
 export const yeetingTime = project => {
   const status = yeetStatus(project);
   const timeTarget =
