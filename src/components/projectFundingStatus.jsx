@@ -67,7 +67,7 @@ const ProjectFundingStatus = ({ project }) => {
         <Flex fontFamily='mono' direction='column' alignItems='center'>
           <Box fontSize='2xl'>{yeeterCount}</Box>
           <Box fontSize='xs' color='gray.500'>
-            Yeeters {parseInt(softCap) + 10}
+            Yeeters
           </Box>
         </Flex>
       </Flex>
