@@ -67,7 +67,7 @@ const ProjectFundingStatus = ({ project }) => {
         <Flex fontFamily='mono' direction='column' alignItems='center'>
           <Box fontSize='2xl'>{yeeterCount}</Box>
           <Box fontSize='xs' color='gray.500'>
-            Yeeters
+            Yeeters {parseInt(softCap) + 10}
           </Box>
         </Flex>
       </Flex>
@@ -79,7 +79,9 @@ const ProjectFundingStatus = ({ project }) => {
         mb={3}
         bgGradient={
           softCap
-            ? `linear(to-r, primary.400 0% ${softCap}%,primary.300 0%)`
+            ? `linear(to-r, primary.400 0% ${softCap}%,primary.400 0%,primary.100 ${parseInt(
+                softCap,
+              ) + 2}%,primary.300 0%)`
             : 'none'
         }
       />
