@@ -44,23 +44,30 @@ const ProjectFundingStatus = ({ project }) => {
           </Box>
           {softCap && (
             <Box fontSize='xs' color='gray.500'>
-              with soft cap of{' '}
+              with a soft cap of{' '}
               {displayBalance(
                 project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
                 2,
-              )}
+              )}{' '}
+              {`(${softCap}%)`}
             </Box>
           )}
           {softCap && (
             <Box fontSize='xs' color='gray.500'>
               {displayBalance(
-                project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
-                  project.balance,
+                Math.abs(
+                  project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
+                    project.balance,
+                ),
                 project.yeeterTokenDecimals,
                 2,
               )}{' '}
-              to go to soft cap
+              {project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
+                project.balance >
+              0
+                ? 'to go to soft cap'
+                : 'above soft cap'}
             </Box>
           )}
         </Flex>
