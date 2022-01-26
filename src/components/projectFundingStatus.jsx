@@ -34,17 +34,35 @@ const ProjectFundingStatus = ({ project }) => {
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           <Box fontSize='xs' color='gray.500'>
-            With a goal of{' '}
+            With a max goal of{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
               2,
             )}{' '}
             {supportedChains[project.networkID].nativeCurrency}
-            {softCap &&
-              ` with soft cap
-            ${softCap}%`}
           </Box>
+          {softCap && (
+            <Box fontSize='xs' color='gray.500'>
+              with soft cap of{' '}
+              {displayBalance(
+                project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
+                project.yeeterTokenDecimals,
+                2,
+              )}
+            </Box>
+          )}
+          {softCap && (
+            <Box fontSize='xs' color='gray.500'>
+              {displayBalance(
+                project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
+                  project.balance,
+                project.yeeterTokenDecimals,
+                2,
+              )}{' '}
+              to go to soft cap
+            </Box>
+          )}
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
           <Box fontSize='2xl'>{yeeterCount}</Box>
