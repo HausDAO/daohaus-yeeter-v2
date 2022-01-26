@@ -9,6 +9,7 @@ import { supportedChains } from '../utils/chain';
 import { displayBalance } from '../utils/tokenValue';
 import {
   projectCompletePercentage,
+  softCapTag,
   totalYeeters,
   yeetStatus,
 } from '../utils/projects';
@@ -19,6 +20,7 @@ const ProjectFundingStatus = ({ project }) => {
   const projectComplete = projectCompletePercentage(project);
   const yeetPeriodStatus = yeetStatus(project);
   const yeeterCount = totalYeeters(project);
+  const softCap = softCapTag(project);
 
   return (
     <>
@@ -26,7 +28,7 @@ const ProjectFundingStatus = ({ project }) => {
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
             <Text fontSize='xs' color='gray.500'>
-              Raised{' '}
+              Raised
             </Text>
             {project.displayBalance || '0'}{' '}
             {supportedChains[project.networkID].nativeCurrency}
@@ -39,6 +41,9 @@ const ProjectFundingStatus = ({ project }) => {
               2,
             )}{' '}
             {supportedChains[project.networkID].nativeCurrency}
+            {softCap &&
+              ` with soft cap
+            ${softCap}%`}
           </Box>
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
@@ -54,7 +59,14 @@ const ProjectFundingStatus = ({ project }) => {
         value={projectComplete}
         backgroundColor='primary.400'
         mb={3}
+        bgGradient={
+          softCap
+            ? `linear(to-r, primary.400 ${softCap}%,primary.300 ${projectComplete -
+                softCap}%)`
+            : 'none'
+        }
       />
+
       {yeetPeriodStatus !== 'expired' &&
         yeetPeriodStatus !== 'funded' &&
         yeetPeriodStatus !== 'failed' && (
