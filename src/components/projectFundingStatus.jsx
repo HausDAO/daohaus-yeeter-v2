@@ -79,8 +79,7 @@ const ProjectFundingStatus = ({ project }) => {
         mb={3}
         bgGradient={
           softCap
-            ? `linear(to-r, primary.400 ${softCap}%,primary.300 ${projectComplete -
-                softCap}%)`
+            ? `linear(to-r, primary.400 0% ${softCap}%,primary.300 0%)`
             : 'none'
         }
       />
