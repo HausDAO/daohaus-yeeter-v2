@@ -101,7 +101,7 @@ const ProjectFundingStatus = ({ project }) => {
       )}
       {yeetPeriodStatus === 'failed' && (
         <Box mb={3} fontFamily='mono' fontSize='xl'>
-          🤷 Funding Goal not Met
+          ⏰ Funding Period Over
         </Box>
       )}
 
