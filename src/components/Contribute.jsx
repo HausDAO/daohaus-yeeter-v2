@@ -82,28 +82,41 @@ const Contribute = ({ project, contributions }) => {
           </Flex>
         )}
       </ProjectDetailsNotice>
-      <Divider my={7} />
-      <ContributionExample project={project} />
-      <Flex direction='row' justify='flex-start' align='center' p={3} mt={10}>
-        <Icon as={AiOutlineExclamationCircle} mr={3} />
-        <Box>
-          Loot is issued in increments of 100 and accepts multiples of{' '}
-          {displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
-            project.yeeterTokenDecimals,
-            2,
-          )}{' '}
-          {supportedChains[project.networkID].nativeCurrency}
-        </Box>
-      </Flex>
-      <Flex justify='flex-end' mt={5}>
-        <Button variant='outline' onClick={closeModal}>
-          Nevermind
-        </Button>
-        <Button ml={5} onClick={handleDone}>
-          Funds Sent!
-        </Button>
-      </Flex>
+      {Number(contributions.total) < maxContribution(project) && (
+        <>
+          <Divider my={7} />
+          <ContributionExample project={project} />
+          <Flex
+            direction='row'
+            justify='flex-start'
+            align='center'
+            p={3}
+            mt={10}
+          >
+            <Icon as={AiOutlineExclamationCircle} mr={3} />
+            <Box>
+              <Text color='red.600'>Just send funds to the address.</Text>{' '}
+              <Text fontSize='xs'>
+                Loot is issued in increments of 100 and accepts multiples of{' '}
+                {displayBalance(
+                  project.yeeter.yeeterConfig.pricePerUnit,
+                  project.yeeterTokenDecimals,
+                  2,
+                )}{' '}
+                {supportedChains[project.networkID].nativeCurrency}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex justify='flex-end' mt={5}>
+            <Button variant='outline' onClick={closeModal}>
+              Nevermind
+            </Button>
+            <Button ml={5} onClick={handleDone}>
+              Funds Sent!
+            </Button>
+          </Flex>{' '}
+        </>
+      )}
     </>
   );
 };
