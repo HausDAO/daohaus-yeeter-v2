@@ -16,7 +16,6 @@ const ContributionExample = ({
   project,
   fontSize = 'sm',
   boxWidth = '100%',
-  showSlider = false,
 }) => {
   const [sliderValue, setSliderValue] = useState(null);
 
@@ -60,22 +59,18 @@ const ContributionExample = ({
       mt={5}
       width={boxWidth}
     >
-      {showSlider && (
-        <>
-          <Box>
-            <Box mb={3}>If you contribute</Box>
-            <Box mb={3} fontWeight='700'>
-              {sliderValue} {supportedChains[project.networkID].nativeCurrency}{' '}
-            </Box>
-          </Box>
-          <Box mb={3}>
-            <Box mb={3}>You receive</Box>
-            <Box fontWeight='700'>
-              {lootFromContribution(sliderValue * 10 ** 18, project)} Loot
-            </Box>
-          </Box>
-        </>
-      )}
+      <Box>
+        <Box mb={3}>If you contribute</Box>
+        <Box mb={3} fontWeight='700'>
+          {sliderValue} {supportedChains[project.networkID].nativeCurrency}{' '}
+        </Box>
+      </Box>
+      <Box mb={3}>
+        <Box mb={3}>You receive</Box>
+        <Box fontWeight='700'>
+          {lootFromContribution(sliderValue * 10 ** 18, project)} Loot
+        </Box>
+      </Box>
 
       {sliderConfig && sliderValue && (
         <Slider
