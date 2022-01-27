@@ -33,8 +33,8 @@ const ProjectFundingStatus = ({ project }) => {
               Raised
             </Text> */}
           </Box>
-          <Box fontSize='xs' color='gray.500'>
-            Max goal:{' '}
+          <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
+            Max cap:{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -43,8 +43,8 @@ const ProjectFundingStatus = ({ project }) => {
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           {softCap && (
-            <Box fontSize='xs' color='gray.500'>
-              Soft cap:{' '}
+            <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
+              Goal:{' '}
               {displayBalance(
                 project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
@@ -54,7 +54,7 @@ const ProjectFundingStatus = ({ project }) => {
             </Box>
           )}
           {softCap && (
-            <Box fontSize='xs' color='gray.500'>
+            <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
               {displayBalance(
                 Math.abs(
                   project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
@@ -66,14 +66,14 @@ const ProjectFundingStatus = ({ project }) => {
               {project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
                 project.balance >
               0
-                ? 'to soft cap'
-                : 'above soft cap'}
+                ? 'to goal'
+                : 'above goal'}
             </Box>
           )}
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
           <Box fontSize='2xl'>{yeeterCount}</Box>
-          <Box fontSize='xs' color='gray.500'>
+          <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
             Yeeters
           </Box>
         </Flex>
@@ -83,7 +83,7 @@ const ProjectFundingStatus = ({ project }) => {
         height='35px'
         value={projectComplete}
         backgroundColor='primary.400'
-        mb={3}
+        mb={4}
         bgGradient={
           softCap
             ? `linear(to-r, primary.400 0% ${softCap}%,primary.400 0%,primary.100 ${parseInt(
