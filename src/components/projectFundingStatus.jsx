@@ -34,7 +34,7 @@ const ProjectFundingStatus = ({ project }) => {
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           <Box fontSize='xs' color='gray.500'>
-            With a max goal of{' '}
+            Max goal of{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -44,7 +44,7 @@ const ProjectFundingStatus = ({ project }) => {
           </Box>
           {softCap && (
             <Box fontSize='xs' color='gray.500'>
-              with a soft cap of{' '}
+              Soft cap of{' '}
               {displayBalance(
                 project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
@@ -66,7 +66,7 @@ const ProjectFundingStatus = ({ project }) => {
               {project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
                 project.balance >
               0
-                ? 'to go to soft cap'
+                ? 'to soft cap'
                 : 'above soft cap'}
             </Box>
           )}
