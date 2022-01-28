@@ -24,17 +24,17 @@ const ProjectFundingStatus = ({ project }) => {
 
   return (
     <>
-      <Flex justify='space-between' w='100%' mb={3}>
+      <Flex justify='space-between' w='100%' mb={3} mt={{ base: 3, md: 0 }}>
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
-            <Text fontSize='xs' color='gray.500'>
-              Raised
-            </Text>
             {project.displayBalance || '0'}{' '}
             {supportedChains[project.networkID].nativeCurrency}
+            {/* <Text fontSize='xs' color='gray.500'> // maybe we don't need this? 
+              Raised
+            </Text> */}
           </Box>
           <Box fontSize='xs' color='gray.500'>
-            Max goal of{' '}
+            Max goal:{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -44,7 +44,7 @@ const ProjectFundingStatus = ({ project }) => {
           </Box>
           {softCap && (
             <Box fontSize='xs' color='gray.500'>
-              Soft cap of{' '}
+              Soft cap:{' '}
               {displayBalance(
                 project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
