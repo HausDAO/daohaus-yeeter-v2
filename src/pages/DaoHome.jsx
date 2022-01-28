@@ -41,12 +41,13 @@ const DaoHome = () => {
       {!currentProject && <Loading />}
       {currentProject && (
         <>
-          <Flex wrap='wrap' justify='space-between' mb={10}>
+          <Flex wrap='wrap' justify='space-between'>
             <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
               p={{ base: 6, md: 10 }}
               borderRadius='17px'
+              mb={6}
             >
               <Box mb={10}>
                 <ProjectOverview project={currentProject} longDescription />
@@ -61,7 +62,9 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
-              p={10}
+              p={{ base: 6, md: 10 }}
+              borderRadius='17px'
+              mb={6}
             >
               <Box mb={5}>
                 <ProjectFundingStatus project={currentProject} />
@@ -79,9 +82,10 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
-              p={10}
+              p={{ base: 6, md: 10 }}
+              borderRadius='17px'
             >
-              <Box>
+              <Box borderRadius='17px'>
                 {currentProject?.yeeter?.yeets.length > 0 && (
                   <LeaderBoardList
                     yeets={currentProject.yeeter?.yeets}
@@ -96,7 +100,9 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
-              p={10}
+              p={{ base: 6, md: 10 }}
+              borderRadius='17px'
+              bg='red'
             >
               {currentProject?.members.length > 0 && (
                 <Box mb={3}>

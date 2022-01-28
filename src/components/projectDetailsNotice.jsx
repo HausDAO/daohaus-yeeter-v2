@@ -43,7 +43,8 @@ const ProjectDetailsNotice = ({
         border={borderOverride ? 'none' : '1px solid'}
         borderColor='secondary.500'
         borderRadius='10'
-        padding={5}
+        paddingX={{ base: 0, md: 5 }}
+        paddingBottom={{ base: 5 }}
       >
         {children}
       </Flex>

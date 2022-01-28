@@ -34,7 +34,7 @@ const ProjectFundingStatus = ({ project }) => {
             </Text> */}
           </Box>
           <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
-            Max cap:{' '}
+            Max Cap:{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -91,6 +91,8 @@ const ProjectFundingStatus = ({ project }) => {
               ) + 2}%,primary.300 0%)`
             : 'none'
         }
+        borderLeftRadius='4px'
+        borderRightRadius='4px'
       />
 
       {yeetPeriodStatus !== 'expired' &&
