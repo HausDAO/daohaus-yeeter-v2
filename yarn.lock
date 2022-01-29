@@ -2829,10 +2829,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.4.tgz#11d5db19bd178936ec89cd84519c4de439574398"
   integrity sha512-1oO6+dN5kdIA3sKPZhRGJTfGVP4SWV6KqlMOwry4J3HfyD68sl/3KmG7DeYUzvN+RbhXDnv/D8vNNB8168tAMg==
 
-"@raidguild/quiver@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@raidguild/quiver/-/quiver-0.6.0.tgz#aed2300a98df6b5b2d068011d2ed27f437afb089"
-  integrity sha512-VJjHi6DWQ38i4SrXbvMZf3kqZ20QRtYEWmfK+ydJcb+5I6QoAUIUi9T+QGTjg4h54yJWlFUjOKBF0Da5TJPDRQ==
+"@raidguild/quiver@^0.6.5":
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@raidguild/quiver/-/quiver-0.6.5.tgz#ff16f0c850cfcf0a1dcd8d38ed92e4f3a51ab17e"
+  integrity sha512-k2JDBvgPRod2lgsjHEPsX+zdkdnejViAEEMExOk8LH+0gvxP3jifcZ0FFOnFZnq2QC7fGY2aEjbiVKIjD88oEw==
   dependencies:
     "@ethersproject/abstract-signer" "^5.5.0"
     "@ethersproject/bignumber" "^5.5.0"

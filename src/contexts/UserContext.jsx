@@ -50,7 +50,7 @@ export const UserContextProvider = ({ children }) => {
     }
 
     return project.yeeter.yeets.filter(yeet => {
-      return yeet.contributorAddress === address;
+      return yeet.contributorAddress?.toLowerCase() === address?.toLowerCase();
     });
   };
 
