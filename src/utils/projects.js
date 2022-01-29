@@ -11,7 +11,7 @@ export const lootFromContribution = (contributionTotal, project) => {
   return (
     (contributionTotal / project.yeeter.yeeterConfig.pricePerUnit) *
     LOOT_PER_UNIT
-  );
+  ).toFixed(0);
 };
 
 export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
@@ -119,6 +119,13 @@ export const yeetStatus = project => {
   if (Number(start) > now) {
     return 'upcoming';
   }
+};
+
+export const softCapTag = project => {
+  const sctag = project.meta.tags.filter(tag => {
+    return tag.indexOf('sc:') !== -1;
+  });
+  return sctag.length ? sctag[0].split(':')[1] || null : null;
 };
 
 export const yeetingTime = project => {

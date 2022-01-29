@@ -20,8 +20,6 @@ export const UserContextProvider = ({ children }) => {
   const hasLoadedMemberships = userMemberships?.length === numOfSupportedChains;
   const prevAddress = useRef(null);
 
-  // TODO: could add some helper hooks in here that take project data and give confirmation of contribution
-
   useEffect(() => {
     const bigQuery = () => {
       membershipsChainQuery({

@@ -75,6 +75,7 @@ export const handleGetENS = async address => {
     return cachedENS;
   }
   const ens = await fetchENS(address);
+
   cacheENS(ens, address);
   return ens;
 };

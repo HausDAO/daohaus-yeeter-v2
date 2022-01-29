@@ -23,7 +23,7 @@ import CopyButton from './copyButton';
 import { yeetStatus } from '../utils/projects';
 
 const ProjectOverview = ({ project, longDescription }) => {
-  const { daoid } = useParams();
+  const { daoid, daochain } = useParams();
   const [showDetails, setShowDetails] = useState(false);
 
   const status = yeetStatus(project);
@@ -55,14 +55,6 @@ const ProjectOverview = ({ project, longDescription }) => {
             <Text> {project?.meta?.description}</Text>
             {project?.meta?.longDescription && (
               <>
-                <Text
-                  onClick={() => setShowDetails(!showDetails)}
-                  _hover={{ cursor: 'pointer' }}
-                  color='secondary.500'
-                  fontSize='sm'
-                >
-                  Show {!showDetails ? `More` : `Less`}
-                </Text>
                 {showDetails && (
                   <>
                     <ReactMarkdown
@@ -74,6 +66,14 @@ const ProjectOverview = ({ project, longDescription }) => {
                     </ReactMarkdown>
                   </>
                 )}
+                <Text
+                  onClick={() => setShowDetails(!showDetails)}
+                  _hover={{ cursor: 'pointer' }}
+                  color='secondary.500'
+                  fontSize='sm'
+                >
+                  Show {!showDetails ? `More` : `Less`}
+                </Text>
               </>
             )}
           </>
@@ -81,7 +81,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           <Text>{project?.meta?.description}</Text>
         )}
       </Box>
-      <Flex alignItems='center'>
+      <Flex alignItems='center' wrap='wrap'>
         {project?.meta?.links?.twitter && (
           <Link
             href={fixSocialLink('twitter', project.meta.links.twitter)}
@@ -160,7 +160,7 @@ const ProjectOverview = ({ project, longDescription }) => {
         <Flex mt={2} fontSize='sm'>
           Get Share Link{' '}
           <CopyButton
-            text={`https://${window.location.host}/dao/0x4/${project.id}/yeet`}
+            text={`https://${window.location.host}/dao/${daochain}/${project.id}/yeet`}
             iconProps={{ height: '15px', width: '15px' }}
             customMessage='URL Copied to clipboard'
           />

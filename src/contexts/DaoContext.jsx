@@ -111,6 +111,8 @@ export const DaoProvider = ({ children }) => {
     };
 
     const noProjectOrRefresh = !currentProject || refetchComplete;
+
+    console.log('daoOverview', daoOverview);
     if (
       hasPerformedBatchQuery.current &&
       daoOverview &&
@@ -119,6 +121,7 @@ export const DaoProvider = ({ children }) => {
       daoYeets &&
       noProjectOrRefresh
     ) {
+      console.log('hydrate');
       hydrateProjectData();
     }
   }, [
