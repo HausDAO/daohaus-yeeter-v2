@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
 import { MaxUint256 } from '@ethersproject/constants';
 
+import { useWallet } from '@raidguild/quiver';
 import { useDao } from '../contexts/DaoContext';
 import { useTX } from '../contexts/TXContext';
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 import InputSelect from './inputSelect';
 import ModButton from './modButton';
 import { LOCAL_ABI } from '../utils/abi';
@@ -18,7 +18,7 @@ import { spreadOptions } from '../utils/formBuilder';
 
 const TributeInput = props => {
   const { submitTransaction } = useTX();
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
   const { daochain, daoid } = useParams();
   const { daoOverview } = useDao();
   const { localForm, registerOptions } = props;

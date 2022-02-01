@@ -3,22 +3,55 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { WalletProvider } from '@raidguild/quiver';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { InjectedProvider } from './contexts/InjectedProviderContext';
 import { CustomThemeProvider } from './contexts/CustomThemeContext';
+import { getProviderOptions } from './utils/web3Modal';
 
 window.onunload = () => {
   sessionStorage.clear();
+};
+
+const SUPPORTED_NETWORKS = {
+  '0x4': {
+    chainId: '0x4',
+    name: 'Ethereum Rinkeby',
+    symbol: 'ETH',
+    explorer: 'https://rinkeby.etherscan.io/',
+    rpc: `https://${process.env.REACT_APP_RPC_URI}.rinkeby.rpc.rivet.cloud`,
+  },
+  '0x64': {
+    name: 'Gnosis Chain',
+    symbol: 'xDai',
+    chainId: '0x64',
+    rpc: 'https://dai.poa.network',
+    explorer: 'https://blockscout.com/xdai/mainnet/',
+  },
+};
+
+const web3modalOptions = {
+  cacheProvider: true,
+  providerOptions: getProviderOptions(),
+  theme: 'dark',
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <CustomThemeProvider>
-        <InjectedProvider>
+        <WalletProvider
+          web3modalOptions={web3modalOptions}
+          networks={SUPPORTED_NETWORKS}
+          defaultChainId='0x64'
+          handleModalEvents={(eventName, error) => {
+            if (error) {
+              console.log(error.message);
+            }
+          }}
+        >
           <App />
-        </InjectedProvider>
+        </WalletProvider>
       </CustomThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

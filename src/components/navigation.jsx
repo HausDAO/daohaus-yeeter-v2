@@ -20,7 +20,7 @@ import {
 import { AiOutlineClose } from 'react-icons/ai';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 // import { useOverlay } from '../contexts/OverlayContext';
 import AddressAvatar from './addressAvatar';
 import Brand from './brand';
@@ -58,7 +58,7 @@ const NAV_ITEMS = [
 
 const Navigation = ({ isDao }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { address, requestWallet } = useInjectedProvider();
+  const { address, connectWallet } = useWallet();
   // const { setHubAccountModal } = useOverlay();
 
   // const toggleAccountModal = () => {
@@ -105,7 +105,7 @@ const Navigation = ({ isDao }) => {
             <AddressAvatar addr={address} hideCopy hideEtherscanLink />
           </Button>
         ) : (
-          <Button variant='outline' onClick={requestWallet}>
+          <Button variant='outline' onClick={connectWallet}>
             Connect Wallet
           </Button>
         )}

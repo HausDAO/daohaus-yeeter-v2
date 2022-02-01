@@ -238,12 +238,8 @@ export const capitalizeWords = string => {
   return words.map(word => capitalize(word)).join(' ');
 };
 
-export const daoConnectedAndSameChain = (
-  address,
-  injectedChainID,
-  daochain,
-) => {
-  return address && daochain && injectedChainID === daochain;
+export const daoConnectedAndSameChain = (address, chainId, daochain) => {
+  return address && daochain && chainId === daochain;
 };
 
 export const isEthAddress = string =>

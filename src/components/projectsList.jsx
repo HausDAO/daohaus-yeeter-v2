@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, List, Text } from '@chakra-ui/layout';
 
-import { useInjectedProvider } from '../contexts/InjectedProviderContext';
+import { useWallet } from '@raidguild/quiver';
 import { useProjects } from '../contexts/ProjectsContext';
 
 import ProjectListCard from './projectListCard';
@@ -10,7 +10,7 @@ import useInterval from '../hooks/useInterval';
 import Loading from './loading';
 
 const ProjectsList = () => {
-  const { address } = useInjectedProvider();
+  const { address } = useWallet();
   const { projects, refetchProjects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
 
