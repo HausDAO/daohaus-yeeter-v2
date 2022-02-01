@@ -102,7 +102,6 @@ const DaoHome = () => {
               backgroundColor='primary.500'
               p={{ base: 6, md: 10 }}
               borderRadius='17px'
-              bg='red'
             >
               {currentProject?.members.length > 0 && (
                 <Box mb={3}>
