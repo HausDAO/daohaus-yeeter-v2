@@ -32,7 +32,7 @@ const LeaderBoardList = ({ yeets, project }) => {
   // console.log('sortedYeets', sortedYeets);
 
   return (
-    <Box backgroundColor='primary.500'>
+    <Box backgroundColor='primary.500' p={{ base: 4, md: 10 }}>
       <Text fontSize='lg' textTransform='uppercase' mb={3}>
         Leaderboard
       </Text>
@@ -64,17 +64,17 @@ const LeaderBoardList = ({ yeets, project }) => {
               <EnsDisplay address={yeet.contributorAddress} />
             </Box>
             <Box width='25%'>
-              <Text>{Web3.utils.fromWei(yeet.amount)}</Text>
+              <Text fontSize='sm'>{Web3.utils.fromWei(yeet.amount)}</Text>
             </Box>
             <Box width='25%'>
-              <Text>
+              <Text fontSize='sm'>
                 {(Number(yeet.amount) /
                   Number(project.yeeter.yeeterConfig.pricePerUnit)) *
                   100}
               </Text>
             </Box>
             <Box width='25%'>
-              <Text>{timeToNow(yeet.createdAt)}</Text>
+              <Text fontSize='sm'>{timeToNow(yeet.createdAt)}</Text>
             </Box>
           </Flex>
         ))}

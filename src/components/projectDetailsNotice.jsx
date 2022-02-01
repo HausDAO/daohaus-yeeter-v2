@@ -13,7 +13,13 @@ const ProjectDetailsNotice = ({
 }) => {
   return (
     <Box>
-      <Flex justify='space-between' align='center' mb={2} fontSize='xs'>
+      <Flex
+        justify='space-between'
+        align='center'
+        mt={{ base: 2, md: 0 }}
+        mb={2}
+        fontSize='xs'
+      >
         <Text textTransform='uppercase'>{title}</Text>
 
         {toolContent && (
@@ -37,7 +43,8 @@ const ProjectDetailsNotice = ({
         border={borderOverride ? 'none' : '1px solid'}
         borderColor='secondary.500'
         borderRadius='10'
-        padding={5}
+        paddingX={{ base: 0, md: 5 }}
+        paddingBottom={{ base: 5 }}
       >
         {children}
       </Flex>

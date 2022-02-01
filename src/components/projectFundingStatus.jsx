@@ -24,17 +24,17 @@ const ProjectFundingStatus = ({ project }) => {
 
   return (
     <>
-      <Flex justify='space-between' w='100%' mb={3}>
+      <Flex justify='space-between' w='100%' mb={3} mt={{ base: 3, md: 0 }}>
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
-            <Text fontSize='xs' color='gray.500'>
-              Raised
-            </Text>
             {project.displayBalance || '0'}{' '}
             {supportedChains[project.networkID].nativeCurrency}
+            {/* <Text fontSize='xs' color='gray.500'> // maybe we don't need this? 
+              Raised
+            </Text> */}
           </Box>
-          <Box fontSize='xs' color='gray.500'>
-            Max goal of{' '}
+          <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
+            Max Cap:{' '}
             {displayBalance(
               project.yeeter.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
@@ -43,8 +43,8 @@ const ProjectFundingStatus = ({ project }) => {
             {supportedChains[project.networkID].nativeCurrency}
           </Box>
           {softCap && (
-            <Box fontSize='xs' color='gray.500'>
-              Soft cap of{' '}
+            <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
+              Goal:{' '}
               {displayBalance(
                 project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
@@ -54,7 +54,7 @@ const ProjectFundingStatus = ({ project }) => {
             </Box>
           )}
           {softCap && (
-            <Box fontSize='xs' color='gray.500'>
+            <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
               {displayBalance(
                 Math.abs(
                   project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
@@ -66,14 +66,14 @@ const ProjectFundingStatus = ({ project }) => {
               {project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
                 project.balance >
               0
-                ? 'to soft cap'
-                : 'above soft cap'}
+                ? 'to goal'
+                : 'above goal'}
             </Box>
           )}
         </Flex>
         <Flex fontFamily='mono' direction='column' alignItems='center'>
           <Box fontSize='2xl'>{yeeterCount}</Box>
-          <Box fontSize='xs' color='gray.500'>
+          <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
             Yeeters
           </Box>
         </Flex>
@@ -83,7 +83,7 @@ const ProjectFundingStatus = ({ project }) => {
         height='35px'
         value={projectComplete}
         backgroundColor='primary.400'
-        mb={3}
+        mb={4}
         bgGradient={
           softCap
             ? `linear(to-r, primary.400 0% ${softCap}%,primary.400 0%,primary.100 ${parseInt(
@@ -91,6 +91,8 @@ const ProjectFundingStatus = ({ project }) => {
               ) + 2}%,primary.300 0%)`
             : 'none'
         }
+        borderLeftRadius='4px'
+        borderRightRadius='4px'
       />
 
       {yeetPeriodStatus !== 'expired' &&
