@@ -105,7 +105,7 @@ const ProjectFundingStatus = ({ project }) => {
         )}
       {yeetPeriodStatus === 'funded' && (
         <Box mb={3} fontFamily='mono' fontSize='xl'>
-          🎉 Funding Goal Met!
+          🎉 Max Funding Goal Met!
         </Box>
       )}
       {yeetPeriodStatus === 'failed' && (
