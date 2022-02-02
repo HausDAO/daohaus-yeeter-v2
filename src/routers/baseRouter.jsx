@@ -1,13 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, Params } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Dao from '../pages/Dao';
 import FourOhFour from '../pages/404';
 import Faq from '../pages/Faq';
 import BaseLayout from './baseLayout';
-
-// TODO: move base layout - theme reset not needed?
 
 const BaseRouter = () => {
   return (
@@ -19,9 +17,19 @@ const BaseRouter = () => {
         <Route exact path='/faq'>
           <Faq />
         </Route>
-
         <Route
-          path='/dao/:daochain/:daoid'
+          exact
+          path='/dao/:daochain/:daoid(\b0x[0-9a-f]{10,40}\b)'
+          render={routeProps => {
+            return (
+              <Redirect
+                to={`/dao/${routeProps.match.params.daochain}/${routeProps.match.params.daoid}/1`}
+              />
+            );
+          }}
+        />
+        <Route
+          path='/dao/:daochain/:daoid/:yeetnumber'
           render={routeProps => {
             return <Dao key={routeProps.match.params.daoid} {...routeProps} />;
           }}
