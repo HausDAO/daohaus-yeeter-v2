@@ -29,7 +29,7 @@ const BaseRouter = () => {
           }}
         />
         <Route
-          path='/dao/:daochain/:daoid/:yeetnumber'
+          path='/dao/:daochain/:daoid/:yeeternumber'
           render={routeProps => {
             return <Dao key={routeProps.match.params.daoid} {...routeProps} />;
           }}

@@ -138,7 +138,10 @@ export const PROJECT_DETAILS_QUERY = gql`
 
 export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
   query shamans($contractAddr: String!) {
-    shamans(where: { shamanType: "yeeter", molochAddress: $contractAddr }) {
+    shamans(
+      where: { shamanType: "yeeter", molochAddress: $contractAddr }
+      orderBy: createdAt
+    ) {
       id
       createdAt
       shamanAddress

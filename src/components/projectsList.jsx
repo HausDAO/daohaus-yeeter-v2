@@ -14,8 +14,6 @@ const ProjectsList = () => {
   const { projects, refetchProjects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
 
-  console.log('projects', projects);
-
   useInterval(() => {
     refetchProjects();
   }, 30000);
