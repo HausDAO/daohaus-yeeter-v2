@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDao } from '../contexts/DaoContext';
 import CopyButton from '../components/copyButton';
 import { supportedChains } from '../utils/chain';
@@ -10,6 +11,8 @@ import ContributionExample from '../components/contributionExample';
 import Loading from '../components/loading';
 
 const UpcomingBlock = ({ project }) => {
+  const { yeeternumber } = useParams();
+
   const timeContent = yeetingTime(project);
   return (
     <Flex wrap='wrap' justify='center' align='center' mt={10}>
@@ -24,7 +27,10 @@ const UpcomingBlock = ({ project }) => {
         Yeeting will begin {timeContent.time}
       </Box>
       <Text textAlign='center' fontSize='lg'>
-        <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+        <RouterLink
+          to={`/dao/${project?.networkID}/${project?.id}/${yeeternumber ||
+            '1'}`}
+        >
           See More Project Details
         </RouterLink>
       </Text>
@@ -33,6 +39,8 @@ const UpcomingBlock = ({ project }) => {
 };
 
 const ExpiredBlock = ({ project }) => {
+  const { yeeternumber } = useParams();
+
   return (
     <Flex wrap='wrap' justify='center' align='center' mt={10}>
       <Box
@@ -46,7 +54,10 @@ const ExpiredBlock = ({ project }) => {
         Yeeting has ended
       </Box>
       <Text textAlign='center' fontSize='lg'>
-        <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+        <RouterLink
+          to={`/dao/${project?.networkID}/${project?.id}/${yeeternumber ||
+            '1'}`}
+        >
           See More Project Details
         </RouterLink>
       </Text>
@@ -56,6 +67,7 @@ const ExpiredBlock = ({ project }) => {
 
 const Yeet = () => {
   const { currentProject } = useDao();
+  const { yeeternumber } = useParams();
 
   const status = useMemo(() => {
     if (currentProject) {
@@ -121,7 +133,9 @@ const Yeet = () => {
           </Flex>
           <Text textAlign='center' fontSize='lg'>
             <RouterLink
-              to={`/dao/${currentProject?.networkID}/${currentProject?.id}`}
+              to={`/dao/${currentProject?.networkID}/${
+                currentProject?.id
+              }/${yeeternumber || '1'}`}
             >
               See More Project Details
             </RouterLink>

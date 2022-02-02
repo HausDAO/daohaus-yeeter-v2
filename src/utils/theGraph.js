@@ -64,7 +64,7 @@ const completeQueries = {
         },
       });
 
-      setter(graphShamans.shamans[0]);
+      setter(graphShamans.shamans[args.yeeterNumber - 1]);
     } catch (error) {
       console.error(error);
     }

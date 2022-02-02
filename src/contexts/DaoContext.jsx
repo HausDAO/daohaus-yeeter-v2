@@ -18,7 +18,7 @@ import { addCurrentYeetBalance } from '../utils/projects';
 export const DaoContext = createContext();
 
 export const DaoProvider = ({ children }) => {
-  const { daoid, daochain } = useParams();
+  const { daoid, daochain, yeeternumber } = useParams();
 
   const daoNetworkData = supportedChains[daochain];
 
@@ -27,16 +27,11 @@ export const DaoProvider = ({ children }) => {
   const [daoShamans, setDaoShamans] = useState();
   const [daoYeets, setDaoYeets] = useState();
   const [refetchComplete, setRefetchComplete] = useState(false);
-
-  // const [currentProject, setCurrentProject] = useSessionStorage(
-  //   'currentProject',
-  //   null,
-  // );
-
   const [currentProject, setCurrentProject] = useState(null);
 
   const hasPerformedBatchQuery = useRef(false);
   const currentDao = useRef(null);
+  const currentDaoYeeter = useRef(null);
 
   useEffect(() => {
     // This condition is brittle. If one request passes, but the rest fail
@@ -49,6 +44,7 @@ export const DaoProvider = ({ children }) => {
       !daoid ||
       !daochain ||
       !daoNetworkData ||
+      !yeeternumber ||
       hasPerformedBatchQuery.current
     ) {
       return;
@@ -60,6 +56,7 @@ export const DaoProvider = ({ children }) => {
       args: {
         daoID: daoid.toLowerCase(),
         chainID: daochain,
+        yeeterNumber: yeeternumber,
       },
       getSetters: [
         { getter: 'getOverview', setter: setDaoOverview },
@@ -83,6 +80,7 @@ export const DaoProvider = ({ children }) => {
   }, [
     daoid,
     daochain,
+    yeeternumber,
     daoNetworkData,
     daoOverview,
     daoShamans,
@@ -92,7 +90,12 @@ export const DaoProvider = ({ children }) => {
 
   useEffect(() => {
     const hydrateProjectData = () => {
-      const yeeterWithYeets = { ...daoShamans, yeets: daoYeets };
+      const yeeterWithYeets = {
+        ...daoShamans,
+        yeets: daoYeets.filter(
+          yeet => yeet.shamanAddress === daoShamans.shamanAddress,
+        ),
+      };
       const project = {
         ...daoOverview,
         members: daoOverview.members.sort(
@@ -108,11 +111,11 @@ export const DaoProvider = ({ children }) => {
 
       setCurrentProject(project);
       setRefetchComplete(false);
+      currentDaoYeeter.current = yeeternumber;
     };
 
     const noProjectOrRefresh = !currentProject || refetchComplete;
 
-    console.log('daoOverview', daoOverview);
     if (
       hasPerformedBatchQuery.current &&
       daoOverview &&
@@ -121,7 +124,6 @@ export const DaoProvider = ({ children }) => {
       daoYeets &&
       noProjectOrRefresh
     ) {
-      console.log('hydrate');
       hydrateProjectData();
     }
   }, [
@@ -145,6 +147,7 @@ export const DaoProvider = ({ children }) => {
         daoID: daoid.toLowerCase(),
         chainID: daochain,
         refetchSetter: setRefetchComplete,
+        yeeterNumber: yeeternumber,
       },
       getSetters: [
         { getter: 'getOverview', setter: setDaoOverview },
@@ -167,6 +170,12 @@ export const DaoProvider = ({ children }) => {
     bigGraphQuery(bigQueryOptions);
     hasPerformedBatchQuery.current = true;
   };
+
+  useEffect(() => {
+    if (currentDaoYeeter.current && currentDaoYeeter.current !== yeeternumber) {
+      refetch();
+    }
+  }, [yeeternumber, currentDaoYeeter]);
 
   return (
     <DaoContext.Provider

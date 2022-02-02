@@ -23,7 +23,7 @@ import CopyButton from './copyButton';
 import { yeetStatus } from '../utils/projects';
 
 const ProjectOverview = ({ project, longDescription }) => {
-  const { daoid, daochain } = useParams();
+  const { daoid, daochain, yeeternumber } = useParams();
   const [showDetails, setShowDetails] = useState(false);
 
   const status = yeetStatus(project);
@@ -41,10 +41,14 @@ const ProjectOverview = ({ project, longDescription }) => {
         />
         <Box fontSize='2xl' fontWeight={700} fontFamily='heading'>
           {daoid ? (
-            project?.meta?.name || '--'
+            `${project?.meta?.name || ''} #${yeeternumber || ''}`
           ) : (
-            <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
-              {project?.meta?.name || '--'}
+            <RouterLink
+              to={`/dao/${project?.networkID}/${
+                project?.id
+              }/${project.yeeterNumber || '1'}`}
+            >
+              {project?.meta?.name} #{project.yeeterNumber}
             </RouterLink>
           )}
         </Box>
@@ -149,18 +153,36 @@ const ProjectOverview = ({ project, longDescription }) => {
         )}
 
         {!daoid && (
-          <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
+          <RouterLink
+            to={`/dao/${project?.networkID}/${
+              project?.id
+            }/${project.yeeterNumber || '1'}`}
+          >
             View Project
           </RouterLink>
         )}
 
         {daoid && <DaohausLink linkText='Visit the DAO' project={project} />}
       </Flex>
+
+      {daoid && Number(yeeternumber) > 1 && (
+        <Box mt={2} fontSize='sm'>
+          <RouterLink
+            to={`/dao/${project?.networkID}/${project?.id}/${Number(
+              yeeternumber - 1,
+            )}`}
+          >
+            Visit Previous Yeet
+          </RouterLink>
+        </Box>
+      )}
       {daoid && status === 'active' && (
         <Flex mt={2} fontSize='sm'>
           Get Share Link{' '}
           <CopyButton
-            text={`https://${window.location.host}/dao/${daochain}/${project.id}/yeet`}
+            text={`https://${window.location.host}/dao/${daochain}/${
+              project.id
+            }/${yeeternumber || '1'}/yeet`}
             iconProps={{ height: '15px', width: '15px' }}
             customMessage='URL Copied to clipboard'
           />

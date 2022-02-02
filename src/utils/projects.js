@@ -42,46 +42,73 @@ export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
   };
 };
 
-const filterInactiveYeeters = yeeters => {
-  return yeeters.filter(project => {
-    return project.yeeter && project.yeeter.enabled;
-  });
-};
-
-const combineDaosAndYeeters = projectData => {
-  return projectData.reduce((allProjects, network) => {
+const combineYeetersAndDaos = projectData => {
+  const ret = projectData.reduce((allProjects, network) => {
     const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
-      yeets[yeeter.molochAddress] = yeeter;
+      yeets[yeeter.shamanAddress] = yeeter;
+
       return yeets;
     }, {});
 
-    const networkDaos = network.daos.map(dao => {
-      return {
-        ...dao,
-        yeeter: yeeterMap[dao.id] && {
-          ...yeeterMap[dao.id],
-          enabled: dao.shamans.find(
-            shaman => shaman.shamanAddress === yeeterMap[dao.id].id,
-          )?.enabled,
-        },
-        networkID: network.networkID,
-        ...addCurrentYeetBalance(yeeterMap[dao.id], dao, network.networkID),
-      };
-    });
+    const daoMap = network.daos.reduce((daosByShaman, dao) => {
+      dao.shamans.forEach(shaman => {
+        if (dao.meta && shaman.enabled) {
+          const yeeter = yeeterMap[shaman.shamanAddress] && {
+            ...yeeterMap[shaman.shamanAddress],
+            enabled: true,
+          };
 
-    return [...allProjects, ...networkDaos];
+          if (yeeter) {
+            daosByShaman[shaman.shamanAddress] = {
+              ...dao,
+              yeeter,
+              networkID: network.networkID,
+              ...addCurrentYeetBalance(yeeter, dao, network.networkID),
+            };
+          }
+        }
+      });
+
+      return daosByShaman;
+    }, {});
+
+    return [...allProjects, ...Object.values(daoMap)];
   }, []);
+
+  return ret;
 };
+
+const addYeetNumber = projectData => {
+  const dupes = projectData.reduce((daos, dao) => {
+    if (daos[dao.id]) {
+      daos[dao.id].push(dao);
+    } else {
+      daos[dao.id] = [dao];
+    }
+    return daos;
+  }, {});
+
+  Object.keys(dupes).forEach(daoAddress => {
+    if (dupes[daoAddress].length > 1) {
+      dupes[daoAddress] = dupes[daoAddress].map((dao, i) => {
+        return { ...dao, yeeterNumber: i + 1 };
+      });
+    }
+  });
+
+  return Object.values(dupes).flatMap(d => d);
+};
+
 const sortBySummoning = projectData => {
   return projectData.sort(
-    (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
+    (a, b) => Number(b.yeeter.createdAt) - Number(a.yeeter.createdAt),
   );
 };
 
 export const hydrateProjectsData = projectData => {
-  return pipe([combineDaosAndYeeters, filterInactiveYeeters, sortBySummoning])(
-    projectData,
-  );
+  // return combineYeetersAndDaos(projectData);
+
+  return pipe([combineYeetersAndDaos, addYeetNumber])(projectData);
 };
 
 export const projectCompletePercentage = project => {
@@ -164,7 +191,7 @@ const projectListSort = () => projects => {
   //   return projects.sort((a, b) => Number(b.balance) - Number(a.balance));
   // }
 
-  return projects;
+  return sortBySummoning(projects);
 };
 
 const projectListFilter = filter => projects => {
