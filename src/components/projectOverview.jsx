@@ -41,10 +41,10 @@ const ProjectOverview = ({ project, longDescription }) => {
         />
         <Box fontSize='2xl' fontWeight={700} fontFamily='heading'>
           {daoid ? (
-            project?.meta?.name || '--'
+            project?.meta?.name
           ) : (
             <RouterLink to={`/dao/${project?.networkID}/${project?.id}`}>
-              {project?.meta?.name || '--'}
+              {project?.meta?.name} {project.yeeterNumber}
             </RouterLink>
           )}
         </Box>

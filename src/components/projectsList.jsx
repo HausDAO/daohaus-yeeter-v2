@@ -14,6 +14,8 @@ const ProjectsList = () => {
   const { projects, refetchProjects } = useProjects();
   const [listProjects, setListProjects] = useState([]);
 
+  console.log('projects', projects);
+
   useInterval(() => {
     refetchProjects();
   }, 30000);
@@ -36,7 +38,9 @@ const ProjectsList = () => {
           </Box>
           <List spacing={3}>
             {listProjects.map(project => {
-              return <ProjectListCard key={project.id} project={project} />;
+              return (
+                <ProjectListCard key={project.yeeter.id} project={project} />
+              );
             })}
           </List>
         </>
