@@ -72,8 +72,6 @@ const Contribute = ({ project, contributions }) => {
     });
 
   const handleContribute = async () => {
-    setLoading(true);
-
     const signer = provider.getSigner();
 
     const args = {
@@ -83,7 +81,7 @@ const Contribute = ({ project, contributions }) => {
     const tx = await signer.sendTransaction(args);
 
     console.log('tx', tx);
-
+    setLoading(true);
     setTxHash(tx.hash);
   };
 
