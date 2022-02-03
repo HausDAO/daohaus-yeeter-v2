@@ -25,6 +25,7 @@ const Contribute = ({ project, contributions }) => {
   const [contributionAmount, setContributionAmount] = useState(null);
   const [txHash, setTxHash] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [contributionComplete, setContributionComplete] = useState(null);
 
   const chainMatch = daochain === chainId;
 
@@ -49,6 +50,7 @@ const Contribute = ({ project, contributions }) => {
 
         if (tx.blockNumber) {
           refetch();
+          setContributionComplete(txHash);
           setTxHash(null);
           setLoading(false);
           clearInterval(interval);
@@ -79,6 +81,8 @@ const Contribute = ({ project, contributions }) => {
       value: ethers.utils.parseEther(contributionAmount.toString()),
     };
     const tx = await signer.sendTransaction(args);
+
+    console.log('tx', tx);
 
     setTxHash(tx.hash);
   };
@@ -128,17 +132,32 @@ const Contribute = ({ project, contributions }) => {
               </Text>
 
               {loading && txHash && (
-                <Flex mt={10} align='center'>
+                <Flex mt={4} align='center'>
                   <Text
                     color='secondary.500'
-                    fontSize='sm'
+                    fontSize='md'
                     textAlign='center'
                     mr={2}
                     ml={3}
                   >
                     TX Pending
                   </Text>
-                  <EtherscanLink address={txHash} />
+                  <EtherscanLink address={txHash} isTransaction />
+                </Flex>
+              )}
+
+              {contributionComplete && (
+                <Flex mt={4} align='center'>
+                  <Text
+                    color='secondary.500'
+                    fontSize='md'
+                    textAlign='center'
+                    mr={2}
+                    ml={3}
+                  >
+                    🎉 Contribution Complete!
+                  </Text>
+                  <EtherscanLink address={contributionComplete} isTransaction />
                 </Flex>
               )}
             </>

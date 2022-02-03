@@ -6,11 +6,13 @@ import { RiExternalLinkLine } from 'react-icons/ri';
 
 import { supportedChains } from '../utils/chain';
 
-const EtherscanLink = ({ address }) => {
+const EtherscanLink = ({ address, isTransaction }) => {
   const { daochain } = useParams();
   return (
     <Link
-      href={`${supportedChains[daochain].block_explorer}/address/${address}`}
+      href={`${supportedChains[daochain].block_explorer}/${
+        isTransaction ? 'tx' : 'address'
+      }/${address}`}
       isExternal
     >
       <Icon as={RiExternalLinkLine} name='transaction link' />
