@@ -44,7 +44,7 @@ const ProjectDetailsNotice = ({
         borderColor='secondary.500'
         borderRadius='10'
         paddingX={{ base: 0, md: 5 }}
-        paddingBottom={{ base: 5 }}
+        paddingY={{ base: 5 }}
       >
         {children}
       </Flex>

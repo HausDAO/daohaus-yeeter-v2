@@ -125,7 +125,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={project.meta.links.website}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
             ml={0}
           >
             <Icon as={RiGlobeLine} h='30px' w='30px' color='secondary.500' />
@@ -137,7 +137,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={fixSocialLink('telegram', project.meta.links.telegram)}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
           >
             <Icon as={RiTelegramFill} h='30px' w='30px' color='secondary.500' />
           </Link>
@@ -148,7 +148,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={fixSocialLink('medium', project.meta.links.medium)}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
           >
             <Icon as={RiMediumFill} h='30px' w='30px' color='secondary.500' />
           </Link>

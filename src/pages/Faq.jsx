@@ -66,7 +66,7 @@ const Faq = () => {
             <ParagraphText>
               A DAOhaus Yeeter project consists of two main components: a Moloch
               DAO (accessible via the{' '}
-              <Link to='https://app.daohaus.club' isExternal>
+              <Link href='https://app.daohaus.club' isExternal>
                 DAOhaus app
               </Link>{' '}
               and a Yeeter smart contract.
@@ -136,7 +136,7 @@ const Faq = () => {
             <ParagraphText>
               If you&apos;d like to use DAOhaus Yeeter on another network, let
               us know in the{' '}
-              <Link to='https://discord.gg/daohaus' isExternal>
+              <Link href='https://discord.gg/daohaus' isExternal>
                 DAOhaus Discord
               </Link>{' '}
             </ParagraphText>
@@ -203,31 +203,34 @@ const Faq = () => {
             <ParagraphText>
               The DAOhaus Yeeter platform uses four smart contracts: the{' '}
               <Link
-                to='https://github.com/HausDAO/Moloch2.5/blob/main/contracts/MolochSummoner.sol'
+                href='https://github.com/HausDAO/Moloch2.5/blob/main/contracts/MolochSummoner.sol'
                 isExternal
               >
                 MolochV2.5
               </Link>
               , the{' '}
               <Link
-                to='https://github.com/HausDAO/Moloch2.5/blob/main/contracts/Yeeter.sol'
+                href='https://github.com/HausDAO/Moloch2.5/blob/main/contracts/Yeeter.sol'
                 isExternal
               >
                 Yeeter.sol
               </Link>{' '}
               contract, the{' '}
-              <Link to='https://github.com/HausDAO/MinionSummonerV2' isExternal>
+              <Link
+                href='https://github.com/HausDAO/MinionSummonerV2'
+                isExternal
+              >
                 Safe Minion
               </Link>{' '}
               contract, and the{' '}
-              <Link to='https://github.com/gnosis/safe-contracts' isExternal>
+              <Link href='https://github.com/gnosis/safe-contracts' isExternal>
                 Gnosis Safe
               </Link>{' '}
               contract.
             </ParagraphText>
             <ParagraphText>
               The MolochV2.5 contract is based heavily on the{' '}
-              <Link to='https://github.com/MolochVentures/moloch' isExternal>
+              <Link href='https://github.com/MolochVentures/moloch' isExternal>
                 MolochV2 code
               </Link>
               , which has been audited and in heavy use for 2 years with no
@@ -239,7 +242,7 @@ const Faq = () => {
             </ParagraphText>
             <ParagraphText>
               The Safe Minion contract has been{' '}
-              <Link to='https://hackmd.io/R5wgG1zuSZ-p6Sbne5eF6w' isExternal>
+              <Link href='https://hackmd.io/R5wgG1zuSZ-p6Sbne5eF6w' isExternal>
                 audited by the Gnosis team
               </Link>{' '}
               It has been used by many DAOhaus DAOs since November 2021, with no
@@ -249,7 +252,7 @@ const Faq = () => {
             <ParagraphText>
               The Gnosis Safe contracts have received{' '}
               <Link
-                to='https://github.com/gnosis/safe-contracts#audits-formal-verification'
+                href='https://github.com/gnosis/safe-contracts#audits-formal-verification'
                 isExternal
               >
                 multiple audits
@@ -362,7 +365,7 @@ const Faq = () => {
           <AccordionPanel pb={4}>
             <ParagraphText>
               There is a 3% fee on all funds raised. This fee goes to{' '}
-              <Link to='https://uberhaus.club/' isExternal>
+              <Link href='https://uberhaus.club/' isExternal>
                 UberHaus
               </Link>
               , the DAO of DAOs that governs DAOhaus and it funds future
@@ -401,7 +404,7 @@ const Faq = () => {
             <ParagraphText pl={4} mb={1}>
               - Equips your DAO with{' '}
               <Link
-                to='https://daohaus.club/docs/users/boosts/boosts'
+                href='https://daohaus.club/docs/users/boosts/boosts'
                 isExternal
               >
                 DAOhaus Boosts
@@ -487,7 +490,7 @@ const Faq = () => {
             <ParagraphText pl={4} mb={1}>
               - Creates a smoother DAo experience with{' '}
               <Link
-                to='https://daohaus.club/docs/users/boosts/boosts'
+                href='https://daohaus.club/docs/users/boosts/boosts'
                 isExternal
               >
                 DAOhaus Boosts
