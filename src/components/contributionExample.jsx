@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/layout';
 
 import {
@@ -16,6 +16,7 @@ const ContributionExample = ({
   project,
   fontSize = 'sm',
   boxWidth = '100%',
+  setContributionAmount,
 }) => {
   const [sliderValue, setSliderValue] = useState(null);
 
@@ -30,6 +31,7 @@ const ContributionExample = ({
           ),
         ),
       );
+
       return {
         min: Number(
           displayBalance(
@@ -49,6 +51,11 @@ const ContributionExample = ({
     }
     return null;
   }, []);
+
+  const handleSlide = val => {
+    setSliderValue(val);
+    setContributionAmount(val);
+  };
 
   return (
     <Flex
@@ -78,7 +85,7 @@ const ContributionExample = ({
           min={sliderConfig.min}
           max={sliderConfig.max}
           step={sliderConfig.min}
-          onChange={val => setSliderValue(val)}
+          onChange={val => handleSlide(val)}
           mb={4}
         >
           <SliderMark

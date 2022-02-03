@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect, Params } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Dao from '../pages/Dao';

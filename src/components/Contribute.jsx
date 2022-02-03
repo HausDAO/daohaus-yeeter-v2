@@ -1,31 +1,86 @@
-import React from 'react';
-import { Box, Divider, Flex, Text } from '@chakra-ui/layout';
-import { Icon, Button } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Icon, Button, Spinner } from '@chakra-ui/react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useParams } from 'react-router';
+import { ethers } from 'ethers';
 import { useWallet } from '@raidguild/quiver';
+
 import ProjectDetailsNotice from './projectDetailsNotice';
+import EtherscanLink from './etherscanLink';
+import WrongNetworkToolTip from './wrongNetworkToolTip';
+import ContributionExample from './contributionExample';
 import { supportedChains } from '../utils/chain';
 import { maxContribution } from '../utils/projects';
-import CopyButton from './copyButton';
-import EtherscanLink from './etherscanLink';
 import { displayBalance } from '../utils/tokenValue';
-import WrongNetworkToolTip from './wrongNetworkToolTip';
-import { useAppModal } from '../hooks/useModals';
 import { useDao } from '../contexts/DaoContext';
-import ContributionExample from './contributionExample';
+import { useAppModal } from '../hooks/useModals';
+import ContributeAddress from './contributeAddress';
 
 const Contribute = ({ project, contributions }) => {
   const { daochain } = useParams();
-  const { chainId } = useWallet();
-  const { closeModal } = useAppModal();
+  const { chainId, provider } = useWallet();
   const { refetch } = useDao();
+  const { genericModal } = useAppModal();
+  const [contributionAmount, setContributionAmount] = useState(null);
+  const [txHash, setTxHash] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   const chainMatch = daochain === chainId;
 
-  const handleDone = () => {
-    refetch();
-    closeModal();
+  useEffect(() => {
+    if (project) {
+      setContributionAmount(
+        Number(
+          displayBalance(
+            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterTokenDecimals,
+            2,
+          ),
+        ),
+      );
+    }
+  }, [project]);
+
+  useEffect(() => {
+    const pollTX = async () => {
+      const interval = setInterval(async () => {
+        const tx = await provider.getTransaction(txHash);
+
+        if (tx.blockNumber) {
+          refetch();
+          setTxHash(null);
+          setLoading(false);
+          clearInterval(interval);
+        }
+      }, 3000);
+
+      return () => clearInterval(interval);
+    };
+
+    if (txHash) {
+      pollTX();
+    }
+  }, [txHash]);
+
+  const openContributeAddress = () =>
+    genericModal({
+      title: 'Contribute!',
+      body: <ContributeAddress project={project} />,
+    });
+
+  const handleContribute = async () => {
+    setLoading(true);
+
+    const signer = provider.getSigner();
+
+    const args = {
+      to: project.yeeter.shamanAddress,
+      value: ethers.utils.parseEther(contributionAmount.toString()),
+    };
+    const tx = await signer.sendTransaction(args);
+
+    setTxHash(tx.hash);
   };
 
   return (
@@ -35,88 +90,73 @@ const Contribute = ({ project, contributions }) => {
         toolLabel='What to know!'
         toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
       >
-        <Flex
-          direction='column'
-          justify='center'
-          wrap='wrap'
-          align='center'
-          mb={3}
-        >
-          {!chainMatch && <WrongNetworkToolTip />}
-          <Box fontSize='xs' textTransform='uppercase' color='gray.200'>
-            On {supportedChains[project.networkID].name}
-          </Box>
-        </Flex>
-        <Text color='secondary.500' fontSize='sm' textAlign='center'>
-          From your Wallet, send{' '}
-          {supportedChains[project.networkID].nativeCurrency} to the following
-          address:
-        </Text>
-        <Flex
-          fontSize='lg'
-          fontFamily='mono'
-          align='center'
-          mb={3}
-          px={{ base: 8, md: 0 }}
-          justify='center'
-        >
-          <Text fontSize='sm' ml={3} my={5} maxWidth={{ base: '100%' }}>
-            {/* {truncateAddr(project.yeeter.shamanAddress)} */}
-            {project.yeeter.shamanAddress}
-          </Text>
-          <CopyButton text={project.yeeter.shamanAddress} />
-          <Box>
-            <EtherscanLink address={project.yeeter.shamanAddress} />
-          </Box>
-        </Flex>
+        {!chainMatch && <WrongNetworkToolTip />}
+        <Flex direction='column' align='center' mb={3}>
+          {Number(contributions.total) < maxContribution(project) && (
+            <>
+              <Box
+                fontSize='xs'
+                fontWeight='700'
+                textTransform='uppercase'
+                color='gray.200'
+                mt={3}
+              >
+                On {supportedChains[project.networkID].name}
+              </Box>
 
-        {Number(contributions.total) >= maxContribution(project) && (
-          <Flex
-            direction='row'
-            justify='flex-start'
-            align='center'
-            color='red.600'
-          >
-            <Icon as={AiOutlineExclamationCircle} mr={3} />
-            <Box mt={2}>You’ve reached your individual contribution cap!</Box>
-          </Flex>
-        )}
-      </ProjectDetailsNotice>
-      {Number(contributions.total) < maxContribution(project) && (
-        <>
-          <Divider my={7} />
-          <ContributionExample project={project} />
-          <Flex
-            direction='row'
-            justify='flex-start'
-            align='center'
-            p={3}
-            mt={10}
-          >
-            <Icon as={AiOutlineExclamationCircle} mr={3} />
-            <Box>
-              <Text color='red.600'>Just send funds to the address.</Text>{' '}
-              <Text fontSize='xs'>
-                Loot is issued in increments of 100 and accepts multiples of{' '}
-                {displayBalance(
-                  project.yeeter.yeeterConfig.pricePerUnit,
-                  project.yeeterTokenDecimals,
-                  2,
-                )}{' '}
-                {supportedChains[project.networkID].nativeCurrency}
+              {contributionAmount && (
+                <ContributionExample
+                  project={project}
+                  fontSize='xs'
+                  boxWidth='90%'
+                  setContributionAmount={setContributionAmount}
+                />
+              )}
+
+              <Button mt={10} onClick={handleContribute} disabled={loading}>
+                {!loading ? 'Contribute' : <Spinner color='secondary.500' />}
+              </Button>
+
+              <Text
+                mt={5}
+                color='secondary.500'
+                fontSize='sm'
+                onClick={openContributeAddress}
+                _hover={{ cursor: 'pointer' }}
+              >
+                Or Send Funds Directly
               </Text>
-            </Box>
-          </Flex>
-          <Flex justify='flex-end' mt={5}>
-            <Button variant='outline' onClick={closeModal}>
-              Nevermind
-            </Button>
-            <Button ml={5} onClick={handleDone}>
-              Funds Sent!
-            </Button>
-          </Flex>{' '}
-        </>
-      )}
+
+              {loading && txHash && (
+                <Flex mt={10} align='center'>
+                  <Text
+                    color='secondary.500'
+                    fontSize='sm'
+                    textAlign='center'
+                    mr={2}
+                    ml={3}
+                  >
+                    TX Pending
+                  </Text>
+                  <EtherscanLink address={txHash} />
+                </Flex>
+              )}
+            </>
+          )}
+
+          {Number(contributions.total) >= maxContribution(project) && (
+            <Flex
+              direction='row'
+              justify='flex-start'
+              align='center'
+              color='red.600'
+            >
+              <Icon as={AiOutlineExclamationCircle} mr={3} />
+              <Box mt={2}>You’ve reached your individual contribution cap!</Box>
+            </Flex>
+          )}
+        </Flex>
+      </ProjectDetailsNotice>
     </>
   );
 };
