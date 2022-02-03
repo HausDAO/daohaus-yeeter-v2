@@ -1,15 +1,11 @@
 import React, { useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Button, Spacer } from '@chakra-ui/react';
 
 import { useWallet } from '@raidguild/quiver';
-import { useAppModal } from '../hooks/useModals';
 import ProjectDetailsNotice from './projectDetailsNotice';
 import DaohausLink from './daohausLink';
 import Contribute from './Contribute';
-// import ContributionExample from './contributionExample';
-import { maxContribution, yeetStatus } from '../utils/projects';
-import { displayBalance } from '../utils/tokenValue';
+import { yeetStatus } from '../utils/projects';
 
 const fundedNotice = project => {
   return (
@@ -55,19 +51,12 @@ const failedNotice = (project, address) => {
 
 const ProjectContributionActions = ({ project, contributions }) => {
   const { address } = useWallet();
-  const { genericModal } = useAppModal();
   const projectStatus = useMemo(() => {
     if (project) {
       return yeetStatus(project);
     }
     return null;
   }, [project]);
-
-  const openContribute = () =>
-    genericModal({
-      title: 'Contribute!',
-      body: <Contribute project={project} contributions={contributions} />,
-    });
 
   if (!projectStatus) {
     return null;
@@ -77,31 +66,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
     <Box direction='column'>
       {projectStatus === 'active' && (
         <ProjectDetailsNotice borderOverride>
-          <Flex fontSize='lg' align='center' mb={3} justify='center'>
-            <Button w='100%' fontWeight='700' onClick={openContribute}>
-              Contribute...
-            </Button>
-          </Flex>
-          {/* <ContributionExample project={project} fontSize='xs' /> */}
-          <Flex fontSize='xs'>
-            <Box>
-              MIN{' '}
-              {displayBalance(
-                project.yeeter.yeeterConfig.pricePerUnit,
-                project.yeeterTokenDecimals,
-                2,
-              )}
-            </Box>
-            <Spacer />
-            <Box>
-              MAX{' '}
-              {displayBalance(
-                maxContribution(project),
-                project.yeeterTokenDecimals,
-                2,
-              )}
-            </Box>
-          </Flex>
+          <Contribute project={project} contributions={contributions} />
         </ProjectDetailsNotice>
       )}
       {projectStatus === 'failed' && (
