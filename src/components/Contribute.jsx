@@ -92,7 +92,7 @@ const Contribute = ({ project, contributions }) => {
         toolLabel='What to know!'
         toolContent='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface.'
       >
-        {!chainMatch && <WrongNetworkToolTip />}
+        {/* {!chainMatch && <WrongNetworkToolTip />} */}
         <Flex direction='column' align='center' mb={3}>
           {Number(contributions.total) < maxContribution(project) && (
             <>
@@ -115,19 +115,31 @@ const Contribute = ({ project, contributions }) => {
                 />
               )}
 
-              <Button mt={10} onClick={handleContribute} disabled={loading}>
+              {!chainMatch && (
+                <Box mt={10}>
+                  <WrongNetworkToolTip />
+                </Box>
+              )}
+
+              <Button
+                mt={10}
+                onClick={handleContribute}
+                disabled={loading || !chainMatch}
+              >
                 {!loading ? 'Contribute' : <Spinner color='secondary.500' />}
               </Button>
 
-              <Text
-                mt={5}
-                color='secondary.500'
-                fontSize='sm'
-                onClick={openContributeAddress}
-                _hover={{ cursor: 'pointer' }}
-              >
-                Or Send Funds Directly
-              </Text>
+              {chainMatch && (
+                <Text
+                  mt={5}
+                  color='secondary.500'
+                  fontSize='sm'
+                  onClick={openContributeAddress}
+                  _hover={{ cursor: 'pointer' }}
+                >
+                  Or Send Funds Directly
+                </Text>
+              )}
 
               {loading && txHash && (
                 <Flex mt={4} align='center'>

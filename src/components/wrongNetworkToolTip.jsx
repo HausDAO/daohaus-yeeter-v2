@@ -4,15 +4,15 @@ import { useParams } from 'react-router-dom';
 import { Box, Button, Flex, Tooltip } from '@chakra-ui/react';
 
 import { useWallet } from '@raidguild/quiver';
-import useCanInteract from '../hooks/useCanInteract';
+// import useCanInteract from '../hooks/useCanInteract';
 import { capitalize } from '../utils/general';
 import { chainByID, EIP3085, MM_ADDCHAIN_DATA } from '../utils/chain';
 
 const WrongNetworkToolTip = () => {
-  const { address, provider } = useWallet();
-  const { canInteract } = useCanInteract({
-    checklist: ['isConnected', 'isSameChain'],
-  });
+  const { address } = useWallet();
+  // const { canInteract } = useCanInteract({
+  //   checklist: ['isConnected', 'isSameChain'],
+  // });
   const { daochain } = useParams();
   const daoChainName = chainByID(daochain)?.name;
 
@@ -35,9 +35,9 @@ const WrongNetworkToolTip = () => {
     return null;
   }
 
-  if (canInteract || !provider?.currentProvider?.isMetaMask) {
-    return <NetworkTextBox name={daoChainName} />;
-  }
+  // if (canInteract || !provider?.currentProvider?.isMetaMask) {
+  //   return <NetworkTextBox name={daoChainName} />;
+  // }
 
   return (
     <>
@@ -91,13 +91,13 @@ const WrongNetworkToolTip = () => {
 };
 export default WrongNetworkToolTip;
 
-const NetworkTextBox = ({ name }) => (
-  <Flex align='center' mr={5} p='5px 12px' borderRadius='20px'>
-    <Box fontSize='md' fontWeight={200} color='white'>
-      {name}
-    </Box>
-  </Flex>
-);
+// const NetworkTextBox = ({ name }) => (
+//   <Flex align='center' mr={5} p='5px 12px' borderRadius='20px'>
+//     <Box fontSize='md' fontWeight={200} color='white'>
+//       {name}
+//     </Box>
+//   </Flex>
+// );
 
 const ToolTipLabel = ({ daoChainName }) => (
   <Box fontFamily='heading' color='white'>
