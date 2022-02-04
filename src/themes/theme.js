@@ -34,6 +34,7 @@ export const createTheme = daoTheme => {
   return extendTheme({
     active: true,
     colors: {
+      interfaceOrange: '#ED963A',
       secondaryAlpha: themeOverrides.secondaryAlpha,
       primaryAlpha: themeOverrides.primaryAlpha,
       primary: {

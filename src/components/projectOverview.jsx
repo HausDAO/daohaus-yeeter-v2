@@ -95,7 +95,12 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiTwitterFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiTwitterFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange'
+            />
           </Link>
         )}
         {project?.meta?.links?.discord && (
@@ -105,7 +110,12 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiDiscordFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiDiscordFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange'
+            />
           </Link>
         )}
 
@@ -116,7 +126,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiGithubFill} h='30px' w='30px' color='secondary.500' />
+            <Icon as={RiGithubFill} h='30px' w='30px' color='interfaceOrange' />
           </Link>
         )}
 
@@ -128,7 +138,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             mr={3}
             ml={0}
           >
-            <Icon as={RiGlobeLine} h='30px' w='30px' color='secondary.500' />
+            <Icon as={RiGlobeLine} h='30px' w='30px' color='interfaceOrange' />
           </Link>
         )}
 
@@ -139,7 +149,12 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiTelegramFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiTelegramFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange'
+            />
           </Link>
         )}
 
@@ -150,7 +165,7 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiMediumFill} h='30px' w='30px' color='secondary.500' />
+            <Icon as={RiMediumFill} h='30px' w='30px' color='interfaceOrange' />
           </Link>
         )}
 
