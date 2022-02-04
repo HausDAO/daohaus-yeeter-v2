@@ -48,6 +48,10 @@ export const statusFilterOptions = [
 
 export const filterOptions = [
   {
+    name: 'Mainnet',
+    value: '0x1',
+  },
+  {
     name: 'Gnosis Chain',
     value: '0x64',
   },

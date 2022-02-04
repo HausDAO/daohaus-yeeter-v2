@@ -1,54 +1,54 @@
 export const supportedChains = {
-  // '0x1': {
-  //   name: 'Ethereum Mainnet',
-  //   short_name: 'eth',
-  //   nativeCurrency: 'ETH',
-  //   network: 'mainnet',
-  //   network_id: 1,
-  //   chain_id: '0x1',
-  //   hub_sort_order: 1,
-  //   providers: ['walletconnect'],
-  //   // , 'portis', 'fortmatic'
-  //   rpc_url: `https://${process.env.REACT_APP_RPC_URI}.eth.rpc.rivet.cloud/`,
-  //   abi_api_url:
-  //     'https://api.etherscan.io/api?module=contract&action=getabi&address=',
-  //   tokenlist_api_url: 'https://api.etherscan.io/api',
-  //   subgraph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus',
-  //   stats_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats',
-  //   boosts_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts',
-  //   erc721_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc721-subgraph',
-  //   erc1155_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc1155-subgraph',
-  //   shaman_graph_url:
-  //     'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-rinkeby',
-  //   minion_factory_addr: '0x88207Daf515e0da1A32399b3f92D128B1BF45294',
-  //   moloch_factory_addr: '0x38064F40B20347d58b326E767791A6f79cdEddCe',
-  //   dai_contract: '0x6b175474e89094c44da98b954eedeac495271d0f',
-  //   wrapper_contract: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-  //   wrap_n_zap_factory_addr: '0x4e521FF388c83b4c945a33984ba42Efb73Cc04e6',
-  //   block_explorer: 'https://etherscan.io',
-  //   rarible: {
-  //     api_url: 'https://ethereum-api.rarible.org/v0.1',
-  //     erc20_transfer_proxy: '0xb8e4526e0da700e9ef1f879af713d691f81507d8',
-  //     nft_transfer_proxy: '0x4fee7b061c97c9c496b01dbce9cdb10c02f0a0be',
-  //     base_url: 'https://rarible.com',
-  //   },
-  //   niftyMinion: {
-  //     minion_factory_addr: '0x7EDfBDED3077Bc035eFcEA1835359736Fa342209',
-  //     version: 'v1',
-  //   },
-  //   safeMinion: {
-  //     minion_factory_addr: '0xbC37509A283E2bb67fd151c34E72e826C501E108',
-  //     safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
-  //     safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
-  //   },
-  //   escrow_minion: '0xc9f9E7FC92A7D3B2b3554be850fFF462B7b382E7',
-  //   disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
-  // },
+  '0x1': {
+    name: 'Ethereum Mainnet',
+    short_name: 'eth',
+    nativeCurrency: 'ETH',
+    network: 'mainnet',
+    network_id: 1,
+    chain_id: '0x1',
+    hub_sort_order: 1,
+    providers: ['walletconnect'],
+    // , 'portis', 'fortmatic'
+    rpc_url: `https://${process.env.REACT_APP_RPC_URI}.eth.rpc.rivet.cloud/`,
+    abi_api_url:
+      'https://api.etherscan.io/api?module=contract&action=getabi&address=',
+    tokenlist_api_url: 'https://api.etherscan.io/api',
+    subgraph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus',
+    stats_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats',
+    boosts_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts',
+    erc721_graph_url:
+      'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc721-subgraph',
+    erc1155_graph_url:
+      'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc1155-subgraph',
+    shaman_graph_url:
+      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-subgraph',
+    minion_factory_addr: '0x88207Daf515e0da1A32399b3f92D128B1BF45294',
+    moloch_factory_addr: '0x38064F40B20347d58b326E767791A6f79cdEddCe',
+    dai_contract: '0x6b175474e89094c44da98b954eedeac495271d0f',
+    wrapper_contract: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+    wrap_n_zap_factory_addr: '0x4e521FF388c83b4c945a33984ba42Efb73Cc04e6',
+    block_explorer: 'https://etherscan.io',
+    rarible: {
+      api_url: 'https://ethereum-api.rarible.org/v0.1',
+      erc20_transfer_proxy: '0xb8e4526e0da700e9ef1f879af713d691f81507d8',
+      nft_transfer_proxy: '0x4fee7b061c97c9c496b01dbce9cdb10c02f0a0be',
+      base_url: 'https://rarible.com',
+    },
+    niftyMinion: {
+      minion_factory_addr: '0x7EDfBDED3077Bc035eFcEA1835359736Fa342209',
+      version: 'v1',
+    },
+    safeMinion: {
+      minion_factory_addr: '0xbC37509A283E2bb67fd151c34E72e826C501E108',
+      safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
+      safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
+    },
+    escrow_minion: '0xc9f9E7FC92A7D3B2b3554be850fFF462B7b382E7',
+    disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
+  },
   '0x4': {
     name: 'Ethereum Rinkeby',
     short_name: 'rinkeby',
