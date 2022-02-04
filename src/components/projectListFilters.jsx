@@ -87,7 +87,9 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
       <Input
         type='search'
         className='input'
-        placeholder='Search By Name'
+        placeholder='Search by name'
+        fontSize='14px'
+        lineHeight='21px'
         maxW={300}
         mr={5}
         onChange={debouncedHandleChange}

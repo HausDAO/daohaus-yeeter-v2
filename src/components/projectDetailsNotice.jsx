@@ -28,6 +28,7 @@ const ProjectDetailsNotice = ({
             shouldWrapChildren
             padding={3}
             color='#ED963A'
+            bgColor='black'
             placement='bottom'
             label={toolContent}
           >

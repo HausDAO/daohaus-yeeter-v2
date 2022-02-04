@@ -100,7 +100,8 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
-              p={{ base: 6, md: 10 }}
+              paddingX={{ base: 5, lg: 7 }}
+              paddingTop={{ base: '17px', lg: '19px' }}
               borderRadius='17px'
             >
               {currentProject?.members.length > 0 && (

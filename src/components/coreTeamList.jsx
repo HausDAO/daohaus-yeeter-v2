@@ -12,13 +12,21 @@ const CoreTeamList = ({ coreTeam, totalShares, project }) => {
 
   return (
     <Box backgroundColor='primary.500'>
-      <Flex fontSize='lg' textTransform='uppercase' mb={3} align='center'>
-        Core Team
+      <Flex mb={5} align='center'>
+        <Text
+          fontSize='md'
+          lineHeight='24px'
+          letterSpacing='11%'
+          textTransform='uppercase'
+        >
+          Core Team
+        </Text>
         <Tooltip
           hasArrow
           shouldWrapChildren
           padding={3}
           color='#ED963A'
+          bgColor='black'
           placement='bottom'
           label='The Core Team are full shareholders in the DAO and are responsible for the goals of the project. Full shareholder membership is proposed through the DAOhaus interface. '
         >
@@ -28,24 +36,30 @@ const CoreTeamList = ({ coreTeam, totalShares, project }) => {
         </Tooltip>
       </Flex>
       {coreTeam.slice(0, TEAM_DISPLAY_COUNT).map(member => (
-        <Flex flexDirection='column' key={member.memberAddress} mb={5}>
-          <AddressAvatar addr={member.memberAddress} hideCopy />
-          <Flex alignItems='center' justifyContent='flex-start' ml={1}>
+        <Flex flexDirection='column' key={member.memberAddress}>
+          <AddressAvatar addr={member.memberAddress} hideCopy fontSize='lg' />
+          <Flex
+            alignItems='center'
+            justifyContent='flex-start'
+            ml={1}
+            mt='10px'
+            mb={6}
+          >
             <Flex flexDirection='column' width='33%'>
-              <Text>{member.shares}</Text>
-              <Text fontSize='xs' color='gray.500'>
+              <Text fontSize='lg'>{member.shares}</Text>
+              <Text fontSize='xs' color='gray.500' mt={1}>
                 Shares
               </Text>
             </Flex>
             <Flex flexDirection='column' width='33%'>
               <Text>{((member.shares / totalShares) * 100).toFixed(2)}%</Text>
-              <Text fontSize='xs' color='gray.500'>
+              <Text fontSize='xs' color='gray.500' mt={1}>
                 Voting Power
               </Text>
             </Flex>
             <Flex flexDirection='column' width='33%'>
               <Text>{member.loot}</Text>
-              <Text fontSize='xs' color='gray.500'>
+              <Text fontSize='xs' color='gray.500' mt={1}>
                 Loot
               </Text>
             </Flex>

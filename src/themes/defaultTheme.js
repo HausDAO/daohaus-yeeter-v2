@@ -6,6 +6,7 @@ import BrandImg from '../assets/img/Daohaus__Castle--Dark.svg';
 export const defaultTheme = {
   primary500: '#050a1b',
   primaryAlpha: rgba('#050a1b', 0.9),
+  interfaceOrange: '#ED963A',
   secondary500: '#38a169',
   secondaryAlpha: rgba('#050a1b', 0.75),
   bg500: rgba(5, 10, 27, 0.8), // to match the Figma bg: hex is 050a1b
