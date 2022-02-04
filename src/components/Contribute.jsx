@@ -115,7 +115,23 @@ const Contribute = ({ project, contributions }) => {
                 />
               )}
 
-              <Button mt={10} onClick={handleContribute} disabled={loading}>
+              {!chainMatch && (
+                <Text
+                  mt={5}
+                  // color='secondary.500'
+                  fontSize='sm'
+                  onClick={openContributeAddress}
+                  _hover={{ cursor: 'pointer' }}
+                >
+                  Switch to {supportedChains[project.networkID].name}
+                </Text>
+              )}
+
+              <Button
+                mt={10}
+                onClick={handleContribute}
+                disabled={loading || !chainMatch}
+              >
                 {!loading ? 'Contribute' : <Spinner color='secondary.500' />}
               </Button>
 
