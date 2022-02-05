@@ -17,6 +17,9 @@ const BaseRouter = () => {
         <Route exact path='/faq'>
           <Faq />
         </Route>
+        <Route exact path='/yeet'>
+          <Redirect to='/dao/0x1/0x55695a67f3987aeed7d2a87670dbb4367a709021/1' />
+        </Route>
         <Route
           exact
           path='/dao/:daochain/:daoid(\b0x[0-9a-f]{10,40}\b)'

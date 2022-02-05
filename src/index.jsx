@@ -14,6 +14,13 @@ window.onunload = () => {
 };
 
 const SUPPORTED_NETWORKS = {
+  '0x1': {
+    chainId: '0x1',
+    name: 'Ethereum Mainnet',
+    symbol: 'ETH',
+    explorer: 'https://etherscan.io/',
+    rpc: `https://${process.env.REACT_APP_RPC_URI}.eth.rpc.rivet.cloud`,
+  },
   '0x4': {
     chainId: '0x4',
     name: 'Ethereum Rinkeby',
@@ -43,7 +50,7 @@ ReactDOM.render(
         <WalletProvider
           web3modalOptions={web3modalOptions}
           networks={SUPPORTED_NETWORKS}
-          defaultChainId='0x64'
+          defaultChainId='0x1'
           handleModalEvents={(eventName, error) => {
             if (error) {
               console.log(error.message);

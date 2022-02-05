@@ -21,7 +21,6 @@ const ProjectsList = () => {
   return (
     <Box p={7}>
       {!address && !projects.length ? (
-        // <Spinner />
         <Loading />
       ) : (
         <>
