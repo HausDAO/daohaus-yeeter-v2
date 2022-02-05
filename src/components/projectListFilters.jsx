@@ -6,7 +6,10 @@ import { useProjects } from '../contexts/ProjectsContext';
 // import ListSort from './listSort';
 import ListFilter from './listFilter';
 import { debounce } from '../utils/general';
-import { filterAndSortProjects } from '../utils/projects';
+import {
+  filterAndSortProjects,
+  projectListFilterContent,
+} from '../utils/projects';
 
 export const sortOptions = [
   {
@@ -46,37 +49,12 @@ export const statusFilterOptions = [
   },
 ];
 
-export const filterOptions = [
-  {
-    name: 'Mainnet',
-    value: '0x1',
-  },
-  {
-    name: 'Gnosis Chain',
-    value: '0x64',
-  },
-  {
-    name: 'Rinkeby',
-    value: '0x4',
-  },
-  {
-    name: 'All',
-    value: 'all',
-  },
-  // {
-  //   name: 'Mainnet',
-  //   value: '0x1',
-  // },
-];
-
 const ProjectListFilters = ({ listProjects, setListProjects }) => {
   const { projects } = useProjects();
 
-  // const [sort, setSort] = useState(sortOptions[0].value);
   const [sort] = useState(sortOptions[0]);
-
   const [statusFilter, setStatusFilter] = useState(statusFilterOptions[0]);
-  const [filter, setFilter] = useState(filterOptions[0]);
+  const [filter, setFilter] = useState(projectListFilterContent()[0]);
   const [searchTerm, setSearchTerm] = useState(null);
 
   useEffect(() => {
@@ -127,7 +105,7 @@ const ProjectListFilters = ({ listProjects, setListProjects }) => {
         <ListFilter
           filter={filter}
           setFilter={setFilter}
-          options={filterOptions}
+          options={projectListFilterContent()}
           labelText='Network'
         />
       </Box>

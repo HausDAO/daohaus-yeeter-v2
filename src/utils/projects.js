@@ -248,3 +248,14 @@ export const userContributionData = (project, userMemberships, yeets) => {
 
   return { total, yeets, currentMembership };
 };
+
+export const projectListFilterContent = () => {
+  const validNetworks = Object.keys(supportedChains).map(networkId => {
+    return { name: supportedChains[networkId].name, value: networkId };
+  });
+  validNetworks.push({
+    name: 'All',
+    value: 'all',
+  });
+  return validNetworks;
+};
