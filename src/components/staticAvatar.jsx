@@ -15,7 +15,7 @@ const StaticAvatar = ({
   hideCopy,
   emoji,
   hideEtherscanLink,
-  fontSize,
+  ...props
 }) => {
   const { daochain } = useParams();
   const blockie = useMemo(() => {
@@ -30,7 +30,12 @@ const StaticAvatar = ({
       <Flex direction='row' alignItems='center'>
         <Avatar name={name || address} src={avImg} size='sm' />
         <Flex>
-          <EnsDisplay address={address} noLink fontSize={fontSize} />
+          <EnsDisplay
+            address={address}
+            noLink
+            fontSize={props.fontSize}
+            ml={{ base: props.ml || 2, md: props.ml || 3 }}
+          />
 
           <Box as='span' mx={1}>
             {emoji}

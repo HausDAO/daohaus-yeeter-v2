@@ -7,7 +7,7 @@ import { truncateAddr } from '../utils/general';
 import { handleGetENS } from '../utils/ens';
 import { supportedChains } from '../utils/chain';
 
-const EnsDisplay = ({ address, noLink, fontSize }) => {
+const EnsDisplay = ({ address, noLink, ...props }) => {
   const { daochain } = useParams();
 
   const [ensName, setEnsName] = useState();
@@ -30,9 +30,10 @@ const EnsDisplay = ({ address, noLink, fontSize }) => {
   }, [address]);
   return (
     <Text
-      fontSize={fontSize || 'sm'}
+      fontSize={props.fontSize || 'sm'}
       fontFamily='heading'
-      ml={{ base: 2, md: 3 }}
+      ml={{ base: props.ml || 2, md: props.ml || 3 }}
+      maxWidth={props.maxWidth}
     >
       {ensName || truncateAddr(address)}
       {!noLink && (
