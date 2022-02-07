@@ -119,7 +119,7 @@ const Navigation = ({ isDao }) => {
 };
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('white.600', 'white.200');
+  // const linkColor = useColorModeValue('white.600', 'white.200');
   const linkHoverColor = useColorModeValue('white.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'white.800');
 
@@ -135,7 +135,11 @@ const DesktopNav = () => {
                 to={navItem.href || '#'}
                 fontSize='sm'
                 fontWeight={500}
-                color={linkColor}
+                // color={linkColor}
+                color='white'
+                letterSpacing='widest'
+                lineHeight='18px'
+                textTransform='uppercase'
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor,

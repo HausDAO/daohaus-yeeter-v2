@@ -38,43 +38,75 @@ const LeaderBoardList = ({ yeets, project }) => {
       </Text>
       <Flex flexDirection='column'>
         <Flex alignItems='center' justifyContent='flex-start'>
-          <Text fontSize='xs' color='gray.500' width='35%'>
+          <Text
+            fontSize='xs'
+            color='gray.500'
+            width={{ base: '25%', lg: '35%' }}
+            mr={{ base: '10%', lg: '0' }}
+            mb={{ base: 1, lg: '19px' }}
+          >
             Contributor
           </Text>
-          <Text fontSize='xs' color='gray.500' width='25%'>
+          <Text
+            fontSize='xs'
+            color='gray.500'
+            width='25%'
+            mb={{ base: 1, lg: '19px' }}
+          >
             Amount
             {/* <Icon onClick={toggleSort} as={TiArrowUnsorted} /> */}
           </Text>
-          <Text fontSize='xs' color='gray.500' width='25%'>
+          <Text
+            fontSize='xs'
+            color='gray.500'
+            width='25%'
+            mb={{ base: 1, lg: '19px' }}
+          >
             Loot
           </Text>
-          <Text fontSize='xs' color='gray.500' width='25%'>
+          <Text
+            fontSize='xs'
+            color='gray.500'
+            width='25%'
+            mb={{ base: 1, lg: '19px' }}
+          >
             Time
             {/* <Icon onClick={toggleSort} as={TiArrowUnsorted} /> */}
           </Text>
         </Flex>
         {sortedYeets.map((yeet, idx) => (
           <Flex
-            alignItems='center'
-            justifyContent='flex-start'
+            alignItems='flex-start'
+            justifyContent='flex-end'
             key={idx}
             mb={3}
           >
-            <Box width='35%'>
-              <EnsDisplay address={yeet.contributorAddress} />
+            <Box
+              width={{ base: '25%', lg: '35%' }}
+              mr={{ base: '10%', lg: '0' }}
+            >
+              <EnsDisplay
+                address={yeet.contributorAddress}
+                ml='0px'
+                fontSize={{ base: 'sm', lg: 'lg' }}
+              />
+            </Box>
+            <Box width='25%' align='start'>
+              <Text fontSize={{ base: 'sm', lg: 'lg' }}>
+                {Web3.utils.fromWei(yeet.amount)}
+              </Text>
             </Box>
             <Box width='25%'>
-              <Text fontSize='sm'>{Web3.utils.fromWei(yeet.amount)}</Text>
-            </Box>
-            <Box width='25%'>
-              <Text fontSize='sm'>
+              <Text fontSize={{ base: 'sm', lg: 'lg' }}>
                 {(Number(yeet.amount) /
                   Number(project.yeeter.yeeterConfig.pricePerUnit)) *
                   100}
               </Text>
             </Box>
             <Box width='25%'>
-              <Text fontSize='sm'>{timeToNow(yeet.createdAt)}</Text>
+              <Text fontSize={{ base: 'sm', lg: 'lg' }}>
+                {timeToNow(yeet.createdAt)}
+              </Text>
             </Box>
           </Flex>
         ))}
