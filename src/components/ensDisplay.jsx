@@ -32,7 +32,7 @@ const EnsDisplay = ({ address, noLink, ...props }) => {
     <Text
       fontSize={props.fontSize || 'sm'}
       fontFamily='heading'
-      ml={{ base: props.ml || 2, md: props.ml || 3 }}
+      ml={{ base: props.ml, lg: props.ml || 3 }}
       maxWidth={props.maxWidth}
     >
       {ensName || truncateAddr(address)}

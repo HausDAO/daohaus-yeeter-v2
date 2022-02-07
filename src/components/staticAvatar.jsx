@@ -28,7 +28,12 @@ const StaticAvatar = ({
   return (
     <Flex direction='row' alignItems='center'>
       <Flex direction='row' alignItems='center'>
-        <Avatar name={name || address} src={avImg} size='sm' />
+        <Avatar
+          name={name || address}
+          src={avImg}
+          size='sm'
+          mr={{ base: 2, md: 0 }}
+        />
         <Flex>
           <EnsDisplay
             address={address}

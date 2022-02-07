@@ -31,7 +31,7 @@ const ProjectOverview = ({ project, longDescription }) => {
 
   return (
     <>
-      <Flex alignItems='flex-start' mb={5}>
+      <Flex alignItems={{ base: 'center', lg: 'flex-start' }} mb={5}>
         <Avatar
           src={
             project?.meta?.avatarImg

@@ -41,9 +41,9 @@ const LeaderBoardList = ({ yeets, project }) => {
           <Text
             fontSize='xs'
             color='gray.500'
-            width='25%'
+            width={{ base: '25%', lg: '35%' }}
+            mr={{ base: '10%', lg: '0' }}
             mb={{ base: 1, lg: '19px' }}
-            mr='10%'
           >
             Contributor
           </Text>
@@ -81,12 +81,14 @@ const LeaderBoardList = ({ yeets, project }) => {
             key={idx}
             mb={3}
           >
-            <Box width='25%' mr='10%'>
+            <Box
+              width={{ base: '25%', lg: '35%' }}
+              mr={{ base: '10%', lg: '0' }}
+            >
               <EnsDisplay
                 address={yeet.contributorAddress}
                 ml='0px'
                 fontSize={{ base: 'sm', lg: 'lg' }}
-                maxWidth='100%'
               />
             </Box>
             <Box width='25%' align='start'>
