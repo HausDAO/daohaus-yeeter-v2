@@ -45,7 +45,9 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '65%', '65%']}
               backgroundColor='primary.500'
-              p={{ base: 6, md: 10 }}
+              paddingX={{ base: 5, lg: 7 }}
+              paddingTop={{ base: '17px', lg: 6 }}
+              paddingBottom={{ base: '17px', lg: 8 }}
               borderRadius='17px'
               mb={6}
             >
@@ -62,7 +64,9 @@ const DaoHome = () => {
             <Box
               w={['100%', null, null, '30%', '30%']}
               backgroundColor='primary.500'
-              p={{ base: 6, md: 10 }}
+              paddingX={{ base: 5, lg: 7 }}
+              paddingTop={{ base: '17px', lg: 6 }}
+              paddingBottom={{ base: '17px', lg: 8 }}
               borderRadius='17px'
               mb={6}
             >
@@ -81,8 +85,11 @@ const DaoHome = () => {
           <Flex wrap='wrap' justify='space-between'>
             <Box
               w={['100%', null, null, '65%', '65%']}
+              h='fit-content'
               backgroundColor='primary.500'
-              p={{ base: 6, md: 10 }}
+              paddingX={{ base: 5, lg: 7 }}
+              paddingTop={{ base: '17px', lg: 6 }}
+              paddingBottom={{ base: '17px', lg: 8 }}
               borderRadius='17px'
             >
               <Box borderRadius='17px'>
@@ -99,9 +106,11 @@ const DaoHome = () => {
             </Box>
             <Box
               w={['100%', null, null, '30%', '30%']}
+              h='fit-content'
               backgroundColor='primary.500'
               paddingX={{ base: 5, lg: 7 }}
-              paddingTop={{ base: '17px', lg: '19px' }}
+              paddingTop={{ base: '17px', lg: 6 }}
+              paddingBottom={{ base: '17px', lg: 8 }}
               borderRadius='17px'
             >
               {currentProject?.members.length > 0 && (

@@ -44,7 +44,7 @@ const ProjectDetailsNotice = ({
         border={borderOverride ? 'none' : '1px solid'}
         borderColor='secondary.500'
         borderRadius='10'
-        paddingX={{ base: 0, md: 5 }}
+        paddingX={{ base: 5, md: 5 }}
         paddingY={{ base: 5 }}
       >
         {children}
