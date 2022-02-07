@@ -149,10 +149,12 @@ const Contribute = ({ project, contributions }) => {
                     textAlign='center'
                     mr={2}
                     ml={3}
-                  >
-                    TX Pending
-                  </Text>
-                  <EtherscanLink address={txHash} isTransaction />
+                  />
+                  <EtherscanLink
+                    address={txHash}
+                    isTransaction
+                    linkText='TX Pending'
+                  />
                 </Flex>
               )}
 
@@ -165,7 +167,7 @@ const Contribute = ({ project, contributions }) => {
                     mr={2}
                     ml={3}
                   >
-                    🎉 Contribution Complete!
+                    🎉 Success!
                   </Text>
                   <EtherscanLink address={contributionComplete} isTransaction />
                 </Flex>
