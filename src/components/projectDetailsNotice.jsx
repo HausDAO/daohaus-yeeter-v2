@@ -28,6 +28,7 @@ const ProjectDetailsNotice = ({
             shouldWrapChildren
             padding={3}
             color='#ED963A'
+            bgColor='black'
             placement='bottom'
             label={toolContent}
           >
@@ -43,8 +44,8 @@ const ProjectDetailsNotice = ({
         border={borderOverride ? 'none' : '1px solid'}
         borderColor='secondary.500'
         borderRadius='10'
-        paddingX={{ base: 0, md: 5 }}
-        paddingBottom={{ base: 5 }}
+        paddingX={{ base: 5, md: 5 }}
+        paddingY={{ base: 5 }}
       >
         {children}
       </Flex>

@@ -12,13 +12,19 @@ const fundedNotice = project => {
     <Flex
       fontSize='md'
       fontFamily='heading'
-      align='flex-start'
+      alignItems='flex-start'
+      // alignItems='center'
       direction='column'
       mb={3}
       justify='center'
     >
-      <Text mb={3}>Visit the DAO to keep up with the project details:</Text>
-      <Flex direction='row' justify='space-between'>
+      <Box mb={3} fontFamily='mono' fontSize='lg'>
+        🎉 Funding Goal Met!
+      </Box>
+      <Text mb={3} fontSize='md'>
+        Visit the DAO to keep up with the project details:
+      </Text>
+      <Flex direction='row' justify='space-between' alignSelf='center'>
         <DaohausLink linkText='Visit the DAO' project={project} />
       </Flex>
     </Flex>
@@ -35,7 +41,10 @@ const failedNotice = (project, address) => {
       mb={3}
       justify='center'
     >
-      <Text mb={3}>
+      <Box mb={3} fontFamily='mono' fontSize='lg'>
+        ⏰ Funding Period Over
+      </Box>
+      <Text mb={3} fontSize='md'>
         You can rage quit and withdraw your funds or visit the DAO:
       </Text>
       <Flex direction='row' justify='space-between'>

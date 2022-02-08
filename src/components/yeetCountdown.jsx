@@ -25,9 +25,9 @@ const YeetCountdown = ({ project }) => {
   }
 
   return (
-    <Flex justify='space-between' align='center'>
+    <Flex justify='space-between' align='start' width='100%' alignSelf='start'>
       <Flex direction='column' fontFamily='mono'>
-        <Box fontSize={{ base: 'lg', md: '2xl' }}>{countdownTime.time}</Box>
+        <Box fontSize={{ base: 'lg' }}>{countdownTime.time}</Box>
         <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
           {countdownTime.text}
         </Box>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton } from '@chakra-ui/button';
+import { Box, IconButton } from '@chakra-ui/react';
 import { RiRefreshLine } from 'react-icons/ri';
 import { Spinner } from '@chakra-ui/spinner';
 
@@ -24,14 +24,18 @@ const RefreshButton = () => {
     return <Spinner ml={3} color='secondary.500' />;
   }
   return (
-    <IconButton
-      icon={<RiRefreshLine size='1.5rem' />}
-      p={0}
-      size='sm'
-      variant='outline'
+    <Box
+      paddingLeft='6px'
+      paddingY='6px'
       onClick={handleRefetch}
-      ml={3}
-    />
+      _hover={{ cursor: 'pointer' }}
+    >
+      <IconButton
+        icon={<RiRefreshLine size='1rem' />}
+        size='xs'
+        variant='outline'
+      />
+    </Box>
   );
 };
 

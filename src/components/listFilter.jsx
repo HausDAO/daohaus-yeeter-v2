@@ -38,11 +38,11 @@ const ListFilter = ({ filter, setFilter, options, labelText }) => {
             textTransform='uppercase'
             fontFamily='heading'
             fontSize={['sm', null, null, 'md']}
-            color='secondary.500'
-            _hover={{ color: 'secondary.400' }}
+            color='interfaceOrange.500'
+            _hover={{ color: 'interfaceOrange.400' }}
           >
             {filter.name}
-            <Icon as={RiArrowDropDownFill} color='secondary.500' />
+            <Icon as={RiArrowDropDownFill} color='interfaceOrange.500' />
           </MenuButton>
           <MenuList bg='black'>
             {filterOptions?.map(option => {

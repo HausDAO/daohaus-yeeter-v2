@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Link, Text } from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/avatar';
 import makeBlockie from 'ethereum-blockies-base64';
 import ReactMarkdown from 'react-markdown';
@@ -30,7 +31,7 @@ const ProjectOverview = ({ project, longDescription }) => {
 
   return (
     <>
-      <Flex alignItems='flex-start' mb={5}>
+      <Flex alignItems={{ base: 'center', lg: 'flex-start' }} mb={5}>
         <Avatar
           src={
             project?.meta?.avatarImg
@@ -39,7 +40,12 @@ const ProjectOverview = ({ project, longDescription }) => {
           }
           mr={6}
         />
-        <Box fontSize='2xl' fontWeight={700} fontFamily='heading'>
+        <Box
+          fontSize={{ base: '20px', lg: '30px' }}
+          lineHeight={{ base: '30px', lg: '42px' }}
+          fontWeight={700}
+          fontFamily='heading'
+        >
           {daoid ? (
             `${project?.meta?.name || ''} ${
               yeeternumber === '1' ? '' : yeeternumber
@@ -49,6 +55,9 @@ const ProjectOverview = ({ project, longDescription }) => {
               to={`/dao/${project?.networkID}/${
                 project?.id
               }/${project.yeeterNumber || '1'}`}
+              style={{
+                color: '#ED963A',
+              }} // needed to override the theme 'a' style
             >
               {project?.meta?.name} {project.yeeterNumber || ''}
             </RouterLink>
@@ -58,7 +67,7 @@ const ProjectOverview = ({ project, longDescription }) => {
       <Box mb={5}>
         {longDescription ? (
           <>
-            <Text> {project?.meta?.description}</Text>
+            <Text fontSize='md'> {project?.meta?.description}</Text>
             {project?.meta?.longDescription && (
               <>
                 {showDetails && (
@@ -75,7 +84,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                 <Text
                   onClick={() => setShowDetails(!showDetails)}
                   _hover={{ cursor: 'pointer' }}
-                  color='secondary.500'
+                  color='interfaceOrange'
                   fontSize='sm'
                 >
                   Show {!showDetails ? `More` : `Less`}
@@ -95,7 +104,12 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiTwitterFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiTwitterFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+            />
           </Link>
         )}
         {project?.meta?.links?.discord && (
@@ -105,7 +119,14 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiDiscordFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiDiscordFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+              transition='all 0.15s linear'
+              _hover={{ textDecoration: 'none', color: 'interfaceOrange.800' }}
+            />
           </Link>
         )}
 
@@ -116,7 +137,14 @@ const ProjectOverview = ({ project, longDescription }) => {
             rel='noreferrer noopener'
             mr={3}
           >
-            <Icon as={RiGithubFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiGithubFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+              transition='all 0.15s linear'
+              _hover={{ textDecoration: 'none', color: 'interfaceOrange.800' }}
+            />
           </Link>
         )}
 
@@ -125,10 +153,17 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={project.meta.links.website}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
             ml={0}
           >
-            <Icon as={RiGlobeLine} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiGlobeLine}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+              transition='all 0.15s linear'
+              _hover={{ textDecoration: 'none', color: 'interfaceOrange.800' }}
+            />
           </Link>
         )}
 
@@ -137,9 +172,16 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={fixSocialLink('telegram', project.meta.links.telegram)}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
           >
-            <Icon as={RiTelegramFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiTelegramFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+              transition='all 0.15s linear'
+              _hover={{ textDecoration: 'none', color: 'interfaceOrange.800' }}
+            />
           </Link>
         )}
 
@@ -148,24 +190,48 @@ const ProjectOverview = ({ project, longDescription }) => {
             href={fixSocialLink('medium', project.meta.links.medium)}
             target='_blank'
             rel='noreferrer noopener'
-            m={3}
+            mr={3}
           >
-            <Icon as={RiMediumFill} h='30px' w='30px' color='secondary.500' />
+            <Icon
+              as={RiMediumFill}
+              h='30px'
+              w='30px'
+              color='interfaceOrange.500'
+              transition='all 0.15s linear'
+              _hover={{ textDecoration: 'none', color: 'interfaceOrange.800' }}
+            />
           </Link>
         )}
-
+      </Flex>
+      <Box marginTop={6}>
         {!daoid && (
           <RouterLink
+            style={{}}
             to={`/dao/${project?.networkID}/${
               project?.id
             }/${project.yeeterNumber || '1'}`}
           >
-            View Project
+            <Button
+              paddingX={2}
+              paddingY={1}
+              width='94px'
+              height='29px'
+              borderRadius='lg'
+              color='black'
+              fontSize='11px'
+              lineHeight='20px'
+              fontWeight='400'
+              align='center'
+              transition='all 0.15s linear'
+              _hover={{ color: 'gray.900', backgroundColor: 'secondary.600' }}
+            >
+              Visit Y33T
+            </Button>
           </RouterLink>
         )}
 
         {daoid && <DaohausLink linkText='Visit the DAO' project={project} />}
-      </Flex>
+      </Box>
 
       {daoid && Number(yeeternumber) > 1 && (
         <Box mt={2} fontSize='sm'>
