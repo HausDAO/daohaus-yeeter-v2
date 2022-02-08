@@ -64,15 +64,15 @@ export const MEMBERSHIPS_QUERY = gql`
       id
       memberAddress
       molochAddress
-      shares
       loot
+      shares
       moloch {
-        id
         version
-        summoner
       }
       tokenBalances {
-        token
+        token {
+          tokenAddress
+        }
         tokenBalance
       }
     }
@@ -168,6 +168,7 @@ export const PROJECTS_YEETS_QUERY = gql`
       amount
       shamanAddress
       molochAddress
+      transactionHash
     }
   }
 `;
@@ -185,6 +186,7 @@ export const PROJECT_DETAIL_YEETS_QUERY = gql`
       amount
       shamanAddress
       molochAddress
+      transactionHash
     }
   }
 `;

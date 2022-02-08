@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Text } from '@chakra-ui/react';
 import { BsCaretDownFill } from 'react-icons/bs';
 import Web3 from 'web3';
 
 import { timeToNow } from '../utils/general';
 import EnsDisplay from './ensDisplay';
 
-const YEET_VIEW_COUNT = 15;
+const YEET_VIEW_COUNT = 20;
 const YEET_SORT_OPTIONS = {
   TIME: 'createdAt',
   CONTRIBUTOR: 'contributorAddress',
@@ -148,26 +148,52 @@ const LeaderBoardList = ({ yeets, project }) => {
         ))}
       </Flex>
       {sortedYeets.length < yeets.length && (
-        <Text
+        <Button
+          mt={2}
+          paddingX={2}
+          paddingY={1}
+          width='94px'
+          height='29px'
+          borderRadius='lg'
+          color='black'
+          fontSize='11px'
+          lineHeight='20px'
+          fontWeight='400'
+          align='center'
+          transition='all 0.15s linear'
+          _hover={{
+            color: 'gray.900',
+            backgroundColor: 'secondary.600',
+          }}
           onClick={showMoreYeets}
-          _hover={{ cursor: 'pointer' }}
-          color='interfaceOrange'
-          fontSize='sm'
         >
           Show More
-        </Text>
+        </Button>
       )}
 
       {sortedYeets.length > YEET_VIEW_COUNT &&
         sortedYeets.length === yeets.length && (
-          <Text
+          <Button
+            mt={2}
+            paddingX={2}
+            paddingY={1}
+            width='94px'
+            height='29px'
+            borderRadius='lg'
+            color='black'
+            fontSize='11px'
+            lineHeight='20px'
+            fontWeight='400'
+            align='center'
+            transition='all 0.15s linear'
+            _hover={{
+              color: 'gray.900',
+              backgroundColor: 'secondary.600',
+            }}
             onClick={resetYeetList}
-            _hover={{ cursor: 'pointer' }}
-            color='interfaceOrange'
-            fontSize='sm'
           >
             Show Less
-          </Text>
+          </Button>
         )}
     </Box>
   );

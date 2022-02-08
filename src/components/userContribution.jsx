@@ -129,7 +129,9 @@ const UserContribution = ({ project, contributions }) => {
         Your Transactions
       </Text>
       {contributions?.yeets.map(yeet => {
-        return <ContributionRow key={yeet.id} yeet={yeet} project={project} />;
+        return (
+          <ContributionRow key={yeet.createdAt} yeet={yeet} project={project} />
+        );
       })}
     </Box>
   );
