@@ -81,14 +81,28 @@ const ProjectOverview = ({ project, longDescription }) => {
                     </ReactMarkdown>
                   </>
                 )}
-                <Text
+
+                <Button
+                  mt={2}
+                  paddingX={2}
+                  paddingY={1}
+                  width='94px'
+                  height='29px'
+                  borderRadius='lg'
+                  color='black'
+                  fontSize='11px'
+                  lineHeight='20px'
+                  fontWeight='400'
+                  align='center'
+                  transition='all 0.15s linear'
+                  _hover={{
+                    color: 'gray.900',
+                    backgroundColor: 'secondary.600',
+                  }}
                   onClick={() => setShowDetails(!showDetails)}
-                  _hover={{ cursor: 'pointer' }}
-                  color='interfaceOrange'
-                  fontSize='sm'
                 >
                   Show {!showDetails ? `More` : `Less`}
-                </Text>
+                </Button>
               </>
             )}
           </>

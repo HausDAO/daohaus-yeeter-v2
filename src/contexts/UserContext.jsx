@@ -1,4 +1,10 @@
-import React, { useContext, createContext, useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  createContext,
+  useEffect,
+  useRef,
+  // useState,
+} from 'react';
 
 import { useWallet } from '@raidguild/quiver';
 import { useSessionStorage } from '../hooks/useSessionStorage';
@@ -17,6 +23,8 @@ export const UserContextProvider = ({ children }) => {
     [],
   );
 
+  // const [userMemberships, setMemberships] = useState([]);
+
   const hasLoadedMemberships = userMemberships?.length === numOfSupportedChains;
   const prevAddress = useRef(null);
 
@@ -26,7 +34,7 @@ export const UserContextProvider = ({ children }) => {
         supportedChains,
         reactSetter: setMemberships,
         variables: {
-          memberAddress: address,
+          memberAddress: address.toLowerCase(),
         },
       });
     };

@@ -11,6 +11,7 @@ export const graphQuery = async ({ endpoint, query, variables }) => {
       query,
       variables,
     });
+
     return results.data;
   } catch (error) {
     console.error(error);
