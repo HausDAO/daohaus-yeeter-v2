@@ -183,10 +183,11 @@ export const projectsCrossChainQuery = async ({
       });
 
       const yeetsMap = yeetsData.reduce((coll, yeet) => {
-        if (coll[yeet.shamanAddress]) {
-          coll[yeet.shamanAddress].push(yeet);
+        const yeetMolochId = `${yeet.shamanAddress}-${yeet.molochAddress}`;
+        if (coll[yeetMolochId]) {
+          coll[yeetMolochId].push(yeet);
         } else {
-          coll[yeet.shamanAddress] = [yeet];
+          coll[yeetMolochId] = [yeet];
         }
         return coll;
       }, {});
@@ -198,17 +199,40 @@ export const projectsCrossChainQuery = async ({
         };
       });
 
+      const withMetaDataMap = daoData.reduce((coll, dao) => {
+        coll[dao.id] = {
+          ...dao,
+          meta: daoMapLookup(dao?.id, chain.apiMatch),
+        };
+        return coll;
+      }, {});
+
       const yeeters = shamanData.filter(shaman => {
         return shaman.shamanType === 'yeeter';
       });
 
       const yeetersWithYeets = yeeters.map(yeeter => {
-        return { ...yeeter, yeets: yeetsMap[yeeter.shamanAddress] || [] };
+        const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
+        return { ...yeeter, yeets: yeetsMap[yeetMolochId] || [] };
+      });
+
+      const yeetersWithYeetsAndDaos = yeeters.map(yeeter => {
+        const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
+        return {
+          ...yeeter,
+          yeets: yeetsMap[yeetMolochId] || [],
+          dao: withMetaDataMap[yeeter.molochAddress],
+        };
       });
 
       reactSetter(prevState => [
         ...prevState,
-        { ...chain, daos: withMetaData, yeeters: yeetersWithYeets },
+        {
+          ...chain,
+          daos: withMetaData,
+          yeeters: yeetersWithYeets,
+          newYeeters: yeetersWithYeetsAndDaos,
+        },
       ]);
     } catch (error) {
       console.error(error);

@@ -98,10 +98,10 @@ const Yeet = () => {
               textAlign='center'
               mb={5}
             >
-              {currentProject.yeeter.shamanAddress}
+              {currentProject.shamanAddress}
             </Box>
             <CopyButton
-              text={currentProject.yeeter.shamanAddress}
+              text={currentProject.shamanAddress}
               iconProps={{ height: '100px', width: '100px' }}
             />
           </Flex>

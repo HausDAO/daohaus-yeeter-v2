@@ -23,8 +23,6 @@ export const UserContextProvider = ({ children }) => {
     [],
   );
 
-  // const [userMemberships, setMemberships] = useState([]);
-
   const hasLoadedMemberships = userMemberships?.length === numOfSupportedChains;
   const prevAddress = useRef(null);
 
@@ -57,7 +55,7 @@ export const UserContextProvider = ({ children }) => {
       return [];
     }
 
-    return project.yeeter.yeets.filter(yeet => {
+    return project.yeets.filter(yeet => {
       return yeet.contributorAddress?.toLowerCase() === address?.toLowerCase();
     });
   };

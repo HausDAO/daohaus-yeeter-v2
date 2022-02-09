@@ -34,7 +34,7 @@ const Contribute = ({ project, contributions }) => {
       setContributionAmount(
         Number(
           displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
             2,
           ),
@@ -75,7 +75,7 @@ const Contribute = ({ project, contributions }) => {
     const signer = provider.getSigner();
 
     const args = {
-      to: project.yeeter.shamanAddress,
+      to: project.shamanAddress,
       value: ethers.utils.parseEther(contributionAmount.toString()),
     };
     const tx = await signer.sendTransaction(args);

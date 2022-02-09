@@ -23,6 +23,7 @@ export const PROJECTS_DAOS_QUERY = gql`
         }
       }
       shamans {
+        createdAt
         shamanAddress
         enabled
       }
@@ -129,6 +130,7 @@ export const PROJECT_DETAILS_QUERY = gql`
         guildBank
       }
       shamans {
+        createdAt
         shamanAddress
         enabled
       }
