@@ -24,7 +24,7 @@ export const DaoProvider = ({ children }) => {
 
   const [daoOverview, setDaoOverview] = useState();
   const [daoProposals, setDaoProposals] = useState();
-  const [daoShamans, setDaoShamans] = useState();
+  const [daoShaman, setDaoShaman] = useState();
   const [daoYeets, setDaoYeets] = useState();
   const [refetchComplete, setRefetchComplete] = useState(false);
   const [currentProject, setCurrentProject] = useState(null);
@@ -37,7 +37,7 @@ export const DaoProvider = ({ children }) => {
     // This condition is brittle. If one request passes, but the rest fail
     // this stops the app from fetching. We'll need something better later on.
 
-    if (daoOverview || daoProposals || daoShamans || daoYeets) {
+    if (daoOverview || daoProposals || daoShaman || daoYeets) {
       return;
     }
     if (
@@ -66,7 +66,7 @@ export const DaoProvider = ({ children }) => {
         },
         {
           getter: 'getShamans',
-          setter: setDaoShamans,
+          setter: setDaoShaman,
         },
         {
           getter: 'getYeets',
@@ -83,33 +83,35 @@ export const DaoProvider = ({ children }) => {
     yeeternumber,
     daoNetworkData,
     daoOverview,
-    daoShamans,
+    daoShaman,
     daoProposals,
     daoYeets,
   ]);
 
   useEffect(() => {
     const hydrateProjectData = () => {
-      const yeeterWithYeets = {
-        ...daoShamans,
-        yeets: daoYeets.filter(
-          yeet => yeet.shamanAddress === daoShamans.shamanAddress,
-        ),
-      };
-      const project = {
-        ...daoOverview,
+      const shamanYeets = daoYeets.filter(
+        yeet => yeet.shamanAddress === daoShaman.shamanAddress,
+      );
+
+      setCurrentProject({
+        dao: daoOverview,
         members: daoOverview.members.sort(
           (a, b) => Number(b.shares) - Number(a.shares),
         ),
         proposals: daoProposals.sort((a, b) => {
           return Number(a.proposalIndex) - Number(b.proposalIndex);
         }),
-        yeeter: yeeterWithYeets,
+        ...daoShaman,
         networkID: daochain,
-        ...addCurrentYeetBalance(yeeterWithYeets, daoOverview, daochain),
-      };
+        yeets: shamanYeets,
+        ...addCurrentYeetBalance(
+          { ...daoShaman, yeets: shamanYeets },
+          daoOverview,
+          daochain,
+        ),
+      });
 
-      setCurrentProject(project);
       setRefetchComplete(false);
       currentDaoYeeter.current = yeeternumber;
     };
@@ -120,7 +122,7 @@ export const DaoProvider = ({ children }) => {
       hasPerformedBatchQuery.current &&
       daoOverview &&
       daoProposals &&
-      daoShamans &&
+      daoShaman &&
       daoYeets &&
       noProjectOrRefresh
     ) {
@@ -129,7 +131,7 @@ export const DaoProvider = ({ children }) => {
   }, [
     daoOverview,
     daoProposals,
-    daoShamans,
+    daoShaman,
     daoYeets,
     currentProject,
     setCurrentProject,
@@ -139,7 +141,7 @@ export const DaoProvider = ({ children }) => {
   const refetch = () => {
     setDaoOverview(null);
     setDaoProposals(null);
-    setDaoShamans(null);
+    setDaoShaman(null);
     setDaoYeets(null);
 
     const bigQueryOptions = {
@@ -157,7 +159,7 @@ export const DaoProvider = ({ children }) => {
         },
         {
           getter: 'getShamans',
-          setter: setDaoShamans,
+          setter: setDaoShaman,
         },
         {
           getter: 'getYeets',

@@ -34,9 +34,9 @@ const ProjectOverview = ({ project, longDescription }) => {
       <Flex alignItems={{ base: 'center', lg: 'flex-start' }} mb={5}>
         <Avatar
           src={
-            project?.meta?.avatarImg
-              ? themeImagePath(project.meta.avatarImg)
-              : makeBlockie(project.id || '0x0')
+            project?.dao?.meta?.avatarImg
+              ? themeImagePath(project.dao.meta.avatarImg)
+              : makeBlockie(project.dao.id || '0x0')
           }
           mr={6}
         />
@@ -47,19 +47,19 @@ const ProjectOverview = ({ project, longDescription }) => {
           fontFamily='heading'
         >
           {daoid ? (
-            `${project?.meta?.name || ''} ${
+            `${project?.dao.meta?.name || ''} ${
               yeeternumber === '1' ? '' : yeeternumber
             }`
           ) : (
             <RouterLink
               to={`/dao/${project?.networkID}/${
-                project?.id
+                project?.dao?.id
               }/${project.yeeterNumber || '1'}`}
               style={{
                 color: '#ED963A',
               }} // needed to override the theme 'a' style
             >
-              {project?.meta?.name} {project.yeeterNumber || ''}
+              {project?.dao?.meta?.name} {project.yeeterNumber || ''}
             </RouterLink>
           )}
         </Box>
@@ -67,8 +67,8 @@ const ProjectOverview = ({ project, longDescription }) => {
       <Box mb={5}>
         {longDescription ? (
           <>
-            <Text fontSize='md'> {project?.meta?.description}</Text>
-            {project?.meta?.longDescription && (
+            <Text fontSize='md'> {project?.dao?.meta?.description}</Text>
+            {project?.dao?.meta?.longDescription && (
               <>
                 {showDetails && (
                   <>
@@ -77,7 +77,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                       skipHtml
                       remarkPlugins={[remarkGfm]}
                     >
-                      {project?.meta?.longDescription}
+                      {project?.dao?.meta?.longDescription}
                     </ReactMarkdown>
                   </>
                 )}
@@ -107,13 +107,13 @@ const ProjectOverview = ({ project, longDescription }) => {
             )}
           </>
         ) : (
-          <Text>{project?.meta?.description}</Text>
+          <Text>{project?.dao?.meta?.description}</Text>
         )}
       </Box>
       <Flex alignItems='center' wrap='wrap'>
-        {project?.meta?.links?.twitter && (
+        {project?.dao?.meta?.links?.twitter && (
           <Link
-            href={fixSocialLink('twitter', project.meta.links.twitter)}
+            href={fixSocialLink('twitter', project.dao.meta.links.twitter)}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -126,9 +126,9 @@ const ProjectOverview = ({ project, longDescription }) => {
             />
           </Link>
         )}
-        {project?.meta?.links?.discord && (
+        {project?.dao?.meta?.links?.discord && (
           <Link
-            href={fixSocialLink('discord', project.meta.links.discord)}
+            href={fixSocialLink('discord', project.dao.meta.links.discord)}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -144,9 +144,9 @@ const ProjectOverview = ({ project, longDescription }) => {
           </Link>
         )}
 
-        {project?.meta?.links?.other && (
+        {project?.dao?.meta?.links?.other && (
           <Link
-            href={fixSocialLink('github', project.meta.links.other)}
+            href={fixSocialLink('github', project.dao.meta.links.other)}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -162,9 +162,9 @@ const ProjectOverview = ({ project, longDescription }) => {
           </Link>
         )}
 
-        {project?.meta?.links?.website && (
+        {project?.dao?.meta?.links?.website && (
           <Link
-            href={project.meta.links.website}
+            href={project.dao.meta.links.website}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -181,9 +181,9 @@ const ProjectOverview = ({ project, longDescription }) => {
           </Link>
         )}
 
-        {project?.meta?.links?.telegram && (
+        {project?.dao?.meta?.links?.telegram && (
           <Link
-            href={fixSocialLink('telegram', project.meta.links.telegram)}
+            href={fixSocialLink('telegram', project.dao.meta.links.telegram)}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -199,9 +199,9 @@ const ProjectOverview = ({ project, longDescription }) => {
           </Link>
         )}
 
-        {project?.meta?.links?.medium && (
+        {project?.dao?.meta?.links?.medium && (
           <Link
-            href={fixSocialLink('medium', project.meta.links.medium)}
+            href={fixSocialLink('medium', project.dao.meta.links.medium)}
             target='_blank'
             rel='noreferrer noopener'
             mr={3}
@@ -222,7 +222,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           <RouterLink
             style={{}}
             to={`/dao/${project?.networkID}/${
-              project?.id
+              project?.dao?.id
             }/${project.yeeterNumber || '1'}`}
           >
             <Button
@@ -250,7 +250,7 @@ const ProjectOverview = ({ project, longDescription }) => {
       {daoid && Number(yeeternumber) > 1 && (
         <Box mt={2} fontSize='sm'>
           <RouterLink
-            to={`/dao/${project?.networkID}/${project?.id}/${Number(
+            to={`/dao/${project?.networkID}/${project?.dao?.id}/${Number(
               yeeternumber - 1,
             )}`}
           >
@@ -263,7 +263,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           Get Share Link{' '}
           <CopyButton
             text={`https://${window.location.host}/dao/${daochain}/${
-              project.id
+              project.dao.id
             }/${yeeternumber || '1'}/yeet`}
             iconProps={{ height: '15px', width: '15px' }}
             customMessage='URL Copied to clipboard'

@@ -49,7 +49,10 @@ const completeQueries = {
         },
       });
 
-      setter({ ...graphOverview.moloch, meta: metadata[0] });
+      setter({
+        ...graphOverview.moloch,
+        meta: metadata[0],
+      });
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +67,10 @@ const completeQueries = {
         },
       });
 
-      setter(graphShamans.shamans[args.yeeterNumber - 1]);
+      setter({
+        ...graphShamans.shamans[args.yeeterNumber - 1],
+        yeeterNumber: Number(args.yeeterNumber),
+      });
     } catch (error) {
       console.error(error);
     }
@@ -87,9 +93,6 @@ const completeQueries = {
   },
   async getProposals(args, setter) {
     try {
-      // only fetching the newest proposals in this example
-      // TODO: new query for latest ragequittable
-      // might need to filter here
       const graphProposals = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
         query: EXAMPLE_DAO_PROPOSALS,
@@ -142,7 +145,6 @@ const buildCrossChainQuery = (supportedChains, endpointType) => {
         networkID: chain,
         network_id: supportedChains[chain].network_id,
         hubSortOrder: supportedChains[chain].hub_sort_order,
-        // apiMatch: chain === '0x64' ? 'xdai' : supportedChains[chain].network,
         apiMatch: supportedChains[chain].network,
       },
     ];
@@ -183,10 +185,11 @@ export const projectsCrossChainQuery = async ({
       });
 
       const yeetsMap = yeetsData.reduce((coll, yeet) => {
-        if (coll[yeet.shamanAddress]) {
-          coll[yeet.shamanAddress].push(yeet);
+        const yeetMolochId = `${yeet.shamanAddress}-${yeet.molochAddress}`;
+        if (coll[yeetMolochId]) {
+          coll[yeetMolochId].push(yeet);
         } else {
-          coll[yeet.shamanAddress] = [yeet];
+          coll[yeetMolochId] = [yeet];
         }
         return coll;
       }, {});
@@ -198,17 +201,40 @@ export const projectsCrossChainQuery = async ({
         };
       });
 
+      const withMetaDataMap = daoData.reduce((coll, dao) => {
+        coll[dao.id] = {
+          ...dao,
+          meta: daoMapLookup(dao?.id, chain.apiMatch),
+        };
+        return coll;
+      }, {});
+
       const yeeters = shamanData.filter(shaman => {
         return shaman.shamanType === 'yeeter';
       });
 
       const yeetersWithYeets = yeeters.map(yeeter => {
-        return { ...yeeter, yeets: yeetsMap[yeeter.shamanAddress] || [] };
+        const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
+        return { ...yeeter, yeets: yeetsMap[yeetMolochId] || [] };
+      });
+
+      const yeetersWithYeetsAndDaos = yeeters.map(yeeter => {
+        const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
+        return {
+          ...yeeter,
+          yeets: yeetsMap[yeetMolochId] || [],
+          dao: withMetaDataMap[yeeter.molochAddress],
+        };
       });
 
       reactSetter(prevState => [
         ...prevState,
-        { ...chain, daos: withMetaData, yeeters: yeetersWithYeets },
+        {
+          ...chain,
+          daos: withMetaData,
+          yeeters: yeetersWithYeets,
+          newYeeters: yeetersWithYeetsAndDaos,
+        },
       ]);
     } catch (error) {
       console.error(error);

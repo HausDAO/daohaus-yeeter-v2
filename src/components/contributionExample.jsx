@@ -25,7 +25,7 @@ const ContributionExample = ({
       setSliderValue(
         Number(
           displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
             2,
           ),
@@ -35,7 +35,7 @@ const ContributionExample = ({
       return {
         min: Number(
           displayBalance(
-            project.yeeter.yeeterConfig.pricePerUnit,
+            project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
             2,
           ),

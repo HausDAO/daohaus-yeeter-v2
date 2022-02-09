@@ -35,9 +35,7 @@ const ProjectsList = () => {
           </Box>
           <List spacing={3}>
             {listProjects.map(project => {
-              return (
-                <ProjectListCard key={project.yeeter.id} project={project} />
-              );
+              return <ProjectListCard key={project.id} project={project} />;
             })}
           </List>
         </>

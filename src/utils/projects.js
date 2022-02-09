@@ -9,7 +9,7 @@ export const LOOT_PER_UNIT = 100;
 
 export const lootFromContribution = (contributionTotal, project) => {
   return (
-    (contributionTotal / project.yeeter.yeeterConfig.pricePerUnit) *
+    (contributionTotal / project.yeeterConfig.pricePerUnit) *
     LOOT_PER_UNIT
   ).toFixed(0);
 };
@@ -42,93 +42,84 @@ export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
   };
 };
 
-const combineYeetersAndDaos = projectData => {
-  const ret = projectData.reduce((allProjects, network) => {
-    const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
-      yeets[yeeter.shamanAddress] = yeeter;
-
-      return yeets;
-    }, {});
-
-    const daoMap = network.daos.reduce((daosByShaman, dao) => {
-      dao.shamans.forEach(shaman => {
-        if (dao.meta && shaman.enabled) {
-          const yeeter = yeeterMap[shaman.shamanAddress] && {
-            ...yeeterMap[shaman.shamanAddress],
-            enabled: true,
-          };
-
-          if (yeeter) {
-            daosByShaman[shaman.shamanAddress] = {
-              ...dao,
-              yeeter,
-              networkID: network.networkID,
-              ...addCurrentYeetBalance(yeeter, dao, network.networkID),
-            };
-          }
-        }
-      });
-
-      return daosByShaman;
-    }, {});
-
-    return [...allProjects, ...Object.values(daoMap)];
-  }, []);
-
-  return ret;
+const sortByCreatedAt = projects => {
+  return projects.sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
 };
 
-const addYeetNumber = projectData => {
-  const dupes = projectData.reduce((daos, dao) => {
-    if (daos[dao.id]) {
-      daos[dao.id].push(dao);
+const hasValidDao = dao => {
+  return dao && dao.meta && !dao.meta.hide;
+};
+
+const hasEnabledShaman = (shamans, shamanAddress) => {
+  return shamans.find(shaman => shaman.shamanAddress === shamanAddress)
+    ?.enabled;
+};
+
+const filterValidProjects = projectData => {
+  return sortByCreatedAt(
+    projectData.reduce((allProjects, network) => {
+      const filteredProjects = network.newYeeters
+        .filter(project => {
+          return (
+            hasValidDao(project.dao) &&
+            hasEnabledShaman(project.dao.shamans, project.shamanAddress)
+          );
+        })
+        .map(project => {
+          return {
+            ...project,
+            networkID: network.networkID,
+            ...addCurrentYeetBalance(project, project.dao, network.networkID),
+          };
+        });
+
+      return [...allProjects, ...filteredProjects];
+    }, []),
+  );
+};
+
+const addRaiseWindowCount = projectData => {
+  const projectMap = projectData.reduce((projects, project) => {
+    if (projects[project.molochAddress]) {
+      projects[project.molochAddress].push(project);
     } else {
-      daos[dao.id] = [dao];
+      projects[project.molochAddress] = [project];
     }
-    return daos;
+    return projects;
   }, {});
 
-  Object.keys(dupes).forEach(daoAddress => {
-    if (dupes[daoAddress].length > 1) {
-      dupes[daoAddress] = dupes[daoAddress].map((dao, i) => {
+  Object.keys(projectMap).forEach(daoAddress => {
+    if (projectMap[daoAddress].length > 1) {
+      projectMap[daoAddress] = projectMap[daoAddress].map((dao, i) => {
         return { ...dao, yeeterNumber: i + 1 };
       });
     }
   });
 
-  return Object.values(dupes).flatMap(d => d);
+  return Object.values(projectMap).flatMap(d => d);
 };
 
-const sortBySummoning = projectData => {
-  return projectData.sort(
-    (a, b) => Number(b.yeeter.createdAt) - Number(a.yeeter.createdAt),
-  );
-};
-
-export const hydrateProjectsData = projectData => {
-  // return combineYeetersAndDaos(projectData);
-
-  return pipe([combineYeetersAndDaos, addYeetNumber])(projectData);
+export const hydrateProjectsDataNew = projectData => {
+  return pipe([filterValidProjects, addRaiseWindowCount])(projectData);
 };
 
 export const projectCompletePercentage = project => {
   return (
-    (Number(project.balance) / Number(project.yeeter.yeeterConfig.maxTarget)) *
-    100
+    (Number(project.balance) / Number(project.yeeterConfig.maxTarget)) * 100
   );
 };
 
 export const totalYeeters = project => {
-  if (!project?.yeeter?.yeets) {
+  if (!project?.yeets) {
     return;
   }
-  return [...new Set(project.yeeter.yeets.map(yeet => yeet.contributorAddress))]
+  return [...new Set(project.yeets.map(yeet => yeet.contributorAddress))]
     .length;
 };
 
 export const yeetStatus = project => {
-  const start = project.yeeter.yeeterConfig.raiseStartTime;
-  const end = project.yeeter.yeeterConfig.raiseEndTime;
+  const start = project.yeeterConfig.raiseStartTime;
+  const end = project.yeeterConfig.raiseEndTime;
   const now = new Date().getTime() / 1000;
 
   if (projectCompletePercentage(project) >= 100) {
@@ -149,7 +140,7 @@ export const yeetStatus = project => {
 };
 
 export const softCapTag = project => {
-  const sctag = project.meta.tags.filter(tag => {
+  const sctag = project.dao.meta.tags.filter(tag => {
     return tag.indexOf('sc:') !== -1;
   });
   return sctag.length ? sctag[0].split(':')[1] || null : null;
@@ -159,8 +150,8 @@ export const yeetingTime = project => {
   const status = yeetStatus(project);
   const timeTarget =
     status === 'upcoming'
-      ? project.yeeter.yeeterConfig.raiseStartTime
-      : project.yeeter.yeeterConfig.raiseEndTime;
+      ? project.yeeterConfig.raiseStartTime
+      : project.yeeterConfig.raiseEndTime;
 
   return {
     time: formatDistanceToNow(new Date(timeTarget * 1000)),
@@ -171,27 +162,14 @@ export const yeetingTime = project => {
 const projectListSearch = term => projects => {
   if (term) {
     return projects.filter(
-      p => p.meta?.name.toLowerCase().indexOf(term.toLowerCase()) > -1,
+      p => p.dao.meta?.name.toLowerCase().indexOf(term.toLowerCase()) > -1,
     );
   }
   return projects;
 };
 
-// const projectListSort = sort => projects => {
 const projectListSort = () => projects => {
-  // console.log('sort', sort);
-  /// time: sortBy raiseEndDate desc / move anything past now to the end
-  /// yours: need to get their memberships and put those first, move anything past to the end
-  // if (sort === 'time') {
-  //   return projects.sort(
-  //     (a, b) => Number(b.summoningTime) - Number(a.summoningTime),
-  //   );
-  // }
-  // if (sort === 'amountDesc') {
-  //   return projects.sort((a, b) => Number(b.balance) - Number(a.balance));
-  // }
-
-  return sortBySummoning(projects);
+  return sortByCreatedAt(projects);
 };
 
 const projectListFilter = filter => projects => {
@@ -199,14 +177,16 @@ const projectListFilter = filter => projects => {
     return projects;
   }
 
-  if (
-    filter === 'active' ||
-    filter === 'upcoming' ||
-    filter === 'failed' ||
-    filter === 'funded'
-  ) {
+  if (filter === 'active' || filter === 'upcoming') {
     return projects.filter(p => yeetStatus(p) === filter);
   }
+
+  if (filter === 'complete') {
+    return projects.filter(
+      p => yeetStatus(p) === 'failed' || yeetStatus(p) === 'funded',
+    );
+  }
+
   return projects.filter(p => p.networkID === filter);
 };
 
@@ -221,15 +201,16 @@ export const filterAndSortProjects = (projects, args) => {
 
 export const contributionSharePercentage = (loot, project) => {
   return (
-    (Number(loot) / (Number(project.totalLoot) + Number(project.totalShares))) *
+    (Number(loot) /
+      (Number(project.dao.totalLoot) + Number(project.dao.totalShares))) *
     100
   ).toFixed(2);
 };
 
 export const maxContribution = project => {
   return (
-    Number(project.yeeter.yeeterConfig.maxUnits) *
-    Number(project.yeeter.yeeterConfig.pricePerUnit)
+    Number(project.yeeterConfig.maxUnits) *
+    Number(project.yeeterConfig.pricePerUnit)
   );
 };
 
@@ -238,7 +219,7 @@ export const userContributionData = (project, userMemberships, yeets) => {
     network => network.networkID === project.networkID,
   );
   const currentMembership = networkDaos?.daos.find(dao => {
-    return dao.molochAddress === project.id;
+    return dao.molochAddress === project.dao.id;
   });
 
   const total = yeets.reduce((sum, yeet) => {

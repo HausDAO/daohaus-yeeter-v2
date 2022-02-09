@@ -40,12 +40,8 @@ export const statusFilterOptions = [
     value: 'upcoming',
   },
   {
-    name: 'Funded',
-    value: 'funded',
-  },
-  {
-    name: 'Failed',
-    value: 'failed',
+    name: 'Complete',
+    value: 'complete',
   },
 ];
 

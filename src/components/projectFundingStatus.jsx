@@ -36,7 +36,7 @@ const ProjectFundingStatus = ({ project }) => {
           <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
             Max Cap:{' '}
             {displayBalance(
-              project.yeeter.yeeterConfig.maxTarget,
+              project.yeeterConfig.maxTarget,
               project.yeeterTokenDecimals,
               2,
             )}{' '}
@@ -46,7 +46,7 @@ const ProjectFundingStatus = ({ project }) => {
             <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
               Goal:{' '}
               {displayBalance(
-                project.yeeter.yeeterConfig.maxTarget * (softCap / 100),
+                project.yeeterConfig.maxTarget * (softCap / 100),
                 project.yeeterTokenDecimals,
                 2,
               )}{' '}
@@ -57,13 +57,13 @@ const ProjectFundingStatus = ({ project }) => {
             <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>
               {displayBalance(
                 Math.abs(
-                  project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
+                  project.yeeterConfig.maxTarget * (softCap / 100) -
                     project.balance,
                 ),
                 project.yeeterTokenDecimals,
                 2,
               )}{' '}
-              {project.yeeter.yeeterConfig.maxTarget * (softCap / 100) -
+              {project.yeeterConfig.maxTarget * (softCap / 100) -
                 project.balance >
               0
                 ? 'to goal'
