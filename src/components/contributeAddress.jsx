@@ -32,12 +32,12 @@ const ContributeAddress = ({ project }) => {
         justify='center'
       >
         <Text fontSize='sm' ml={3} mt={5} maxWidth={{ base: '100%' }}>
-          {project.yeeter.shamanAddress}
+          {project.shamanAddress}
         </Text>
         <Flex align='center'>
-          <CopyButton text={project.yeeter.shamanAddress} />
+          <CopyButton text={project.shamanAddress} />
           <Box>
-            <EtherscanLink address={project.yeeter.shamanAddress} />
+            <EtherscanLink address={project.shamanAddress} />
           </Box>
         </Flex>
       </Flex>
@@ -48,7 +48,7 @@ const ContributeAddress = ({ project }) => {
           <Text fontSize='xs'>
             Loot is issued in increments of 100 and accepts multiples of{' '}
             {displayBalance(
-              project.yeeter.yeeterConfig.pricePerUnit,
+              project.yeeterConfig.pricePerUnit,
               project.yeeterTokenDecimals,
               2,
             )}{' '}

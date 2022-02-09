@@ -94,13 +94,13 @@ const DaoHome = () => {
               borderRadius='17px'
             >
               <Box borderRadius='17px'>
-                {currentProject?.yeeter?.yeets.length > 0 && (
+                {currentProject?.yeets.length > 0 && (
                   <LeaderBoardList
-                    yeets={currentProject.yeeter?.yeets}
+                    yeets={currentProject.yeets}
                     project={currentProject}
                   />
                 )}
-                {currentProject?.yeeter?.yeets.length === 0 && (
+                {currentProject?.yeets.length === 0 && (
                   <Box>Awaiting Yeets</Box>
                 )}
               </Box>
@@ -115,10 +115,10 @@ const DaoHome = () => {
               borderRadius='17px'
             >
               {currentProject?.members.length > 0 && (
-                <Box mb={3}>
+                <Box mb={5}>
                   <CoreTeamList
                     coreTeam={currentProject.members}
-                    totalShares={currentProject.totalShares}
+                    totalShares={currentProject.dao.totalShares}
                     project={currentProject}
                   />
                 </Box>

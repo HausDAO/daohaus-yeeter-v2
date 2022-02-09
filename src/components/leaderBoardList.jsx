@@ -135,7 +135,7 @@ const LeaderBoardList = ({ yeets, project }) => {
             <Box width='25%'>
               <Text fontSize={{ base: 'sm', lg: 'lg' }}>
                 {(Number(yeet.amount) /
-                  Number(project.yeeter.yeeterConfig.pricePerUnit)) *
+                  Number(project.yeeterConfig.pricePerUnit)) *
                   100}
               </Text>
             </Box>

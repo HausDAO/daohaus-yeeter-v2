@@ -14,7 +14,11 @@ const proposalCard = (proposal, project) => {
       wrap='wrap'
       mb={5}
     >
-      <DaohausLink linkText={proposal.title} project={project} />
+      <DaohausLink
+        linkText={proposal.title}
+        project={project}
+        route={`/proposals/${proposal.proposalId}`}
+      />
       <Flex justify='space-between' w='100%' mt={3}>
         <Box>
           <AddressAvatar addr={proposal.createdBy} hideCopy />
@@ -52,6 +56,7 @@ const ProjectProposals = ({ project }) => {
         <DaohausLink
           linkText={`View ${remainingCount} more on DAOHaus`}
           project={project}
+          route='/proposals'
         />
       )}
     </Box>

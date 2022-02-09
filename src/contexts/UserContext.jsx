@@ -23,8 +23,6 @@ export const UserContextProvider = ({ children }) => {
     [],
   );
 
-  // const [userMemberships, setMemberships] = useState([]);
-
   const hasLoadedMemberships = userMemberships?.length === numOfSupportedChains;
   const prevAddress = useRef(null);
 
@@ -57,25 +55,10 @@ export const UserContextProvider = ({ children }) => {
       return [];
     }
 
-    return project.yeeter.yeets.filter(yeet => {
+    return project.yeets.filter(yeet => {
       return yeet.contributorAddress?.toLowerCase() === address?.toLowerCase();
     });
   };
-
-  // const currentMembership = project => {
-  //   if (!userMemberships) {
-  //     return null;
-  //   }
-  //   console.log('userMemberships', userMemberships);
-  //   const networkDaos = userMemberships.find(
-  //     network => project.networkID === network.networkID,
-  //   );
-
-  //   console.log('networkDaos', networkDaos);
-  //   return networkDaos?.daos.find(membership => {
-  //     return membership.daos.find(dao => dao.molochAddress === project.id);
-  //   });
-  // };
 
   return (
     <UserContext.Provider

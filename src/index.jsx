@@ -50,7 +50,7 @@ ReactDOM.render(
         <WalletProvider
           web3modalOptions={web3modalOptions}
           networks={SUPPORTED_NETWORKS}
-          defaultChainId='0x1'
+          // defaultChainId='0x1'
           handleModalEvents={(eventName, error) => {
             if (error) {
               console.log(error.message);
