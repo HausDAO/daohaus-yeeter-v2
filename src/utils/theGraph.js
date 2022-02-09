@@ -49,7 +49,10 @@ const completeQueries = {
         },
       });
 
-      setter({ ...graphOverview.moloch, meta: metadata[0] });
+      setter({
+        ...graphOverview.moloch,
+        meta: metadata[0],
+      });
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +67,10 @@ const completeQueries = {
         },
       });
 
-      setter(graphShamans.shamans[args.yeeterNumber - 1]);
+      setter({
+        ...graphShamans.shamans[args.yeeterNumber - 1],
+        yeeterNumber: Number(args.yeeterNumber),
+      });
     } catch (error) {
       console.error(error);
     }
@@ -87,9 +93,6 @@ const completeQueries = {
   },
   async getProposals(args, setter) {
     try {
-      // only fetching the newest proposals in this example
-      // TODO: new query for latest ragequittable
-      // might need to filter here
       const graphProposals = await graphQuery({
         endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
         query: EXAMPLE_DAO_PROPOSALS,
@@ -142,7 +145,6 @@ const buildCrossChainQuery = (supportedChains, endpointType) => {
         networkID: chain,
         network_id: supportedChains[chain].network_id,
         hubSortOrder: supportedChains[chain].hub_sort_order,
-        // apiMatch: chain === '0x64' ? 'xdai' : supportedChains[chain].network,
         apiMatch: supportedChains[chain].network,
       },
     ];

@@ -284,7 +284,7 @@ export const userContributionData = (project, userMemberships, yeets) => {
     network => network.networkID === project.networkID,
   );
   const currentMembership = networkDaos?.daos.find(dao => {
-    return dao.molochAddress === project.id;
+    return dao.molochAddress === project.dao.id;
   });
 
   const total = yeets.reduce((sum, yeet) => {

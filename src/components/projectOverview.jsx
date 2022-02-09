@@ -36,7 +36,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           src={
             project?.dao?.meta?.avatarImg
               ? themeImagePath(project.dao.meta.avatarImg)
-              : makeBlockie(project.id || '0x0')
+              : makeBlockie(project.dao.id || '0x0')
           }
           mr={6}
         />
@@ -53,7 +53,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           ) : (
             <RouterLink
               to={`/dao/${project?.networkID}/${
-                project?.id
+                project?.dao?.id
               }/${project.yeeterNumber || '1'}`}
               style={{
                 color: '#ED963A',
@@ -222,7 +222,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           <RouterLink
             style={{}}
             to={`/dao/${project?.networkID}/${
-              project?.id
+              project?.dao?.id
             }/${project.yeeterNumber || '1'}`}
           >
             <Button
@@ -250,7 +250,7 @@ const ProjectOverview = ({ project, longDescription }) => {
       {daoid && Number(yeeternumber) > 1 && (
         <Box mt={2} fontSize='sm'>
           <RouterLink
-            to={`/dao/${project?.networkID}/${project?.id}/${Number(
+            to={`/dao/${project?.networkID}/${project?.dao?.id}/${Number(
               yeeternumber - 1,
             )}`}
           >
@@ -263,7 +263,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           Get Share Link{' '}
           <CopyButton
             text={`https://${window.location.host}/dao/${daochain}/${
-              project.id
+              project.dao.id
             }/${yeeternumber || '1'}/yeet`}
             iconProps={{ height: '15px', width: '15px' }}
             customMessage='URL Copied to clipboard'

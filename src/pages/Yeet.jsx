@@ -28,7 +28,7 @@ const UpcomingBlock = ({ project }) => {
       </Box>
       <Text textAlign='center' fontSize='lg'>
         <RouterLink
-          to={`/dao/${project?.networkID}/${project?.id}/${yeeternumber ||
+          to={`/dao/${project?.networkID}/${project?.dao?.id}/${yeeternumber ||
             '1'}`}
         >
           See More Project Details
@@ -55,7 +55,7 @@ const ExpiredBlock = ({ project }) => {
       </Box>
       <Text textAlign='center' fontSize='lg'>
         <RouterLink
-          to={`/dao/${project?.networkID}/${project?.id}/${yeeternumber ||
+          to={`/dao/${project?.networkID}/${project?.dao?.id}/${yeeternumber ||
             '1'}`}
         >
           See More Project Details
@@ -134,7 +134,7 @@ const Yeet = () => {
           <Text textAlign='center' fontSize='lg'>
             <RouterLink
               to={`/dao/${currentProject?.networkID}/${
-                currentProject?.id
+                currentProject?.dao?.id
               }/${yeeternumber || '1'}`}
             >
               See More Project Details

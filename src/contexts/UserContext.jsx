@@ -60,21 +60,6 @@ export const UserContextProvider = ({ children }) => {
     });
   };
 
-  // const currentMembership = project => {
-  //   if (!userMemberships) {
-  //     return null;
-  //   }
-  //   console.log('userMemberships', userMemberships);
-  //   const networkDaos = userMemberships.find(
-  //     network => project.networkID === network.networkID,
-  //   );
-
-  //   console.log('networkDaos', networkDaos);
-  //   return networkDaos?.daos.find(membership => {
-  //     return membership.daos.find(dao => dao.molochAddress === project.id);
-  //   });
-  // };
-
   return (
     <UserContext.Provider
       value={{

@@ -7,7 +7,7 @@ const DaohausLink = ({ linkText, project, route }) => {
   const { daoid, daochain } = useParams();
 
   const url = `https://app.daohaus.club/dao/${project?.networkID ||
-    daochain}/${project?.id || daoid}${route || ''}`;
+    daochain}/${project?.dao?.id || daoid}${route || ''}`;
 
   return (
     <Link href={url} isExternal>
