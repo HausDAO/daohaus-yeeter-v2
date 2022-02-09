@@ -42,77 +42,9 @@ export const addCurrentYeetBalance = (yeeter, dao, networkID) => {
   };
 };
 
-// const combineYeetersAndDaos = projectData => {
-//   const ret = projectData.reduce((allProjects, network) => {
-//     const yeeterMap = network.yeeters.reduce((yeets, yeeter) => {
-//       // could be two with same address
-//       yeets[yeeter.shamanAddress] = yeeter;
-
-//       return yeets;
-//     }, {});
-
-//     const daoMap = network.daos.reduce((daosByShaman, dao) => {
-//       dao.shamans.forEach(shaman => {
-//         if (dao.meta && shaman.enabled) {
-//           const yeeter = yeeterMap[shaman.shamanAddress] && {
-//             ...yeeterMap[shaman.shamanAddress],
-//             enabled: true,
-//           };
-
-//           if (yeeter) {
-//             daosByShaman[shaman.shamanAddress] = {
-//               ...dao,
-//               yeeter,
-//               networkID: network.networkID,
-//               ...addCurrentYeetBalance(yeeter, dao, network.networkID),
-//             };
-//           }
-//         }
-//       });
-
-//       return daosByShaman;
-//     }, {});
-
-//     return [...allProjects, ...Object.values(daoMap)];
-//   }, []);
-
-//   return ret;
-// };
-
-// const addYeetNumber = projectData => {
-//   const dupes = projectData.reduce((daos, dao) => {
-//     if (daos[dao.id]) {
-//       daos[dao.id].push(dao);
-//     } else {
-//       daos[dao.id] = [dao];
-//     }
-//     return daos;
-//   }, {});
-
-//   Object.keys(dupes).forEach(daoAddress => {
-//     if (dupes[daoAddress].length > 1) {
-//       dupes[daoAddress] = dupes[daoAddress].map((dao, i) => {
-//         return { ...dao, yeeterNumber: i + 1 };
-//       });
-//     }
-//   });
-
-//   return Object.values(dupes).flatMap(d => d);
-// };
-
-// const sortBySummoning = projectData => {
-//   return projectData.sort(
-//     (a, b) => Number(b.yeeter.createdAt) - Number(a.yeeter.createdAt),
-//   );
-// };
-
 const sortByCreatedAt = projects => {
   return projects.sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
 };
-
-// export const hydrateProjectsData = projectData => {
-//   return pipe([combineYeetersAndDaos, addYeetNumber])(projectData);
-// };
 
 const hasValidDao = dao => {
   return dao && dao.meta && !dao.meta.hide;
@@ -230,7 +162,7 @@ export const yeetingTime = project => {
 const projectListSearch = term => projects => {
   if (term) {
     return projects.filter(
-      p => p.meta?.name.toLowerCase().indexOf(term.toLowerCase()) > -1,
+      p => p.dao.meta?.name.toLowerCase().indexOf(term.toLowerCase()) > -1,
     );
   }
   return projects;
@@ -245,14 +177,16 @@ const projectListFilter = filter => projects => {
     return projects;
   }
 
-  if (
-    filter === 'active' ||
-    filter === 'upcoming' ||
-    filter === 'failed' ||
-    filter === 'funded'
-  ) {
+  if (filter === 'active' || filter === 'upcoming') {
     return projects.filter(p => yeetStatus(p) === filter);
   }
+
+  if (filter === 'complete') {
+    return projects.filter(
+      p => yeetStatus(p) === 'failed' || yeetStatus(p) === 'funded',
+    );
+  }
+
   return projects.filter(p => p.networkID === filter);
 };
 
@@ -267,7 +201,8 @@ export const filterAndSortProjects = (projects, args) => {
 
 export const contributionSharePercentage = (loot, project) => {
   return (
-    (Number(loot) / (Number(project.totalLoot) + Number(project.totalShares))) *
+    (Number(loot) /
+      (Number(project.dao.totalLoot) + Number(project.dao.totalShares))) *
     100
   ).toFixed(2);
 };
