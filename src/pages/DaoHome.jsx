@@ -36,7 +36,7 @@ const DaoHome = () => {
     refetch();
   }, 30000);
 
-  if (!currentProject?.dao?.meta?.hide) {
+  if (currentProject?.dao?.meta?.hide) {
     return (
       <Box p={{ base: 6, md: 10 }}>
         <Box
