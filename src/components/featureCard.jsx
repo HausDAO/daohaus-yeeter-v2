@@ -7,6 +7,7 @@ const FeatureCard = ({
   fullWidthCopy,
   contentPosition,
   imgSrc,
+  ...props
 }) => {
   return (
     <Flex
@@ -46,6 +47,8 @@ const FeatureCard = ({
         </Flex>
         <Flex
           direction='column'
+          justifyContent='center'
+          alignItems='center'
           spacing={8}
           order={{ base: '2', lg: contentPosition === 'left' ? '1' : '2' }}
         >

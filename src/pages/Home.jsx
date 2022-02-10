@@ -49,10 +49,14 @@ const Home = () => {
         value aligned individuals to pool resources towards a common goal.`}
         />
         <FeatureCard
-          contentPosition='left'
-          imgSrc={BrandImg}
+          fullWidthCopy
           content={
-            <Flex direction='column' alignItems='flex-start' fontSize='lg'>
+            <Flex
+              direction='column'
+              alignItems='center'
+              fontSize='lg'
+              paddingX={16}
+            >
               <Text mb={4}>
                 When you step beyond the forest and onto the coastline,
                 countless frens emerge into view. They have come prepared for
@@ -65,6 +69,74 @@ const Home = () => {
                 onto the shore. The flag of the green tongue waves in the wind,
                 reflecting off the water, as a gathering of giants gesture for
                 you to board.
+              </Text>
+            </Flex>
+          }
+        />
+        <FeatureCard
+          contentPosition='left'
+          title='Easiest Way to Launch a DAO'
+          content={
+            <VStack spacing={4} align='flex-start' fontSize='lg'>
+              <Text>
+                Whether a new organization or an initiative within an existing
+                DAO, Yeeter is the no-code option for funding your community
+                with your contributors.
+              </Text>
+              <Text>
+                With customizable parameters, the Yeeter contract allows you to
+                determine the contribution range, start and end times, and
+                maximum capitalization.
+              </Text>
+            </VStack>
+          }
+        />
+        <FeatureCard
+          contentPosition='right'
+          title='Minority Protections and Exit Options'
+          content={
+            <VStack spacing={4} align='flex-start' fontSize='lg'>
+              <Text>
+                By preserving the option to exit, Yeeters&apos; contributions
+                are protected and funds are safu.
+              </Text>
+              <Text>
+                As members of the DAO, Yeeters can withdraw their portion of the
+                funds at any time by ragequitting. Your organization is
+                decentralized from day 1.
+              </Text>
+            </VStack>
+          }
+        />
+        <FeatureCard
+          contentPosition='left'
+          title='Community Owned and Operated'
+          content={
+            <VStack spacing={4} align='flex-start' fontSize='lg'>
+              <Text>
+                Transparent and open-source, Yeeter is an exciting new
+                fundraising primitive funded by the DAOhaus community.
+              </Text>
+              <Text>
+                Intended as a public good and an opportunity to practice
+                community driven development, the project was funded by a Yeeter
+                campaign and is maintained by DAO contributors.
+              </Text>
+            </VStack>
+          }
+        />
+        <FeatureCard
+          fullWidthCopy
+          title='Sophisticated Smart Contracts to Serve Your Community'
+          justifyContent='center'
+          content={
+            <VStack spacing={4} align='center' fontSize='lg' paddingX={16}>
+              <Text>
+                With your project on Y33T, contributors send tokens in the form
+                of xDAI or ETH. The Yeeter smart contract forwards those funds
+                into a treasury, creating shares for contributors. The result is
+                a DAO, with a crowdfunded treasury, controlled by the project
+                team and supported by contributors.
               </Text>
               <Button
                 mt={8}
@@ -85,66 +157,13 @@ const Home = () => {
               >
                 Join the Y33T List
               </Button>
-            </Flex>
-          }
-        />
-        <FeatureCard
-          contentPosition='right'
-          title='Easiest Way to Launch a DAO'
-          content={
-            <VStack spacing={4} align='flex-start' fontSize='lg'>
-              <Text>
-                Whether a new organization or an initiative within an existing
-                DAO, Yeeter is the no-code option for funding your community
-                with your contributors.
-              </Text>
-              <Text>
-                With customizable parameters, the Yeeter contract allows you to
-                determine the contribution range, start and end times, and
-                maximum capitalization.
-              </Text>
             </VStack>
           }
         />
         <FeatureCard
-          contentPosition='left'
-          title='Minority Protections and Exit Options'
+          fullWidthCopy
           content={
-            <VStack spacing={4} align='flex-start' fontSize='lg'>
-              <Text>
-                By preserving the option to exit, Yeeters&apos; contributions
-                are protected and funds are safu.
-              </Text>
-              <Text>
-                As members of the DAO, Yeeters can withdraw their portion of the
-                funds at any time by ragequitting. Your organization is
-                decentralized from day 1.
-              </Text>
-            </VStack>
-          }
-        />
-        <FeatureCard
-          contentPosition='right'
-          title='Community Owned and Operated'
-          content={
-            <VStack spacing={4} align='flex-start' fontSize='lg'>
-              <Text>
-                Transparent and open-source, Yeeter is an exciting new
-                fundraising primitive funded by the DAOhaus community.
-              </Text>
-              <Text>
-                Intended as a public good and an opportunity to practice
-                community driven development, the project was funded by a Yeeter
-                campaign and is maintained by DAO contributors.
-              </Text>
-            </VStack>
-          }
-        />
-        <FeatureCard
-          contentPosition='right'
-          imgSrc={YeetBoatImg}
-          content={
-            <VStack spacing={4} align='flex-start' fontSize='lg'>
+            <VStack spacing={4} align='center' fontSize='lg' paddingX={16}>
               <Text>
                 With billowing sails and a swift current, excitement outweighs
                 any trepidation. May we request that you keep a logbook, as you
@@ -165,8 +184,8 @@ const Home = () => {
               >
                 <Icon
                   as={RiDiscordFill}
-                  h='30px'
-                  w='30px'
+                  h='48px'
+                  w='48px'
                   color='secondary.500'
                   transition='all 0.15s linear'
                   _hover={{
@@ -174,7 +193,7 @@ const Home = () => {
                     color: 'secondary.400',
                   }}
                 />
-                <Text as='span' ml={8}>
+                <Text as='span' ml={8} fontSize='xl'>
                   Join the Discord
                 </Text>
               </Link>
