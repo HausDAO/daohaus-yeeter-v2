@@ -36,6 +36,25 @@ const DaoHome = () => {
     refetch();
   }, 30000);
 
+  if (!currentProject?.dao?.meta?.hide) {
+    return (
+      <Box p={{ base: 6, md: 10 }}>
+        <Box
+          w={['100%', null, null, '65%', '65%']}
+          backgroundColor='primary.500'
+          paddingX={{ base: 5, lg: 7 }}
+          paddingTop={{ base: '17px', lg: 6 }}
+          paddingBottom={{ base: '17px', lg: 8 }}
+          borderRadius='17px'
+          mb={6}
+          fontSize='2xl'
+        >
+          🚧 Yeeting Paused. Come back soon. 🚧
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box p={{ base: 6, md: 10 }}>
       {!currentProject && <Loading />}
