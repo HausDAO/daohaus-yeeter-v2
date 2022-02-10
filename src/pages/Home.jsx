@@ -153,7 +153,6 @@ const Home = () => {
                 fontWeight='bold'
                 align='center'
                 transition='all 0.15s linear'
-                textTransform='uppercase'
               >
                 Join the Y33T List
               </Button>

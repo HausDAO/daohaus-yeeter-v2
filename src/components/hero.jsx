@@ -22,16 +22,15 @@ const Hero = ({ heroTitle, heroCopy }) => {
             width='240px'
             height='50px'
             borderRadius='lg'
-            color='black'
-            fontSize='2xl'
+            color='white'
+            bgColor='#0E1235'
+            fontSize='xl'
             lineHeight='20px'
-            fontWeight='bold'
             align='center'
             transition='all 0.15s linear'
-            textTransform='uppercase'
-            _hover={{ color: 'gray.900', backgroundColor: 'secondary.300' }}
+            // _hover={{ color: 'gray.900', backgroundColor: 'secondary.300' }}
           >
-            Y33TS
+            View Projects
           </Button>
         </RouterLink>
       </VStack>
