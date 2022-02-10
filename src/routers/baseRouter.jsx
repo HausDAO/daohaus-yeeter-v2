@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
+import Projects from '../pages/Projects';
 import Home from '../pages/Home';
 import Dao from '../pages/Dao';
 import FourOhFour from '../pages/404';
@@ -13,6 +13,9 @@ const BaseRouter = () => {
       <Switch>
         <Route exact path='/'>
           <Home />
+        </Route>
+        <Route exact path='/projects'>
+          <Projects />
         </Route>
         <Route exact path='/faq'>
           <Faq />
