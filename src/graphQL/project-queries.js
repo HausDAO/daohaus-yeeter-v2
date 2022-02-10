@@ -35,6 +35,7 @@ export const PROJECTS_SHAMANS_QUERY = gql`
   query shamans($skip: Int) {
     shamans(
       orderBy: createdAt
+      orderDirection: asc
       first: 1000
       skip: $skip
       where: { shamanType: "yeeter" }
@@ -143,6 +144,7 @@ export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
     shamans(
       where: { shamanType: "yeeter", molochAddress: $contractAddr }
       orderBy: createdAt
+      orderDirection: asc
     ) {
       id
       createdAt

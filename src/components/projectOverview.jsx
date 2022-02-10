@@ -47,9 +47,16 @@ const ProjectOverview = ({ project, longDescription }) => {
           fontFamily='heading'
         >
           {daoid ? (
-            `${project?.dao.meta?.name || ''} ${
-              yeeternumber === '1' ? '' : yeeternumber
-            }`
+            <Flex align='baseline'>
+              <Text>{project?.dao.meta?.name || ''}</Text>
+              {yeeternumber === '1' ? (
+                ''
+              ) : (
+                <Text ml={2} fontSize='md'>
+                  (yeet #{yeeternumber})
+                </Text>
+              )}
+            </Flex>
           ) : (
             <RouterLink
               to={`/dao/${project?.networkID}/${
@@ -59,7 +66,16 @@ const ProjectOverview = ({ project, longDescription }) => {
                 color: '#ED963A',
               }} // needed to override the theme 'a' style
             >
-              {project?.dao?.meta?.name} {project.yeeterNumber || ''}
+              <Flex align='baseline'>
+                <Text>{project?.dao?.meta?.name}</Text>
+                {project.yeeterNumber ? (
+                  <Text ml={2} fontSize='md'>
+                    (yeet #{project.yeeterNumber})
+                  </Text>
+                ) : (
+                  ''
+                )}
+              </Flex>
             </RouterLink>
           )}
         </Box>
