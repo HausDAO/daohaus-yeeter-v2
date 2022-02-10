@@ -73,6 +73,8 @@ const ProjectContributionActions = ({ project, contributions }) => {
 
   return (
     <Box direction='column'>
+      <Contribute project={project} contributions={contributions} />
+
       {projectStatus === 'active' && (
         <ProjectDetailsNotice borderOverride>
           <Contribute project={project} contributions={contributions} />

@@ -8,6 +8,8 @@ import { supportedChains } from '../utils/chain';
 
 const EtherscanLink = ({ address, isTransaction, linkText }) => {
   const { daochain } = useParams();
+
+  console.log('daochain', daochain);
   return (
     <Link
       href={`${supportedChains[daochain].block_explorer}/${
