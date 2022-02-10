@@ -56,26 +56,24 @@ const hasEnabledShaman = (shamans, shamanAddress) => {
 };
 
 const filterValidProjects = projectData => {
-  return sortByCreatedAt(
-    projectData.reduce((allProjects, network) => {
-      const filteredProjects = network.newYeeters
-        .filter(project => {
-          return (
-            hasValidDao(project.dao) &&
-            hasEnabledShaman(project.dao.shamans, project.shamanAddress)
-          );
-        })
-        .map(project => {
-          return {
-            ...project,
-            networkID: network.networkID,
-            ...addCurrentYeetBalance(project, project.dao, network.networkID),
-          };
-        });
+  return projectData.reduce((allProjects, network) => {
+    const filteredProjects = network.newYeeters
+      .filter(project => {
+        return (
+          hasValidDao(project.dao) &&
+          hasEnabledShaman(project.dao.shamans, project.shamanAddress)
+        );
+      })
+      .map(project => {
+        return {
+          ...project,
+          networkID: network.networkID,
+          ...addCurrentYeetBalance(project, project.dao, network.networkID),
+        };
+      });
 
-      return [...allProjects, ...filteredProjects];
-    }, []),
-  );
+    return [...allProjects, ...filteredProjects];
+  }, []);
 };
 
 const addRaiseWindowCount = projectData => {
