@@ -11,7 +11,6 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { RiDiscordFill } from 'react-icons/ri';
-
 import Hero from '../components/hero';
 import FeatureCard from '../components/featureCard';
 import BrandImg from '../assets/img/y33t_logo.svg';
