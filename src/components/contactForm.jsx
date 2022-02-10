@@ -15,7 +15,6 @@ const ContactForm = () => {
     launchDate: '',
     firstName: '',
     discordUsername: '',
-    message: '',
   });
   const handleSubmit = async () => {
     const res = await fetch('/', {
@@ -34,11 +33,22 @@ const ContactForm = () => {
   const handleChange = e => setDumbForm({ [e.target.name]: e.target.value });
 
   if (success) {
-    return <Box>Success! Feel free to reach out in Discord.</Box>;
+    return (
+      <Box>
+        We will reach out to you on Discord for some additional details. In the
+        meantime, please swing by the Tavern 🍻 on the Y33T Discord server and
+        share what you are up to..
+      </Box>
+    );
   }
 
   return (
     <Box>
+      <Box mb={5}>
+        We are running a concierge program to roll out the next batch of
+        projects on our platform. If you are interested in funding your project
+        with Yeeter, please fill out the form below.
+      </Box>
       <Box mb={3}>
         Project Title
         <Input
@@ -49,7 +59,7 @@ const ContactForm = () => {
         />
       </Box>
       <Box mb={3}>
-        Project TLDR
+        Project tl;dr
         <Textarea
           name='projectTldr'
           value={dumbForm.projectTldr}
@@ -57,7 +67,7 @@ const ContactForm = () => {
         />
       </Box>
       <Box mb={3}>
-        Launch Date
+        Desired Launch Date
         <Input
           type='date'
           name='launchDate'
@@ -74,16 +84,8 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box mb={3}>
-        Message
-        <Textarea
-          name='message'
-          value={dumbForm.message}
-          onChange={handleChange}
-        />
-      </Box>
       <Box mt={5}>
-        <Button onClick={handleSubmit}>Send</Button>
+        <Button onClick={handleSubmit}>Y33T!</Button>
       </Box>
     </Box>
   );

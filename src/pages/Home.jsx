@@ -25,7 +25,7 @@ const Home = () => {
 
   const openContactForm = () => {
     setModal({
-      title: 'Join the Y33T List',
+      title: 'Y33T With Us',
       body: <ContactForm closeModal={closeModal} />,
     });
   };
