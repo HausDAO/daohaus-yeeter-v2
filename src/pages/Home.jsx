@@ -171,7 +171,7 @@ const Home = () => {
                 voyages is shared knowledge of, as yet, undiscovered lands.
               </Text>
               <Link
-                href='https://discord.com'
+                href='https://discord.gg/yb45YBqBXT'
                 target='_blank'
                 color='secondary.500'
                 transition='all 0.15s linear'
