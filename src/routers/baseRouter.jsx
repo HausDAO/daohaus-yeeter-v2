@@ -18,7 +18,7 @@ const BaseRouter = () => {
           <Faq />
         </Route>
         <Route exact path='/yeet'>
-          <Redirect to='/dao/0x1/0x55695a67f3987aeed7d2a87670dbb4367a709021/1' />
+          <Redirect to='/dao/0x1/0x1efe05df1f5e82a4994093b1982c97e3dd404e65/1' />
         </Route>
         <Route
           exact

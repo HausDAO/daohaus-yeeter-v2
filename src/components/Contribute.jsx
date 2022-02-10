@@ -36,7 +36,7 @@ const Contribute = ({ project, contributions }) => {
           displayBalance(
             project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
-            2,
+            4,
           ),
         ),
       );
@@ -106,7 +106,7 @@ const Contribute = ({ project, contributions }) => {
                 On {supportedChains[project.networkID].name}
               </Box>
 
-              {contributionAmount && (
+              {contributionAmount !== null && (
                 <ContributionExample
                   project={project}
                   fontSize='xs'
@@ -141,7 +141,7 @@ const Contribute = ({ project, contributions }) => {
                 </Text>
               )}
 
-              {loading && txHash && (
+              {loading && txHash && !contributionComplete && (
                 <Flex mt={4} align='center'>
                   <Text
                     color='secondary.500'
