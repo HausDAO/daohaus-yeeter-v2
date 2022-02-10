@@ -27,7 +27,7 @@ const ContributionExample = ({
           displayBalance(
             project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
-            2,
+            4,
           ),
         ),
       );
@@ -37,7 +37,7 @@ const ContributionExample = ({
           displayBalance(
             project.yeeterConfig.pricePerUnit,
             project.yeeterTokenDecimals,
-            2,
+            4,
           ),
         ),
         max: Number(
