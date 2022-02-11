@@ -46,8 +46,11 @@ const FeatureCard = ({
         </Flex>
         <Flex
           direction='column'
-          justifyContent='flex-start'
-          alignItems={{ base: 'center', lg: 'flex-start' }}
+          justifyContent={fullWidthCopy ? 'center' : 'flex-start'}
+          alignItems={{
+            base: 'center',
+            lg: fullWidthCopy ? 'center' : 'flex-start',
+          }}
           spacing={8}
           order={{ base: '2', lg: contentPosition === 'left' ? '1' : '2' }}
         >

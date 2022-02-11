@@ -16,6 +16,9 @@ import Modal from '../modals/modal';
 import Hero from '../components/hero';
 import FeatureCard from '../components/featureCard';
 import ContactForm from '../components/contactForm';
+import YeetCommunityImg from '../assets/img/yeet_community.png';
+import YeetExitImg from '../assets/img/yeet_exit.png';
+import YeetLaunchEasyImg from '../assets/img/yeet_launchEasy.png';
 
 const Home = () => {
   const { setModal, closeModal } = useContext(OverlayContext);
@@ -65,12 +68,17 @@ const Home = () => {
                   the journey ahead, yet their packs do not feel burdensome. How
                   can you embark together?
                 </Text>
-                <Text>
+                <Text mb={4}>
                   As you look towards the sea, the sun illuminates a vessel,
                   with broad planks resting along the edge of the deck, angled
                   gently onto the shore. The flag of the green tongue waves in
                   the wind, reflecting off the water, as a gathering of giants
                   gesture for you to board.
+                </Text>
+                <Text>
+                  Your crew run to the ship and ready the craft to set sail.
+                  When all are aboard, the giants remove the planks and shove
+                  the ship into the ocean.
                 </Text>
               </Flex>
             }
@@ -78,6 +86,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='left'
             title='Easiest Way to Launch a DAO'
+            imgSrc={YeetLaunchEasyImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -96,6 +105,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='right'
             title='Minority Protections and Exit Options'
+            imgSrc={YeetExitImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -113,6 +123,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='left'
             title='Community Owned and Operated'
+            imgSrc={YeetCommunityImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -130,7 +141,6 @@ const Home = () => {
           <FeatureCard
             fullWidthCopy
             title='Sophisticated Smart Contracts to Serve Your Community'
-            justifyContent={{ base: 'flex-start', lg: 'center' }}
             content={
               <VStack spacing={4} align='center' fontSize='lg'>
                 <Text mb={4}>
@@ -170,13 +180,22 @@ const Home = () => {
                 fontSize='lg'
                 paddingX={{ base: 0, lg: 16 }}
               >
-                <Text mb={4}>
-                  With billowing sails and a swift current, excitement outweighs
-                  any trepidation. May we request that you keep a logbook, as
-                  you navigate both turbulent and calm waters? Each of our
-                  Yeeter voyages is shared knowledge of, as yet, undiscovered
-                  lands.
-                </Text>
+                <Flex direction='column' justifyContent='flex-start'>
+                  <Text mb={4}>
+                    Inside the upper cabin, crew mates are collaborating on the
+                    beginnings of a logbook and map, both of which are mostly
+                    blank.
+                  </Text>
+                  <Text mb={4}>
+                    You gaze beyond the bow and witness numerous ships, raising
+                    the flag of the Green Tongue. The roll of the rising tide
+                    lifts us into swift currents.
+                  </Text>
+                  <Text mb={4}>
+                    Let’s meet in the Yeeter tavern to share stories of the sea
+                    and learnings of uncharted lands.
+                  </Text>
+                </Flex>
                 <Link
                   href='https://discord.gg/yb45YBqBXT'
                   target='_blank'
