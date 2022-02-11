@@ -29,7 +29,7 @@ import WrongNetworkToolTip from './wrongNetworkToolTip';
 const NAV_ITEMS = [
   {
     label: 'Projects',
-    href: '/',
+    href: '/projects',
   },
   {
     label: 'FAQ',
