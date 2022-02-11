@@ -170,7 +170,7 @@ const Home = () => {
                 fontSize='lg'
                 paddingX={{ base: 0, lg: 16 }}
               >
-                <Text>
+                <Text mb={4}>
                   With billowing sails and a swift current, excitement outweighs
                   any trepidation. May we request that you keep a logbook, as
                   you navigate both turbulent and calm waters? Each of our

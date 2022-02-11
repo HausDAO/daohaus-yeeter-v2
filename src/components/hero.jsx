@@ -43,7 +43,7 @@ const Hero = ({ heroTitle, heroCopy }) => {
           <Text fontSize='xl' lineHeight='28.88px' color='black'>
             {heroCopy}
           </Text>
-          <RouterLink as={RouterLink} to='/projects'>
+          <RouterLink as={RouterLink} to='/projects' forwardRef>
             <Button
               paddingX={2}
               paddingY={1}
@@ -56,6 +56,9 @@ const Hero = ({ heroTitle, heroCopy }) => {
               lineHeight='20px'
               align='center'
               transition='all 0.15s linear'
+              _hover={{
+                bgColor: 'primary.500',
+              }}
             >
               View Projects
             </Button>
