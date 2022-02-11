@@ -43,7 +43,7 @@ const Hero = ({ heroTitle, heroCopy }) => {
           <Text fontSize='xl' lineHeight='28.88px' color='black'>
             {heroCopy}
           </Text>
-          <RouterLink as={RouterLink} to='/projects' forwardRef>
+          <RouterLink as={RouterLink} to='/projects'>
             <Button
               paddingX={2}
               paddingY={1}

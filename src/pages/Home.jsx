@@ -76,7 +76,8 @@ const Home = () => {
             }
           />
           <FeatureCard
-            contentPosition='left'
+            // contentPosition='left'
+            fullWidthCopy
             title='Easiest Way to Launch a DAO'
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
@@ -94,7 +95,8 @@ const Home = () => {
             }
           />
           <FeatureCard
-            contentPosition='right'
+            // contentPosition='right'
+            fullWidthCopy
             title='Minority Protections and Exit Options'
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
@@ -111,7 +113,8 @@ const Home = () => {
             }
           />
           <FeatureCard
-            contentPosition='left'
+            // contentPosition='left'
+            fullWidthCopy
             title='Community Owned and Operated'
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
