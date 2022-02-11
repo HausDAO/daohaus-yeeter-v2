@@ -16,6 +16,9 @@ import Modal from '../modals/modal';
 import Hero from '../components/hero';
 import FeatureCard from '../components/featureCard';
 import ContactForm from '../components/contactForm';
+import YeetCommunityImg from '../assets/img/yeet_community.png';
+import YeetExitImg from '../assets/img/yeet_exit.png';
+import YeetLaunchEasyImg from '../assets/img/yeet_launchEasy.png';
 
 const Home = () => {
   const { setModal, closeModal } = useContext(OverlayContext);
@@ -83,6 +86,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='left'
             title='Easiest Way to Launch a DAO'
+            imgSrc={YeetLaunchEasyImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -101,6 +105,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='right'
             title='Minority Protections and Exit Options'
+            imgSrc={YeetExitImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -118,6 +123,7 @@ const Home = () => {
           <FeatureCard
             contentPosition='left'
             title='Community Owned and Operated'
+            imgSrc={YeetCommunityImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
@@ -135,7 +141,6 @@ const Home = () => {
           <FeatureCard
             fullWidthCopy
             title='Sophisticated Smart Contracts to Serve Your Community'
-            justifyContent={{ base: 'flex-start', lg: 'center' }}
             content={
               <VStack spacing={4} align='center' fontSize='lg'>
                 <Text mb={4}>

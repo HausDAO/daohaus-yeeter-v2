@@ -50,7 +50,7 @@ const ContactForm = () => {
         projects on our platform. If you are interested in funding your project
         with Yeeter, please fill out the form below.
       </Box>
-      <Box mb={3}>
+      <Box mb={3} fontWeight='bold'>
         Project Title
         <Input
           type='text'
@@ -59,7 +59,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box mb={3}>
+      <Box mb={3} fontWeight='bold'>
         Project tl;dr
         <Textarea
           name='projectTldr'
@@ -67,7 +67,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box mb={3}>
+      <Box mb={3} fontWeight='bold'>
         Desired Launch Date
         <Input
           type='date'
@@ -76,7 +76,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </Box>
-      <Box mb={3}>
+      <Box mb={3} fontWeight='bold'>
         Discord Username
         <Input
           type='text'
