@@ -30,7 +30,8 @@ const ContactForm = () => {
     }
   };
 
-  const handleChange = e => setDumbForm({ [e.target.name]: e.target.value });
+  const handleChange = e =>
+    setDumbForm({ ...dumbForm, [e.target.name]: e.target.value });
 
   if (success) {
     return (
