@@ -92,6 +92,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                       components={ChakraUIRenderer()}
                       skipHtml
                       remarkPlugins={[remarkGfm]}
+                      linkTarget='_blank'
                     >
                       {project?.dao?.meta?.longDescription}
                     </ReactMarkdown>
