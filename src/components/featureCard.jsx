@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, VStack, Heading, Text, Grid, Image } from '@chakra-ui/react';
+import { Flex, Heading, Grid, Image } from '@chakra-ui/react';
 
 const FeatureCard = ({
   title,
@@ -7,7 +7,6 @@ const FeatureCard = ({
   fullWidthCopy,
   contentPosition,
   imgSrc,
-  ...props
 }) => {
   return (
     <Flex
@@ -47,8 +46,8 @@ const FeatureCard = ({
         </Flex>
         <Flex
           direction='column'
-          justifyContent='center'
-          alignItems='center'
+          justifyContent='flex-start'
+          alignItems={{ base: 'center', lg: 'flex-start' }}
           spacing={8}
           order={{ base: '2', lg: contentPosition === 'left' ? '1' : '2' }}
         >
@@ -59,7 +58,7 @@ const FeatureCard = ({
               lineHeight={{ base: '30px', lg: '42px' }}
               fontWeight={700}
               color='interfaceOrange.500'
-              mb={10}
+              mb={{ base: 6 }}
             >
               {title}
             </Heading>

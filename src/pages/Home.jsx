@@ -11,13 +11,10 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { RiDiscordFill } from 'react-icons/ri';
-
 import { OverlayContext } from '../contexts/OverlayContext';
 import Modal from '../modals/modal';
 import Hero from '../components/hero';
 import FeatureCard from '../components/featureCard';
-import BrandImg from '../assets/img/y33t_logo.svg';
-import YeetBoatImg from '../assets/img/yeet-boat.png';
 import ContactForm from '../components/contactForm';
 
 const Home = () => {
@@ -39,21 +36,12 @@ const Home = () => {
               <VStack>
                 <Heading
                   as='h2'
-                  fontSize={{ base: '32px', lg: '44px' }}
-                  lineHeight={{ base: '40px', lg: '56px' }}
+                  fontSize={{ base: '24px', lg: '24px' }}
+                  lineHeight={{ base: '38px', lg: '38px' }}
                   fontWeight={700}
-                  color='interfaceOrange.500'
+                  color='white'
                 >
-                  Raise Funds and Rally Your Community
-                </Heading>
-                <Heading
-                  as='h2'
-                  fontSize={{ base: '32px', lg: '44px' }}
-                  lineHeight={{ base: '40px', lg: '56px' }}
-                  fontWeight={700}
-                  color='interfaceOrange.500'
-                >
-                  at the Push of a Button
+                  Raise Funds and Rally Your Community at the Push of a Button
                 </Heading>
               </VStack>
             }
@@ -69,7 +57,7 @@ const Home = () => {
                 direction='column'
                 alignItems='center'
                 fontSize='lg'
-                paddingX={16}
+                paddingX={{ base: 0, lg: 16 }}
               >
                 <Text mb={4}>
                   When you step beyond the forest and onto the coastline,
@@ -142,10 +130,10 @@ const Home = () => {
           <FeatureCard
             fullWidthCopy
             title='Sophisticated Smart Contracts to Serve Your Community'
-            justifyContent='center'
+            justifyContent={{ base: 'flex-start', lg: 'center' }}
             content={
-              <VStack spacing={4} align='center' fontSize='lg' paddingX={16}>
-                <Text>
+              <VStack spacing={4} align='center' fontSize='lg'>
+                <Text mb={4}>
                   With your project on Y33T, contributors send tokens in the
                   form of xDAI or ETH. The Yeeter smart contract forwards those
                   funds into a treasury, creating shares for contributors. The
@@ -153,7 +141,6 @@ const Home = () => {
                   the project team and supported by contributors.
                 </Text>
                 <Button
-                  mt={8}
                   paddingX={2}
                   paddingY={1}
                   width='240px'
@@ -177,7 +164,12 @@ const Home = () => {
           <FeatureCard
             fullWidthCopy
             content={
-              <VStack spacing={4} align='center' fontSize='lg' paddingX={16}>
+              <VStack
+                spacing={4}
+                align='center'
+                fontSize='lg'
+                paddingX={{ base: 0, lg: 16 }}
+              >
                 <Text>
                   With billowing sails and a swift current, excitement outweighs
                   any trepidation. May we request that you keep a logbook, as
