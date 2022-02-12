@@ -78,9 +78,21 @@ const Contribute = ({ project, contributions }) => {
       to: project.shamanAddress,
       value: ethers.utils.parseEther(contributionAmount.toString()),
     };
-    const tx = await signer.sendTransaction(args);
 
-    console.log('tx', tx);
+    const tx = await signer.sendTransaction(args).catch(err => {
+      if (err.code === -32603) {
+        // not enough funds to make this tx
+        console.log(err.data.message);
+      }
+      if (err.code === 4001) {
+        // user cancelled
+        console.log(err.message);
+      }
+    });
+
+    if (!tx) {
+      return;
+    }
     setLoading(true);
     setTxHash(tx.hash);
   };
