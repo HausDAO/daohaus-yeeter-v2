@@ -94,6 +94,14 @@ export const DaoProvider = ({ children }) => {
         yeet => yeet.shamanAddress === daoShaman.shamanAddress,
       );
 
+      // hot fix for a contract with some bad values in raidbrood
+      // can remove after yeeter is closed
+      if (
+        daoShaman.shamanAddress === '0x85fa509aabcf300c52c81eece7d473faa67f9673'
+      ) {
+        daoShaman.yeeterConfig.maxUnits = 24;
+      }
+
       setCurrentProject({
         dao: daoOverview,
         members: daoOverview.members.sort(
