@@ -6,6 +6,7 @@ import Dao from '../pages/Dao';
 import FourOhFour from '../pages/404';
 import Faq from '../pages/Faq';
 import BaseLayout from './baseLayout';
+import QrCode from '../pages/Qr';
 
 const BaseRouter = () => {
   return (
@@ -19,6 +20,9 @@ const BaseRouter = () => {
         </Route>
         <Route exact path='/faq'>
           <Faq />
+        </Route>
+        <Route exact path='/qr'>
+          <QrCode />
         </Route>
         <Route exact path='/yeet'>
           <Redirect to='/dao/0x1/0x1efe05df1f5e82a4994093b1982c97e3dd404e65/1' />
