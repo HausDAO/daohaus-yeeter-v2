@@ -82,7 +82,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
         <ProjectDetailsNotice
           title="What's Next"
           toolLabel='What happens to the funds?'
-          toolContent='Regardless of reaching a goal, funds for this project are available for the DAO. Visit the DAO to see how they are being used or rage quit and withdraw your funds.'
+          toolContent='Funds for this project are available for the DAO. Visit the DAO to see how they are being used.'
         >
           {failedNotice(project, address)}
         </ProjectDetailsNotice>
@@ -91,7 +91,7 @@ const ProjectContributionActions = ({ project, contributions }) => {
         <ProjectDetailsNotice
           title="What's Next"
           toolLabel='What happens to the funds?'
-          toolContent='Regardless of reaching a goal, funds for this project are available for the DAO. Visit the DAO to see how they are being used or rage quit and withdraw your funds.'
+          toolContent='Funds for this project are available for the DAO. Visit the DAO to see how they are being used.'
         >
           {fundedNotice(project)}
         </ProjectDetailsNotice>
