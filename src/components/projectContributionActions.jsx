@@ -44,9 +44,9 @@ const failedNotice = (project, address) => {
       <Box mb={3} fontFamily='mono' fontSize='lg'>
         ⏰ Funding Period Over
       </Box>
-      <Text mb={3} fontSize='md'>
+      {/* <Text mb={3} fontSize='md'>
         You can rage quit and withdraw your funds or visit the DAO:
-      </Text>
+      </Text> */}
       <Flex direction='row' justify='space-between'>
         <DaohausLink
           linkText='Visit the DAO'
