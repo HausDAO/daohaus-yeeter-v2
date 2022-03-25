@@ -28,7 +28,9 @@ const ProjectFundingStatus = ({ project }) => {
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
             {project.displayBalance || '0'}{' '}
-            {supportedChains[project.networkID].nativeCurrency}
+            {project.yeeterConfig.erc20Only
+              ? project.yeeterConfig.token.symbol
+              : supportedChains[project.networkID].nativeCurrency}
             {/* <Text fontSize='xs' color='gray.500'> // maybe we don't need this? 
               Raised
             </Text> */}
@@ -40,7 +42,9 @@ const ProjectFundingStatus = ({ project }) => {
               project.yeeterTokenDecimals,
               2,
             )}{' '}
-            {supportedChains[project.networkID].nativeCurrency}
+            {project.yeeterConfig.erc20Only
+              ? project.yeeterConfig.token.symbol
+              : supportedChains[project.networkID].nativeCurrency}
           </Box>
           {softCap && (
             <Box fontSize={{ base: 'sm', md: 'xs' }} color='gray.500'>

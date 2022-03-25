@@ -12,6 +12,7 @@ import {
   PROJECTS_SHAMANS_QUERY,
   PROJECTS_YEETS_QUERY,
   PROJECT_DETAILS_QUERY,
+  PROJECTS_FUNDING_ASSETS_QUERY,
 } from '../graphQL/project-queries';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
@@ -178,6 +179,11 @@ export const projectsCrossChainQuery = async ({
         subfield: 'shamans',
       });
 
+      const tokensData = await graphFetchAll({
+        endpoint: supportedChains[chain.networkID].shaman_graph_url,
+        query: PROJECTS_FUNDING_ASSETS_QUERY,
+        subfield: 'tokens',
+      });
       const yeetsData = await graphFetchAll({
         endpoint: supportedChains[chain.networkID].shaman_graph_url,
         query: PROJECTS_YEETS_QUERY,
@@ -234,6 +240,7 @@ export const projectsCrossChainQuery = async ({
           daos: withMetaData,
           yeeters: yeetersWithYeets,
           newYeeters: yeetersWithYeetsAndDaos,
+          tokens: tokensData,
         },
       ]);
     } catch (error) {

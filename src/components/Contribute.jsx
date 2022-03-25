@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { Icon, Button, Spinner } from '@chakra-ui/react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
@@ -10,27 +10,42 @@ import ProjectDetailsNotice from './projectDetailsNotice';
 import EtherscanLink from './etherscanLink';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
 import ContributionExample from './contributionExample';
+import { encodeFunctionCall } from '../utils/abi';
 import { supportedChains } from '../utils/chain';
 import { maxContribution } from '../utils/projects';
-import { displayBalance } from '../utils/tokenValue';
+import { displayBalance, fetchSpecificTokenData } from '../utils/tokenValue';
 import { useDao } from '../contexts/DaoContext';
 import { useAppModal } from '../hooks/useModals';
 import ContributeAddress from './contributeAddress';
 
 const Contribute = ({ project, contributions }) => {
   const { daochain } = useParams();
-  const { chainId, provider } = useWallet();
+  const { address, chainId, provider } = useWallet();
   const { refetch } = useDao();
   const { genericModal } = useAppModal();
   const [contributionAmount, setContributionAmount] = useState(null);
   const [txHash, setTxHash] = useState(null);
   const [loading, setLoading] = useState(null);
   const [contributionComplete, setContributionComplete] = useState(null);
+  const [tokenData, setTokenData] = useState(null);
 
   const chainMatch = daochain === chainId;
 
+  const fetchToken = async () => {
+    setTokenData(
+      await fetchSpecificTokenData(
+        project.yeeterConfig.token.id,
+        {
+          allowance: [address, project.shamanAddress],
+          decimals: true,
+        },
+        daochain,
+      ),
+    );
+  };
+
   useEffect(() => {
-    if (project) {
+    if (!contributionAmount && project) {
       setContributionAmount(
         Number(
           displayBalance(
@@ -41,7 +56,23 @@ const Contribute = ({ project, contributions }) => {
         ),
       );
     }
-  }, [project]);
+    if (address && project?.yeeterConfig?.erc20Only) {
+      fetchToken();
+    }
+  }, [address, project]);
+
+  const enoughTokenAllowance = useMemo(() => {
+    if (contributionAmount && tokenData?.allowance) {
+      return ethers.utils
+        .parseUnits(tokenData.allowance, 'wei')
+        .gte(
+          ethers.utils.parseUnits(
+            contributionAmount.toString(),
+            tokenData.decimals,
+          ),
+        );
+    }
+  }, [contributionAmount, tokenData]);
 
   useEffect(() => {
     const pollTX = async () => {
@@ -50,7 +81,9 @@ const Contribute = ({ project, contributions }) => {
 
         if (tx.blockNumber) {
           refetch();
-          setContributionComplete(txHash);
+          setContributionComplete(
+            tx.to.toLowerCase() === project.shamanAddress && txHash,
+          );
           setTxHash(null);
           setLoading(false);
           clearInterval(interval);
@@ -71,14 +104,9 @@ const Contribute = ({ project, contributions }) => {
       body: <ContributeAddress project={project} />,
     });
 
-  const handleContribute = async () => {
+  const submitTx = async args => {
+    setLoading(true);
     const signer = provider.getSigner();
-
-    const args = {
-      to: project.shamanAddress,
-      value: ethers.utils.parseEther(contributionAmount.toString()),
-    };
-
     const tx = await signer.sendTransaction(args).catch(err => {
       if (err.code === -32603) {
         // not enough funds to make this tx
@@ -88,13 +116,49 @@ const Contribute = ({ project, contributions }) => {
         // user cancelled
         console.log(err.message);
       }
+      setLoading(false);
     });
 
     if (!tx) {
+      setLoading(false);
       return;
     }
-    setLoading(true);
     setTxHash(tx.hash);
+  };
+
+  const handleContribute = async () => {
+    const args = {
+      to: project.shamanAddress,
+      value: ethers.utils.parseEther(contributionAmount.toString()),
+    };
+    await submitTx(args);
+  };
+
+  const handleERC20Contribute = async () => {
+    const contribValue = ethers.utils.parseUnits(
+      contributionAmount.toString(),
+      tokenData.decimals,
+    );
+    const args = !enoughTokenAllowance
+      ? {
+          to: project.yeeterConfig.token.id,
+          data: encodeFunctionCall(
+            [
+              'function approve(address spender, uint256 amount) returns (bool)',
+            ],
+            'approve',
+            [project.shamanAddress, ethers.constants.MaxUint256.toString()],
+          ),
+        }
+      : {
+          to: project.shamanAddress,
+          data: encodeFunctionCall(
+            ['function yeetyeet20(uint256 _value)'],
+            'yeetyeet20',
+            [contribValue],
+          ),
+        };
+    await submitTx(args);
   };
 
   return (
@@ -133,42 +197,82 @@ const Contribute = ({ project, contributions }) => {
                 </Box>
               )}
 
-              <Button
-                mt={10}
-                onClick={handleContribute}
-                disabled={loading || !chainMatch}
-              >
-                {!loading ? 'Contribute' : <Spinner color='secondary.500' />}
-              </Button>
+              {!project.yeeterConfig.erc20Only ? (
+                <>
+                  <Button
+                    mt={10}
+                    onClick={handleContribute}
+                    disabled={loading || !chainMatch}
+                  >
+                    {!loading ? (
+                      'Contribute'
+                    ) : (
+                      <Spinner color='secondary.500' />
+                    )}
+                  </Button>
 
-              {chainMatch && (
-                <Text
-                  mt={5}
-                  color='secondary.500'
-                  fontSize='sm'
-                  onClick={openContributeAddress}
-                  _hover={{ cursor: 'pointer' }}
-                >
-                  Or Send Funds Directly
-                </Text>
-              )}
-
-              {loading && txHash && !contributionComplete && (
-                <Flex mt={4} align='center'>
+                  {chainMatch && (
+                    <Text
+                      mt={5}
+                      color='secondary.500'
+                      fontSize='sm'
+                      onClick={openContributeAddress}
+                      _hover={{ cursor: 'pointer' }}
+                    >
+                      Or Send Funds Directly
+                    </Text>
+                  )}
+                </>
+              ) : (
+                <Box>
+                  <Button
+                    mt={10}
+                    onClick={handleERC20Contribute}
+                    disabled={loading || !chainMatch || !tokenData}
+                    isLoading={loading}
+                    minWidth='152px'
+                  >
+                    {!enoughTokenAllowance ? 'Approve Tokens' : 'Contribute'}
+                  </Button>
                   <Text
-                    color='secondary.500'
-                    fontSize='md'
+                    mt={5}
+                    fontSize='xs'
+                    fontWeight='700'
+                    textTransform='uppercase'
                     textAlign='center'
-                    mr={2}
-                    ml={3}
-                  />
-                  <EtherscanLink
-                    address={txHash}
-                    isTransaction
-                    linkText='TX Pending'
-                  />
-                </Flex>
+                  >
+                    Actions required:
+                  </Text>
+                  <Box textTransform='uppercase'>
+                    <Text fontSize='xs' textAlign='left' px={4}>
+                      1. Approve Tokens
+                    </Text>
+                    <Text fontSize='xs' textAlign='left' px={4}>
+                      2. Contribute
+                    </Text>
+                  </Box>
+                </Box>
               )}
+
+              {loading &&
+                txHash &&
+                (!project.yeeterConfig.erc20Only || enoughTokenAllowance) &&
+                !contributionComplete && (
+                  <Flex mt={4} align='center'>
+                    <Text
+                      color='secondary.500'
+                      fontSize='md'
+                      textAlign='center'
+                      mr={2}
+                      ml={3}
+                    />
+                    <EtherscanLink
+                      address={txHash}
+                      isTransaction
+                      linkText='TX Pending'
+                    />
+                  </Flex>
+                )}
 
               {contributionComplete && (
                 <Flex mt={4} align='center'>
