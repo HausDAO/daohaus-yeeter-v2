@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Link, Text } from '@chakra-ui/layout';
-import { Button } from '@chakra-ui/react';
+import { Badge, Button } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/avatar';
 import makeBlockie from 'ethereum-blockies-base64';
 import ReactMarkdown from 'react-markdown';
@@ -28,6 +28,23 @@ const ProjectOverview = ({ project, longDescription }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const status = yeetStatus(project);
+
+  const projectBadge = useMemo(() => {
+    return (
+      project.yeeterConfig.erc20Only && (
+        <Badge
+          bg='pink'
+          borderRadius={4}
+          color='#632b16'
+          ml={4}
+          px={2}
+          variant='outline'
+        >
+          ERC20
+        </Badge>
+      )
+    );
+  }, [project]);
 
   return (
     <>
@@ -56,6 +73,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                   (yeet #{yeeternumber})
                 </Text>
               )}
+              {projectBadge}
             </Flex>
           ) : (
             <RouterLink
@@ -75,6 +93,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                 ) : (
                   ''
                 )}
+                {projectBadge}
               </Flex>
             </RouterLink>
           )}
