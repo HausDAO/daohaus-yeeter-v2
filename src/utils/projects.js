@@ -101,6 +101,20 @@ export const hydrateProjectsDataNew = projectData => {
   return pipe([filterValidProjects, addRaiseWindowCount])(projectData);
 };
 
+export const projectFundingTokens = projectData => {
+  return projectData.reduce((allTokens, network) => {
+    return [
+      ...allTokens,
+      ...network.tokens.map(t => {
+        return {
+          networkID: network.networkID,
+          ...t,
+        };
+      }),
+    ];
+  }, []);
+};
+
 export const projectCompletePercentage = project => {
   return (
     (Number(project.balance) / Number(project.yeeterConfig.maxTarget)) * 100
@@ -188,12 +202,20 @@ const projectListFilter = filter => projects => {
   return projects.filter(p => p.networkID === filter);
 };
 
+const projectTokenFilter = filter => projects => {
+  if (filter === 'all') {
+    return projects;
+  }
+  return projects.filter(p => p.yeeterConfig.token?.id === filter);
+};
+
 export const filterAndSortProjects = (projects, args) => {
   return pipe([
     projectListSearch(args.searchTerm),
     projectListSort(args.sort),
     projectListFilter(args.filter),
     projectListFilter(args.statusFilter),
+    projectTokenFilter(args.tokenFilter),
   ])(projects);
 };
 
@@ -237,4 +259,23 @@ export const projectListFilterContent = () => {
     value: 'all',
   });
   return validNetworks;
+};
+
+export const projectListTokenFilter = (networkID, fundingTokens) => {
+  const tokenListBase = {
+    name: 'All',
+    value: 'all',
+  };
+  if (networkID === 'all') {
+    return [tokenListBase];
+  }
+  const filteredTokens = fundingTokens
+    .filter(token => token.networkID === networkID)
+    .map(token => {
+      return {
+        name: token.symbol,
+        value: token.id,
+      };
+    });
+  return [tokenListBase, ...filteredTokens];
 };

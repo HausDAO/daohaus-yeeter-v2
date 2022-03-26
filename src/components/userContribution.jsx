@@ -25,7 +25,9 @@ const ContributionRow = ({ yeet, project }) => {
         letterSpacing='3px'
       >
         {Web3.utils.fromWei(yeet.amount)}{' '}
-        {supportedChains[project.networkID].nativeCurrency}
+        {project.yeeterConfig.erc20Only
+          ? project.yeeterConfig.token.symbol
+          : supportedChains[project.networkID].nativeCurrency}
       </Box>
 
       <Box

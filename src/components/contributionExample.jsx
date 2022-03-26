@@ -69,7 +69,10 @@ const ContributionExample = ({
       <Box>
         <Box mb={3}>If you contribute</Box>
         <Box mb={3} fontWeight='700'>
-          {sliderValue} {supportedChains[project.networkID].nativeCurrency}{' '}
+          {sliderValue}{' '}
+          {project.yeeterConfig.erc20Only
+            ? project.yeeterConfig.token.symbol
+            : supportedChains[project.networkID].nativeCurrency}{' '}
         </Box>
       </Box>
       <Box mb={3}>

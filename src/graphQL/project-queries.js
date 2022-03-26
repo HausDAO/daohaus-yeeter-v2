@@ -53,6 +53,12 @@ export const PROJECTS_SHAMANS_QUERY = gql`
         raiseStartTime
         maxUnits
         pricePerUnit
+        token {
+          id
+          name
+          symbol
+        }
+        erc20Only
       }
     }
   }
@@ -159,7 +165,22 @@ export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
         raiseStartTime
         maxUnits
         pricePerUnit
+        erc20Only
+        token {
+          id
+          symbol
+        }
       }
+    }
+  }
+`;
+
+export const PROJECTS_FUNDING_ASSETS_QUERY = gql`
+  query tokens($skip: Int) {
+    tokens(where: { symbol_not: "UNKNOWN" }, orderBy: symbol) {
+      id
+      name
+      symbol
     }
   }
 `;
