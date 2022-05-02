@@ -57,7 +57,7 @@ const hasEnabledShaman = (shamans, shamanAddress) => {
 
 const filterValidProjects = projectData => {
   return projectData.reduce((allProjects, network) => {
-    const filteredProjects = network.newYeeters
+    const filteredProjects = network.yeeters
       .filter(project => {
         return (
           hasValidDao(project.dao) &&
@@ -97,7 +97,7 @@ const addRaiseWindowCount = projectData => {
   return Object.values(projectMap).flatMap(d => d);
 };
 
-export const hydrateProjectsDataNew = projectData => {
+export const hydrateProjectsData = projectData => {
   return pipe([filterValidProjects, addRaiseWindowCount])(projectData);
 };
 

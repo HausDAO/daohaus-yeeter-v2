@@ -219,11 +219,6 @@ export const projectsCrossChainQuery = async ({
         return shaman.shamanType === 'yeeter';
       });
 
-      const yeetersWithYeets = yeeters.map(yeeter => {
-        const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
-        return { ...yeeter, yeets: yeetsMap[yeetMolochId] || [] };
-      });
-
       const yeetersWithYeetsAndDaos = yeeters.map(yeeter => {
         const yeetMolochId = `${yeeter.shamanAddress}-${yeeter.molochAddress}`;
         return {
@@ -238,8 +233,7 @@ export const projectsCrossChainQuery = async ({
         {
           ...chain,
           daos: withMetaData,
-          yeeters: yeetersWithYeets,
-          newYeeters: yeetersWithYeetsAndDaos,
+          yeeters: yeetersWithYeetsAndDaos,
           tokens: tokensData,
         },
       ]);

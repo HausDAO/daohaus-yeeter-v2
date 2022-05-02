@@ -46,6 +46,7 @@ export const PROJECTS_SHAMANS_QUERY = gql`
       molochAddress
       details
       shamanType
+      enabled
       yeeterConfig {
         id
         maxTarget
@@ -148,7 +149,11 @@ export const PROJECT_DETAILS_QUERY = gql`
 export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
   query shamans($contractAddr: String!) {
     shamans(
-      where: { shamanType: "yeeter", molochAddress: $contractAddr }
+      where: {
+        shamanType: "yeeter"
+        molochAddress: $contractAddr
+        enabled: true
+      }
       orderBy: createdAt
       orderDirection: asc
     ) {
@@ -158,6 +163,7 @@ export const PROJECTS_DETAIL_SHAMAN_QUERY = gql`
       molochAddress
       details
       shamanType
+      enabled
       yeeterConfig {
         id
         maxTarget
