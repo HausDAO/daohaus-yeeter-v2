@@ -4,10 +4,7 @@ import { useSessionStorage } from '../hooks/useSessionStorage';
 import { projectsCrossChainQuery } from '../utils/theGraph';
 import { supportedChains } from '../utils/chain';
 import { getApiMetadata } from '../utils/metadata';
-import {
-  hydrateProjectsDataNew,
-  projectFundingTokens,
-} from '../utils/projects';
+import { hydrateProjectsData, projectFundingTokens } from '../utils/projects';
 
 const numOfSupportedChains = Object.keys(supportedChains).length;
 
@@ -38,7 +35,7 @@ export const ProjectsContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (projectData.length === numOfSupportedChains && !projects.length) {
-      setProjects(hydrateProjectsDataNew(projectData));
+      setProjects(hydrateProjectsData(projectData));
       setFundingTokens(projectFundingTokens(projectData));
     }
   }, [projects, setProjects, projectData]);
