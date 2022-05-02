@@ -66,12 +66,12 @@ const Home = () => {
                   When you step beyond the forest and onto the coastline,
                   countless frens emerge into view. They have come prepared for
                   the journey ahead, yet their packs do not feel burdensome. How
-                  can you embark together?
+                  might we embark together?
                 </Text>
                 <Text mb={4}>
                   As you look towards the sea, the sun illuminates a vessel,
                   with broad planks resting along the edge of the deck, angled
-                  gently onto the shore. The flag of the green tongue waves in
+                  gently onto the shore. The flag of the Green Tongue waves in
                   the wind, reflecting off the water, as a gathering of giants
                   gesture for you to board.
                 </Text>
@@ -85,14 +85,14 @@ const Home = () => {
           />
           <FeatureCard
             contentPosition='left'
-            title='Easiest Way to Launch a DAO'
+            title='Easiest Way to Bootstrap a DAO'
             imgSrc={YeetLaunchEasyImg}
             content={
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
                   Whether a new organization or an initiative within an existing
-                  DAO, Yeeter is the no-code option for funding your community
-                  with your contributors.
+                  DAO, Yeeter is the no-code option for funding your project
+                  with your community.
                 </Text>
                 <Text>
                   With customizable parameters, the Yeeter contract allows you
@@ -128,12 +128,12 @@ const Home = () => {
               <VStack spacing={4} align='flex-start' fontSize='lg'>
                 <Text>
                   Transparent and open-source, Yeeter is an exciting new
-                  fundraising primitive funded by the DAOhaus community.
+                  fundraising primitive built by the DAOhaus community.
                 </Text>
                 <Text>
                   Intended as a public good and an opportunity to practice
-                  community driven development, the project was funded by a
-                  Yeeter campaign and is maintained by DAO contributors.
+                  meme-driven development, the project was funded by a Yeeter
+                  campaign and is maintained by DAO contributors.
                 </Text>
               </VStack>
             }
@@ -146,9 +146,9 @@ const Home = () => {
                 <Text mb={4}>
                   With your project on Y33T, contributors send tokens in the
                   form of xDAI or ETH. The Yeeter smart contract forwards those
-                  funds into a treasury, creating shares for contributors. The
-                  result is a DAO, with a crowdfunded treasury, controlled by
-                  the project team and supported by contributors.
+                  funds into a treasury, creating stake for contributors. The
+                  result is a DAO, with a crowdfunded treasury, managed by the
+                  project team and supported by contributors.
                 </Text>
                 <Button
                   paddingX={2}
