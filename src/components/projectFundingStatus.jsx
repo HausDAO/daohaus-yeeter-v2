@@ -24,7 +24,13 @@ const ProjectFundingStatus = ({ project }) => {
 
   return (
     <>
-      <Flex justify='space-between' w='100%' mb={3} mt={{ base: 3, md: 0 }}>
+      <Flex
+        justify='space-between'
+        w='100%'
+        mb={3}
+        ml={{ base: 3, xl: 0 }}
+        mt={{ base: 3, md: 0 }}
+      >
         <Flex fontFamily='mono' direction='column'>
           <Box fontSize='2xl'>
             {project.displayBalance || '0'}{' '}
@@ -88,6 +94,7 @@ const ProjectFundingStatus = ({ project }) => {
         value={projectComplete}
         backgroundColor='primary.400'
         mb={4}
+        ml={{ base: 3, xl: 0 }}
         bgGradient={
           softCap
             ? `linear(to-r, primary.400 0% ${softCap}%,primary.400 0%,primary.100 ${parseInt(

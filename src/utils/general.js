@@ -182,6 +182,11 @@ export const numberWithCommas = num => {
 export const truncateAddr = addr => {
   return addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : null;
 };
+export const truncateENSName = name => {
+  return name && name.length > 15
+    ? `${name.slice(0, 6)}...${name.slice(-8)}`
+    : name;
+};
 export const timeToNow = time => {
   return formatDistanceToNow(new Date(time * 1000), {
     addSuffix: true,
