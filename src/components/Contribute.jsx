@@ -211,7 +211,7 @@ const Contribute = ({ project, contributions }) => {
 
               {!project.yeeterConfig.erc20Only ? (
                 <>
-                  {!loading && !error ? (
+                  {!error ? (
                     <>
                       <Button
                         mt={10}
@@ -239,7 +239,12 @@ const Contribute = ({ project, contributions }) => {
                     </>
                   ) : (
                     <>
-                      <Alert status='error' backgroundColor='red.900' mt={8}>
+                      <Alert
+                        status='error'
+                        backgroundColor='red.900'
+                        borderRadius='10'
+                        mt={8}
+                      >
                         <AlertIcon />
                         <AlertDescription>
                           You do not have enough funds to contribute to this
