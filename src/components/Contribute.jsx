@@ -243,7 +243,7 @@ const Contribute = ({ project, contributions }) => {
                         status='error'
                         backgroundColor='red.900'
                         borderRadius='10'
-                        mt={8}
+                        mt={10}
                       >
                         <AlertIcon />
                         <AlertDescription>
