@@ -10,6 +10,7 @@ import {
   Collapse,
   Icon,
   Link,
+  Tooltip,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -58,7 +59,7 @@ const NAV_ITEMS = [
 
 const Navigation = ({ isDao }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { address, connectWallet } = useWallet();
+  const { address, connectWallet, disconnect } = useWallet();
   // const { setHubAccountModal } = useOverlay();
 
   // const toggleAccountModal = () => {
@@ -101,9 +102,11 @@ const Navigation = ({ isDao }) => {
         {isDao && <WrongNetworkToolTip />}
 
         {address ? (
-          <Button variant='outline'>
-            <AddressAvatar addr={address} hideCopy hideEtherscanLink />
-          </Button>
+          <Tooltip label='Click to disconnect wallet' fontSize='md'>
+            <Button variant='outline' onClick={disconnect}>
+              <AddressAvatar addr={address} hideCopy hideEtherscanLink />
+            </Button>
+          </Tooltip>
         ) : (
           <Button variant='outline' onClick={connectWallet}>
             Connect Wallet

@@ -1,6 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Icon, Button, Spinner } from '@chakra-ui/react';
+import {
+  Icon,
+  Button,
+  Spinner,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+} from '@chakra-ui/react';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useParams } from 'react-router';
 import { ethers } from 'ethers';
@@ -26,6 +33,7 @@ const Contribute = ({ project, contributions }) => {
   const [contributionAmount, setContributionAmount] = useState(null);
   const [txHash, setTxHash] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
   const [contributionComplete, setContributionComplete] = useState(null);
   const [tokenData, setTokenData] = useState(null);
 
@@ -111,12 +119,16 @@ const Contribute = ({ project, contributions }) => {
       if (err.code === -32603) {
         // not enough funds to make this tx
         console.log(err.data.message);
+        setError(true);
       }
       if (err.code === 4001) {
         // user cancelled
         console.log(err.message);
       }
       setLoading(false);
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
     });
 
     if (!tx) {
@@ -199,28 +211,47 @@ const Contribute = ({ project, contributions }) => {
 
               {!project.yeeterConfig.erc20Only ? (
                 <>
-                  <Button
-                    mt={10}
-                    onClick={handleContribute}
-                    disabled={loading || !chainMatch}
-                  >
-                    {!loading ? (
-                      'Contribute'
-                    ) : (
-                      <Spinner color='secondary.500' />
-                    )}
-                  </Button>
+                  {!error ? (
+                    <>
+                      <Button
+                        mt={10}
+                        onClick={handleContribute}
+                        disabled={loading || !chainMatch}
+                      >
+                        {!loading ? (
+                          'Contribute'
+                        ) : (
+                          <Spinner color='secondary.500' />
+                        )}
+                      </Button>
 
-                  {chainMatch && (
-                    <Text
-                      mt={5}
-                      color='secondary.500'
-                      fontSize='sm'
-                      onClick={openContributeAddress}
-                      _hover={{ cursor: 'pointer' }}
-                    >
-                      Or Send Funds Directly
-                    </Text>
+                      {chainMatch && (
+                        <Text
+                          mt={5}
+                          color='secondary.500'
+                          fontSize='sm'
+                          onClick={openContributeAddress}
+                          _hover={{ cursor: 'pointer' }}
+                        >
+                          Or Send Funds Directly
+                        </Text>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <Alert
+                        status='error'
+                        backgroundColor='red.900'
+                        borderRadius='10'
+                        mt={10}
+                      >
+                        <AlertIcon />
+                        <AlertDescription>
+                          You do not have enough funds to contribute to this
+                          project
+                        </AlertDescription>
+                      </Alert>
+                    </>
                   )}
                 </>
               ) : (
