@@ -64,7 +64,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           fontFamily='heading'
         >
           {daoid ? (
-            <Flex align='baseline'>
+            <Flex align='center' flexWrap='wrap'>
               <Text>{project?.dao.meta?.name || ''}</Text>
               {yeeternumber === '1' ? (
                 ''
@@ -84,7 +84,7 @@ const ProjectOverview = ({ project, longDescription }) => {
                 color: '#ED963A',
               }} // needed to override the theme 'a' style
             >
-              <Flex align='baseline'>
+              <Flex align='center' flexWrap='wrap'>
                 <Text>{project?.dao?.meta?.name}</Text>
                 {project.yeeterNumber ? (
                   <Text ml={2} fontSize='md'>
@@ -99,7 +99,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           )}
         </Box>
       </Flex>
-      <Box mb={5}>
+      <Box mb={5} mr={5}>
         {longDescription ? (
           <>
             <Text fontSize='md'> {project?.dao?.meta?.description}</Text>
