@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost';
-import { ethers } from 'ethers';
+import { ethers, Contract } from 'ethers';
+import { normalize } from 'eth-ens-namehash';
 import { graphQuery } from './apollo';
 import { chainByID } from './chain';
 
@@ -15,6 +16,29 @@ const REVERSE_RESOLVER_QUERY = gql`
   }
 `;
 
+const REVERSE_RESOLVER_ADDRESS = '0x3671aE578E63FdF66ad4F3E12CC0c0d71Ac7510C';
+
+const ensReverseRecordRequest = async address => {
+  const provider = ethers.getDefaultProvider(chainByID('0x1').rpc_url);
+  const abi = [
+    {
+      inputs: [
+        { internalType: 'address[]', name: 'addresses', type: 'address[]' },
+      ],
+      name: 'getNames',
+      outputs: [{ internalType: 'string[]', name: 'r', type: 'string[]' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+  ];
+  try {
+    const contract = new Contract(REVERSE_RESOLVER_ADDRESS, abi, provider);
+    return await contract.getNames([address]);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 const fetchENS = async address => {
   try {
     const result = await graphQuery({
@@ -28,6 +52,14 @@ const fetchENS = async address => {
       // look into dealing with multiple. get most recent
       return result.reverseRegistrations.sort((a, b) => b.block - a.block)[0]
         .name;
+    }
+
+    const recordRequest = await ensReverseRecordRequest(address.toLowerCase());
+    if (recordRequest.length) {
+      const name = recordRequest[0];
+      if (normalize(name) === name) {
+        return name;
+      }
     }
 
     return false;

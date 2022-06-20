@@ -15,6 +15,7 @@
     "apollo-boost": "^0.4.9",
     "chakra-ui-markdown-renderer": "^4.0.0",
     "date-fns": "^2.16.1",
+    "eth-ens-namehash": "^2.0.8",
     "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^5.0.24",
     "framer-motion": "^3.2.0",
