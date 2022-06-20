@@ -35,6 +35,20 @@ const SUPPORTED_NETWORKS = {
     rpc: 'https://dai.poa.network',
     explorer: 'https://blockscout.com/xdai/mainnet/',
   },
+  '0xa': {
+    name: 'Optimism',
+    symbol: 'ETH',
+    chainId: '0xa',
+    rpc: 'https://mainnet.optimism.io',
+    explorer: 'https://optimistic.etherscan.io',
+  },
+  '0xa4b1': {
+    name: 'Arbitrum',
+    symbol: 'AETH',
+    chainId: '0xa4b1',
+    rpc: 'https://arb1.arbitrum.io/rpc',
+    explorer: 'https://arbiscan.io/',
+  },
 };
 
 const web3modalOptions = {
