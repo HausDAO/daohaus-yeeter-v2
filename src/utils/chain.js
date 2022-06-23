@@ -106,63 +106,43 @@ export const supportedChains = {
     disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
     dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
   },
-  '0x4': {
-    name: 'Rinkeby',
-    short_name: 'rinkeby',
-    nativeCurrency: 'ETH',
-    network: 'rinkeby',
-    network_id: 4,
-    chain_id: '0x4',
-    hub_sort_order: 6,
+  '0x5': {
+    name: 'Göerli',
+    short_name: 'göerli',
+    nativeCurrency: 'GOR',
+    network: 'goerli',
+    networkAlt: 'goerli',
+    network_id: 5,
+    chain_id: '0x5',
+    hub_sort_order: 9,
     providers: ['walletconnect'],
-    // , 'portis', 'fortmatic'
-    rpc_url: `https://${process.env.REACT_APP_RPC_URI}.rinkeby.rpc.rivet.cloud/`,
+    rpc_url: `https://goerli.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`,
     abi_api_url:
-      'https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address=',
-    tokenlist_api_url: 'https://api-rinkeby.etherscan.io/api',
+      'https://api.goerli.etherscan.io/api?module=contract&action=getabi&address=',
+    tokenlist_api_url: 'https://api.goerli.etherscan.io/api',
     subgraph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-rinkeby',
-
+      'https://thegraph.com/hosted-service/subgraph/odyssy-automaton/daohaus-goerli',
     stats_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-rinkeby',
+      'https://thegraph.com/hosted-service/subgraph/odyssy-automaton/daohaus-stats-goerli',
     boosts_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-boosts-rinkeby',
-    erc721_graph_url:
-      'https://api.thegraph.com/subgraphs/name/sunguru98/erc721-rinkeby-subgraph',
-    erc1155_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/erc1155-rinkeby-subgraph',
-    shaman_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-rinkeby',
-    minion_factory_addr: '0x313F02A44089150C9ff7011D4e87b52404A914A9',
-    moloch_factory_addr: '0xC33a4EfecB11D2cAD8E7d8d2a6b5E7FEacCC521d',
-    dai_contract: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658',
-    wrapper_contract: '0xc778417e063141139fce010982780140aa0cd5ab',
-    wrap_n_zap_factory_addr: '0x4e521FF388c83b4c945a33984ba42Efb73Cc04e6',
-    block_explorer: 'https://rinkeby.etherscan.io',
+      'https://thegraph.com/hosted-service/subgraph/odyssy-automaton/daohaus-boosts-goerli',
+    // TODO update graph endpoints when ready
+    // erc721_graph_url:
+    //   'https://api.thegraph.com/subgraphs/name/sunguru98/matic-erc721-subgraph',
+    // erc1155_graph_url:
+    //   'https://api.thegraph.com/subgraphs/name/odyssy-automaton/erc1155-matic-subgraph',
+    moloch_factory_addr: '0x72B8Bf40C8B316753a3E470689DA625759D2b025',
+    wrapper_contract: '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
+    wrap_n_zap_factory_addr: '0xf89f79A0E5aF89BFa5c4d4FC6F7fD25700bC4905',
+    escrow_minion: '0xceE7f251Bd38B21E8F71C1d62cFbb18219a7F606',
+    block_explorer: 'https://goerli.etherscan.io/',
     safeMinion: {
-      minion_factory_addr: '0x3f13ABc8931c0e381Ce6d1Be9f978aE6E9d99Cb8',
+      minion_factory_addr: '0x121931c0Bc458A5f13F3861444AeB036cc8a5363',
       safe_mutisend_addr: '0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761',
       safe_sign_lib_addr: '0xa25b3579a295be016de5eb5F082b54B12d45F72C',
     },
-    superfluid: {
-      minion_factory_addr: '0x4b168c1a1E729F4c8e3ae81d09F02d350fc905ca',
-      resolver: '0x659635Fab0A0cef1293f7eb3c7934542B6A6B31A',
-      subgraph_url:
-        'https://api.thegraph.com/subgraphs/name/superfluid-finance/superfluid-rinkeby',
-      superapp_addr: {
-        v1: '0x7d8151FAB5D6742F1c574fff472B6794062C2D0C',
-      },
-      version: 'v1',
-    },
-    rarible: {
-      api_url: 'https://ethereum-api-staging.rarible.org/v0.1',
-      erc20_transfer_proxy: '0x2fce8435f0455edc702199741411dbcd1b7606ca',
-      nft_transfer_proxy: '0x7d47126a2600E22eab9eD6CF0e515678727779A6',
-      base_url: 'https://rinkeby.rarible.com',
-    },
-    dao_conditional_helper_addr: '0xc50462aEa8873f6343a2Fd2103aE1dD21d53bC27',
-    escrow_minion: '0xEB28321b7952CC34bFb734413b58496A889C9660',
-    disperse_app: '0xD152f549545093347A162Dce210e7293f1452150',
+    disperse_app: '0x3D0e848b6C55153E2b0154734ac6b5288A7f1B6F',
+    poster: '0x3c1f4802be7e26d95b31ef7a566e18f42e360cab',
   },
   '0xa': {
     name: 'Optimism Mainnet',
@@ -439,9 +419,8 @@ export const getGraphEndpoint = (chainID, endpointType) =>
 export const chainByNetworkId = networkId => {
   const idMapping = {
     1: supportedChains['0x1'],
-    4: supportedChains['0x4'],
+    5: supportedChains['0x5']
     10: supportedChains['0xa'],
-    42: supportedChains['0x2a'],
     74: supportedChains['0x4a'],
     100: supportedChains['0x64'],
     137: supportedChains['0x89'],
@@ -540,8 +519,7 @@ export const EIP3085 = {
   },
   NOT_SUPPORTED: {
     '0x1': true,
-    '0x2a': true,
-    '0x4': true,
+    '0x5': true
   },
 };
 
