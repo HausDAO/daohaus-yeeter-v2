@@ -21,12 +21,12 @@ const SUPPORTED_NETWORKS = {
     explorer: 'https://etherscan.io/',
     rpc: `https://${process.env.REACT_APP_RPC_URI}.eth.rpc.rivet.cloud`,
   },
-  '0x4': {
-    chainId: '0x4',
-    name: 'Ethereum Rinkeby',
+  '0x5': {
+    chainId: '0x5',
+    name: 'Göerli',
     symbol: 'ETH',
-    explorer: 'https://rinkeby.etherscan.io/',
-    rpc: `https://${process.env.REACT_APP_RPC_URI}.rinkeby.rpc.rivet.cloud`,
+    explorer: 'https://goerli.etherscan.io/',
+    rpc: `https://goerli.prylabs.net`,
   },
   '0x64': {
     name: 'Gnosis Chain',

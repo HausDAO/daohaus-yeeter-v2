@@ -37,7 +37,7 @@ export const createGnosisSafeTxProposal = async ({
   };
   const safeDetails = await getApiGnosis(networkName, `safes/${safeAddress}/`);
   const gasEstimate =
-    ['mainnnet', 'rinkeby', 'goerli'].includes(networkName) &&
+    ['mainnnet', 'goerli'].includes(networkName) &&
     (await postGnosisRelayApi(
       networkName,
       `safes/${safeAddress}/transactions/estimate/`,
