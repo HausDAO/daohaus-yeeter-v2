@@ -23,7 +23,8 @@ import DaohausLink from './daohausLink';
 import CopyButton from './copyButton';
 import { yeetStatus } from '../utils/projects';
 
-const ProjectOverview = ({ project, longDescription }) => {
+const ProjectOverview = ({ project, hideYeetBadge, longDescription }) => {
+  console.log('ProjectOverview', project);
   const { daoid, daochain, yeeternumber } = useParams();
   const [showDetails, setShowDetails] = useState(false);
 
@@ -63,7 +64,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           fontWeight={700}
           fontFamily='heading'
         >
-          {daoid ? (
+          {daoid && yeeternumber ? (
             <Flex align='center' flexWrap='wrap'>
               <Text>{project?.dao.meta?.name || ''}</Text>
               {yeeternumber === '1' ? (
@@ -77,23 +78,25 @@ const ProjectOverview = ({ project, longDescription }) => {
             </Flex>
           ) : (
             <RouterLink
-              to={`/dao/${project?.networkID}/${
-                project?.dao?.id
-              }/${project.yeeterNumber || '1'}`}
+              to={`/onboard/${project?.networkID}/${project?.dao?.id}`}
               style={{
                 color: '#ED963A',
               }} // needed to override the theme 'a' style
             >
               <Flex align='center' flexWrap='wrap'>
                 <Text>{project?.dao?.meta?.name}</Text>
-                {project.yeeterNumber ? (
-                  <Text ml={2} fontSize='md'>
-                    (yeet #{project.yeeterNumber})
-                  </Text>
-                ) : (
-                  ''
+                {!hideYeetBadge && (
+                  <Box>
+                    {project.yeeterNumber ? (
+                      <Text ml={2} fontSize='md'>
+                        (yeet #{project.yeeterNumber})
+                      </Text>
+                    ) : (
+                      ''
+                    )}
+                    {projectBadge}
+                  </Box>
                 )}
-                {projectBadge}
               </Flex>
             </RouterLink>
           )}

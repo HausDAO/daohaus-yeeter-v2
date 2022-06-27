@@ -7,6 +7,7 @@ import { RiExternalLinkLine } from 'react-icons/ri';
 import CopyButton from './copyButton';
 import { supportedChains } from '../utils/chain';
 import EnsDisplay from './ensDisplay';
+import { Bold, ParaMd } from './typography';
 
 const StaticAvatar = ({
   address,
@@ -35,12 +36,18 @@ const StaticAvatar = ({
           mr={{ base: 2, md: 0 }}
         />
         <Flex>
-          <EnsDisplay
-            address={address}
-            noLink
-            fontSize={props.fontSize}
-            ml={{ base: props.ml || 2, md: props.ml || 3 }}
-          />
+          {name ? (
+            <ParaMd ml='2'>
+              <Bold>{name}</Bold>
+            </ParaMd>
+          ) : (
+            <EnsDisplay
+              address={address}
+              noLink
+              fontSize={props.fontSize}
+              ml={{ base: props.ml || 2, md: props.ml || 3 }}
+            />
+          )}
 
           <Box as='span' mx={1}>
             {emoji}

@@ -126,6 +126,32 @@ export const PROJECT_DETAILS_QUERY = gql`
         memberAddress
         shares
         loot
+        isDao {
+          id
+        }
+        isSafeMinion {
+          id
+          minions {
+            id
+            molochAddress
+          }
+        }
+      }
+      lootOnlyMembers: members(where: { shares: "0", loot_gt: "0" }) {
+        id
+        memberAddress
+        shares
+        loot
+        isDao {
+          id
+        }
+        isSafeMinion {
+          id
+          minions {
+            id
+            molochAddress
+          }
+        }
       }
       tokenBalances(where: { guildBank: true }, first: 500) {
         id

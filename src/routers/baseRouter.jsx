@@ -7,6 +7,7 @@ import FourOhFour from '../pages/404';
 import Faq from '../pages/Faq';
 import BaseLayout from './baseLayout';
 import QrCode from '../pages/Qr';
+import Onboard from '../pages/Onboard';
 
 const BaseRouter = () => {
   return (
@@ -42,6 +43,15 @@ const BaseRouter = () => {
           path='/dao/:daochain/:daoid/:yeeternumber'
           render={routeProps => {
             return <Dao key={routeProps.match.params.daoid} {...routeProps} />;
+          }}
+        />
+        <Route
+          exact
+          path='/onboard/:daochain/:daoid'
+          render={routeProps => {
+            return (
+              <Onboard key={routeProps.match.params.daoid} {...routeProps} />
+            );
           }}
         />
         <Route path='*' component={FourOhFour} />

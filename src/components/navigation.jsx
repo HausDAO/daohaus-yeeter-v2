@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -25,7 +25,9 @@ import { useWallet } from '@raidguild/quiver';
 // import { useOverlay } from '../contexts/OverlayContext';
 import AddressAvatar from './addressAvatar';
 import Brand from './brand';
+import SnapshotProfile from './snapshotProfile';
 import WrongNetworkToolTip from './wrongNetworkToolTip';
+import { fetchSnapshotUserProfile } from '../utils/snapshot';
 
 const NAV_ITEMS = [
   {
@@ -57,6 +59,8 @@ const NAV_ITEMS = [
   // },
 ];
 
+const ONBOARD_URL_PATTERN = /(\/onboard\/0x[\w\d]+\/)(0x[\w\d]{40})/i;
+
 const Navigation = ({ isDao }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { address, connectWallet, disconnect } = useWallet();
@@ -65,6 +69,35 @@ const Navigation = ({ isDao }) => {
   // const toggleAccountModal = () => {
   //   setHubAccountModal(prevState => !prevState);
   // };
+
+  const location = useLocation();
+  const [displaySnapshotInfo, toggleSnapshotInfo] = useState(false);
+  const [snapshotProfile, setSnapshotProfile] = useState(null);
+
+  useEffect(() => {
+    console.log('LOC CHANGED', location);
+    if (location.pathname.match(ONBOARD_URL_PATTERN)) {
+      toggleSnapshotInfo(true);
+    } else {
+      toggleSnapshotInfo(false);
+      setSnapshotProfile(null);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const fetchVotingPower = async () => {
+      const params = location.pathname.match(ONBOARD_URL_PATTERN);
+      const daoid = params[2];
+      const { score, spaceId } = await fetchSnapshotUserProfile(daoid, address);
+      setSnapshotProfile({ score, spaceId });
+    };
+    if (address && displaySnapshotInfo) {
+      console.log('CALCULATE SNAPSHOT');
+      fetchVotingPower();
+    }
+  }, [address, displaySnapshotInfo]);
+
+  console.log('snapshotProfile', snapshotProfile);
 
   return (
     <Box>
@@ -98,8 +131,13 @@ const Navigation = ({ isDao }) => {
             <DesktopNav />
           </Flex>
         </Flex>
-
         {isDao && <WrongNetworkToolTip />}
+        {snapshotProfile?.score && (
+          <SnapshotProfile
+            spaceId={snapshotProfile.spaceId}
+            votingPower={snapshotProfile.score}
+          />
+        )}
 
         {address ? (
           <Tooltip label='Click to disconnect wallet' fontSize='md'>

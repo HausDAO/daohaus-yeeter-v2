@@ -28,6 +28,16 @@ export const ProposalStatusDisplay = {
   // Unsponsored: 'Unsponsored',
 };
 
+export const BASE_ACTIVE_STATES = {
+  Unknown: 'Unknown',
+  InQueue: 'InQueue',
+  VotingPeriod: 'VotingPeriod',
+  GracePeriod: 'GracePeriod',
+  ReadyForProcessing: 'ReadyForProcessing',
+  Unsponsored: 'Unsponsored',
+  NeedsExecution: 'NeedsExecution',
+};
+
 export const PROPOSAL_TYPES = {
   CORE: 'Core',
   MEMBER: 'Member Proposal',
@@ -623,4 +633,18 @@ export const hasMinionActions = (prop, minionDeets) => {
     minionDeets &&
     minionDeets[1] === '0x0000000000000000000000000000000000000000'
   );
+};
+
+export const isTwoWeeksOrOlder = proposal =>
+  Number(proposal.createdAt) > (new Date() / 1000 || 0) - 1.21e6;
+
+export const isProposalActive = proposal => {
+  const status = determineProposalStatus(proposal);
+  if (status === 'Unsponsored' && !isTwoWeeksOrOlder(proposal)) {
+    return true;
+  }
+  if (BASE_ACTIVE_STATES[status]) {
+    return true;
+  }
+  return false;
 };

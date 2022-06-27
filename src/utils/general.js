@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto';
-import { formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import { utils } from 'ethers';
 import Web3 from 'web3';
 import { validate } from './validation';
@@ -193,6 +193,10 @@ export const timeToNow = time => {
   });
 };
 
+export const formatDate = (dateTimeMillis, formatDate = 'MMM dd, yyyy') => {
+  return format(new Date(dateTimeMillis * 1000), formatDate);
+};
+
 // export const formatCreatedAt = (createdAt) => {
 //   return format(new Date(createdAt * 1000), 'MMM dd, yyyy');
 // };
@@ -367,3 +371,25 @@ export const debounce = (func, wait) => {
     timeout = setTimeout(later, wait);
   };
 };
+
+export const NOUN = {
+  SHARES: {
+    singular: 'share',
+    plural: 'shares',
+  },
+  LOOT: {
+    singular: 'loot',
+    plural: 'loot',
+  },
+  PROPOSALS: {
+    singular: 'proposal',
+    plural: 'proposals',
+  },
+  ADDRESSES: {
+    singular: 'address',
+    plural: 'addresses',
+  },
+};
+
+export const handleNounCase = (amt, noun) =>
+  Number(amt) === 1 ? noun.singular : noun.plural;

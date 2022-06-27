@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 // import Layout from '../components/layout';
 import DaoHome from '../pages/DaoHome';
+import DaoOnboard from '../pages/DaoOnboard';
 import Yeet from '../pages/Yeet';
 // import DaoProposals from '../pages/DaoProposals';
 
@@ -17,6 +18,9 @@ const DaoRouter = () => {
       </Route>
       <Route exact path={`${path}/yeet`}>
         <Yeet />
+      </Route>
+      <Route exact path={`${path}/onboard`}>
+        <DaoOnboard />
       </Route>
     </Switch>
     // </Layout>

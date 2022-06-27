@@ -263,7 +263,7 @@ const Contribute = ({ project, contributions }) => {
                     isLoading={loading}
                     minWidth='152px'
                   >
-                    {!enoughTokenAllowance ? 'Approve Tokens' : 'Contribute'}
+                    {!enoughTokenAllowance ? 'Approve Tokens' : 'Join'}
                   </Button>
                   <Text
                     mt={5}
@@ -279,7 +279,7 @@ const Contribute = ({ project, contributions }) => {
                       1. Approve Tokens
                     </Text>
                     <Text fontSize='xs' textAlign='left' px={4}>
-                      2. Contribute
+                      2. Join
                     </Text>
                   </Box>
                 </Box>

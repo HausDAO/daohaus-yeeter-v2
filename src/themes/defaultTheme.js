@@ -7,7 +7,7 @@ export const defaultTheme = {
   primary500: '#050a1b',
   primaryAlpha: rgba('#050a1b', 0.9),
   interfaceOrange: '#ED963A',
-  secondary500: '#38a169',
+  secondary500: '#7B1E1E',
   secondaryAlpha: rgba('#050a1b', 0.75),
   bg500: rgba(5, 10, 27, 0.8), // to match the Figma bg: hex is 050a1b
   bgAlpha: '#03061B',

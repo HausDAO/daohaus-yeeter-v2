@@ -5,6 +5,12 @@ import { proposalResolver } from './resolvers';
 import { EXAMPLE_DAO_PROPOSALS } from '../graphQL/example-queries';
 import { fetchMetaData } from './metadata';
 import {
+  DAO_ACTIVITIES,
+  SPAM_FILTER_ACTIVITIES,
+  SPAM_FILTER_GK_WL,
+  SPAM_FILTER_TRIBUTE,
+} from '../graphQL/dao-queries';
+import {
   MEMBERSHIPS_QUERY,
   PROJECTS_DAOS_QUERY,
   PROJECTS_DETAIL_SHAMAN_QUERY,
@@ -14,6 +20,13 @@ import {
   PROJECT_DETAILS_QUERY,
   PROJECTS_FUNDING_ASSETS_QUERY,
 } from '../graphQL/project-queries';
+import {
+  SNAPSHOT_SPACE_QUERY,
+  SNAPSHOT_PROPOSALS_QUERY,
+  SNAPSHOT_VOTES_QUERY,
+} from '../graphQL/snapshot-queries';
+
+const SNAPSHOT_ENDPOINT = 'https://hub.snapshot.org/graphql';
 
 export const graphFetchAll = async (args, items = [], skip = 0) => {
   try {
@@ -37,6 +50,89 @@ export const graphFetchAll = async (args, items = [], skip = 0) => {
   }
 };
 
+export const fetchAllActivity = async (
+  args,
+  items = [],
+  createdAt = '0',
+  count = 1,
+  query = DAO_ACTIVITIES,
+  variables = {},
+) => {
+  try {
+    const result = await graphQuery({
+      endpoint: getGraphEndpoint(args.chainID, 'subgraph_url'),
+      query,
+      variables: {
+        contractAddr: args.daoID,
+        createdAt,
+        ...variables,
+      },
+    });
+
+    const { proposals } = result;
+    count = proposals.length;
+    if (count > 0) {
+      const lastRecord = proposals[count - 1];
+      createdAt = lastRecord && lastRecord.createdAt;
+
+      return fetchAllActivity(
+        args,
+        [...items, ...proposals],
+        createdAt,
+        count,
+        query,
+        variables,
+      );
+    }
+    return { ...result, proposals: [...items, ...proposals] };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const fetchSpamFilterActivity = async (
+  args,
+  items = [],
+  createdAt = '0',
+  count = 1,
+) => {
+  const sponsored = await fetchAllActivity(
+    args,
+    items,
+    createdAt,
+    count,
+    SPAM_FILTER_ACTIVITIES,
+  );
+  const unsponsoredGuildkickWhitelist = await fetchAllActivity(
+    args,
+    items,
+    createdAt,
+    count,
+    SPAM_FILTER_GK_WL,
+  );
+  const unsponsoredTribute = await fetchAllActivity(
+    args,
+    items,
+    createdAt,
+    count,
+    SPAM_FILTER_TRIBUTE,
+    {
+      requiredTributeMin: args.requiredTributeMin,
+      requiredTributeToken: args.requiredTributeToken,
+    },
+  );
+
+  return {
+    id: args.daoID,
+    rageQuits: sponsored.rageQuits,
+    proposals: [
+      ...sponsored?.proposals,
+      ...unsponsoredGuildkickWhitelist?.proposals,
+      ...unsponsoredTribute?.proposals,
+    ],
+  };
+};
+
 const completeQueries = {
   async getOverview(args, setter) {
     try {
@@ -58,6 +154,48 @@ const completeQueries = {
       console.error(error);
     }
   },
+  async getActivities(args, setter) {
+    try {
+      const metadata = await fetchMetaData(args.daoID);
+
+      const activity = metadata[0]?.boosts?.SPAM_FILTER?.active
+        ? await fetchSpamFilterActivity({
+            ...args,
+            requiredTributeToken:
+              metadata[0].boosts.SPAM_FILTER.metadata.paymentToken,
+            requiredTributeMin:
+              metadata[0].boosts.SPAM_FILTER.metadata.paymentRequested,
+          })
+        : await fetchAllActivity(args);
+
+      const resolvedActivity = {
+        id: args.daoID,
+        rageQuits: activity.rageQuits,
+        proposals: activity.proposals.map(proposal =>
+          proposalResolver(proposal, {
+            status: true,
+            title: true,
+            description: true,
+            link: true,
+            hash: true,
+            proposalType: true,
+          }),
+        ),
+      };
+
+      if (setter.setDaoActivities) {
+        setter.setDaoActivities(resolvedActivity);
+      }
+      if (setter.setDaoProposals) {
+        setter.setDaoProposals(resolvedActivity.proposals);
+      }
+      if (setter.setUberProposals) {
+        setter.setUberProposals(resolvedActivity.proposals);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
   async getShamans(args, setter) {
     try {
       const graphShamans = await graphQuery({
@@ -72,6 +210,21 @@ const completeQueries = {
         ...graphShamans.shamans[args.yeeterNumber - 1],
         yeeterNumber: Number(args.yeeterNumber),
       });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async getAllShamans(args, setter) {
+    try {
+      const graphShamans = await graphQuery({
+        endpoint: getGraphEndpoint(args.chainID, 'shaman_graph_url'),
+        query: PROJECTS_DETAIL_SHAMAN_QUERY,
+        variables: {
+          contractAddr: args.daoID,
+        },
+      });
+
+      setter(graphShamans.shamans);
     } catch (error) {
       console.error(error);
     }
@@ -264,4 +417,49 @@ export const membershipsChainQuery = async ({
       console.error(error);
     }
   });
+};
+
+export const getSnaphotSpace = async id => {
+  try {
+    return graphQuery({
+      endpoint: SNAPSHOT_ENDPOINT,
+      query: SNAPSHOT_SPACE_QUERY,
+      variables: {
+        id,
+      },
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const getSnapshotProposals = async (id, first = 1000, skip = 0) => {
+  try {
+    return graphQuery({
+      endpoint: SNAPSHOT_ENDPOINT,
+      query: SNAPSHOT_PROPOSALS_QUERY,
+      variables: {
+        id,
+        first,
+        fromDate: Number((new Date().getTime() / 1000).toFixed(0)),
+        skip,
+      },
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+export const getSnapshotVotes = async id => {
+  try {
+    return graphQuery({
+      endpoint: SNAPSHOT_ENDPOINT,
+      query: SNAPSHOT_VOTES_QUERY,
+      variables: {
+        id,
+      },
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
 };
