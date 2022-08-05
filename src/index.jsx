@@ -32,7 +32,7 @@ const SUPPORTED_NETWORKS = {
     name: 'Gnosis Chain',
     symbol: 'xDai',
     chainId: '0x64',
-    rpc: 'https://dai.poa.network',
+    rpc: ' https://rpc.gnosischain.com',
     explorer: 'https://blockscout.com/xdai/mainnet/',
   },
 };

@@ -58,7 +58,7 @@ export const supportedChains = {
     chain_id: '0x64',
     hub_sort_order: 2,
     providers: ['walletconnect'],
-    rpc_url: 'https://dai.poa.network',
+    rpc_url: ' https://rpc.gnosischain.com',
     abi_api_url:
       'https://blockscout.com/xdai/mainnet/api?module=contract&action=getabi&address=',
     tokenlist_api_url: 'https://blockscout.com/xdai/mainnet/api',
