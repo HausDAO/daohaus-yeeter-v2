@@ -294,7 +294,7 @@ const ProjectOverview = ({ project, longDescription }) => {
           </RouterLink>
         </Box>
       )}
-      {daoid && status === 'active' && (
+      {daoid && status === 'active' && !project.yeeterConfig.erc20Only && (
         <Flex mt={2} fontSize='sm'>
           Get Share Link{' '}
           <CopyButton
