@@ -16,7 +16,7 @@ const ProjectsList = () => {
 
   useInterval(() => {
     refetchProjects();
-  }, 30000);
+  }, 45000);
 
   return (
     <Box p={7}>
