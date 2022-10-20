@@ -34,7 +34,7 @@ const DaoHome = () => {
 
   useInterval(() => {
     refetch();
-  }, 30000);
+  }, 45000);
 
   if (currentProject?.dao?.meta?.hide) {
     return (
