@@ -130,7 +130,7 @@ const Faq = () => {
           </AccordionButton>
           <AccordionPanel pb={4}>
             <ParagraphText>
-              DAOhaus Yeeter is currently available on Rinkeby (testnet) and
+              DAOhaus Yeeter is currently available on Göerli (testnet) and
               Gnosis Chain and soon on Ethereum Mainnet, Arbitrum, and Polygon.
             </ParagraphText>
             <ParagraphText>

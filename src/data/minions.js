@@ -4,28 +4,26 @@ import { NFT_ACTIONS } from '../utils/nftData';
 
 export const MINION_NETWORKS = {
   [MINION_TYPES.VANILLA]: {
+    '0x1': true,
+    '0xa': true,
     '0x64': true,
     '0x89': true,
-    '0x4': true,
-    '0x1': true,
-    '0x2a': true,
   },
   [MINION_TYPES.NIFTY]: {
-    '0x64': true,
     '0x1': true,
+    '0x64': true,
     '0x89': true,
     '0xa4b1': true,
     '0xa4ec': true,
   },
   [MINION_TYPES.SUPERFLUID]: {
+    '0xa': true,
     '0x64': true,
     '0x89': true,
-    '0x4': true,
   },
   [MINION_TYPES.SAFE]: {
     '0x1': true,
-    '0x4': true,
-    '0x2a': true,
+    '0xa': true,
     '0x64': true,
     '0x89': true,
     '0xa4b1': true,
