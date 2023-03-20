@@ -25,6 +25,8 @@ const addNetworkProviders = chainData => {
         rpc: {
           1: `https://${process.env.REACT_APP_RPC_URI}.eth.rpc.rivet.cloud/`,
           4: `https://${process.env.REACT_APP_RPC_URI}.rinkeby.rpc.rivet.cloud/`,
+          // its recommended that we use infura or alchemy and not the public rpc as litsted here.
+          10: 'https://mainnet.optimism.io',
           42: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_PROJECT_ID}`,
           100: ' https://rpc.gnosischain.com',
           137: 'https://rpc-mainnet.maticvigil.com',
