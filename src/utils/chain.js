@@ -518,7 +518,7 @@ export const EIP3085 = {
   },
   NOT_SUPPORTED: {
     '0x1': true,
-    '0x5': true
+    '0x5': true,
   },
 };
 
