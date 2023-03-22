@@ -418,7 +418,7 @@ export const getGraphEndpoint = (chainID, endpointType) =>
 export const chainByNetworkId = networkId => {
   const idMapping = {
     1: supportedChains['0x1'],
-    5: supportedChains['0x5']
+    5: supportedChains['0x5'],
     10: supportedChains['0xa'],
     74: supportedChains['0x4a'],
     100: supportedChains['0x64'],
