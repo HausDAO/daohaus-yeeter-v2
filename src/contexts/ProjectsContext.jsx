@@ -28,6 +28,7 @@ export const ProjectsContextProvider = ({ children }) => {
         reactSetter: setProjectData,
       });
     };
+    console.log('projectData', projectData);
     if (!projectData.length) {
       bigQuery();
     }

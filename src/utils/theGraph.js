@@ -165,6 +165,7 @@ export const projectsCrossChainQuery = async ({
 
     return daoMatch.find(dao => dao.network === chainName) || null;
   };
+
   buildCrossChainQuery(supportedChains).forEach(async chain => {
     try {
       const daoData = await graphFetchAll({
