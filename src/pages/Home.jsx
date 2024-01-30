@@ -197,7 +197,7 @@ const Home = () => {
                   </Text>
                 </Flex>
                 <Link
-                  href='https://discord.gg/yb45YBqBXT'
+                  href='https://discord.gg/cCJCh6DUCe'
                   target='_blank'
                   color='secondary.500'
                   transition='all 0.15s linear'
