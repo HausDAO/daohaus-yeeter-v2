@@ -13,7 +13,7 @@ export const supportedChains = {
     abi_api_url:
       'https://api.etherscan.io/api?module=contract&action=getabi&address=',
     tokenlist_api_url: 'https://api.etherscan.io/api',
-    subgraph_url: process.env.REACT_APP_GRAPH_URL_MAINNET,
+    subgraph_url: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.REACT_APP_GRAPH_KEY}/subgraphs/id/B4YHqrAJuQ1yD2U2tqgGXWGWJVeBrD25WRus3o9jLLBJ`,
     stats_graph_url:
       'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats',
     boosts_graph_url:
@@ -22,8 +22,7 @@ export const supportedChains = {
       'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc721-subgraph',
     erc1155_graph_url:
       'https://api.thegraph.com/subgraphs/name/sunguru98/mainnet-erc1155-subgraph',
-    shaman_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-subgraph',
+    shaman_graph_url: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.REACT_APP_GRAPH_KEY}/subgraphs/id/By8ySivLczH4awGbLz6BcfSnAeUr7JW6NBcAYnbm3AMk`,
     minion_factory_addr: '0x88207Daf515e0da1A32399b3f92D128B1BF45294',
     moloch_factory_addr: '0x38064F40B20347d58b326E767791A6f79cdEddCe',
     dai_contract: '0x6b175474e89094c44da98b954eedeac495271d0f',
@@ -61,8 +60,7 @@ export const supportedChains = {
     abi_api_url:
       'https://blockscout.com/xdai/mainnet/api?module=contract&action=getabi&address=',
     tokenlist_api_url: 'https://blockscout.com/xdai/mainnet/api',
-    subgraph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-xdai',
+    subgraph_url: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.REACT_APP_GRAPH_KEY}/subgraphs/id/2GJY9uxsLQUCvgqSfy6QCLAJgM9P9kdxBUpwNcGs7nPR`,
     stats_graph_url:
       'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-stats-xdai',
     boosts_graph_url:
@@ -73,8 +71,7 @@ export const supportedChains = {
       'https://api.thegraph.com/subgraphs/name/sunguru98/erc1155-xdai-subgraph',
     poap_graph_url:
       'https://api.thegraph.com/subgraphs/name/poap-xyz/poap-xdai',
-    shaman_graph_url:
-      'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-shamans-xdai',
+    shaman_graph_url: `https://gateway-arbitrum.network.thegraph.com/api/${process.env.REACT_APP_GRAPH_KEY}/subgraphs/id/5PDcyJVqjrxxwDcWTm88oaw9ktHrKT68SVKj2Gx9366D`,
     minion_factory_addr: '0x53508D981439Ce6A3283597a4775F6f23504d4A2',
     moloch_factory_addr: '0x0F50B2F3165db96614fbB6E4262716acc9F9e098',
     wrapper_contract: '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
